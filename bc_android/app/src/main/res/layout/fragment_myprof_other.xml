@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="2dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Supervisor 1"
+                android:id="@+id/lblsupervisor1"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_alignParentStart="true" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spnsupervisor1"
+                android:layout_below="@+id/lblsupervisor1"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#B6B6B6"
+                android:id="@+id/linesupervisor1"
+                android:layout_below="@+id/spnsupervisor1"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="5dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Supervisor 2"
+                android:id="@+id/lblsupervisor2"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/linesupervisor1"
+                android:layout_alignParentStart="true" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spnsupervisor2"
+                android:layout_below="@+id/lblsupervisor2"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#B6B6B6"
+                android:id="@+id/linespnsupervisor2"
+                android:layout_below="@+id/spnsupervisor2"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="5dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Location"
+                android:id="@+id/lbllocation"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/linespnsupervisor2"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtlocation"
+                android:layout_below="@+id/lbllocation"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Union"
+                android:id="@+id/lblunion"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/txtlocation"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtunion"
+                android:layout_below="@+id/lblunion"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Kontrak"
+                android:id="@+id/lblkontrak"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/txtunion"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtkontrak"
+                android:layout_below="@+id/lblkontrak"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Shift"
+                android:id="@+id/lblshift"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/txtkontrak"
+                android:layout_alignParentStart="true" />
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spnshift"
+                android:layout_below="@+id/lblshift"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#B6B6B6"
+                android:id="@+id/lineshift"
+                android:layout_below="@+id/spnshift"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="5dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Premi"
+                android:id="@+id/lblpremi"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/lineshift"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtpremi"
+                android:layout_below="@+id/lblpremi"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Premi"
+                android:id="@+id/lblcardno"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/txtpremi"
+                android:layout_alignParentStart="true" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtcardno"
+                android:layout_below="@+id/lblcardno"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="BC CODE"
+                android:id="@+id/lblBccode"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/txtcardno"
+                android:layout_alignParentStart="true" />
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spnBccode"
+                android:layout_below="@+id/lblBccode"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#B6B6B6"
+                android:id="@+id/linespnBccode"
+                android:layout_below="@+id/spnBccode"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="5dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Cost Center"
+                android:id="@+id/lblcostcenter"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/linespnBccode"
+                android:layout_alignParentStart="true" />
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spncostcenter"
+                android:layout_below="@+id/lblcostcenter"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#B6B6B6"
+                android:id="@+id/linecostcenter"
+                android:layout_below="@+id/spncostcenter"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="5dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Astekno"
+                android:id="@+id/lblastekno"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/linecostcenter"
+                android:layout_alignParentStart="true" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtastekno"
+                android:layout_below="@+id/lblastekno"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Kursus Kurs"
+                android:id="@+id/lblkursuskurs"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/txtastekno"
+                android:layout_alignParentStart="true" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtkursuskurs"
+                android:layout_below="@+id/lblkursuskurs"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Description"
+                android:id="@+id/lbldescription"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/txtkursuskurs"
+                android:layout_alignParentStart="true" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtdescription"
+                android:layout_below="@+id/lbldescription"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Sign Out"
+                android:id="@+id/lblsignout"
+                android:layout_below="@+id/txtdescription"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:ems="10"
+                android:id="@+id/txtsignout"
+                android:layout_below="@+id/lblsignout"
+                android:layout_alignParentStart="true"
+                android:hint=" yyyy-mm-dd"
+                android:layout_toStartOf="@+id/btnDatePicker"
+                android:focusable="false" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:id="@+id/btnDatePicker"
+                android:layout_alignBottom="@+id/txtsignout"
+                android:layout_alignParentEnd="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Desc"
+                android:id="@+id/lbldesc"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/txtsignout"
+                android:layout_alignParentStart="true" />
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spndesc"
+                android:layout_below="@+id/lbldesc"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#B6B6B6"
+                android:id="@+id/linedesc"
+                android:layout_below="@+id/spndesc"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="5dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Group"
+                android:id="@+id/lblgroup"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/linedesc"
+                android:layout_alignParentStart="true" />
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spngroup"
+                android:layout_below="@+id/lblgroup"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#B6B6B6"
+                android:id="@+id/linegroup"
+                android:layout_below="@+id/spngroup"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="5dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Ext Leave"
+                android:id="@+id/lblext"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/linegroup"
+                android:layout_alignParentStart="true" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtext"
+                android:layout_below="@+id/lblext"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#B6B6B6"
+                android:id="@+id/line2"
+                android:layout_below="@+id/txtext"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="5dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:id="@+id/btnSave"
+                android:background="#3f51b4"
+                android:textColor="#ffffff"
+                android:layout_below="@+id/line2"
+                android:layout_alignParentStart="true"
+                android:layout_alignEnd="@+id/txtext" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:id="@+id/btnCancel"
+                android:layout_below="@+id/btnSave"
+                android:layout_alignParentStart="true"
+                android:layout_alignEnd="@+id/txtext"
+                android:background="#D32F2F"
+                android:layout_marginTop="5dp"
+                android:textColor="#ffffff" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

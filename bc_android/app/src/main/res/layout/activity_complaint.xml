@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:paddingBottom="@dimen/activity_vertical_margin"
+android:paddingLeft="@dimen/activity_horizontal_margin"
+android:paddingRight="@dimen/activity_horizontal_margin"
+android:paddingTop="@dimen/activity_vertical_margin"
+tools:context="id.co.arkamaya.cico.ComplaintActivity">
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="Date"
+    android:id="@+id/lblComplaintDate"
+    android:textStyle="bold|italic"
+    android:textSize="14dp"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentStart="true" />
+
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:inputType="date"
+    android:ems="10"
+    android:id="@+id/txtComplaintDate"
+    android:layout_below="@+id/lblComplaintDate"
+    android:layout_alignParentStart="true"
+    android:hint=" yyyy-mm-dd"
+    android:layout_toStartOf="@+id/btnDatePicker"
+    android:focusable="false" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="Complaint Type"
+    android:id="@+id/lblComplaintType"
+    android:textStyle="bold|italic"
+    android:textSize="14dp"
+    android:layout_below="@+id/txtComplaintDate"
+    android:layout_alignParentStart="true" />
+
+<Spinner
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:ems="10"
+    android:id="@+id/spnComplaintType"
+    android:layout_below="@+id/lblComplaintType"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentEnd="true"
+    android:focusable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Complaint Type"
+        android:id="@+id/lblCoba"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/spnComplaintType"
+        android:visibility="invisible"
+        android:layout_alignParentStart="true" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="Clock In"
+    android:id="@+id/lblClockIn"
+    android:textStyle="bold|italic"
+    android:layout_below="@+id/spnComplaintType"
+    android:textSize="14dp"
+    android:layout_alignParentStart="true" />
+
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:inputType="date"
+    android:ems="10"
+    android:id="@+id/txtClockIn"
+    android:layout_below="@+id/lblClockIn"
+    android:layout_alignParentStart="true"
+    android:layout_toStartOf="@+id/btnClockIn"
+    android:focusable="false" />
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="..."
+    android:id="@+id/btnClockIn"
+    android:layout_alignBottom="@+id/txtClockIn"
+    android:layout_alignParentEnd="true" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="Clock Out"
+    android:id="@+id/lblClockOut"
+    android:textStyle="bold|italic"
+    android:layout_below="@+id/btnClockIn"
+    android:textSize="14dp"
+    android:layout_alignParentStart="true" />
+
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:inputType="date"
+    android:ems="10"
+    android:id="@+id/txtClockOut"
+    android:layout_below="@+id/lblClockOut"
+    android:layout_alignParentStart="true"
+    android:layout_toStartOf="@+id/btnClockIn"
+    android:focusable="false" />
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="..."
+    android:id="@+id/btnClockOut"
+    android:layout_alignBottom="@+id/txtClockOut"
+    android:layout_alignParentEnd="true" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="Complaint Description"
+    android:id="@+id/lblComplaintDescription"
+    android:textStyle="bold|italic"
+    android:textSize="14dp"
+    android:layout_below="@+id/btnClockOut"
+    android:layout_alignParentStart="true" />
+
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/txtComplaintDescription"
+    android:layout_below="@+id/lblComplaintDescription"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentEnd="true"
+    android:imeOptions="actionNext"/>
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Save"
+    android:id="@+id/btnSave"
+    android:background="#259dab"
+    android:textColor="#ffffff"
+    android:layout_below="@+id/txtComplaintDescription"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentEnd="true" />
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Cancel"
+    android:id="@+id/btnCancel"
+    android:layout_below="@+id/btnSave"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentEnd="true"
+    android:background="#d9534f"
+    android:layout_marginTop="5dp"
+    android:textColor="#ffffff" />
+
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/txtMode"
+    android:layout_below="@+id/btnCancel"
+    android:layout_toEndOf="@+id/lblDate"
+    android:visibility="invisible" />
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="..."
+    android:id="@+id/btnDatePicker"
+    android:layout_alignBottom="@+id/txtComplaintDate"
+    android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>

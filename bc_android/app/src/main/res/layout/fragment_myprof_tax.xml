@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="2dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="ID NPWP"
+                android:id="@+id/lblidnpwp"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtidnpwp"
+                android:layout_below="@+id/lblidnpwp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:singleLine="true" android:imeOptions="actionNext"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Marital Status"
+                android:id="@+id/lblmaritalstatus"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/txtnpwpdate"
+                android:layout_alignParentStart="true" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spnmaritalstatus"
+                android:layout_below="@+id/lblmaritalstatus"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#B6B6B6"
+                android:id="@+id/linemaritalstatus"
+                android:layout_below="@+id/spnmaritalstatus"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="5dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="NPWP Date"
+                android:id="@+id/lblnpwpdate"
+                android:layout_below="@+id/txtidnpwp"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:ems="10"
+                android:id="@+id/txtnpwpdate"
+                android:layout_below="@+id/lblnpwpdate"
+                android:layout_alignParentStart="true"
+                android:hint=" yyyy-mm-dd"
+                android:layout_toStartOf="@+id/btnDatePicker"
+                android:focusable="false" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:id="@+id/btnDatePicker"
+                android:layout_alignBottom="@+id/txtnpwpdate"
+                android:layout_alignParentEnd="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="ID BPJS Ketenagakerjaan"
+                android:id="@+id/lblbpjsketenagakerjaan"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/linemaritalstatus"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtketenagakerjaan"
+                android:layout_below="@+id/lblbpjsketenagakerjaan"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:singleLine="true" android:imeOptions="actionNext"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="ID BPSJ Kesehatan"
+                android:id="@+id/lblbpjskesehatan"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/txtketenagakerjaan"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtbpjskesehatan"
+                android:layout_below="@+id/lblbpjskesehatan"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:singleLine="true" android:imeOptions="actionNext"/>
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#B6B6B6"
+                android:id="@+id/line2"
+                android:layout_below="@+id/txtbpjskesehatan"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="5dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:id="@+id/btnSave"
+                android:background="#3f51b4"
+                android:textColor="#ffffff"
+                android:layout_below="@+id/line2"
+                android:layout_alignParentStart="true"
+                android:layout_alignEnd="@+id/txtbpjskesehatan" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:id="@+id/btnCancel"
+                android:layout_below="@+id/btnSave"
+                android:layout_alignParentStart="true"
+                android:layout_alignEnd="@+id/txtbpjskesehatan"
+                android:background="#D32F2F"
+                android:layout_marginTop="5dp"
+                android:textColor="#ffffff" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

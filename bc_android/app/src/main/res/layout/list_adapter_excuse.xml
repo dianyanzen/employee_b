@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="2dp" >
+    <!-- Thumbnail Image -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2016-03"
+        android:id="@+id/txtProdMonth"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#000000"
+        android:textAlignment="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="05"
+        android:id="@+id/txtDate"
+        android:layout_below="@+id/txtProdMonth"
+        android:layout_alignParentStart="true"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:background="#FF4081"
+        android:textColor="#ffffff"
+        android:layout_toStartOf="@+id/txtExcueseType" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/txtExcuseDescription"
+        android:layout_alignBottom="@+id/txtDate"
+        android:paddingLeft="7dp"
+        android:textColor="#000000"
+        android:layout_toEndOf="@+id/txtDate"
+        android:paddingStart="7dp"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Lupa Clock Out"
+        android:id="@+id/txtExcueseType"
+        android:layout_marginTop="12dp"
+        android:paddingLeft="2dp"
+        android:textColor="#000000"
+        android:layout_toEndOf="@+id/txtProdMonth"
+        android:paddingStart="7dp"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnDelete"
+        android:textColor="#ffffff"
+        android:drawableLeft="@android:drawable/ic_delete"
+        android:text="Delete"
+        android:focusable="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="id"
+        android:id="@+id/txtExcuseId"
+        android:layout_alignTop="@+id/txtOvertimeHour"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="accepted"
+        android:id="@+id/txtExcuseStatus"
+        android:textColor="#06aa17"
+        android:layout_below="@+id/txtProdMonth"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>
