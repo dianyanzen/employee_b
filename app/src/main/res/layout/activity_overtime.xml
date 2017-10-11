@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="id.co.arkamaya.cico.OvertimeActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Date"
+        android:id="@+id/lblOvertimeDate"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtOvertimeDate"
+        android:layout_below="@+id/lblOvertimeDate"
+        android:layout_alignParentStart="true"
+        android:hint=" yyyy-mm-dd"
+        android:layout_toStartOf="@+id/btnDatePicker"
+        android:focusable="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Over Time"
+        android:id="@+id/lblOvertime"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtOvertimeDate"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/txtOvertime"
+        android:layout_below="@+id/lblOvertime"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:singleLine="true" android:imeOptions="actionNext"
+        android:focusable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Overtime Description"
+        android:id="@+id/lblOvertimeDescription"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtOvertime"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtOvertimeDescription"
+        android:layout_below="@+id/lblOvertimeDescription"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:imeOptions="actionNext"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/btnSave"
+        android:background="#259dab"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/txtOvertimeDescription"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:id="@+id/btnCancel"
+        android:layout_below="@+id/btnSave"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:background="#d9534f"
+        android:layout_marginTop="5dp"
+        android:textColor="#ffffff" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtMode"
+        android:layout_below="@+id/btnCancel"
+        android:layout_toEndOf="@+id/lblDate"
+        android:visibility="invisible" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/btnDatePicker"
+        android:layout_alignBottom="@+id/txtOvertimeDate"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>

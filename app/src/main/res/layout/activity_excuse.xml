@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+    <!-- TODO: Main Menu For All Item -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Excuse Type"
+        android:id="@+id/lbltype"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/spnType"
+        android:layout_below="@+id/lbltype"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:focusable="true" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Excuse Description"
+        android:id="@+id/lblexcusedescription"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/spnType"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtExcuseDescription"
+        android:layout_below="@+id/lblexcusedescription"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:imeOptions="actionNext"/>
+
+
+
+    <!-- TODO: Menu For Default Item -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="From Date"
+        android:id="@+id/lblfromdate"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtExcuseDescription"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtfromdate"
+        android:layout_below="@+id/lblfromdate"
+        android:layout_alignParentStart="true"
+        android:hint=" yyyy-mm-dd"
+        android:layout_toStartOf="@+id/BtnExcFromDt"
+        android:focusable="false"
+        android:visibility="invisible" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="To Date"
+        android:id="@+id/lbltodate"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtfromdate"
+        android:layout_alignParentStart="true"
+        android:visibility="invisible" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txttodate"
+        android:layout_below="@+id/lbltodate"
+        android:layout_alignParentStart="true"
+        android:hint=" yyyy-mm-dd"
+        android:layout_toStartOf="@+id/BtnExcToDt"
+        android:focusable="false"
+        android:visibility="invisible" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/BtnExcFromDt"
+        android:layout_alignBottom="@+id/txtfromdate"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/BtnExcToDt"
+        android:layout_alignBottom="@+id/txttodate"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible" />
+
+    <!-- TODO: Menu For Berita Acara ClockIN/OUT Item -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Date"
+        android:id="@+id/lbldate1"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtExcuseDescription"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtdate1"
+        android:layout_below="@+id/lbldate1"
+        android:layout_alignParentStart="true"
+        android:hint=" yyyy-mm-dd"
+        android:layout_toStartOf="@+id/BtnExcDate1"
+        android:focusable="false"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Clock Out"
+        android:id="@+id/lblexcuseclockin1"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtdate1"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtexcuseclockin1"
+        android:layout_below="@+id/lblexcuseclockin1"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/BtnExcClockIn1"
+        android:focusable="false"
+        android:visibility="invisible"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Clock In"
+        android:id="@+id/lblexcuseclockout1"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtexcuseclockin1"
+        android:layout_alignParentStart="true"
+        android:visibility="invisible"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtexcuseclockout1"
+        android:layout_below="@+id/lblexcuseclockout1"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/BtnExcClockOut1"
+        android:focusable="false"
+        android:visibility="invisible"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/BtnExcDate1"
+        android:layout_alignBottom="@+id/txtdate1"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/BtnExcClockIn1"
+        android:layout_alignBottom="@+id/txtexcuseclockin1"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/BtnExcClockOut1"
+        android:layout_alignBottom="@+id/txtexcuseclockout1"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"/>
+
+    <!-- TODO: Menu For Change ClockIN Item -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Date From"
+        android:id="@+id/lbldatefrom2"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtExcuseDescription"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtdatefrom2"
+        android:layout_below="@+id/lbldatefrom2"
+        android:layout_alignParentStart="true"
+        android:hint=" yyyy-mm-dd"
+        android:layout_toStartOf="@+id/BtnExcDateFrom2"
+        android:focusable="false"
+        android:visibility="invisible"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Date To"
+        android:id="@+id/lbldateto2"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtdatefrom2"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtdateto2"
+        android:layout_below="@+id/lbldateto2"
+        android:layout_alignParentStart="true"
+        android:hint=" yyyy-mm-dd"
+        android:layout_toStartOf="@+id/BtnExcDateTo2"
+        android:focusable="false"
+        android:visibility="invisible"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Clock In"
+        android:id="@+id/lblexcuseclockin2"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtdateto2"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtexcuseclockin2"
+        android:layout_below="@+id/lblexcuseclockin2"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/BtnExcClockIn2"
+        android:focusable="false"
+        android:visibility="invisible"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/BtnExcDateFrom2"
+        android:layout_alignBottom="@+id/txtdatefrom2"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/BtnExcDateTo2"
+        android:layout_alignBottom="@+id/txtdateto2"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/BtnExcClockIn2"
+        android:layout_alignBottom="@+id/txtexcuseclockin2"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+    <!-- TODO: Menu For Change Group Item -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Date Changed"
+        android:id="@+id/lbldatefrom3"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtExcuseDescription"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtdatefrom3"
+        android:layout_below="@+id/lbldatefrom3"
+        android:layout_alignParentStart="true"
+        android:hint=" yyyy-mm-dd"
+        android:layout_toStartOf="@+id/BtnExcDateFrom3"
+        android:focusable="false"
+        android:visibility="invisible"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Replacement"
+        android:id="@+id/lbldateto3"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtdatefrom3"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtdateto3"
+        android:layout_below="@+id/lbldateto3"
+        android:layout_alignParentStart="true"
+        android:hint=" yyyy-mm-dd"
+        android:layout_toStartOf="@+id/BtnExcDateTo3"
+        android:focusable="false"
+        android:visibility="invisible"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Group"
+        android:id="@+id/lblgroup3"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtdateto3"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/spnGroup3"
+        android:layout_below="@+id/lblgroup3"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:focusable="true"
+        android:visibility="invisible"
+        />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/BtnExcDateFrom3"
+        android:layout_alignBottom="@+id/txtdatefrom3"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/BtnExcDateTo3"
+        android:layout_alignBottom="@+id/txtdateto3"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+    <!-- TODO: Menu For Change Shift Item -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Date From"
+        android:id="@+id/lbldatefrom5"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtExcuseDescription"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtdatefrom5"
+        android:layout_below="@+id/lbldatefrom5"
+        android:layout_alignParentStart="true"
+        android:hint=" yyyy-mm-dd"
+        android:layout_toStartOf="@+id/BtnExcDateFrom5"
+        android:focusable="false"
+        android:visibility="invisible"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Date To"
+        android:id="@+id/lbldateto5"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtdatefrom5"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtdateto5"
+        android:layout_below="@+id/lbldateto5"
+        android:layout_alignParentStart="true"
+        android:hint=" yyyy-mm-dd"
+        android:layout_toStartOf="@+id/BtnExcDateTo5"
+        android:focusable="false"
+        android:visibility="invisible"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/BtnExcDateFrom5"
+        android:layout_alignBottom="@+id/txtdatefrom5"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/BtnExcDateTo5"
+        android:layout_alignBottom="@+id/txtdateto5"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+    <!-- TODO: Menu For Change Working Day Item -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Date From"
+        android:id="@+id/lbldatefrom4"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtExcuseDescription"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtdatefrom4"
+        android:layout_below="@+id/lbldatefrom4"
+        android:layout_alignParentStart="true"
+        android:hint=" yyyy-mm-dd"
+        android:layout_toStartOf="@+id/BtnExcDateFrom4"
+        android:focusable="false"
+        android:visibility="invisible"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Date To"
+        android:id="@+id/lbldateto4"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtdatefrom4"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtdateto4"
+        android:layout_below="@+id/lbldateto4"
+        android:layout_alignParentStart="true"
+        android:hint=" yyyy-mm-dd"
+        android:layout_toStartOf="@+id/BtnExcDateTo4"
+        android:focusable="false"
+        android:visibility="invisible"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Shift Type"
+        android:id="@+id/lblshifttype4"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtdateto4"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/spnShiftType4"
+        android:layout_below="@+id/lblshifttype4"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:focusable="true"
+        android:visibility="invisible"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Group"
+        android:id="@+id/lblgroup4"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/spnShiftType4"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/spnGroup4"
+        android:layout_below="@+id/lblgroup4"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:focusable="true"
+        android:visibility="invisible"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Shift"
+        android:id="@+id/lblshift4"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/spnShiftType4"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/spnshift4"
+        android:layout_below="@+id/lblshift4"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:focusable="true"
+        android:visibility="invisible"
+        />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/BtnExcDateFrom4"
+        android:layout_alignBottom="@+id/txtdatefrom4"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/BtnExcDateTo4"
+        android:layout_alignBottom="@+id/txtdateto4"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+
+    <!-- TODO: Button For All Item -->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/btnSave"
+        android:background="#259dab"
+        android:textColor="#ffffff"
+        android:layout_above="@+id/btnCancel"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:id="@+id/btnCancel"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:background="#d9534f"
+        android:layout_marginTop="5dp"
+        android:textColor="#ffffff" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtMode"
+        android:layout_below="@+id/btnCancel"
+        android:layout_toEndOf="@+id/btnCancel"
+        android:visibility="invisible" />
+</RelativeLayout>
