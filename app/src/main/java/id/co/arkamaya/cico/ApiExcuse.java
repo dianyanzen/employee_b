@@ -50,13 +50,19 @@ public interface ApiExcuse {
     //    @Multipart
     @POST("/excuseservicemobile/saveexcuse")
     void onSaveExcuse(
-            @Query("excuse_id") String excuse_id,
             @Query("employee_id") String employee_id,
             @Query("username") String username,
-            @Query("date_from") String date_from,
-            @Query("date_to") String date_to,
+            @Query("excuse_id") String excuse_id,
             @Query("excuse_type") String excuse_type,
             @Query("excuse_reason") String excuse_reason,
+            @Query("shift_type") String shift_type,
+            @Query("shift") String shift,
+            @Query("date_from") String date_from,
+            @Query("date_to") String date_to,
+            @Query("date_event") String date_event,
+            @Query("group") String group,
+            @Query("clock_in") String clock_in,
+            @Query("clock_out") String clock_out,
             Callback<CheckLogin> response
     );
 

@@ -51,6 +51,8 @@ import retrofit.client.Response;
 public class ExcuseActivity extends AppCompatActivity {
 
     private String ExcuseId;
+    String getshift = "";
+    String getgroup = "";
     SharedPreferences pref;
     private ProgressDialog progress;
 
@@ -299,6 +301,51 @@ public class ExcuseActivity extends AppCompatActivity {
                 setDate2Menu3();
             }
         });
+        /* TODO Perform For Display Datepicker Menu 4*/
+        BtnExcDateFrom4.performClick();
+        BtnExcDateFrom4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDate1Menu4();
+            }
+        });
+        BtnExcDateTo4.performClick();
+        BtnExcDateTo4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDate2Menu4();
+            }
+        });
+        /* TODO Perform For Display Datepicker Menu 5*/
+        BtnExcDateFrom5.performClick();
+        BtnExcDateFrom5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDate1Menu5();
+            }
+        });
+        BtnExcDateTo5.performClick();
+        BtnExcDateTo5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDate2Menu5();
+            }
+        });
+        /* TODO Perform For Display Datepicker Menu Default*/
+        BtnExcFromDt.performClick();
+        BtnExcFromDt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDate1MenuDef();
+            }
+        });
+        BtnExcToDt.performClick();
+        BtnExcToDt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDate2MenuDef();
+            }
+        });
         /*
 
         Button btnDatePicker1=(Button)findViewById(R.id.BtnExcFromDt);
@@ -518,6 +565,7 @@ public class ExcuseActivity extends AppCompatActivity {
     public void gethardcoreG1(){
         List<String> list = new ArrayList<String>();
         list.clear();
+        spnshift4.setAdapter(null);
         list.add("1");
         list.add("2");
 
@@ -539,7 +587,12 @@ public class ExcuseActivity extends AppCompatActivity {
     public void gethardcoreNS(){
         List<String> list = new ArrayList<String>();
         list.clear();
+        spnshift4.setAdapter(null);
         list.add("1");
+        if (list.size() > 1){
+            list.remove("2");
+        }
+
 
         adaAdapterCombo = new ArrayAdapter<String>
                 (getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
@@ -559,8 +612,11 @@ public class ExcuseActivity extends AppCompatActivity {
     public void gethardcoreNS1(){
         List<String> list = new ArrayList<String>();
         list.clear();
+        spnshift4.setAdapter(null);
         list.add("1");
-
+        if (list.size() > 1){
+            list.remove("2");
+        }
         adaAdapterCombo = new ArrayAdapter<String>
                 (getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
 
@@ -579,16 +635,20 @@ public class ExcuseActivity extends AppCompatActivity {
     private void updateShiftType(){
         String ExcuseShiftType = ((String) spnShiftType4.getSelectedItem());
         if (ExcuseShiftType.equals("G1")) {
+            gethardcoreG1();
+//            Toast.makeText(ExcuseActivity.this, ExcuseShiftType, Toast.LENGTH_SHORT).show();
             if (lblshift4.getVisibility() == View.INVISIBLE) {
                 lblshift4.setVisibility(View.VISIBLE);
                 spnshift4.setVisibility(View.VISIBLE);
-                gethardcoreG1();
+
             }
             if (lblgroup4.getVisibility() == View.VISIBLE) {
                 lblgroup4.setVisibility(View.INVISIBLE);
                 spnGroup4.setVisibility(View.INVISIBLE);
             }
         }else if (ExcuseShiftType.equals("G2")) {
+            getspnGroup2(data_group);
+//            Toast.makeText(ExcuseActivity.this, ExcuseShiftType, Toast.LENGTH_SHORT).show();
             if (lblshift4.getVisibility() == View.VISIBLE) {
                 lblshift4.setVisibility(View.INVISIBLE);
                 spnshift4.setVisibility(View.INVISIBLE);
@@ -596,13 +656,15 @@ public class ExcuseActivity extends AppCompatActivity {
             if (lblgroup4.getVisibility() == View.INVISIBLE) {
                 lblgroup4.setVisibility(View.VISIBLE);
                 spnGroup4.setVisibility(View.VISIBLE);
-                getspnGroup2(data_group);
+
             }
         }else if (ExcuseShiftType.equals("NS")) {
+            gethardcoreNS();
+//            Toast.makeText(ExcuseActivity.this, ExcuseShiftType, Toast.LENGTH_SHORT).show();
             if (lblshift4.getVisibility() == View.INVISIBLE) {
                 lblshift4.setVisibility(View.VISIBLE);
                 spnshift4.setVisibility(View.VISIBLE);
-                gethardcoreNS();
+
             }
             if (lblgroup4.getVisibility() == View.VISIBLE) {
                 lblgroup4.setVisibility(View.INVISIBLE);
@@ -610,10 +672,12 @@ public class ExcuseActivity extends AppCompatActivity {
 
             }
         }else if (ExcuseShiftType.equals("NS1")) {
+            gethardcoreNS1();
+//            Toast.makeText(ExcuseActivity.this, ExcuseShiftType, Toast.LENGTH_SHORT).show();
             if (lblshift4.getVisibility() == View.INVISIBLE) {
                 lblshift4.setVisibility(View.VISIBLE);
                 spnshift4.setVisibility(View.VISIBLE);
-                gethardcoreNS1();
+
             }
             if (lblgroup4.getVisibility() == View.VISIBLE) {
                 lblgroup4.setVisibility(View.INVISIBLE);
@@ -817,7 +881,9 @@ public class ExcuseActivity extends AppCompatActivity {
 
 
             if(modeEdit.equals("edit")){
-
+                txtdate1.setText("");
+                txtexcuseclockin1.setText("");
+                txtexcuseclockout1.setText("");
             }else{
                 txtdate1.setText("");
                 txtexcuseclockin1.setText("");
@@ -841,7 +907,9 @@ public class ExcuseActivity extends AppCompatActivity {
 
 
             if(modeEdit.equals("edit")){
-
+                txtdatefrom2.setText("");
+                txtdateto2.setText("");
+                txtexcuseclockin2.setText("");
             }else {
                 txtdatefrom2.setText("");
                 txtdateto2.setText("");
@@ -862,7 +930,8 @@ public class ExcuseActivity extends AppCompatActivity {
             lblgroup3.setVisibility(View.VISIBLE);
 
             if(modeEdit.equals("edit")){
-
+                txtdatefrom3.setText("");
+                txtdateto3.setText("");
             }else {
                 txtdatefrom3.setText("");
                 txtdateto3.setText("");
@@ -886,7 +955,8 @@ public class ExcuseActivity extends AppCompatActivity {
             lblshift4.setVisibility(View.VISIBLE);*/
 
             if(modeEdit.equals("edit")){
-
+                txtdatefrom4.setText("");
+                txtdateto4.setText("");
             }else {
                 txtdatefrom4.setText("");
                 txtdateto4.setText("");
@@ -909,13 +979,15 @@ public class ExcuseActivity extends AppCompatActivity {
 
 
             if(modeEdit.equals("edit")){
-
-            }else {
-                txtdateto5.setText("");
                 txtdatefrom5.setText("");
+                txtdateto5.setText("");
+            }else {
+                txtdatefrom5.setText("");
+                txtdateto5.setText("");
             }
-            txtdateto5.setVisibility(View.VISIBLE);
+
             txtdatefrom5.setVisibility(View.VISIBLE);
+            txtdateto5.setVisibility(View.VISIBLE);
 
             BtnExcDateFrom5.setVisibility(View.VISIBLE);
             BtnExcDateTo5.setVisibility(View.VISIBLE);
@@ -927,7 +999,8 @@ public class ExcuseActivity extends AppCompatActivity {
             lbltodate.setVisibility(View.VISIBLE);
 
             if(modeEdit.equals("edit")){
-
+                txtfromdate.setText("");
+                txttodate.setText("");
             }else {
                 txtfromdate.setText("");
                 txttodate.setText("");
@@ -975,68 +1048,23 @@ public class ExcuseActivity extends AppCompatActivity {
         }
     }
     protected void onSaveExcuse(){
-        if (lbldate1.getVisibility() == View.VISIBLE) {
-
-        }
-        /*String date_from = txtfromdate.getText().toString();
-        String date_to = txttodate.getText().toString();
+        String ExcuseType = ((String) spnExcuseType.getSelectedItem());
         String excuse_reason = txtExcuseDescription.getText().toString();
         String excuse_type = spnExcuseType.getSelectedItem().toString();
-        String excuse_id = ExcuseId;*/
+        String excuse_id = ExcuseId;
+        if (ExcuseType.equals("Berita Acara Clock IN/OUT")) {
+            String date_from = "";
+            String date_to = "";
+            String shift_type = "";
+            String shift = "";
+            String date_event = txtdate1.getText().toString();
+            String group = "";
+            String clock_in = txtexcuseclockin1.getText().toString();
+            String clock_out = txtexcuseclockout1.getText().toString();
 
-        /*
-        if(!excuse_date.equals("")|| !excuse_description.equals("") || !excuse_hour.equals("")) {
-
-            if(Integer.parseInt(excuse_hour) > 1 & Integer.parseInt(excuse_hour) <= 24){
-                progress = new ProgressDialog(this);
-                progress.setMessage("Processing..");
-                progress.setIndeterminate(true);
-                progress.setCancelable(false);
-                progress.show();
-                RestAdapter restAdapter = new RestAdapter.Builder()
-                        .setEndpoint(ENDPOINT)
-                        .setLogLevel(RestAdapter.LogLevel.FULL)
-                        .build();
-
-                APIExcuse restInterface = restAdapter.create(APIExcuse.class);
-
-                restInterface.onSaveExcuse(excuse_id, excuse_date, excuse_description, excuse_hour,
-                    User, EmployeeId, new Callback<CheckLogin>() {
-                        @Override
-                        public void success(CheckLogin m, Response response) {
-
-                            if (progress != null) {
-                                progress.dismiss();
-                            }
-
-                            Toast.makeText(getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
-
-                            if (m.getMsgType().toLowerCase().equals("info")) {
-                                finish();
-                            } else {
-
-                            }
-                        }
-
-                        @Override
-                        public void failure(RetrofitError error) {
-                            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                            if (progress != null) {
-                                progress.dismiss();
-                            }
-                        }
-                    });
-            }else {
-                Toast.makeText(getApplicationContext(), "Tidak boleh mengisi lebih dari 24 jam ", Toast.LENGTH_LONG).show();
-            }
-        }else {
-            Toast.makeText(getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
-        }
-        */
-
-        /*if(date_from.equals("")|| date_to.equals("") || excuse_reason.equals("")) {
-            Toast.makeText(getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
-        }else{
+            if(date_event.equals("")|| clock_in.equals("") ||clock_out.equals("") || excuse_reason.equals("")) {
+                Toast.makeText(getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
+            }else{
                 progress = new ProgressDialog(this);
                 progress.setMessage("Processing..");
                 progress.setIndeterminate(true);
@@ -1049,7 +1077,7 @@ public class ExcuseActivity extends AppCompatActivity {
 
                 ApiExcuse restInterface = restAdapter.create(ApiExcuse.class);
 
-                restInterface.onSaveExcuse(excuse_id,EmployeeId, User, date_from, date_to, excuse_type,excuse_reason
+                restInterface.onSaveExcuse(EmployeeId,User,excuse_id,excuse_type,excuse_reason,shift_type,shift,date_from, date_to, date_event,group,clock_in,clock_out
                         , new Callback<CheckLogin>() {
                             @Override
                             public void success(CheckLogin m, Response response) {
@@ -1075,7 +1103,283 @@ public class ExcuseActivity extends AppCompatActivity {
                                 }
                             }
                         });
-        }*/
+            }
+
+        } else if (ExcuseType.equals("Change Clock-in")) {
+            String date_from = txtdatefrom2.getText().toString();
+            String date_to = txtdateto2.getText().toString();
+            String shift_type = "";
+            String shift = "";
+            String date_event = "";
+            String group = "";
+            String clock_in = txtexcuseclockin2.getText().toString();
+            String clock_out = "";
+
+            if(date_from.equals("")|| date_to.equals("") ||clock_in.equals("") || excuse_reason.equals("")) {
+                Toast.makeText(getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
+            }else{
+                progress = new ProgressDialog(this);
+                progress.setMessage("Processing..");
+                progress.setIndeterminate(true);
+                progress.setCancelable(false);
+                progress.show();
+                RestAdapter restAdapter = new RestAdapter.Builder()
+                        .setEndpoint(ENDPOINT)
+                        .setLogLevel(RestAdapter.LogLevel.FULL)
+                        .build();
+
+                ApiExcuse restInterface = restAdapter.create(ApiExcuse.class);
+
+                restInterface.onSaveExcuse(EmployeeId,User,excuse_id,excuse_type,excuse_reason,shift_type,shift,date_from, date_to, date_event,group,clock_in,clock_out
+                        , new Callback<CheckLogin>() {
+                            @Override
+                            public void success(CheckLogin m, Response response) {
+
+                                if (progress != null) {
+                                    progress.dismiss();
+                                }
+
+                                Toast.makeText(getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
+
+                                if (m.getMsgType().toLowerCase().equals("info")) {
+                                    finish();
+                                } else {
+
+                                }
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                                if (progress != null) {
+                                    progress.dismiss();
+                                }
+                            }
+                        });
+            }
+        } else if (ExcuseType.equals("Change Group")) {
+            String date_from = txtdatefrom3.getText().toString();
+            String date_to = txtdateto3.getText().toString();
+            String shift_type = "";
+            String shift = "";
+            String date_event = "";
+            String group = ((String) spnGroup3.getSelectedItem());
+            String clock_in = "";
+            String clock_out = "";
+
+            if(date_from.equals("")|| date_to.equals("") ||group.equals("") || excuse_reason.equals("")) {
+                Toast.makeText(getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
+            }else{
+                progress = new ProgressDialog(this);
+                progress.setMessage("Processing..");
+                progress.setIndeterminate(true);
+                progress.setCancelable(false);
+                progress.show();
+                RestAdapter restAdapter = new RestAdapter.Builder()
+                        .setEndpoint(ENDPOINT)
+                        .setLogLevel(RestAdapter.LogLevel.FULL)
+                        .build();
+
+                ApiExcuse restInterface = restAdapter.create(ApiExcuse.class);
+
+                restInterface.onSaveExcuse(EmployeeId,User,excuse_id,excuse_type,excuse_reason,shift_type,shift,date_from, date_to, date_event,group,clock_in,clock_out
+                        , new Callback<CheckLogin>() {
+                            @Override
+                            public void success(CheckLogin m, Response response) {
+
+                                if (progress != null) {
+                                    progress.dismiss();
+                                }
+
+                                Toast.makeText(getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
+
+                                if (m.getMsgType().toLowerCase().equals("info")) {
+                                    finish();
+                                } else {
+
+                                }
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                                if (progress != null) {
+                                    progress.dismiss();
+                                }
+                            }
+                        });
+            }
+        } else if (ExcuseType.equals("Change Shift")) {
+            String date_from = txtdatefrom4.getText().toString();
+            String date_to = txtdateto4.getText().toString();
+            String shift_type = ((String) spnShiftType4.getSelectedItem());
+                if (shift_type.equals("G1")) {
+                    getshift = ((String) spnshift4.getSelectedItem());
+                    getgroup = "";
+                }else if (shift_type.equals("G2")) {
+                    getshift = "";
+                    getgroup = ((String) spnGroup4.getSelectedItem());
+                }else if (shift_type.equals("NS")) {
+                    getshift = "1";
+                    getgroup = "";
+                }else{
+                    getshift = "1";
+                    getgroup = "";
+                }
+            String shift = getshift;
+            String group = getgroup;
+            String date_event = "";
+
+            String clock_in = "";
+            String clock_out = "";
+
+            if(date_from.equals("")|| date_to.equals("") || excuse_reason.equals("")) {
+                Toast.makeText(getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
+            }else{
+                progress = new ProgressDialog(this);
+                progress.setMessage("Processing..");
+                progress.setIndeterminate(true);
+                progress.setCancelable(false);
+                progress.show();
+                RestAdapter restAdapter = new RestAdapter.Builder()
+                        .setEndpoint(ENDPOINT)
+                        .setLogLevel(RestAdapter.LogLevel.FULL)
+                        .build();
+
+                ApiExcuse restInterface = restAdapter.create(ApiExcuse.class);
+
+                restInterface.onSaveExcuse(EmployeeId,User,excuse_id,excuse_type,excuse_reason,shift_type,shift,date_from, date_to, date_event,group,clock_in,clock_out
+                        , new Callback<CheckLogin>() {
+                            @Override
+                            public void success(CheckLogin m, Response response) {
+
+                                if (progress != null) {
+                                    progress.dismiss();
+                                }
+
+                                Toast.makeText(getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
+
+                                if (m.getMsgType().toLowerCase().equals("info")) {
+                                    finish();
+                                } else {
+
+                                }
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                                if (progress != null) {
+                                    progress.dismiss();
+                                }
+                            }
+                        });
+            }
+        } else if (ExcuseType.equals("Change Working Day")) {
+            String date_from = txtdatefrom5.getText().toString();
+            String date_to = txtdateto5.getText().toString();
+            String shift_type = "";
+            String shift = "";
+            String date_event = "";
+            String group = "";
+            String clock_in = "";
+            String clock_out = "";
+
+            if(date_from.equals("")|| date_to.equals("") || excuse_reason.equals("")) {
+                Toast.makeText(getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
+            }else{
+                progress = new ProgressDialog(this);
+                progress.setMessage("Processing..");
+                progress.setIndeterminate(true);
+                progress.setCancelable(false);
+                progress.show();
+                RestAdapter restAdapter = new RestAdapter.Builder()
+                        .setEndpoint(ENDPOINT)
+                        .setLogLevel(RestAdapter.LogLevel.FULL)
+                        .build();
+
+                ApiExcuse restInterface = restAdapter.create(ApiExcuse.class);
+
+                restInterface.onSaveExcuse(EmployeeId,User,excuse_id,excuse_type,excuse_reason,shift_type,shift,date_from, date_to, date_event,group,clock_in,clock_out
+                        , new Callback<CheckLogin>() {
+                            @Override
+                            public void success(CheckLogin m, Response response) {
+
+                                if (progress != null) {
+                                    progress.dismiss();
+                                }
+
+                                Toast.makeText(getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
+
+                                if (m.getMsgType().toLowerCase().equals("info")) {
+                                    finish();
+                                } else {
+
+                                }
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                                if (progress != null) {
+                                    progress.dismiss();
+                                }
+                            }
+                        });
+            }
+        } else {
+            String date_from = txtfromdate.getText().toString();
+            String date_to = txttodate.getText().toString();
+            String shift_type = "";
+            String shift = "";
+            String date_event = "";
+            String group = "";
+            String clock_in = "";
+            String clock_out = "";
+
+        if(date_from.equals("")|| date_to.equals("") || excuse_reason.equals("")) {
+            Toast.makeText(getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
+        }else{
+                progress = new ProgressDialog(this);
+                progress.setMessage("Processing..");
+                progress.setIndeterminate(true);
+                progress.setCancelable(false);
+                progress.show();
+                RestAdapter restAdapter = new RestAdapter.Builder()
+                        .setEndpoint(ENDPOINT)
+                        .setLogLevel(RestAdapter.LogLevel.FULL)
+                        .build();
+
+                ApiExcuse restInterface = restAdapter.create(ApiExcuse.class);
+
+                restInterface.onSaveExcuse(EmployeeId,User,excuse_id,excuse_type,excuse_reason,shift_type,shift,date_from, date_to, date_event,group,clock_in,clock_out
+                        , new Callback<CheckLogin>() {
+                            @Override
+                            public void success(CheckLogin m, Response response) {
+
+                                if (progress != null) {
+                                    progress.dismiss();
+                                }
+
+                                Toast.makeText(getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
+
+                                if (m.getMsgType().toLowerCase().equals("info")) {
+                                    finish();
+                                } else {
+
+                                }
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                                if (progress != null) {
+                                    progress.dismiss();
+                                }
+                            }
+                        });
+                        }
+        }
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -1161,6 +1465,15 @@ public class ExcuseActivity extends AppCompatActivity {
     public void setDate1Menu3() { showDialog(300); }
     public void setDate2Menu3() { showDialog(301); }
 
+    public void setDate1Menu4() { showDialog(400); }
+    public void setDate2Menu4() { showDialog(401); }
+
+    public void setDate1Menu5() { showDialog(500); }
+    public void setDate2Menu5() { showDialog(501); }
+
+    public void setDate1MenuDef() { showDialog(900); }
+    public void setDate2MenuDef() { showDialog(901); }
+
 
 
     @Override
@@ -1186,6 +1499,24 @@ public class ExcuseActivity extends AppCompatActivity {
             return new DatePickerDialog(this, myDate1Menu3, year, month, day);
         }else if(id == 301){
             return new DatePickerDialog(this, myDate2Menu3, year, month, day);
+        }
+        // TODO Menu 4
+        if (id == 400) {
+            return new DatePickerDialog(this, myDate1Menu4, year, month, day);
+        }else if(id == 401){
+            return new DatePickerDialog(this, myDate2Menu4, year, month, day);
+        }
+        // TODO Menu 5
+        if (id == 500) {
+            return new DatePickerDialog(this, myDate1Menu5, year, month, day);
+        }else if(id == 501){
+            return new DatePickerDialog(this, myDate2Menu5, year, month, day);
+        }
+        // TODO Menu Def
+        if (id == 900) {
+            return new DatePickerDialog(this, myDate1MenuDef, year, month, day);
+        }else if(id == 901){
+            return new DatePickerDialog(this, myDate2MenuDef, year, month, day);
         }
 
         else{
@@ -1279,13 +1610,84 @@ public class ExcuseActivity extends AppCompatActivity {
 
 
     private void showDate1Menu3(int year, int month, int day) {
-        txtdatefrom2.setText(new StringBuilder().append(year).append("-")
+        txtdatefrom3.setText(new StringBuilder().append(year).append("-")
                 .append(month).append("-").append(day));
     }
     private void showDate2Menu3(int year, int month, int day) {
-        txtdateto2.setText(new StringBuilder().append(year).append("-")
+        txtdateto3.setText(new StringBuilder().append(year).append("-")
                 .append(month).append("-").append(day));
     }
+    // TODO menu 4
+    private DatePickerDialog.OnDateSetListener myDate1Menu4 = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
+            showDate1Menu4(arg1, arg2 + 1, arg3);
+        }
+    };
+    private DatePickerDialog.OnDateSetListener myDate2Menu4 = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
+            showDate2Menu4(arg1, arg2 + 1, arg3);
+        }
+    };
 
+
+
+    private void showDate1Menu4(int year, int month, int day) {
+        txtdatefrom4.setText(new StringBuilder().append(year).append("-")
+                .append(month).append("-").append(day));
+    }
+    private void showDate2Menu4(int year, int month, int day) {
+        txtdateto4.setText(new StringBuilder().append(year).append("-")
+                .append(month).append("-").append(day));
+    }
+    // TODO menu 5
+    private DatePickerDialog.OnDateSetListener myDate1Menu5 = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
+            showDate1Menu5(arg1, arg2 + 1, arg3);
+        }
+    };
+    private DatePickerDialog.OnDateSetListener myDate2Menu5 = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
+            showDate2Menu5(arg1, arg2 + 1, arg3);
+        }
+    };
+
+
+
+    private void showDate1Menu5(int year, int month, int day) {
+        txtdatefrom5.setText(new StringBuilder().append(year).append("-")
+                .append(month).append("-").append(day));
+    }
+    private void showDate2Menu5(int year, int month, int day) {
+        txtdateto5.setText(new StringBuilder().append(year).append("-")
+                .append(month).append("-").append(day));
+    }
+    // TODO menu Def
+    private DatePickerDialog.OnDateSetListener myDate1MenuDef = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
+            showDate1MenuDef(arg1, arg2 + 1, arg3);
+        }
+    };
+    private DatePickerDialog.OnDateSetListener myDate2MenuDef = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
+            showDate2MenuDef(arg1, arg2 + 1, arg3);
+        }
+    };
+
+
+
+    private void showDate1MenuDef(int year, int month, int day) {
+        txtfromdate.setText(new StringBuilder().append(year).append("-")
+                .append(month).append("-").append(day));
+    }
+    private void showDate2MenuDef(int year, int month, int day) {
+        txttodate.setText(new StringBuilder().append(year).append("-")
+                .append(month).append("-").append(day));
+    }
 
 }
