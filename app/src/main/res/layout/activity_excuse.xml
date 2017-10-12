@@ -334,7 +334,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Date Changed"
+        android:text="Date From"
         android:id="@+id/lbldatefrom3"
         android:textStyle="bold|italic"
         android:textSize="14dp"
@@ -361,7 +361,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Replacement"
+        android:text="Date To"
         android:id="@+id/lbldateto3"
         android:textStyle="bold|italic"
         android:textSize="14dp"
@@ -429,12 +429,12 @@
         android:layout_alignParentEnd="true"
         android:visibility="invisible"
         />
-    <!-- TODO: Menu For Change Shift Item -->
+    <!-- TODO: Menu For Change Worrking Day Item -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Date From"
+        android:text="Date Changed"
         android:id="@+id/lbldatefrom5"
         android:textStyle="bold|italic"
         android:textSize="14dp"
@@ -461,7 +461,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Date To"
+        android:text="Replacement"
         android:id="@+id/lbldateto5"
         android:textStyle="bold|italic"
         android:textSize="14dp"
@@ -503,7 +503,7 @@
         android:layout_alignParentEnd="true"
         android:visibility="invisible"
         />
-    <!-- TODO: Menu For Change Working Day Item -->
+    <!-- TODO: Menu For Change Shift Item -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

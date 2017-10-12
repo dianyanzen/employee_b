@@ -37,6 +37,7 @@ import pojo.CheckLogin;
 import pojo.ComboboxCommon;
 import pojo.GetExcuseGroup;
 import pojo.GetExcuseList;
+import pojo.GetExcuseShift;
 import pojo.GetExcuseType;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -96,15 +97,18 @@ public class ExcuseActivity extends AppCompatActivity {
     String EmployeeId="";
     public String data_type = "";
     public String data_group = "";
+    public String data_shift = "";
     int aspectX;
     int aspectY;
     int outputX;
     int outputY;
 
     ConnectionDetector conDetector;
-
+    Bundle extras;
     /**DatePicker**/
     private int year, month, day;
+
+    private int hour, minute;
 
     private class ScreenResolution {
         int width, height;
@@ -141,7 +145,7 @@ public class ExcuseActivity extends AppCompatActivity {
         EmployeeId=pref.getString("EmployeeId",null);
         conDetector =  new ConnectionDetector(getApplicationContext());
 
-        Bundle extras = getIntent().getExtras();
+        extras = getIntent().getExtras();
 
         ScreenResolution sr = deviceDimensions();
         // use Euclid's theorem to calculate the proper aspect ratio i.e. screen
@@ -235,6 +239,67 @@ public class ExcuseActivity extends AppCompatActivity {
                         .show();
             }
         });
+        /* TODO Perform For Display Datepicker Menu 1*/
+        BtnExcDate1.performClick();
+        BtnExcDate1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDateMenu1();
+            }
+        });
+        BtnExcClockIn1.performClick();
+        BtnExcClockIn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTimeInMenu1();
+            }
+        });
+        BtnExcClockOut1.performClick();
+        BtnExcClockOut1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTimeOutMenu1();
+            }
+        });
+
+        /* TODO Perform For Display Datepicker Menu 2*/
+        BtnExcDateFrom2.performClick();
+        BtnExcDateFrom2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDate1Menu2();
+            }
+        });
+        BtnExcDateTo2.performClick();
+        BtnExcDateTo2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDate2Menu2();
+            }
+        });
+        BtnExcClockIn2.performClick();
+        BtnExcClockIn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTimeInMenu2();
+            }
+        });
+        /* TODO Perform For Display Datepicker Menu 3*/
+        BtnExcDateFrom3.performClick();
+        BtnExcDateFrom3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDate1Menu3();
+            }
+        });
+        BtnExcDateTo3.performClick();
+        BtnExcDateTo3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDate2Menu3();
+            }
+        });
+        /*
 
         Button btnDatePicker1=(Button)findViewById(R.id.BtnExcFromDt);
         btnDatePicker1.performClick();
@@ -252,6 +317,7 @@ public class ExcuseActivity extends AppCompatActivity {
                 setDateto();
             }
         });
+*/
 
     }
     private void getExcuseType(final String data_type){
@@ -315,7 +381,7 @@ public class ExcuseActivity extends AppCompatActivity {
             }
         });
     }
-    private void getspnGroup3(final String data_group){
+    private void getspnGroup(final String data_group){
 
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(ENDPOINT)
@@ -354,6 +420,221 @@ public class ExcuseActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private void getspnGroup2(final String data_group){
+
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(ENDPOINT)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+
+        ApiExcuse restInterface = restAdapter.create(ApiExcuse.class);
+
+        restInterface.getExcuseGroup(new Callback<List<GetExcuseGroup>>() {
+            @Override
+            public void success(List<GetExcuseGroup> m, Response response) {
+                List<String> list = new ArrayList<String>();
+
+                for (int i = 0; i < m.size(); i++) {
+                    list.add(m.get(i).getExcuseGroup());
+                }
+
+                adaAdapterCombo = new ArrayAdapter<String>
+                        (getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
+
+                adaAdapterCombo.setDropDownViewResource
+                        (R.layout.spinner_simple_item);
+
+                spnGroup4.setAdapter(adaAdapterCombo);
+
+                String data = data_group;
+
+                if (data != "") {
+                    int idxLocation = adaAdapterCombo.getPosition(data_group);
+                    spnGroup4.setSelection(idxLocation);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getApplicationContext().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void getspnShift(final String data_shift){
+
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(ENDPOINT)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+
+        ApiExcuse restInterface = restAdapter.create(ApiExcuse.class);
+
+        restInterface.getExcuseShift(new Callback<List<GetExcuseShift>>() {
+            @Override
+            public void success(List<GetExcuseShift> m, Response response) {
+                List<String> list = new ArrayList<String>();
+
+                for (int i = 0; i < m.size(); i++) {
+                    list.add(m.get(i).getExcuseshift());
+                }
+
+                adaAdapterCombo = new ArrayAdapter<String>
+                        (getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
+
+                adaAdapterCombo.setDropDownViewResource
+                        (R.layout.spinner_simple_item);
+
+                spnShiftType4.setAdapter(adaAdapterCombo);
+
+                String data = data_shift;
+
+                if (data != "") {
+                    int idxLocation = adaAdapterCombo.getPosition(data_shift);
+                    spnShiftType4.setSelection(idxLocation);
+                }
+                spnShiftType4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                        updateShiftType();
+                        //Toast.makeText(getApplicationContext(), separated[0].replace(" ", "").toString(), Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parentView) {
+                        // your code here
+                        updateShiftType();
+
+                    }
+                });
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getApplicationContext().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void gethardcoreG1(){
+        List<String> list = new ArrayList<String>();
+        list.clear();
+        list.add("1");
+        list.add("2");
+
+        adaAdapterCombo = new ArrayAdapter<String>
+                (getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
+
+        adaAdapterCombo.setDropDownViewResource
+                (R.layout.spinner_simple_item);
+
+        spnshift4.setAdapter(adaAdapterCombo);
+
+        String data = data_shift;
+
+        if (data != "") {
+            int idxLocation = adaAdapterCombo.getPosition(data_shift);
+            spnshift4.setSelection(idxLocation);
+        }
+    }
+    public void gethardcoreNS(){
+        List<String> list = new ArrayList<String>();
+        list.clear();
+        list.add("1");
+
+        adaAdapterCombo = new ArrayAdapter<String>
+                (getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
+
+        adaAdapterCombo.setDropDownViewResource
+                (R.layout.spinner_simple_item);
+
+        spnshift4.setAdapter(adaAdapterCombo);
+
+        String data = data_shift;
+
+        if (data != "") {
+            int idxLocation = adaAdapterCombo.getPosition(data_shift);
+            spnshift4.setSelection(idxLocation);
+        }
+    }
+    public void gethardcoreNS1(){
+        List<String> list = new ArrayList<String>();
+        list.clear();
+        list.add("1");
+
+        adaAdapterCombo = new ArrayAdapter<String>
+                (getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
+
+        adaAdapterCombo.setDropDownViewResource
+                (R.layout.spinner_simple_item);
+
+        spnshift4.setAdapter(adaAdapterCombo);
+
+        String data = data_shift;
+
+        if (data != "") {
+            int idxLocation = adaAdapterCombo.getPosition(data_shift);
+            spnshift4.setSelection(idxLocation);
+        }
+    }
+    private void updateShiftType(){
+        String ExcuseShiftType = ((String) spnShiftType4.getSelectedItem());
+        if (ExcuseShiftType.equals("G1")) {
+            if (lblshift4.getVisibility() == View.INVISIBLE) {
+                lblshift4.setVisibility(View.VISIBLE);
+                spnshift4.setVisibility(View.VISIBLE);
+                gethardcoreG1();
+            }
+            if (lblgroup4.getVisibility() == View.VISIBLE) {
+                lblgroup4.setVisibility(View.INVISIBLE);
+                spnGroup4.setVisibility(View.INVISIBLE);
+            }
+        }else if (ExcuseShiftType.equals("G2")) {
+            if (lblshift4.getVisibility() == View.VISIBLE) {
+                lblshift4.setVisibility(View.INVISIBLE);
+                spnshift4.setVisibility(View.INVISIBLE);
+            }
+            if (lblgroup4.getVisibility() == View.INVISIBLE) {
+                lblgroup4.setVisibility(View.VISIBLE);
+                spnGroup4.setVisibility(View.VISIBLE);
+                getspnGroup2(data_group);
+            }
+        }else if (ExcuseShiftType.equals("NS")) {
+            if (lblshift4.getVisibility() == View.INVISIBLE) {
+                lblshift4.setVisibility(View.VISIBLE);
+                spnshift4.setVisibility(View.VISIBLE);
+                gethardcoreNS();
+            }
+            if (lblgroup4.getVisibility() == View.VISIBLE) {
+                lblgroup4.setVisibility(View.INVISIBLE);
+                spnGroup4.setVisibility(View.INVISIBLE);
+
+            }
+        }else if (ExcuseShiftType.equals("NS1")) {
+            if (lblshift4.getVisibility() == View.INVISIBLE) {
+                lblshift4.setVisibility(View.VISIBLE);
+                spnshift4.setVisibility(View.VISIBLE);
+                gethardcoreNS1();
+            }
+            if (lblgroup4.getVisibility() == View.VISIBLE) {
+                lblgroup4.setVisibility(View.INVISIBLE);
+                spnGroup4.setVisibility(View.INVISIBLE);
+            }
+        }else{
+            if (lblgroup4.getVisibility() == View.VISIBLE) {
+                lblgroup4.setVisibility(View.INVISIBLE);
+            }
+            if (lblshift4.getVisibility() == View.VISIBLE) {
+                lblshift4.setVisibility(View.INVISIBLE);
+            }
+
+            if (spnGroup4.getVisibility() == View.VISIBLE) {
+                spnGroup4.setVisibility(View.INVISIBLE);
+            }
+            if (spnshift4.getVisibility() == View.VISIBLE) {
+                spnshift4.setVisibility(View.INVISIBLE);
+            }
+
+        }
     }
     private void declareview(){
          /* Main View */
@@ -426,14 +707,14 @@ public class ExcuseActivity extends AppCompatActivity {
         BtnExcDateTo5 = (Button)findViewById(R.id.BtnExcDateTo5);
 
         /* 2 Textview Menu Default*/
-        lblfromdate = (TextView)findViewById(R.id.lbldatefrom5);
-        lbltodate = (TextView)findViewById(R.id.lbldateto5);
+        lblfromdate = (TextView)findViewById(R.id.lblfromdate);
+        lbltodate = (TextView)findViewById(R.id.lbltodate);
             /* 2 Edittext Menu Index 4*/
-        txtfromdate = (EditText)findViewById(R.id.txtdateto5);
-        txttodate = (EditText)findViewById(R.id.txtdatefrom5);
+        txtfromdate = (EditText)findViewById(R.id.txtfromdate);
+        txttodate = (EditText)findViewById(R.id.txttodate);
             /* 2 Button Menu Index 4*/
-        BtnExcFromDt = (Button)findViewById(R.id.BtnExcDateFrom5);
-        BtnExcToDt = (Button)findViewById(R.id.BtnExcDateTo5);
+        BtnExcFromDt = (Button)findViewById(R.id.BtnExcFromDt);
+        BtnExcToDt = (Button)findViewById(R.id.BtnExcToDt);
 
     }
     private void clearVisible(){
@@ -449,6 +730,7 @@ public class ExcuseActivity extends AppCompatActivity {
             BtnExcDate1.setVisibility(View.INVISIBLE);
             BtnExcClockIn1.setVisibility(View.INVISIBLE);
             BtnExcClockOut1.setVisibility(View.INVISIBLE);
+
         }
         if (lbldatefrom2.getVisibility() == View.VISIBLE) {
             lbldatefrom2.setVisibility(View.INVISIBLE);
@@ -489,12 +771,7 @@ public class ExcuseActivity extends AppCompatActivity {
             lblshifttype4.setVisibility(View.INVISIBLE);
             lbldatefrom4.setVisibility(View.INVISIBLE);
             lbldateto4.setVisibility(View.INVISIBLE);
-            if (lblgroup4.getVisibility() == View.VISIBLE) {
-                lblgroup4.setVisibility(View.INVISIBLE);
-            }
-            if (lblshift4.getVisibility() == View.VISIBLE) {
-                lblshift4.setVisibility(View.INVISIBLE);
-            }
+
 
             txtdatefrom4.setVisibility(View.INVISIBLE);
             txtdateto4.setVisibility(View.INVISIBLE);
@@ -503,12 +780,19 @@ public class ExcuseActivity extends AppCompatActivity {
             BtnExcDateTo4.setVisibility(View.INVISIBLE);
 
             spnShiftType4.setVisibility(View.INVISIBLE);
-            if (spnGroup4.getVisibility() == View.VISIBLE) {
-                spnGroup4.setVisibility(View.INVISIBLE);
-            }
-            if (spnshift4.getVisibility() == View.VISIBLE) {
-                spnshift4.setVisibility(View.INVISIBLE);
-            }
+
+        }
+        if (spnGroup4.getVisibility() == View.VISIBLE) {
+            spnGroup4.setVisibility(View.INVISIBLE);
+        }
+        if (spnshift4.getVisibility() == View.VISIBLE) {
+            spnshift4.setVisibility(View.INVISIBLE);
+        }
+        if (lblgroup4.getVisibility() == View.VISIBLE) {
+            lblgroup4.setVisibility(View.INVISIBLE);
+        }
+        if (lblshift4.getVisibility() == View.VISIBLE) {
+            lblshift4.setVisibility(View.INVISIBLE);
         }
         if (lblfromdate.getVisibility() == View.VISIBLE) {
             lblfromdate.setVisibility(View.INVISIBLE);
@@ -523,12 +807,22 @@ public class ExcuseActivity extends AppCompatActivity {
     }
     private void updateType() {
         clearVisible();
-
+        modeEdit=extras.getString("Mode");
         String ExcuseType = ((String) spnExcuseType.getSelectedItem());
+         /* TODO Perform For Display Menu 1*/
         if (ExcuseType.equals("Berita Acara Clock IN/OUT")) {
             lbldate1.setVisibility(View.VISIBLE);
             lblexcuseclockin1.setVisibility(View.VISIBLE);
             lblexcuseclockout1.setVisibility(View.VISIBLE);
+
+
+            if(modeEdit.equals("edit")){
+
+            }else{
+                txtdate1.setText("");
+                txtexcuseclockin1.setText("");
+                txtexcuseclockout1.setText("");
+            }
 
             txtdate1.setVisibility(View.VISIBLE);
             txtexcuseclockin1.setVisibility(View.VISIBLE);
@@ -539,11 +833,20 @@ public class ExcuseActivity extends AppCompatActivity {
             BtnExcClockOut1.setVisibility(View.VISIBLE);
 //            Toast.makeText(ExcuseActivity.this, ExcuseType, Toast.LENGTH_SHORT).show();
 
+        /* TODO Perform For Display Menu 2*/
         } else if (ExcuseType.equals("Change Clock-in")) {
             lbldatefrom2.setVisibility(View.VISIBLE);
             lbldateto2.setVisibility(View.VISIBLE);
             lblexcuseclockin2.setVisibility(View.VISIBLE);
 
+
+            if(modeEdit.equals("edit")){
+
+            }else {
+                txtdatefrom2.setText("");
+                txtdateto2.setText("");
+                txtexcuseclockin2.setText("");
+            }
             txtdatefrom2.setVisibility(View.VISIBLE);
             txtdateto2.setVisibility(View.VISIBLE);
             txtexcuseclockin2.setVisibility(View.VISIBLE);
@@ -552,21 +855,29 @@ public class ExcuseActivity extends AppCompatActivity {
             BtnExcDateTo2.setVisibility(View.VISIBLE);
             BtnExcClockIn2.setVisibility(View.VISIBLE);
 //            Toast.makeText(ExcuseActivity.this, ExcuseType, Toast.LENGTH_SHORT).show();
+        /* TODO Perform For Display Menu 3*/
         } else if (ExcuseType.equals("Change Group")) {
             lbldatefrom3.setVisibility(View.VISIBLE);
             lbldateto3.setVisibility(View.VISIBLE);
             lblgroup3.setVisibility(View.VISIBLE);
 
+            if(modeEdit.equals("edit")){
+
+            }else {
+                txtdatefrom3.setText("");
+                txtdateto3.setText("");
+            }
             txtdatefrom3.setVisibility(View.VISIBLE);
             txtdateto3.setVisibility(View.VISIBLE);
 
             BtnExcDateFrom3.setVisibility(View.VISIBLE);
             BtnExcDateTo3.setVisibility(View.VISIBLE);
             spnGroup3.setVisibility(View.VISIBLE);
-            getspnGroup3(data_group);
+            getspnGroup(data_group);
 
 
 //            Toast.makeText(ExcuseActivity.this, ExcuseType, Toast.LENGTH_SHORT).show();
+        /* TODO Perform For Display Menu 4*/
         } else if (ExcuseType.equals("Change Shift")) {
             lblshifttype4.setVisibility(View.VISIBLE);
             lbldatefrom4.setVisibility(View.VISIBLE);
@@ -574,6 +885,12 @@ public class ExcuseActivity extends AppCompatActivity {
             /*lblgroup4.setVisibility(View.VISIBLE);
             lblshift4.setVisibility(View.VISIBLE);*/
 
+            if(modeEdit.equals("edit")){
+
+            }else {
+                txtdatefrom4.setText("");
+                txtdateto4.setText("");
+            }
             txtdatefrom4.setVisibility(View.VISIBLE);
             txtdateto4.setVisibility(View.VISIBLE);
 
@@ -581,13 +898,22 @@ public class ExcuseActivity extends AppCompatActivity {
             BtnExcDateTo4.setVisibility(View.VISIBLE);
 
             spnShiftType4.setVisibility(View.VISIBLE);
+            getspnShift(data_shift);
             /*spnGroup4.setVisibility(View.VISIBLE);
             spnshift4.setVisibility(View.VISIBLE);*/
 //            Toast.makeText(ExcuseActivity.this, ExcuseType, Toast.LENGTH_SHORT).show();
+        /* TODO Perform For Display Menu 5*/
         } else if (ExcuseType.equals("Change Working Day")) {
             lbldatefrom5.setVisibility(View.VISIBLE);
             lbldateto5.setVisibility(View.VISIBLE);
 
+
+            if(modeEdit.equals("edit")){
+
+            }else {
+                txtdateto5.setText("");
+                txtdatefrom5.setText("");
+            }
             txtdateto5.setVisibility(View.VISIBLE);
             txtdatefrom5.setVisibility(View.VISIBLE);
 
@@ -595,10 +921,51 @@ public class ExcuseActivity extends AppCompatActivity {
             BtnExcDateTo5.setVisibility(View.VISIBLE);
 
 //            Toast.makeText(ExcuseActivity.this, ExcuseType, Toast.LENGTH_SHORT).show();
+        /* TODO Perform For Display Menu 6*/
+        } else if (ExcuseType.equals("Coba aja")) {
+            lblfromdate.setVisibility(View.VISIBLE);
+            lbltodate.setVisibility(View.VISIBLE);
+
+            if(modeEdit.equals("edit")){
+
+            }else {
+                txtfromdate.setText("");
+                txttodate.setText("");
+            }
+            txtfromdate.setVisibility(View.VISIBLE);
+            txttodate.setVisibility(View.VISIBLE);
+
+            BtnExcFromDt.setVisibility(View.VISIBLE);
+            BtnExcToDt.setVisibility(View.VISIBLE);
+//            Toast.makeText(ExcuseActivity.this, ExcuseType, Toast.LENGTH_SHORT).show();
+        /* TODO Perform For Display Menu 7*/
+        } else if (ExcuseType.equals("Leave")) {
+            lblfromdate.setVisibility(View.VISIBLE);
+            lbltodate.setVisibility(View.VISIBLE);
+
+            if(modeEdit.equals("edit")){
+
+            }else {
+                txtfromdate.setText("");
+                txttodate.setText("");
+            }
+            txtfromdate.setVisibility(View.VISIBLE);
+            txttodate.setVisibility(View.VISIBLE);
+
+            BtnExcFromDt.setVisibility(View.VISIBLE);
+            BtnExcToDt.setVisibility(View.VISIBLE);
+//            Toast.makeText(ExcuseActivity.this, ExcuseType, Toast.LENGTH_SHORT).show();
+        /* TODO Perform For Display Menu Default*/
         } else {
             lblfromdate.setVisibility(View.VISIBLE);
             lbltodate.setVisibility(View.VISIBLE);
 
+            if(modeEdit.equals("edit")){
+
+            }else {
+                txtfromdate.setText("");
+                txttodate.setText("");
+            }
             txtfromdate.setVisibility(View.VISIBLE);
             txttodate.setVisibility(View.VISIBLE);
 
@@ -608,6 +975,9 @@ public class ExcuseActivity extends AppCompatActivity {
         }
     }
     protected void onSaveExcuse(){
+        if (lbldate1.getVisibility() == View.VISIBLE) {
+
+        }
         /*String date_from = txtfromdate.getText().toString();
         String date_to = txttodate.getText().toString();
         String excuse_reason = txtExcuseDescription.getText().toString();
@@ -774,51 +1144,148 @@ public class ExcuseActivity extends AppCompatActivity {
     }
 
     @SuppressWarnings("deprecation")
-    public void setDateto() {
-        showDialog(999);
+    public void setDateMenu1() { showDialog(100); }
+    public void setTimeInMenu1() {
+        showDialog(101);
     }
-    public void setDatefrom() {
-        showDialog(222);
+    public void setTimeOutMenu1() {
+        showDialog(102);
     }
+
+    public void setDate1Menu2() { showDialog(200); }
+    public void setDate2Menu2() { showDialog(201); }
+    public void setTimeInMenu2() {
+        showDialog(202);
+    }
+
+    public void setDate1Menu3() { showDialog(300); }
+    public void setDate2Menu3() { showDialog(301); }
+
+
 
     @Override
     protected Dialog onCreateDialog(int id) {
-        // TODO Auto-generated method stub
-        if (id == 999) {
-            return new DatePickerDialog(this, myDateListenerto, year, month, day);
-        }else if (id == 222){
-            return new DatePickerDialog(this, myDateListenerfrom, year, month, day);
+        // TODO Menu 1
+        if (id == 100) {
+            return new DatePickerDialog(this, myDate1Menu1, year, month, day);
+        }else if(id == 101){
+            return new TimePickerDialog(this, myTimeInMenu1 , hour, minute, false);
+        }else if(id == 102){
+            return new TimePickerDialog(this, myTimeOutMenu1 , hour, minute, false);
         }
-        return null;
-    }
+        // TODO Menu 2
+        if (id == 200) {
+            return new DatePickerDialog(this, myDate1Menu2, year, month, day);
+        }else if(id == 201){
+            return new DatePickerDialog(this, myDate2Menu2, year, month, day);
+        }else if(id == 202){
+            return new TimePickerDialog(this, myTimeInMenu2 , hour, minute, false);
+        }
+        // TODO Menu 3
+        if (id == 300) {
+            return new DatePickerDialog(this, myDate1Menu3, year, month, day);
+        }else if(id == 301){
+            return new DatePickerDialog(this, myDate2Menu3, year, month, day);
+        }
 
-    private DatePickerDialog.OnDateSetListener myDateListenerto = new DatePickerDialog.OnDateSetListener() {
+        else{
+            return null;
+        }
+
+    }
+    // TODO menu 1
+    private DatePickerDialog.OnDateSetListener myDate1Menu1 = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
-            // TODO Auto-generated method stub
-            // arg1 = year
-            // arg2 = month
-            // arg3 = day
-            showdtto(arg1, arg2 + 1, arg3);
+            showDate1Menu1(arg1, arg2 + 1, arg3);
         }
     };
-    private DatePickerDialog.OnDateSetListener myDateListenerfrom = new DatePickerDialog.OnDateSetListener() {
+    private TimePickerDialog.OnTimeSetListener myTimeInMenu1 = new TimePickerDialog.OnTimeSetListener() {
         @Override
-        public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
-            // TODO Auto-generated method stub
-            // arg1 = year
-            // arg2 = month
-            // arg3 = day
-            showdtfrom(arg1, arg2 + 1, arg3);
+        public void onTimeSet(TimePicker arg0, int arg1, int arg2) {
+            showTimeInMenu1(arg1, arg2);
         }
     };
 
-    private void showdtto(int year, int month, int day) {
-        /*txttodate.setText(new StringBuilder().append(year).append("-")
-                .append(month).append("-").append(day));*/
+    private TimePickerDialog.OnTimeSetListener myTimeOutMenu1 = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker arg0, int arg1, int arg2) {
+            showTimeOutMenu1(arg1, arg2);
+        }
+    };
+
+    private void showDate1Menu1(int year, int month, int day) {
+        txtdate1.setText(new StringBuilder().append(year).append("-")
+                .append(month).append("-").append(day));
     }
-    private void showdtfrom(int year, int month, int day) {
-        /*txtfromdate.setText(new StringBuilder().append(year).append("-")
-                .append(month).append("-").append(day));*/
+
+    private void showTimeInMenu1(int hour, int minute) {
+        txtexcuseclockin1.setText(new StringBuilder().append(hour).append(":")
+                .append(minute));
     }
+
+    private void showTimeOutMenu1(int hour, int minute) {
+        txtexcuseclockout1.setText(new StringBuilder().append(hour).append(":")
+                .append(minute));
+    }
+    // TODO menu 2
+    private DatePickerDialog.OnDateSetListener myDate1Menu2 = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
+            showDate1Menu2(arg1, arg2 + 1, arg3);
+        }
+    };
+    private DatePickerDialog.OnDateSetListener myDate2Menu2 = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
+            showDate2Menu2(arg1, arg2 + 1, arg3);
+        }
+    };
+    private TimePickerDialog.OnTimeSetListener myTimeInMenu2 = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker arg0, int arg1, int arg2) {
+            showTimeInMenu2(arg1, arg2);
+        }
+    };
+
+
+
+    private void showDate1Menu2(int year, int month, int day) {
+        txtdatefrom2.setText(new StringBuilder().append(year).append("-")
+                .append(month).append("-").append(day));
+    }
+    private void showDate2Menu2(int year, int month, int day) {
+        txtdateto2.setText(new StringBuilder().append(year).append("-")
+                .append(month).append("-").append(day));
+    }
+    private void showTimeInMenu2(int hour, int minute) {
+        txtexcuseclockin2.setText(new StringBuilder().append(hour).append(":")
+                .append(minute));
+    }
+    // TODO menu 3
+    private DatePickerDialog.OnDateSetListener myDate1Menu3 = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
+            showDate1Menu3(arg1, arg2 + 1, arg3);
+        }
+    };
+    private DatePickerDialog.OnDateSetListener myDate2Menu3 = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
+            showDate2Menu3(arg1, arg2 + 1, arg3);
+        }
+    };
+
+
+
+    private void showDate1Menu3(int year, int month, int day) {
+        txtdatefrom2.setText(new StringBuilder().append(year).append("-")
+                .append(month).append("-").append(day));
+    }
+    private void showDate2Menu3(int year, int month, int day) {
+        txtdateto2.setText(new StringBuilder().append(year).append("-")
+                .append(month).append("-").append(day));
+    }
+
+
 }

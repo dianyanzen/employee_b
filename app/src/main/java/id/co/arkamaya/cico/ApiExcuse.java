@@ -5,6 +5,7 @@ import java.util.List;
 import pojo.CheckLogin;
 import pojo.GetExcuseGroup;
 import pojo.GetExcuseList;
+import pojo.GetExcuseShift;
 import pojo.GetExcuseType;
 import retrofit.Callback;
 import retrofit.http.GET;
@@ -23,6 +24,10 @@ public interface ApiExcuse {
     @GET("/excuseservicemobile/getexcusegroup")
     void getExcuseGroup(
             Callback<List<GetExcuseGroup>> response
+    );
+    @GET("/excuseservicemobile/getexcuseshift")
+    void getExcuseShift(
+            Callback<List<GetExcuseShift>> response
     );
 
     @GET("/excuseservicemobile/getexcuselist")
