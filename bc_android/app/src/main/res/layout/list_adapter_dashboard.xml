@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:descendantFocusability="blocksDescendants">
+    <!-- Thumbnail Image -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2016-03"
+        android:id="@+id/txtProdMonth"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textAlignment="center"
+        android:textColor="#000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="05"
+        android:id="@+id/txtDate"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:background="#FF4081"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/txtProdMonth"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/txtOvertimeDescription" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Tol Krawang Barat - Ja.."
+        android:id="@+id/txtOvertimeDescription"
+        android:paddingLeft="5dp"
+        android:textColor="#242424"
+        android:layout_alignBottom="@+id/txtDate"
+        android:layout_alignStart="@+id/txtOvertimeHour" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/txtOvertimeHour"
+        android:paddingLeft="5dp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_above="@+id/txtOvertimeDescription"
+        android:layout_toEndOf="@+id/txtProdMonth" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Hour"
+        android:id="@+id/txtHour"
+        android:paddingLeft="5dp"
+        android:textColor="#000000"
+        android:layout_above="@+id/txtOvertimeDescription"
+        android:layout_toEndOf="@+id/txtOvertimeHour" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="id"
+        android:id="@+id/txtOvertimeId"
+        android:layout_alignTop="@+id/txtOvertimeHour"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible" />
+
+</RelativeLayout>

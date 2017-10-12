@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="id.co.arkamaya.cico.SettingActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="URL Portal"
+        android:id="@+id/lblurl"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtURLEndPoint"
+        android:hint="Eg : http://portal.arkamaya.net/"
+        android:layout_below="@+id/lblurl"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:text="http://portal.arkamaya.net/" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="URL PMS"
+        android:id="@+id/lblurlpms"
+        android:layout_below="@+id/txtURLEndPoint"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtURLPMSEndPoint"
+        android:hint="Eg : http://project.arkamaya.net/"
+        android:layout_below="@+id/lblurlpms"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:text="http://project.arkamaya.net/" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/btnSaveURLEndPoint"
+        android:background="#3f51b4"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/txtURLPMSEndPoint"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
