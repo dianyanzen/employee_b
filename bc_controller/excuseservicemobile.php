@@ -123,8 +123,8 @@ class excuseservicemobile extends CI_Controller {
 			$clock_in = $this->input->get('clock_in');
 		}else{
 			if ($excuse_type == 'Berita Acara Clock IN/OUT'){
-				$clock_in = $this->input->get('clock_in_event');
-				$clock_out = $this->input->get('clock_out_event');
+				$clock_in = $this->input->get('clock_in');
+				$clock_out = $this->input->get('clock_out');
 			}
 		}
         $data['employee_id']    = $employee_id;        

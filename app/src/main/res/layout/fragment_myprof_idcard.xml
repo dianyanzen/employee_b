@@ -24,9 +24,10 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Save"
+                android:text="Resync"
                 android:id="@+id/btnResync"
                 android:textColor="#ffffff"
+                android:layout_below="@+id/btnClockIn"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:background="#8ab23c" android:layout_marginLeft="3dp" />

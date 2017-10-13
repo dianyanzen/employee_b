@@ -72,7 +72,7 @@ public class MyProfileFragment extends AppCompatActivity {
         adapter.addFrag(new MyProfileIdCardFragment(), "ID Card");
         adapter.addFrag(new MyProfileTaxFragment(), "Tax And BPJS");
         adapter.addFrag(new MyProfileUserFragment(), "User");
-        adapter.addFrag(new MyProfileOtherFragment(), "Other+");
+//        adapter.addFrag(new MyProfileOtherFragment(), "Other+");
         viewPager.setAdapter(adapter);
     }
 

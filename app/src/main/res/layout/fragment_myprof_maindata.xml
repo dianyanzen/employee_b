@@ -80,7 +80,7 @@
                 android:layout_below="@+id/lblBornDate"
                 android:layout_alignParentStart="true"
                 android:hint=" yyyy-mm-dd"
-                android:layout_toStartOf="@+id/btnDatePicker"
+                android:layout_toStartOf="@+id/btnBornDate"
                 android:focusable="false" />
 
             <TextView
@@ -170,17 +170,8 @@
                 android:layout_below="@+id/lblmeriedsince"
                 android:layout_alignParentStart="true"
                 android:hint=" yyyy-mm-dd"
-                android:layout_toStartOf="@+id/btnDatePicker2"
+                android:layout_toStartOf="@+id/btnmeriedsince"
                 android:focusable="false" />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Change Photo"
-                android:id="@+id/btnchangephoto"
-                android:layout_below="@+id/txtmeriedsince"
-                android:layout_alignParentStart="true"
-                android:layout_toStartOf="@+id/textView7" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -193,14 +184,6 @@
                 android:layout_centerHorizontal="true"
                 android:visibility="invisible" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="View Photo"
-                android:id="@+id/btnViewchangephoto"
-                android:layout_alignBottom="@+id/btnchangephoto"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@+id/textView7" />
 
 
             <View
@@ -208,7 +191,7 @@
                 android:layout_height="1dp"
                 android:background="#B6B6B6"
                 android:id="@+id/line2"
-                android:layout_below="@+id/btnchangephoto"
+                android:layout_below="@+id/txtmeriedsince"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="5dp" />
 
@@ -221,7 +204,7 @@
                 android:textColor="#ffffff"
                 android:layout_below="@+id/line2"
                 android:layout_alignParentStart="true"
-                android:layout_alignEnd="@+id/btnViewchangephoto" />
+                android:layout_alignEnd="@+id/spnmariedstatus" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -230,7 +213,7 @@
                 android:id="@+id/btnCancel"
                 android:layout_below="@+id/btnSave"
                 android:layout_alignParentStart="true"
-                android:layout_alignEnd="@+id/btnViewchangephoto"
+                android:layout_alignEnd="@+id/spnmariedstatus"
                 android:background="#D32F2F"
                 android:layout_marginTop="5dp"
                 android:textColor="#ffffff" />
@@ -264,14 +247,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="..."
-                android:id="@+id/btnDatePicker"
+                android:id="@+id/btnBornDate"
                 android:layout_alignBottom="@+id/txtBornDate"
                 android:layout_alignParentEnd="true" />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="..."
-                android:id="@+id/btnDatePicker2"
+                android:id="@+id/btnmeriedsince"
                 android:layout_alignBottom="@+id/txtmeriedsince"
                 android:layout_alignParentEnd="true" />
             <TextView
