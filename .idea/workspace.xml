@@ -10,6 +10,59 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5f363dc-1f94-4e03-aa29-b07a91e563d9" name="Default" comment="">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/APICico.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/APICico.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/APIComplaint.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/APIComplaint.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/APIDailyReport.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/APIDailyReport.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/APIDashboard.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/APIDashboard.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/APILogin.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/APILogin.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/APIOvertime.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/APIOvertime.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/APIReimburse.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/APIReimburse.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/APIWorkingReport.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/APIWorkingReport.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/AdapterAlreadyDoneListView.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/AdapterAlreadyDoneListView.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/AdapterComplaintListView.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/AdapterComplaintListView.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/AdapterDailyReportListView.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/AdapterDailyReportListView.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/AdapterDashboardListView.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/AdapterDashboardListView.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/AdapterExcuseListView.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/AdapterExcuseListView.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/AdapterNextTodoListView.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/AdapterNextTodoListView.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/AdapterOvertimeListView.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/AdapterOvertimeListView.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/AdapterReimburseListView.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/AdapterReimburseListView.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/AdapterWorkingReportListView.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/AdapterWorkingReportListView.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/ApiExcuse.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/ApiExcuse.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/ComplaintActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/ComplaintActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/ComplaintFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/ComplaintFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/ConnectionDetector.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/ConnectionDetector.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/DailyReportActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/DailyReportActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/DailyReportFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/DailyReportFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/DailyReportSendActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/DailyReportSendActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/DashboardActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/DashboardActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/DashboardFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/DashboardFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/DatePickerDialogFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/DatePickerDialogFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/DigitalClockCustom.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/DigitalClockCustom.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/ExcuseActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/ExcuseActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/ExcuseFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/ExcuseFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/LoginActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/LoginActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/MainActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MainFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/MainFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MyProfilMaindataFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/MyProfilMaindataFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MyProfileAddressFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/MyProfileAddressFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MyProfileEducationFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/MyProfileEducationFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MyProfileFamilyFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/MyProfileFamilyFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MyProfileFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/MyProfileFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MyProfileIdCardFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/MyProfileIdCardFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MyProfileOtherFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/MyProfileOtherFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MyProfileTaxFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/MyProfileTaxFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MyProfileUserFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/MyProfileUserFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MyProjectFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/MyProjectFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/OvertimeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/OvertimeActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/OvertimeFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/OvertimeFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/PreAlreadyDoneActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/PreAlreadyDoneActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/PreNextTodoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/PreNextTodoActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/ReimburseActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/ReimburseActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/ReimburseFileViewerActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/ReimburseFileViewerActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/ReimburseFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/ReimburseFragment.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/SettingActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/SettingActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/WorkingReportActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/WorkingReportActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/WorkingReportFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/WorkingReportFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
@@ -18,13 +71,32 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MyProfilMaindataFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MyProfilMaindataFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MyProfileFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MyProfileFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_myprof_education.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_myprof_education.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_myprof_family.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_myprof_family.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_myprof_idcard.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_myprof_idcard.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_myprof_maindata.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_myprof_maindata.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_complaint.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_complaint.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_daily_report.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_daily_report.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_daily_report_send.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_daily_report_send.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_dashboard.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_dashboard.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_overtime.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_overtime.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_pre_already_done.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_pre_already_done.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_pre_next_todo.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_pre_next_todo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_reimburse.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_reimburse.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_reimburse_file_viewer.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_reimburse_file_viewer.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_setting.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_setting.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_working_report.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_working_report.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_complaint.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_complaint.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_daily_report.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_daily_report.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_date_picker_dialog.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_date_picker_dialog.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_excuse.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_excuse.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_project.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_project.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_overtime.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_overtime.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_reimburse.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_reimburse.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_working_report.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_working_report.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scanlibrary/scanlibrary.iml" afterPath="$PROJECT_DIR$/scanlibrary/scanlibrary.iml" />
     </list>
     <ignored path="bc_android.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,54 +128,99 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MyProfilMaindataFragment.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MyProfilMaindataFragment.java">
+      <file leaf-file-name="MyProfilMaindataFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/MyProfilMaindataFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="165" column="42" selection-start-line="165" selection-start-column="42" selection-end-line="165" selection-end-column="42" />
-              <folding>
-                <element signature="e#1807#1839#0" expanded="true" />
-                <element signature="e#5405#5550#0" expanded="true" />
-                <element signature="e#5549#5550#0" expanded="true" />
-                <element signature="e#5901#6066#0" expanded="true" />
-                <element signature="e#6065#6066#0" expanded="true" />
-                <element signature="e#8121#8122#0" expanded="true" />
-                <element signature="e#8172#8173#0" expanded="true" />
-                <element signature="e#9755#10251#0" expanded="true" />
-                <element signature="e#10250#10251#0" expanded="true" />
-                <element signature="e#10308#10807#0" expanded="true" />
-                <element signature="e#10806#10807#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-630">
+              <caret line="0" column="26" selection-start-line="0" selection-start-column="26" selection-end-line="0" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="43" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-manifest">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdapterComplaintListView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/AdapterComplaintListView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CheckLogin.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/pojo/CheckLogin.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdapterAlreadyDoneListView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/AdapterAlreadyDoneListView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="WorkingReportFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/WorkingReportFragment.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/WorkingReportFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="138" column="72" selection-start-line="138" selection-start-column="61" selection-end-line="138" selection-end-column="72" />
-              <folding>
-                <element signature="e#5300#5301#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1560">
+              <caret line="131" column="72" selection-start-line="131" selection-start-column="61" selection-end-line="131" selection-end-column="72" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="ExcuseActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/ExcuseActivity.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/ExcuseActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="655" column="12" selection-start-line="655" selection-start-column="12" selection-end-line="655" selection-end-column="62" />
+            <state relative-caret-position="8670">
+              <caret line="652" column="12" selection-start-line="652" selection-start-column="12" selection-end-line="652" selection-end-column="62" />
               <folding>
-                <element signature="e#3667#3699#0" expanded="true" />
-                <element signature="e#10931#11080#0" expanded="true" />
-                <element signature="e#11079#11080#0" expanded="true" />
-                <element signature="e#56114#56115#0" expanded="true" />
-                <element signature="e#56165#56166#0" expanded="true" />
-                <element signature="e#57994#58026#0" expanded="true" />
-                <marker date="1507802931274" expanded="false" signature="12289:12398" ph="(v) → { " />
-                <marker date="1507802931274" expanded="false" signature="12412:12436" ph=" }" />
+                <element signature="e#56032#56033#0" expanded="true" />
+                <element signature="e#56083#56084#0" expanded="true" />
+                <marker date="1508120744795" expanded="false" signature="12207:12316" ph="(v) → { " />
+                <marker date="1508120744795" expanded="false" signature="12330:12354" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -115,21 +232,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
+            <state relative-caret-position="3240">
               <caret line="216" column="37" selection-start-line="216" selection-start-column="37" selection-end-line="216" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_excuse.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_excuse.xml">
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3285">
-              <caret line="219" column="17" selection-start-line="219" selection-start-column="17" selection-end-line="219" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -2521,7 +2625,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="6029024245853" />
+        <entry key="$PROJECT_DIR$" value="6029870470735" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2979,6 +3083,7 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_myprof_maindata.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/ExcuseActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MyProfilMaindataFragment.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
       </list>
     </option>
   </component>
@@ -3013,6 +3118,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -3107,63 +3214,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bc_android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bc_android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bc_android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bc_android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pojo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3193,15 +3248,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="cico" />
+              <option name="myItemId" value="bc_android" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -3554,8 +3607,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290938" sideWeight="0.5027365" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29252782" sideWeight="0.4972635" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32994527" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29252782" sideWeight="0.4972635" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290938" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -3563,6 +3615,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25097734" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290938" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32994527" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -3575,7 +3628,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32994527" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -3628,73 +3681,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#4183#4184#0" expanded="false" />
-            <element signature="e#4248#4249#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_working_report.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2010">
-          <caret line="134" column="19" selection-start-line="100" selection-start-column="8" selection-end-line="134" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_excuse.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="29" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_my_project.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="44" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_myprof_address.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="6" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_myprof_other.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_myprof_tax.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3728,15 +3714,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
           <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#4183#4184#0" expanded="false" />
-            <element signature="e#4248#4249#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3777,11 +3759,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/ComplaintActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/ComplaintActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1804">
           <caret line="448" column="4" selection-start-line="448" selection-start-column="4" selection-end-line="450" selection-end-column="5" />
@@ -3789,7 +3770,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/ApiExcuse.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/ApiExcuse.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="64" column="29" selection-start-line="64" selection-start-column="29" selection-end-line="64" selection-end-column="29" />
@@ -3973,7 +3954,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/APIWorkingReport.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/APIWorkingReport.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="62" />
@@ -3983,7 +3964,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MyProfileFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/MyProfileFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="71" column="51" selection-start-line="71" selection-start-column="51" selection-end-line="71" selection-end-column="51" />
@@ -4035,7 +4016,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/APIComplaint.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/APIComplaint.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
@@ -4043,7 +4024,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1620">
           <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
@@ -4051,7 +4032,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MainFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/MainFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="66" column="36" selection-start-line="63" selection-start-column="4" selection-end-line="66" selection-end-column="36" />
@@ -4063,14 +4044,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="533" column="22" selection-start-line="533" selection-start-column="22" selection-end-line="533" selection-end-column="22" />
-          <folding>
-            <element signature="e#14786#14787#0" expanded="true" />
-            <element signature="e#14837#14838#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/AdapterExcuseListView.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/AdapterExcuseListView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
@@ -4078,18 +4055,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/ComplaintFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/ComplaintFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-510">
           <caret line="66" column="36" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
           <folding>
-            <element signature="e#2151#4322#0" expanded="true" />
-            <element signature="e#4321#4322#0" expanded="true" />
+            <element signature="e#2187#4358#0" expanded="false" />
+            <element signature="e#4357#4358#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/ExcuseFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/ExcuseFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-435">
           <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
@@ -4101,10 +4078,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3360">
           <caret line="310" column="19" selection-start-line="310" selection-start-column="19" selection-end-line="310" selection-end-column="19" />
-          <folding>
-            <element signature="e#13763#13764#0" expanded="true" />
-            <element signature="e#13814#13815#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4119,7 +4092,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/ReimburseActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/ReimburseActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-5925">
           <caret line="59" column="13" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
@@ -4127,7 +4100,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/SettingActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/SettingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
@@ -4135,7 +4108,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/WorkingReportActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/WorkingReportActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="54" column="13" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
@@ -4154,7 +4127,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/OvertimeFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/OvertimeFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1046">
           <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
@@ -4162,29 +4135,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/WorkingReportFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/WorkingReportFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="138" column="72" selection-start-line="138" selection-start-column="61" selection-end-line="138" selection-end-column="72" />
-          <folding>
-            <element signature="e#5300#5301#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1560">
+          <caret line="131" column="72" selection-start-line="131" selection-start-column="61" selection-end-line="131" selection-end-column="72" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/ExcuseActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/ExcuseActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="655" column="12" selection-start-line="655" selection-start-column="12" selection-end-line="655" selection-end-column="62" />
+        <state relative-caret-position="8670">
+          <caret line="652" column="12" selection-start-line="652" selection-start-column="12" selection-end-line="652" selection-end-column="62" />
           <folding>
-            <element signature="e#3667#3699#0" expanded="true" />
-            <element signature="e#10931#11080#0" expanded="true" />
-            <element signature="e#11079#11080#0" expanded="true" />
-            <element signature="e#56114#56115#0" expanded="true" />
-            <element signature="e#56165#56166#0" expanded="true" />
-            <element signature="e#57994#58026#0" expanded="true" />
-            <marker date="1507802931274" expanded="false" signature="12289:12398" ph="(v) → { " />
-            <marker date="1507802931274" expanded="false" signature="12412:12436" ph=" }" />
+            <element signature="e#56032#56033#0" expanded="true" />
+            <element signature="e#56083#56084#0" expanded="true" />
+            <marker date="1508120744795" expanded="false" signature="12207:12316" ph="(v) → { " />
+            <marker date="1508120744795" expanded="false" signature="12330:12354" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -4194,29 +4161,68 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
+        <state relative-caret-position="3240">
           <caret line="216" column="37" selection-start-line="216" selection-start-column="37" selection-end-line="216" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/cico/MyProfilMaindataFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/MyProfilMaindataFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="165" column="42" selection-start-line="165" selection-start-column="42" selection-end-line="165" selection-end-column="42" />
-          <folding>
-            <element signature="e#1807#1839#0" expanded="true" />
-            <element signature="e#5405#5550#0" expanded="true" />
-            <element signature="e#5549#5550#0" expanded="true" />
-            <element signature="e#5901#6066#0" expanded="true" />
-            <element signature="e#6065#6066#0" expanded="true" />
-            <element signature="e#8121#8122#0" expanded="true" />
-            <element signature="e#8172#8173#0" expanded="true" />
-            <element signature="e#9755#10251#0" expanded="true" />
-            <element signature="e#10250#10251#0" expanded="true" />
-            <element signature="e#10308#10807#0" expanded="true" />
-            <element signature="e#10806#10807#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-630">
+          <caret line="0" column="26" selection-start-line="0" selection-start-column="26" selection-end-line="0" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="43" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/AdapterComplaintListView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pojo/CheckLogin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/id/co/arkamaya/bc_android/AdapterAlreadyDoneListView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
+          <folding />
         </state>
       </provider>
     </entry>

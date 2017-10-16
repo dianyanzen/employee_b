@@ -2,13 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="id.co.arkamaya.cico.MainFragment"
+    tools:context="id.co.arkamaya.cico.id.co.arkamaya.bc_android.MainFragment"
     android:padding="10dp"
     android:id="@+id/lblDate">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <id.co.arkamaya.cico.DigitalClockCustom
+    <id.co.arkamaya.bc_android.DigitalClockCustom
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtDateTime"

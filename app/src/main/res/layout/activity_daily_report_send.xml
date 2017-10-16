@@ -4,7 +4,7 @@
     android:id="@+id/ScrollView01"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    tools:context="id.co.arkamaya.cico.DailyReportSendActivity"
+    tools:context="id.co.arkamaya.cico.id.co.arkamaya.bc_android.DailyReportSendActivity"
     android:scrollbars="vertical">
 
     <LinearLayout
