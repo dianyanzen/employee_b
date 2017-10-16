@@ -20,8 +20,8 @@ import retrofit.client.Response;
 
 public class LoginActivity extends AppCompatActivity {
     //public static final String ENDPOINT="http://192.168.1.146:86/arka_portal/index.php/";
-    public String ENDPOINT="http://192.168.88.158:86/arka_portal/index.php/";
-    public String PMSENDPOINT="http://192.168.88.158:86/arka_portal/index.php/";
+    public String ENDPOINT="http://bc-id.co.id/";
+    public String PMSENDPOINT="http://bc-id.co.id/";
     private ProgressDialog progress;
     EditText txtUserName;
     EditText txtPassword;

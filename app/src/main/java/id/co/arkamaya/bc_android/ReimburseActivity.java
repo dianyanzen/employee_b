@@ -63,8 +63,8 @@ public class ReimburseActivity extends AppCompatActivity {
 
     ArrayAdapter<String> dataAdapterReimburseType;
 
-    public String ENDPOINT="http://192.168.1.146:9888/";
-    final public String IMAGE_PATH="assets/files/reimburse/";
+    public String ENDPOINT="http://bc-id.co.id/";
+    final public String IMAGE_PATH="assets/images/apps/reimburse/";
 
     private static final int CAMERA_REQUEST = 1888;
     final int CAMERA_CAPTURE = 1;

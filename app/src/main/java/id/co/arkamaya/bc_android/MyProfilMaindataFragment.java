@@ -20,12 +20,18 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import id.co.arkamaya.cico.R;
+import pojo.GetProfileMain;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by root on 06/10/17.
@@ -36,15 +42,19 @@ public class MyProfilMaindataFragment extends Fragment {
     SharedPreferences pref;
     private ProgressDialog progress;
     private String employee_id,user;
-    EditText txtBornDate,txtmeriedsince;
+    EditText txtBornDate,txtmeriedsince,txtTitle,txtBornPlace,txtReligion;
     TextView lblmeriedsince;
+    Button BtnSave,BtnCancel;
     Spinner spnGender,spnMeried;
-    ArrayAdapter<String> adaAdapterCombo;
+    String MariedStat;
+    ArrayAdapter<String> adaAdapterMaried,adaAdapterGender;
 
     String data_gender = "";
     String data_meried = "";
+    int idxGender;
+    int idxMarried;
     Button btnBornDate,btnmeriedsince;
-    public String ENDPOINT="http://192.168.1.152:8080/";
+    public String ENDPOINT="http://bc-id.co.id/";
 
     int aspectX;
     int aspectY;
@@ -105,9 +115,15 @@ public class MyProfilMaindataFragment extends Fragment {
         user= pref.getString("User",null);
         Log.d("Yudha", employee_id);
         extras = getActivity().getIntent().getExtras();
-
+        /* Start insert Able Text Edit */
+        txtTitle =  (EditText)getActivity().findViewById(R.id.txttitle);
+        spnGender = (Spinner)getActivity().findViewById(R.id.spnGender);
         txtBornDate = (EditText)getActivity().findViewById(R.id.txtBornDate);
+        txtBornPlace =  (EditText)getActivity().findViewById(R.id.txtBornPlace);
+        txtReligion =  (EditText)getActivity().findViewById(R.id.txtreligion);
+        spnMeried = (Spinner)getActivity().findViewById(R.id.spnmariedstatus);
         txtmeriedsince = (EditText)getActivity().findViewById(R.id.txtmeriedsince);
+        /* End */
         lblmeriedsince = (TextView)getActivity().findViewById(R.id.lblmeriedsince);
         //setMeriedsince();
         ScreenResolution sr = deviceDimensions();
@@ -130,12 +146,13 @@ public class MyProfilMaindataFragment extends Fragment {
         day = calendar.get(Calendar.DAY_OF_MONTH);
 
 
-        spnGender = (Spinner)getActivity().findViewById(R.id.spnGender);
-        spnMeried = (Spinner)getActivity().findViewById(R.id.spnmariedstatus);
+
+
         getGender();
         getMeried();
-        Button btnCancel =(Button)getActivity().findViewById(R.id.btnCancel);
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+        BtnCancel =(Button)getActivity().findViewById(R.id.btnCancelMain);
+        BtnSave =(Button)getActivity().findViewById(R.id.btnSaveMain);
+        BtnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().finish();
@@ -151,14 +168,14 @@ public class MyProfilMaindataFragment extends Fragment {
 
             }
         });
-
+        getProfileMaindata(employee_id);
 
 
     }
 
     public void setMeriedsince(){
-        String ExcuseType = ((String) spnMeried.getSelectedItem());
-        if (ExcuseType.equals("Single")) {
+        MariedStat = ((String) spnMeried.getSelectedItem());
+        if (MariedStat.equals("Single")) {
             txtmeriedsince.setText("");
             btnmeriedsince.setEnabled(false);
         }else {
@@ -180,18 +197,18 @@ public class MyProfilMaindataFragment extends Fragment {
         list.add("Male");
         list.add("Female");
 
-        adaAdapterCombo = new ArrayAdapter<String>
+        adaAdapterMaried = new ArrayAdapter<String>
                 (getActivity().getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
 
-        adaAdapterCombo.setDropDownViewResource
+        adaAdapterMaried.setDropDownViewResource
                 (R.layout.spinner_simple_item);
 
-        spnGender.setAdapter(adaAdapterCombo);
+        spnGender.setAdapter(adaAdapterMaried);
 
         String data = data_gender;
 
         if (data != "") {
-            int idxLocation = adaAdapterCombo.getPosition(data_gender);
+            int idxLocation = adaAdapterMaried.getPosition(data_gender);
             spnGender.setSelection(idxLocation);
         }
     }
@@ -203,31 +220,29 @@ public class MyProfilMaindataFragment extends Fragment {
         list.add("Married");
         list.add("Divorce");
 
-        adaAdapterCombo = new ArrayAdapter<String>
+        adaAdapterGender = new ArrayAdapter<String>
                 (getActivity().getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
 
-        adaAdapterCombo.setDropDownViewResource
+        adaAdapterGender.setDropDownViewResource
                 (R.layout.spinner_simple_item);
 
-        spnMeried.setAdapter(adaAdapterCombo);
+        spnMeried.setAdapter(adaAdapterGender);
 
         String data = data_meried;
 
         if (data != "") {
-            int idxLocation = adaAdapterCombo.getPosition(data_meried);
+            int idxLocation = adaAdapterGender.getPosition(data_meried);
             spnMeried.setSelection(idxLocation);
         }
         spnMeried.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 setMeriedsince();
-                //Toast.makeText(getApplicationContext(), separated[0].replace(" ", "").toString(), Toast.LENGTH_LONG).show();
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-                //setMeriedsince();
 
             }
         });
@@ -290,5 +305,81 @@ public class MyProfilMaindataFragment extends Fragment {
             //Toast.makeText(getActivity().getApplicationContext(), String.valueOf(year) + "-" + String.valueOf(monthOfYear) + "-" + String.valueOf(dayOfMonth), Toast.LENGTH_LONG).show();
         }
     };
+    private void getProfileMaindata(String employee_id){
+        progress = new ProgressDialog(getActivity());
+        progress.setMessage("Load Data..");
+        progress.setIndeterminate(true);
+        progress.setCancelable(false);
+        progress.show();
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(ENDPOINT)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+
+        APIEditProfile restInterface = restAdapter.create(APIEditProfile.class);
+        restInterface.getProfileMain(employee_id, new Callback<GetProfileMain>() {
+            @Override
+            public void success(GetProfileMain m, Response response) {
+                try {
+                    txtTitle.setText(m.getTitle().toString());
+                    txtBornDate.setText(m.getBornDt().toString());
+                    txtBornPlace.setText(m.getBornPlace().toString());
+                    txtReligion.setText(m.getReligion().toString());
+                    txtmeriedsince.setText(m.getMarriedSince().toString());
+                    String Gender = m.getGender().toString();
+                    if (Gender.equalsIgnoreCase("female")){
+                     idxGender = 1;
+                    }else{
+                     idxGender = 0;
+                    }
+                    String Married = m.getMarriedStatus().toString();
+                    if (Married.equalsIgnoreCase("divorce")) {
+                        idxMarried = 2;
+                        btnmeriedsince.setEnabled(true);
+                        btnmeriedsince.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                setDate2();
+                            }
+                        });
+                    }else if (Married.equalsIgnoreCase("married")){
+                        idxMarried = 1;
+                        btnmeriedsince.setEnabled(true);
+                        btnmeriedsince.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                setDate2();
+                            }
+                        });
+                    }else{
+                        idxMarried = 0;
+                        txtmeriedsince.setText("");
+                        btnmeriedsince.setEnabled(false);
+                    }
+                    Log.e("Yanzen",String.valueOf(idxGender)+" "+Gender );
+                    Log.e("Yanzen",String.valueOf(idxMarried)+" "+Married );
+                    spnGender.setSelection(idxGender);
+                    spnMeried.setSelection(idxMarried);
+                }catch (Exception e){
+
+                }
+
+
+
+                if (progress != null) {
+                    progress.dismiss();
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                if (progress != null) {
+                    progress.dismiss();
+                }
+            }
+        });
+
+    }
 
 }

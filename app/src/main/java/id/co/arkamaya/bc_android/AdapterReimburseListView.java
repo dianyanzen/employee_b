@@ -36,7 +36,7 @@ public class AdapterReimburseListView extends ArrayAdapter<GetReimburseList> {
     SharedPreferences pref;
     View adapterView;
     private ProgressDialog progress;
-    public String ENDPOINT="http://192.168.1.146:9888/";
+    public String ENDPOINT="http://bc-id.co.id/";
     public String EmployeeId;
     private ListView list;
     public AdapterReimburseListView(Context context, int resource, List<GetReimburseList> object){

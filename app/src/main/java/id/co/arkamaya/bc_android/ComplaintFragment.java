@@ -36,7 +36,7 @@ public class ComplaintFragment extends Fragment {
     private String employee_id;
 
     ConnectionDetector conDetector;
-    public String ENDPOINT="http://192.168.1.152:8080/";
+    public String ENDPOINT="http://bc-id.co.id/";
     public ComplaintFragment() {
         // Required empty public constructor
     }

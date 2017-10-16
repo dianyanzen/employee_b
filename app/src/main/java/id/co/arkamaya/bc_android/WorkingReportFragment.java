@@ -38,7 +38,7 @@ public class WorkingReportFragment extends Fragment {
     String data;
 
     ConnectionDetector conDetector;
-    public String ENDPOINT="http://192.168.88.153:8080/arka_portal";
+    public String ENDPOINT="http://bc-id.co.id/";
     private int year, month, day;
 
     public WorkingReportFragment() {

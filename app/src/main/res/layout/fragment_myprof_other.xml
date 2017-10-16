@@ -401,7 +401,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Save"
+                android:text="Update"
                 android:id="@+id/btnSave"
                 android:background="#3f51b4"
                 android:textColor="#ffffff"

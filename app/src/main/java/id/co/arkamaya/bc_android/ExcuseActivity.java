@@ -52,7 +52,7 @@ public class ExcuseActivity extends AppCompatActivity {
     String getgroup = "";
     SharedPreferences pref;
     private ProgressDialog progress;
-
+    int idxShiftType, idxShift,idxGroup;
     /* Menu Index 0 */
     private TextView lbldate1,lblexcuseclockin1,lblexcuseclockout1;
     private EditText txtdate1,txtexcuseclockin1,txtexcuseclockout1;
@@ -86,9 +86,9 @@ public class ExcuseActivity extends AppCompatActivity {
     private Button BtnExcFromDt,BtnExcToDt;
     private Spinner spnExcuseType;
 
-    ArrayAdapter<String> dataAdapterExcuseType;
-    ArrayAdapter<String> adaAdapterCombo;
-    public String ENDPOINT="http://192.168.88.153:8080/arka_portal";
+    Button btnSave;
+    ArrayAdapter<String> dataAdapterExcuseType,dataAdapterShiftType,dataAdapterShift,dataAdapterGroup;
+    public String ENDPOINT="http://bc-id.co.id/";
 
     private String modeEdit;
     /**UserInfo**/
@@ -175,8 +175,13 @@ public class ExcuseActivity extends AppCompatActivity {
             if(modeEdit.equals("edit")){
                 modeEdit="edit";
                 ExcuseId = extras.getString("ExcuseId");
+                try {
                 getExcuseType(data_type);
                 getExcuseById(ExcuseId);
+                }catch (Exception e){
+
+                }
+
                 //updateType();
             }else{
                 modeEdit="new";
@@ -217,7 +222,7 @@ public class ExcuseActivity extends AppCompatActivity {
             }
         });
 
-        Button btnSave=(Button) findViewById(R.id.btnSave);
+        btnSave =(Button) findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -443,18 +448,18 @@ public class ExcuseActivity extends AppCompatActivity {
                     list.add(m.get(i).getExcuseGroup());
                 }
 
-                adaAdapterCombo = new ArrayAdapter<String>
+                dataAdapterGroup = new ArrayAdapter<String>
                         (getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
 
-                adaAdapterCombo.setDropDownViewResource
+                dataAdapterGroup.setDropDownViewResource
                         (R.layout.spinner_simple_item);
 
-                spnGroup3.setAdapter(adaAdapterCombo);
+                spnGroup3.setAdapter(dataAdapterGroup);
 
                 String data = data_group;
 
                 if (data != "") {
-                    int idxLocation = adaAdapterCombo.getPosition(data_group);
+                    int idxLocation = dataAdapterGroup.getPosition(data_group);
                     spnGroup3.setSelection(idxLocation);
                 }
             }
@@ -483,18 +488,18 @@ public class ExcuseActivity extends AppCompatActivity {
                     list.add(m.get(i).getExcuseGroup());
                 }
 
-                adaAdapterCombo = new ArrayAdapter<String>
+                dataAdapterGroup = new ArrayAdapter<String>
                         (getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
 
-                adaAdapterCombo.setDropDownViewResource
+                dataAdapterGroup.setDropDownViewResource
                         (R.layout.spinner_simple_item);
 
-                spnGroup4.setAdapter(adaAdapterCombo);
+                spnGroup4.setAdapter(dataAdapterGroup);
 
                 String data = data_group;
 
                 if (data != "") {
-                    int idxLocation = adaAdapterCombo.getPosition(data_group);
+                    int idxLocation = dataAdapterGroup.getPosition(data_group);
                     spnGroup4.setSelection(idxLocation);
                 }
             }
@@ -523,18 +528,18 @@ public class ExcuseActivity extends AppCompatActivity {
                     list.add(m.get(i).getExcuseshift());
                 }
 
-                adaAdapterCombo = new ArrayAdapter<String>
+                dataAdapterShiftType = new ArrayAdapter<String>
                         (getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
 
-                adaAdapterCombo.setDropDownViewResource
+                dataAdapterShiftType.setDropDownViewResource
                         (R.layout.spinner_simple_item);
 
-                spnShiftType4.setAdapter(adaAdapterCombo);
+                spnShiftType4.setAdapter(dataAdapterShiftType);
 
                 String data = data_shift;
 
                 if (data != "") {
-                    int idxLocation = adaAdapterCombo.getPosition(data_shift);
+                    int idxLocation = dataAdapterShiftType.getPosition(data_shift);
                     spnShiftType4.setSelection(idxLocation);
                 }
                 spnShiftType4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -566,18 +571,18 @@ public class ExcuseActivity extends AppCompatActivity {
         list.add("1");
         list.add("2");
 
-        adaAdapterCombo = new ArrayAdapter<String>
+        dataAdapterShift = new ArrayAdapter<String>
                 (getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
 
-        adaAdapterCombo.setDropDownViewResource
+        dataAdapterShift.setDropDownViewResource
                 (R.layout.spinner_simple_item);
 
-        spnshift4.setAdapter(adaAdapterCombo);
+        spnshift4.setAdapter(dataAdapterShift);
 
         String data = data_shift;
 
         if (data != "") {
-            int idxLocation = adaAdapterCombo.getPosition(data_shift);
+            int idxLocation = dataAdapterShift.getPosition(data_shift);
             spnshift4.setSelection(idxLocation);
         }
     }
@@ -591,18 +596,18 @@ public class ExcuseActivity extends AppCompatActivity {
         }
 
 
-        adaAdapterCombo = new ArrayAdapter<String>
+        dataAdapterShift = new ArrayAdapter<String>
                 (getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
 
-        adaAdapterCombo.setDropDownViewResource
+        dataAdapterShift.setDropDownViewResource
                 (R.layout.spinner_simple_item);
 
-        spnshift4.setAdapter(adaAdapterCombo);
+        spnshift4.setAdapter(dataAdapterShift);
 
         String data = data_shift;
 
         if (data != "") {
-            int idxLocation = adaAdapterCombo.getPosition(data_shift);
+            int idxLocation = dataAdapterShift.getPosition(data_shift);
             spnshift4.setSelection(idxLocation);
         }
     }
@@ -614,18 +619,18 @@ public class ExcuseActivity extends AppCompatActivity {
         if (list.size() > 1){
             list.remove("2");
         }
-        adaAdapterCombo = new ArrayAdapter<String>
+        dataAdapterShift = new ArrayAdapter<String>
                 (getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
 
-        adaAdapterCombo.setDropDownViewResource
+        dataAdapterShift.setDropDownViewResource
                 (R.layout.spinner_simple_item);
 
-        spnshift4.setAdapter(adaAdapterCombo);
+        spnshift4.setAdapter(dataAdapterShift);
 
         String data = data_shift;
 
         if (data != "") {
-            int idxLocation = adaAdapterCombo.getPosition(data_shift);
+            int idxLocation = dataAdapterShift.getPosition(data_shift);
             spnshift4.setSelection(idxLocation);
         }
     }
@@ -878,9 +883,9 @@ public class ExcuseActivity extends AppCompatActivity {
 
 
             if(modeEdit.equals("edit")){
-                txtdate1.setText("");
-                txtexcuseclockin1.setText("");
-                txtexcuseclockout1.setText("");
+                //txtdate1.setText("");
+                /*txtexcuseclockin1.setText("");
+                txtexcuseclockout1.setText("");*/
             }else{
                 txtdate1.setText("");
                 txtexcuseclockin1.setText("");
@@ -904,9 +909,9 @@ public class ExcuseActivity extends AppCompatActivity {
 
 
             if(modeEdit.equals("edit")){
-                txtdatefrom2.setText("");
+               /* txtdatefrom2.setText("");
                 txtdateto2.setText("");
-                txtexcuseclockin2.setText("");
+                txtexcuseclockin2.setText("");*/
             }else {
                 txtdatefrom2.setText("");
                 txtdateto2.setText("");
@@ -927,8 +932,8 @@ public class ExcuseActivity extends AppCompatActivity {
             lblgroup3.setVisibility(View.VISIBLE);
 
             if(modeEdit.equals("edit")){
-                txtdatefrom3.setText("");
-                txtdateto3.setText("");
+                /*txtdatefrom3.setText("");
+                txtdateto3.setText("");*/
             }else {
                 txtdatefrom3.setText("");
                 txtdateto3.setText("");
@@ -952,8 +957,8 @@ public class ExcuseActivity extends AppCompatActivity {
             lblshift4.setVisibility(View.VISIBLE);*/
 
             if(modeEdit.equals("edit")){
-                txtdatefrom4.setText("");
-                txtdateto4.setText("");
+                /*txtdatefrom4.setText("");
+                txtdateto4.setText("");*/
             }else {
                 txtdatefrom4.setText("");
                 txtdateto4.setText("");
@@ -976,8 +981,8 @@ public class ExcuseActivity extends AppCompatActivity {
 
 
             if(modeEdit.equals("edit")){
-                txtdatefrom5.setText("");
-                txtdateto5.setText("");
+                /*txtdatefrom5.setText("");
+                txtdateto5.setText("");*/
             }else {
                 txtdatefrom5.setText("");
                 txtdateto5.setText("");
@@ -996,8 +1001,8 @@ public class ExcuseActivity extends AppCompatActivity {
             lbltodate.setVisibility(View.VISIBLE);
 
             if(modeEdit.equals("edit")){
-                txtfromdate.setText("");
-                txttodate.setText("");
+                /*txtfromdate.setText("");
+                txttodate.setText("");*/
             }else {
                 txtfromdate.setText("");
                 txttodate.setText("");
@@ -1419,13 +1424,111 @@ public class ExcuseActivity extends AppCompatActivity {
                  txtfromdate.setText(m.getExcuseDt().toString());
                  txttodate.setText(m.getExcuseTodt().toString());
                  */
-                txtExcuseDescription.setText(m.getExcuseDescription().toString());
-                int idxLocation = dataAdapterExcuseType.getPosition(m.getExcuseType().toString());
-                spnExcuseType.setSelection(idxLocation);
-                try{
-                    Log.e("data",toString().valueOf(idxLocation));
-                }catch (Exception e){
 
+                try{
+                    txtExcuseDescription.setText(m.getExcuseDescription().toString());
+                    int idxExcuseType = dataAdapterExcuseType.getPosition(m.getExcuseType().toString());
+                    spnExcuseType.setSelection(idxExcuseType);
+                    btnSave.setText("Update");
+                    String ExcuseType = ((String) spnExcuseType.getSelectedItem());
+                    if (ExcuseType.equals("Berita Acara Clock IN/OUT")) {
+                        txtdate1.setText(m.getExcuseDt().toString());
+                        txtexcuseclockin1.setText(m.getExcuseCi().toString());
+                        txtexcuseclockout1.setText(m.getExcuseCo().toString());
+                    }
+                    else if (ExcuseType.equals("Change Clock-in")) {
+                        txtdatefrom2.setText(m.getExcuseDt().toString());
+                        txtdateto2.setText(m.getExcuseTodt().toString());
+                        txtexcuseclockin2.setText(m.getExcuseCi().toString());
+                    }
+                    else if (ExcuseType.equals("Change Group")) {
+                        txtdatefrom3.setText(m.getExcuseDt().toString());
+                        txtdateto3.setText(m.getExcuseTodt().toString());
+                        int idxGroup = dataAdapterGroup.getPosition(m.getExcuseGroup().toString());
+                        spnGroup3.setSelection(idxGroup);
+                    }
+                    else if (ExcuseType.equals("Change Shift")) {
+                        txtdatefrom4.setText(m.getExcuseDt().toString());
+                        txtdateto4.setText(m.getExcuseTodt().toString());
+                        String ShiftTypeIndex = m.getExcuseShiftType().toString();
+                        String ShiftIndex = m.getExcuseShift().toString();
+                        String ShiftGroup = m.getExcuseGroup().toString();
+                        if (ShiftTypeIndex.equalsIgnoreCase("g1")){
+                            idxShiftType = 0;
+                            if (ShiftIndex.equalsIgnoreCase("2")){
+                                idxShift = 1;
+                            }else{
+                                idxShift = 0;
+                            }
+                            spnshift4.setSelection(idxShift);
+                        }else if (ShiftTypeIndex.equals("g2")) {
+                            idxShiftType = 1;
+                            if (ShiftGroup.equalsIgnoreCase("d")) {
+                                idxGroup = 3;
+                            }else if (ShiftGroup.equalsIgnoreCase("c")){
+                                idxGroup = 2;
+                            }else if (ShiftGroup.equalsIgnoreCase("b")){
+                                idxGroup = 1;
+                            }else{
+                                idxShift = 0;
+                            }
+                            spnGroup4.setSelection(idxGroup);
+                        }else if (ShiftTypeIndex.equals("ns")) {
+                            idxShiftType = 2;
+                            if (ShiftIndex.equalsIgnoreCase("2")){
+                                idxShift = 1;
+                            }else{
+                                idxShift = 0;
+                            }
+                            spnshift4.setSelection(idxShift);
+                        }else{
+                            idxShiftType = 3;
+                            if (ShiftIndex.equalsIgnoreCase("2")){
+                                idxShift = 1;
+                            }else{
+                                idxShift = 0;
+                            }
+                            spnshift4.setSelection(idxShift);
+                        }
+                        spnShiftType4.setSelection(idxShiftType);
+                        //int idxShiftType = dataAdapterShiftType.getPosition(m.getExcuseShiftType().toString());
+
+                        /*String ExcuseShiftType = ((String) spnShiftType4.getSelectedItem());
+                        if (ExcuseShiftType.equals("G1")) {
+                            int idxShift = dataAdapterShift.getPosition(m.getExcuseShift().toString());
+                            spnshift4.setSelection(idxShift);
+                        }else if (ExcuseShiftType.equals("G2")) {
+                            int idxGroup = dataAdapterGroup.getPosition(m.getExcuseGroup().toString());
+                            spnGroup4.setSelection(idxGroup);
+                        }else if (ExcuseShiftType.equals("NS")) {
+                            int idxShift = dataAdapterShift.getPosition(m.getExcuseShift().toString());
+                            spnshift4.setSelection(idxShift);
+                        }else if (ExcuseShiftType.equals("NS1")) {
+                            int idxShift = dataAdapterShift.getPosition(m.getExcuseShift().toString());
+                            spnshift4.setSelection(idxShift);
+                        }else{
+
+                        }*/
+                    }
+                    else if (ExcuseType.equals("Change Working Day")) {
+                        txtdatefrom5.setText(m.getExcuseDt().toString());
+                        txtdateto5.setText(m.getExcuseTodt().toString());
+                    }
+                    else if (ExcuseType.equals("Coba aja")) {
+                        txtfromdate.setText(m.getExcuseDt().toString());
+                        txttodate.setText(m.getExcuseTodt().toString());
+                    }
+                    else if (ExcuseType.equals("Leave")) {
+                        txtfromdate.setText(m.getExcuseDt().toString());
+                        txttodate.setText(m.getExcuseTodt().toString());
+                    }
+                    else {
+                        txtfromdate.setText(m.getExcuseDt().toString());
+                        txttodate.setText(m.getExcuseTodt().toString());
+                    }
+                    Log.e("data",toString().valueOf(idxExcuseType));
+                }catch (Exception e){
+//                    Toast.makeText(getApplicationContext(), "Connection Error Check Your Internet Connection", Toast.LENGTH_SHORT).show();
                 }
 
 

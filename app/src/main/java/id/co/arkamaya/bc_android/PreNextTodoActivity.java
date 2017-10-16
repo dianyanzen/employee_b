@@ -26,7 +26,7 @@ import retrofit.client.Response;
 public class PreNextTodoActivity extends AppCompatActivity {
 
     private ListView list_next_todo;
-    public String PMSENDPOINT="http://192.168.3.109:8080/arkapms";
+    public String PMSENDPOINT="http://bc-id.co.id/";
     SharedPreferences pref;
     private ProgressDialog progress;
 

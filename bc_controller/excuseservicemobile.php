@@ -91,8 +91,14 @@ class excuseservicemobile extends CI_Controller {
         	 , excuse_id, date_format(date_from,'%Y-%m-%d') as excuse_dt
         	 , excuse_id, date_format(date_to,'%Y-%m-%d') as excuse_todt
         	 , excuse_type
+             , ( case when clock_in is null then '' else date_format(clock_in,'%H:%i') end ) as excuse_ci
+             , ( case when clock_out is null then '' else date_format(clock_out,'%H:%i') end ) as excuse_co
+             , ( case when shift_type is null then '' else shift_type end ) as excuse_shift_type
+             , ( case when shift is null then '' else shift end ) as excuse_shift
+             , ( case when tb_m_excuse.group is null then '' else tb_m_excuse.group end ) as excuse_group
         	 , CONCAT(SUBSTR(excuse_reason,1,12),'..') as excuse_reason
-        	 , excuse_approved_dt, excuse_approved_by 
+        	 , excuse_approved_dt
+             , excuse_approved_by 
         	 , ( case when excuse_approved_by is null then '' else 'approved' end ) as excuse_status 
         	 from tb_m_excuse where
         	   excuse_id = '$excuse_id'

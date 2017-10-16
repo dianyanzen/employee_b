@@ -38,7 +38,7 @@ public class ExcuseFragment extends Fragment {
     private String employee_id;
 
     ConnectionDetector conDetector;
-    public String ENDPOINT="http://192.168.1.152:8080/";
+    public String ENDPOINT="http://bc-id.co.id/";
     
     public ExcuseFragment() {
         // Required empty public constructor

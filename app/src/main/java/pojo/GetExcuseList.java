@@ -22,6 +22,25 @@ public class GetExcuseList {
     @SerializedName("excuse_type")
     @Expose
     private String excuseType;
+    @SerializedName("excuse_ci")
+    @Expose
+    private String excuseCi;
+
+    @SerializedName("excuse_co")
+    @Expose
+    private String excuseCo;
+
+    @SerializedName("excuse_shift_type")
+    @Expose
+    private String excuseShiftType;
+
+    @SerializedName("excuse_shift")
+    @Expose
+    private String excuseShift;
+
+    @SerializedName("excuse_group")
+    @Expose
+    private String excuseGroup;
     @SerializedName("excuse_dt")
     @Expose
     private String excuseDt;
@@ -40,6 +59,7 @@ public class GetExcuseList {
     @SerializedName("excuse_status")
     @Expose
     private String excuseStatus;
+
 
     /**
      *
@@ -152,6 +172,95 @@ public class GetExcuseList {
     /**
      *
      * @return
+     * The excuseCi
+     */
+    public String getExcuseCi() {
+        return excuseCi;
+    }
+
+    /**
+     *
+     * @param excuseCi
+     * The excuse_ci
+     */
+    public void setExcuseCi(String excuseCi) {
+        this.excuseCi = excuseCi;
+    }
+
+    /**
+     *
+     * @return
+     * The excuseCo
+     */
+    public String getExcuseCo() {
+        return excuseCo;
+    }
+
+    /**
+     *
+     * @param excuseCo
+     * The excuse_co
+     */
+    public void setExcuseCo(String excuseCo) {
+        this.excuseCo = excuseCo;
+    }
+
+    /**
+     *
+     * @return
+     * The excuseShiftType
+     */
+    public String getExcuseShiftType() {
+        return excuseShiftType;
+    }
+
+    /**
+     *
+     * @param excuseShiftType
+     * The excuse_shift_type
+     */
+    public void setExcuseShiftType(String excuseShiftType) {
+        this.excuseShiftType = excuseShiftType;
+    }
+
+    /**
+     *
+     * @return
+     * The excuseShift
+     */
+    public String getExcuseShift() {
+        return excuseShift;
+    }
+
+    /**
+     *
+     * @param excuseShift
+     * The excuse_status
+     */
+    public void setExcuseShift(String excuseShift) {
+        this.excuseShift = excuseShift;
+    }
+
+    /**
+     *
+     * @return
+     * The excuseStatus
+     */
+    public String getExcuseGroup() {
+        return excuseGroup;
+    }
+
+    /**
+     *
+     * @param excuseGroup
+     * The excuse_status
+     */
+    public void setExcuseGroup(String excuseGroup) {
+        this.excuseGroup = excuseGroup;
+    }
+    /**
+     *
+     * @return
      * The excuseHour
      */
     public String getExcuseDescription() {
@@ -220,4 +329,6 @@ public class GetExcuseList {
     public void setExcuseStatus(String excuseStatus) {
         this.excuseStatus = excuseStatus;
     }
+
+
 }

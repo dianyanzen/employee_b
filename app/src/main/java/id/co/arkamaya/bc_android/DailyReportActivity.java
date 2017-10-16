@@ -75,7 +75,7 @@ public class DailyReportActivity extends AppCompatActivity {
     ArrayAdapter<String> adaAdapterCombo;
     RemoteViews remoteViews;
 
-    public String PMSENDPOINT="http://192.168.3.109:8080/arkapms";
+    public String PMSENDPOINT="http://bc-id.co.id/";
 
     private String modeEdit;
     /**UserInfo**/

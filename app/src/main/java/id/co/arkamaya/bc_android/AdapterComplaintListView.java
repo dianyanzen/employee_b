@@ -26,7 +26,7 @@ public class AdapterComplaintListView extends ArrayAdapter<GetComplaintList> {
     SharedPreferences pref;
     View adapterView;
     private ProgressDialog progress;
-    public String ENDPOINT="http://192.168.88.152:8080/";
+    public String ENDPOINT="http://bc-id.co.id/";
     public String EmployeeId;
     private ListView list;
     public AdapterComplaintListView(Context context, int resource, List<GetComplaintList> object){

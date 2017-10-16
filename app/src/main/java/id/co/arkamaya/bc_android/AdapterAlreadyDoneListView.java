@@ -38,7 +38,7 @@ public class AdapterAlreadyDoneListView extends ArrayAdapter<GetListDailyReport>
     SharedPreferences pref;
     View adapterView;
     private ProgressDialog progress;
-    public String PMSENDPOINT="http://192.168.3.109:8080/arkapms";
+    public String PMSENDPOINT="http://bc-id.co.id/";
     public String EmployeeId;
     private ListView list;
     ArrayAdapter<String> adaAdapterCombo;

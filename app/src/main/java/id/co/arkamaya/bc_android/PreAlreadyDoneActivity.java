@@ -25,7 +25,7 @@ import retrofit.client.Response;
 
 public class PreAlreadyDoneActivity extends AppCompatActivity {
     private ListView list_already_done;
-    public String PMSENDPOINT="http://192.168.3.109:8080/arkapms";
+    public String PMSENDPOINT="http://bc-id.co.id/";
     SharedPreferences pref;
     private ProgressDialog progress;
 

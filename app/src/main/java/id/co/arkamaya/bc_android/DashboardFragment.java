@@ -30,7 +30,7 @@ public class DashboardFragment extends Fragment {
     private String employe_id;
 
     ConnectionDetector conDetector;
-    public String ENDPOINT="http://192.168.88.153:8080/arka_portal";
+    public String ENDPOINT="http://bc-id.co.id/";
 
     TextView num_of_day_period;
     TextView cnt_of_day_work_period;

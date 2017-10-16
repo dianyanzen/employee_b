@@ -41,7 +41,7 @@ public class OvertimeActivity extends AppCompatActivity {
     private EditText txtOvertime;
     private Button bntDatePicker;
 
-    public String ENDPOINT="http://192.168.88.153:8080/arka_portal";
+    public String ENDPOINT="http://bc-id.co.id/";
 
     private String modeEdit;
     /**UserInfo**/

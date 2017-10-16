@@ -41,7 +41,7 @@ public class ReimburseFragment extends Fragment {
     private String employe_id;
 
     ConnectionDetector conDetector;
-    public String ENDPOINT="http://192.168.1.146:9888/";
+    public String ENDPOINT="http://bc-id.co.id/";
 
     public ReimburseFragment() {
         // Required empty public constructor

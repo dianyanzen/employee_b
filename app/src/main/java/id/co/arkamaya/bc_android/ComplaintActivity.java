@@ -59,7 +59,7 @@ public class ComplaintActivity extends AppCompatActivity {
 
     String excuse_code_xx = "";
 
-    public String ENDPOINT="http://192.168.88.152:8080/";
+    public String ENDPOINT="http://bc-id.co.id/";
 
     private String modeEdit;
 

@@ -44,7 +44,7 @@ public class DailyReportFragment extends Fragment {
     Button btnResync;
 
     ConnectionDetector conDetector;
-    public String PMSENDPOINT="http://192.168.3.109:8080/arkapms";
+    public String PMSENDPOINT="http://bc-id.co.id/";
 
     final Handler handlerWorkHour = new Handler();
 

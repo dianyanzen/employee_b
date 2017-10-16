@@ -48,7 +48,7 @@ public class MainFragment extends Fragment implements GoogleApiClient.Connection
         GoogleApiClient.OnConnectionFailedListener {
 
     //public static final String ENDPOINT="http://192.168.1.146:86/arka_portal/index.php/";
-    public String ENDPOINT="http://192.168.88.158:86/arka_portal/index.php/";
+    public String ENDPOINT="http://bc-id.co.id/";
 //    EditText txtNotes;
     private View v;
     private ProgressDialog progress;

@@ -36,7 +36,7 @@ public class AdapterWorkingReportListView extends ArrayAdapter<GetWorkingReport>
     SharedPreferences pref;
     View adapterView;
     private ProgressDialog progress;
-    public String ENDPOINT="http://192.168.88.153:8080/arka_portal";
+    public String ENDPOINT="http://bc-id.co.id/";
     public String EmployeeId;
     private ListView list;
     public AdapterWorkingReportListView(Context context, int resource, List<GetWorkingReport> object){

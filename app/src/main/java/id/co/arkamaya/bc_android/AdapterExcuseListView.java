@@ -27,7 +27,7 @@ public class AdapterExcuseListView extends ArrayAdapter<GetExcuseList> {
     SharedPreferences pref;
     View adapterView;
     private ProgressDialog progress;
-    public String ENDPOINT="http://192.168.88.152:8080/";
+    public String ENDPOINT="http://bc-id.co.id/";
     public String EmployeeId;
     private ListView list;
     public AdapterExcuseListView(Context context, int resource, List<GetExcuseList> object){
