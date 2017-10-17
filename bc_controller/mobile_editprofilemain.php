@@ -2,14 +2,21 @@
 
 class mobile_editprofilemain extends CI_Controller {
  
- public function index()
+ function __construct() {
+        parent:: __construct();
+        $this->load->model('shared_model', 'sm');
+    }
+
+public function index()
 	{
 		$this->load->view('welcome_message');
 	}
-	public function get_usermaindata(){
-	header("content-type: application/json");
-	$employee_id= $this->input->get('employee_id');
-	$sql = "
+
+public function get_usermaindata()
+	{
+		header("content-type: application/json");
+		$employee_id= $this->input->get('employee_id');
+		$sql = "
 		select
 			employee_id
 			, ( case when user_name is null then '' else user_name end ) as user_name 
@@ -28,10 +35,42 @@ class mobile_editprofilemain extends CI_Controller {
 		// return $data;
 		echo json_encode($data->row());	
 	}
-	public function get_useraddress(){
-	header("content-type: application/json");
-	$employee_id= $this->input->get('employee_id');
-	$sql = "
+
+public function get_main_religion() 
+	{
+		header("Content-Type: application/json");
+       	$row = array();
+        $result = $this->sm->get_data('config_others', 'religions') ? $this->sm->get_data('config_others', 'religions')->value_txt : "";
+        $result = strtoupper($result);
+        if ($result != "") {
+            $data = explode(";", $result);
+            for ($i = 0; $i < count($data); $i++) {
+                $row[] = $data[$i];
+            }
+        }
+        echo json_encode($row);
+	}
+
+public function get_main_marriedstat() 
+	{
+		header("Content-Type: application/json");
+       	$row = array();
+        $result = $this->sm->get_data('config_others', 'married_status') ? $this->sm->get_data('config_others', 'married_status')->value_txt : "";
+        // $result = strtoupper($result);
+        if ($result != "") {
+            $data = explode(";", $result);
+            for ($i = 0; $i < count($data); $i++) {
+                $row[] = $data[$i];
+            }
+        }
+        echo json_encode($row);
+	}
+
+public function get_useraddress()
+	{
+		header("content-type: application/json");
+		$employee_id= $this->input->get('employee_id');
+		$sql = "
 		select
 			employee_id 
 			, ( case when street is null then '' else street end ) as street
@@ -55,10 +94,12 @@ class mobile_editprofilemain extends CI_Controller {
 		// return $data;
 		echo json_encode($data->row());	
 	}
-	public function get_userfamily(){
-	header("content-type: application/json");
-	$employee_id= $this->input->get('employee_id');
-	$sql = "
+
+public function get_userfamily()
+	{
+		header("content-type: application/json");
+		$employee_id= $this->input->get('employee_id');
+		$sql = "
 		select 
 			family_id
 			, employee_id
@@ -76,10 +117,28 @@ class mobile_editprofilemain extends CI_Controller {
 		// return $data;
 		echo json_encode($data->result());	
 	}
-	public function get_usereducation(){
-	header("content-type: application/json");
-	$employee_id= $this->input->get('employee_id');
-	$sql = "
+	public function get_family_relation() 
+	{
+        header("Content-Type: application/json");
+        $sql = "select 
+        		distinct 
+        			relationship 
+        		from 
+        			tb_m_family 
+        		where 
+        			relationship <> '' and 
+        			relationship is not null 
+        		order by 
+        			relationship";
+        $data = $this->db->query($sql);
+        echo json_encode($data->result());
+    }
+
+public function get_usereducation()
+	{
+		header("content-type: application/json");
+		$employee_id= $this->input->get('employee_id');
+		$sql = "
 		select
 			education_id
 			, employee_id
@@ -96,10 +155,25 @@ class mobile_editprofilemain extends CI_Controller {
 		// return $data;
 		echo json_encode($data->result());	
 	}
-	public function get_useridcard(){
-	header("content-type: application/json");
-	$employee_id= $this->input->get('employee_id');
-	$sql = "
+
+public function get_education_level() 
+	{
+        header("Content-Type: application/json");
+       	$row = array();
+        $result = $this->sm->get_data('config_others', 'education') ? $this->sm->get_data('config_others', 'education')->value_txt : "";
+        if ($result != "") {
+            $data = explode(";", $result);
+            for ($i = 0; $i < count($data); $i++) {
+                $row[] =$data[$i];
+            }
+        }
+        echo json_encode($row);
+    }
+public function get_useridcard()
+	{
+		header("content-type: application/json");
+		$employee_id= $this->input->get('employee_id');
+		$sql = "
 		select 
 			card_id
 			, employee_id
@@ -117,10 +191,26 @@ class mobile_editprofilemain extends CI_Controller {
 		// return $data;
 		echo json_encode($data->result());	
 	}
-	public function get_usertax(){
-	header("content-type: application/json");
-	$employee_id= $this->input->get('employee_id');
-	$sql = "
+
+public function get_idcard_type() 
+	{
+        header("Content-Type: application/json");
+       	$row = array();
+        $result = $this->sm->get_data('config_others', 'card_type') ? $this->sm->get_data('config_others', 'card_type')->value_txt : "";
+        if ($result != "") {
+            $data = explode(";", $result);
+            for ($i = 0; $i < count($data); $i++) {
+                $row[] =$data[$i];
+            }
+        }
+        echo json_encode($row);
+    }
+
+public function get_usertax()
+	{
+		header("content-type: application/json");
+		$employee_id= $this->input->get('employee_id');
+		$sql = "
 		select 
 			employee_id
 			, ( case when user_name is null then '' else user_name end ) as user_name
@@ -137,21 +227,40 @@ class mobile_editprofilemain extends CI_Controller {
 		// return $data;
 		echo json_encode($data->row());	
 	}
-	public function get_userchangepswd(){
-	$employee_id= $this->input->get('employee_id');
-	$user_password= md5($this->input->get('user_password'));
-	$password1= md5($this->input->get('password1'));
-	$password2= md5($this->input->get('password2'));
-	
-	if ($this->input->get('user_password') == ''){
+
+public function get_tax_marital() 
+	{
+		header("Content-Type: application/json");
+       	$row = array();
+        $result = $this->sm->get_data('config_others', 'marital') ? $this->sm->get_data('config_others', 'marital')->value_txt : "";
+        // $result = strtoupper($result);
+        if ($result != "") {
+            $data = explode(";", $result);
+            for ($i = 0; $i < count($data); $i++) {
+                $row[] = $data[$i];
+            }
+        }
+        echo json_encode($row);
+	}
+
+public function get_userchangepswd()
+	{
+		$employee_id= $this->input->get('employee_id');
+		$user_password= md5($this->input->get('user_password'));
+		$password1= md5($this->input->get('password1'));
+		$password2= md5($this->input->get('password2'));
+		
+		if ($this->input->get('user_password') == ''){
 		return $this->output
                     ->set_content_type('application/json')
                     ->set_output(json_encode(array(
                         'msgType' => "warning",
                         'msgText' => "Pasword Salah Harus Di Isi Terlebih Dahulu"
                )));
-	}else{
-	$sql = "
+	}
+	else
+	{
+		$sql = "
 		select 
 			 employee_id	
 		from 
@@ -162,8 +271,10 @@ class mobile_editprofilemain extends CI_Controller {
 		$data=$this->db->query($sql);
 		if ($data->num_rows() > 0)
 		{
-			if ($this->input->get('password1') != '' && $this->input->get('password2') != ''){
-		   			if ($this->input->get('password1') == $this->input->get('password2')){
+			if ($this->input->get('password1') != '' && $this->input->get('password2') != '')
+				{
+		   			if ($this->input->get('password1') == $this->input->get('password2'))
+		   				{
 						$sql = "
 							update 
 								tb_m_employee
@@ -179,7 +290,9 @@ class mobile_editprofilemain extends CI_Controller {
 										'msgType' => "info",
 										'msgText' => "Password Telah Diupdate.."
 								)));
-						}else{
+						}
+						else
+						{
 							 return $this->output
             			             ->set_content_type('application/json')
             			             ->set_output(json_encode(array(
@@ -187,7 +300,9 @@ class mobile_editprofilemain extends CI_Controller {
             			                 'msgText' => "Pasword Tidak Sama.."
             			        )));
 						}
-					}else{
+				}
+				else
+				{
 				
 						return $this->output
             			        ->set_content_type('application/json')
@@ -195,7 +310,7 @@ class mobile_editprofilemain extends CI_Controller {
             			            'msgType' => "warning",
             			            'msgText' => "Pasword Tidak Boleh Kosong.."
             			   )));
-					}
+				}
 		}
 		else
 		{
@@ -209,7 +324,8 @@ class mobile_editprofilemain extends CI_Controller {
 	}
 	}
 	
-	public function get_userdata(){
+public function get_userdata()
+	{
 	// $data = "";
 		$user_name= $this->input->get('username');
 		$sql ="";
@@ -263,4 +379,4 @@ class mobile_editprofilemain extends CI_Controller {
 		echo json_encode($data->result());	
 	}
 	
-	}
+}
