@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="id.co.arkamaya.cico.id.co.arkamaya.bc_android.ReimburseFragment"
+    tools:context="id.co.arkamaya.bc_android.ReimburseFragment"
     android:layout_margin="2dp" android:descendantFocusability="blocksDescendants">>
 
     <!-- TODO: Update blank fragment layout -->

@@ -2,5 +2,153 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="2dp"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Level"
+                android:id="@+id/lbledulevel"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spnedulevel"
+                android:layout_below="@+id/lbledulevel"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Institution"
+                android:id="@+id/lbleduinstitution"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/spnedulevel"
+                android:layout_alignParentStart="true" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtinstitution"
+                android:layout_below="@+id/lbleduinstitution"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:singleLine="true" android:imeOptions="actionNext"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Faculty"
+                android:id="@+id/lbledufaculty"
+                android:layout_below="@+id/txtinstitution"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtedufaculty"
+                android:layout_below="@+id/lbledufaculty"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:singleLine="true" android:imeOptions="actionNext"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Graduated Date"
+                android:id="@+id/lbledudate"
+                android:layout_below="@+id/txtedufaculty"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:ems="10"
+                android:id="@+id/txtedudate"
+                android:layout_below="@+id/lbledudate"
+                android:layout_alignParentStart="true"
+                android:hint=" yyyy-mm-dd"
+                android:layout_toStartOf="@+id/btnDatePicker"
+                android:focusable="false" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:id="@+id/btnedudate"
+                android:layout_alignBottom="@+id/txtedudate"
+                android:layout_alignParentEnd="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="GPA"
+                android:id="@+id/lbledugpa"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/txtedudate"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtedugpa"
+                android:layout_below="@+id/lbledugpa"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:singleLine="true" android:imeOptions="actionNext"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#B6B6B6"
+                android:id="@+id/line2"
+                android:layout_below="@+id/txtedugpa"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="5dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:id="@+id/btnSaveEdu"
+                android:background="#3f51b4"
+                android:textColor="#ffffff"
+                android:layout_below="@+id/line2"
+                android:layout_alignParentStart="true"
+                android:layout_alignEnd="@+id/txtedugpa" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:id="@+id/btnCancelEdu"
+                android:layout_below="@+id/btnSaveEdu"
+                android:layout_alignParentStart="true"
+                android:layout_alignEnd="@+id/txtedugpa"
+                android:background="#D32F2F"
+                android:layout_marginTop="5dp"
+                android:textColor="#ffffff" />
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

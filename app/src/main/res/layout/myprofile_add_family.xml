@@ -1,5 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="2dp"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Relationship"
+                android:id="@+id/lblfmlrelation"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spnfmrelation"
+                android:layout_below="@+id/lblfmlrelation"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Gender"
+                android:id="@+id/lblfmgender"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/spnfmrelation"
+                android:layout_alignParentStart="true" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spnfmgender"
+                android:layout_below="@+id/lblfmgender"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Full Name"
+                android:id="@+id/lblfmfullname"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/spnfmgender"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtfmfullname"
+                android:layout_below="@+id/lblfmfullname"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:singleLine="true" android:imeOptions="actionNext"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Born Date"
+                android:id="@+id/lblfmborndt"
+                android:layout_below="@+id/txtfmfullname"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:ems="10"
+                android:id="@+id/txtfmborndate"
+                android:layout_below="@+id/lblfmborndt"
+                android:layout_alignParentStart="true"
+                android:hint=" yyyy-mm-dd"
+                android:layout_toStartOf="@+id/btnfmdateborn"
+                android:focusable="false" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:id="@+id/btnfmdateborn"
+                android:layout_alignBottom="@+id/txtfmborndate"
+                android:layout_alignParentEnd="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Born Place"
+                android:id="@+id/lblfmbornplace"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/txtfmborndate"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtfmbornplace"
+                android:layout_below="@+id/lblfmbornplace"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:singleLine="true" android:imeOptions="actionNext"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Nationality"
+                android:id="@+id/lblfmnationality"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/txtfmbornplace"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtfmnationality"
+                android:layout_below="@+id/lblfmnationality"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:singleLine="true" android:imeOptions="actionNext"/>
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#B6B6B6"
+                android:id="@+id/linefm2"
+                android:layout_below="@+id/txtfmnationality"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="5dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:id="@+id/btnSavefm"
+                android:background="#3f51b4"
+                android:textColor="#ffffff"
+                android:layout_below="@+id/linefm2"
+                android:layout_alignParentStart="true"
+                android:layout_alignEnd="@+id/txtfmnationality" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:id="@+id/btnCancelfm"
+                android:layout_below="@+id/btnSavefm"
+                android:layout_alignParentStart="true"
+                android:layout_alignEnd="@+id/txtfmnationality"
+                android:background="#D32F2F"
+                android:layout_marginTop="5dp"
+                android:textColor="#ffffff" />
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

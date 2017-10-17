@@ -15,28 +15,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Add"
-                android:id="@+id/btnAdd"
+                android:id="@+id/btnAddedu"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
-                android:layout_toStartOf="@+id/btnResync"
+                android:layout_toStartOf="@+id/btnResyncedu"
                 android:background="#3f51b4"
                 android:textColor="#ffffff" />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Resync"
-                android:id="@+id/btnResync"
+                android:id="@+id/btnResyncedu"
                 android:textColor="#ffffff"
                 android:layout_below="@+id/btnClockIn"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:background="#8ab23c" android:layout_marginLeft="3dp" />
             <ListView
-                android:id="@+id/list"
+                android:id="@+id/listedu"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:dividerHeight="1dp"
-                android:layout_below="@+id/btnAdd" android:layout_marginTop="3dp"
+                android:layout_below="@+id/btnAddedu" android:layout_marginTop="3dp"
                 android:focusable="true" />
         </RelativeLayout>
     </ScrollView>

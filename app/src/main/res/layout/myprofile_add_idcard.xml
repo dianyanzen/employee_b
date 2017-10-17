@@ -1,5 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="2dp"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Type"
+                android:id="@+id/lblidctype"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spnidctype"
+                android:layout_below="@+id/lblidctype"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="ID Number"
+                android:id="@+id/lblidcnumber"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/spnidctype"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtidcnumber"
+                android:layout_below="@+id/lblidcnumber"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:singleLine="true" android:imeOptions="actionNext"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Issued Date"
+                android:id="@+id/lblidcnumberdt"
+                android:layout_below="@+id/txtidcnumber"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:ems="10"
+                android:id="@+id/txtidcnumberdt"
+                android:layout_below="@+id/lblidcnumberdt"
+                android:layout_alignParentStart="true"
+                android:hint=" yyyy-mm-dd"
+                android:layout_toStartOf="@+id/btnidcnumdt"
+                android:focusable="false" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:id="@+id/btnidcnumdt"
+                android:layout_alignBottom="@+id/txtidcnumberdt"
+                android:layout_alignParentEnd="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Placed"
+                android:id="@+id/lblidcplaced"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_below="@+id/txtidcnumberdt"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtidcplaced"
+                android:layout_below="@+id/lblidcplaced"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:singleLine="true" android:imeOptions="actionNext"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Expired Date"
+                android:id="@+id/lblidcnumberexpdt"
+                android:layout_below="@+id/txtidcplaced"
+                android:textStyle="bold|italic"
+                android:textSize="14dp"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:ems="10"
+                android:id="@+id/txtidcnumberexpdt"
+                android:layout_below="@+id/lblidcnumberexpdt"
+                android:layout_alignParentStart="true"
+                android:hint=" yyyy-mm-dd"
+                android:layout_toStartOf="@+id/btnidcnumexpdt"
+                android:focusable="false" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:id="@+id/btnidcnumexpdt"
+                android:layout_alignBottom="@+id/txtidcnumberexpdt"
+                android:layout_alignParentEnd="true" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#B6B6B6"
+                android:id="@+id/line2"
+                android:layout_below="@+id/txtidcnumberexpdt"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="5dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:id="@+id/btnSaveTax"
+                android:background="#3f51b4"
+                android:textColor="#ffffff"
+                android:layout_below="@+id/line2"
+                android:layout_alignParentStart="true"
+                android:layout_alignEnd="@+id/txtidcplaced" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:id="@+id/btnCancelTax"
+                android:layout_below="@+id/btnSaveTax"
+                android:layout_alignParentStart="true"
+                android:layout_alignEnd="@+id/txtidcplaced"
+                android:background="#D32F2F"
+                android:layout_marginTop="5dp"
+                android:textColor="#ffffff" />
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
