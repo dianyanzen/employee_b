@@ -26,9 +26,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtoldpassword"
+                android:inputType="textPassword"
                 android:layout_below="@+id/lbloldpassword"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 android:singleLine="true" android:imeOptions="actionNext"/>
 
             <View
@@ -55,9 +57,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtnwpassword"
+                android:inputType="textPassword"
                 android:layout_below="@+id/lblnwpassword"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 android:singleLine="true" android:imeOptions="actionNext"/>
 
             <TextView
@@ -75,9 +79,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtconfirmpassword"
+                android:inputType="textPassword"
                 android:layout_below="@+id/lblconfrimpassword"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 android:singleLine="true" android:imeOptions="actionNext"/>
 
 

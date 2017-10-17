@@ -3,11 +3,13 @@ package id.co.arkamaya.bc_android;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -27,7 +29,10 @@ import java.util.Calendar;
 import java.util.List;
 
 import id.co.arkamaya.cico.R;
+import pojo.CheckLogin;
 import pojo.GetProfileMain;
+import pojo.GetProfileMainMarried;
+import pojo.GetProfileMainReligion;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -42,16 +47,17 @@ public class MyProfilMaindataFragment extends Fragment {
     SharedPreferences pref;
     private ProgressDialog progress;
     private String employee_id,user;
-    EditText txtBornDate,txtmeriedsince,txtTitle,txtBornPlace,txtReligion;
+    EditText txtBornDate,txtmeriedsince,txtTitle,txtBornPlace;
     TextView lblmeriedsince;
     Button BtnSave,BtnCancel;
-    Spinner spnGender,spnMeried;
+    Spinner spnGender,spnMeried,spnReligion;
     String MariedStat;
-    ArrayAdapter<String> adaAdapterMaried,adaAdapterGender;
+    ArrayAdapter<String> adaAdapterMaried,adaAdapterGender,adaAdapterReligion;
 
     String data_gender = "";
     String data_meried = "";
-    int idxGender;
+    String data_religion = "";
+    int idxGender,idxReligion;
     int idxMarried;
     Button btnBornDate,btnmeriedsince;
     public String ENDPOINT="http://bc-id.co.id/";
@@ -120,7 +126,7 @@ public class MyProfilMaindataFragment extends Fragment {
         spnGender = (Spinner)getActivity().findViewById(R.id.spnGender);
         txtBornDate = (EditText)getActivity().findViewById(R.id.txtBornDate);
         txtBornPlace =  (EditText)getActivity().findViewById(R.id.txtBornPlace);
-        txtReligion =  (EditText)getActivity().findViewById(R.id.txtreligion);
+        spnReligion =  (Spinner)getActivity().findViewById(R.id.spnReligion);
         spnMeried = (Spinner)getActivity().findViewById(R.id.spnmariedstatus);
         txtmeriedsince = (EditText)getActivity().findViewById(R.id.txtmeriedsince);
         /* End */
@@ -150,6 +156,7 @@ public class MyProfilMaindataFragment extends Fragment {
 
         getGender();
         getMeried();
+        getMainReligion();
         BtnCancel =(Button)getActivity().findViewById(R.id.btnCancelMain);
         BtnSave =(Button)getActivity().findViewById(R.id.btnSaveMain);
         BtnCancel.setOnClickListener(new View.OnClickListener() {
@@ -158,7 +165,26 @@ public class MyProfilMaindataFragment extends Fragment {
                 getActivity().finish();
             }
         });
+        BtnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(v.getContext())
+                        .setMessage("Are you sure?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
 
+                                if(conDetector.isConnectingToInternet()){
+                                    onSaveClick();
+                                }else{
+                                    Toast.makeText(getActivity().getApplicationContext(), "Internet Connection Error..", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
         btnBornDate =(Button)getActivity().findViewById(R.id.btnBornDate);
         btnmeriedsince = (Button) getActivity().findViewById(R.id.btnmeriedsince);
         btnBornDate.setOnClickListener(new View.OnClickListener() {
@@ -213,13 +239,22 @@ public class MyProfilMaindataFragment extends Fragment {
         }
     }
     public void getMeried(){
-        List<String> list = new ArrayList<String>();
-        list.clear();
-        spnMeried.setAdapter(null);
-        list.add("Single");
-        list.add("Married");
-        list.add("Divorce");
 
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(ENDPOINT)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+
+        APIEditProfile restInterface = restAdapter.create(APIEditProfile.class);
+
+        restInterface.getProfileMainMarried(new  Callback<List<GetProfileMainMarried>>() {
+            @Override
+            public void success(List<GetProfileMainMarried> m, Response response) {
+                List<String> list = new ArrayList<String>();
+
+                for (int i = 0; i < m.size(); i++) {
+                    list.add(m.get(i).getMarriedStatus());
+                }
         adaAdapterGender = new ArrayAdapter<String>
                 (getActivity().getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
 
@@ -244,6 +279,53 @@ public class MyProfilMaindataFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
 
+                    }
+                });
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+               // Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+    public void getMainReligion(){
+
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(ENDPOINT)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+
+        APIEditProfile restInterface = restAdapter.create(APIEditProfile.class);
+
+        restInterface.getProfileMainReligion(new  Callback<List<GetProfileMainReligion>>() {
+            @Override
+            public void success(List<GetProfileMainReligion> m, Response response) {
+                List<String> list = new ArrayList<String>();
+
+                for (int i = 0; i < m.size(); i++) {
+                    list.add(m.get(i).getReligions());
+                }
+                adaAdapterReligion = new ArrayAdapter<String>
+                        (getActivity().getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
+
+                adaAdapterReligion.setDropDownViewResource
+                        (R.layout.spinner_simple_item);
+
+                spnReligion.setAdapter(adaAdapterReligion);
+
+                String data = data_religion;
+
+                if (data != "") {
+                    int idxLocation = adaAdapterReligion.getPosition(data_religion);
+                    spnReligion.setSelection(idxLocation);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                // Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -324,7 +406,18 @@ public class MyProfilMaindataFragment extends Fragment {
                     txtTitle.setText(m.getTitle().toString());
                     txtBornDate.setText(m.getBornDt().toString());
                     txtBornPlace.setText(m.getBornPlace().toString());
-                    txtReligion.setText(m.getReligion().toString());
+                    String Religion = m.getReligion().toString();
+                    if (Religion.equalsIgnoreCase("islam")) {
+                        idxReligion = 0;
+                    }else if (Religion.equalsIgnoreCase("kristen")){
+                        idxReligion = 1;
+                    }else if (Religion.equalsIgnoreCase("hindu")){
+                        idxReligion = 2;
+                    }else if (Religion.equalsIgnoreCase("budha")){
+                        idxReligion = 3;
+                    }else{
+                        idxReligion = 4;
+                    }
                     txtmeriedsince.setText(m.getMarriedSince().toString());
                     String Gender = m.getGender().toString();
                     if (Gender.equalsIgnoreCase("female")){
@@ -358,6 +451,7 @@ public class MyProfilMaindataFragment extends Fragment {
                     }
                     Log.e("Yanzen",String.valueOf(idxGender)+" "+Gender );
                     Log.e("Yanzen",String.valueOf(idxMarried)+" "+Married );
+                    spnReligion.setSelection(idxReligion);
                     spnGender.setSelection(idxGender);
                     spnMeried.setSelection(idxMarried);
                 }catch (Exception e){
@@ -380,6 +474,56 @@ public class MyProfilMaindataFragment extends Fragment {
             }
         });
 
+    }
+    private void onSaveClick(){
+        String user_title  = txtTitle.getText().toString();
+        String user_born_dt  = txtBornDate.getText().toString();
+        String user_born_place  = txtBornPlace.getText().toString();
+        String user_married_since  = txtmeriedsince.getText().toString();
+        String user_gender = ((String) spnGender.getSelectedItem());
+        String user_religion = ((String) spnReligion.getSelectedItem());
+        String user_married_status = ((String) spnMeried.getSelectedItem());
+        if(user_born_dt.equals("")|| user_born_place.equals("")) {
+            Toast.makeText(getActivity().getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
+        }else{
+            progress = new ProgressDialog(getActivity());
+            progress.setMessage("Processing..");
+            progress.setIndeterminate(true);
+            progress.setCancelable(false);
+            progress.show();
+            RestAdapter restAdapter = new RestAdapter.Builder()
+                    .setEndpoint(ENDPOINT)
+                    .setLogLevel(RestAdapter.LogLevel.FULL)
+                    .build();
+
+            APIEditProfile restInterface = restAdapter.create(APIEditProfile.class);
+            restInterface.onUpdateMainData(employee_id,user_title,user_gender,user_born_dt,user_born_place,user_religion,user_married_status,user_married_since
+                    , new Callback<CheckLogin>() {
+                        @Override
+                        public void success(CheckLogin m, Response response) {
+
+                            if (progress != null) {
+                                progress.dismiss();
+                            }
+
+                            Toast.makeText(getActivity().getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
+
+                            if (m.getMsgType().toLowerCase().equals("info")) {
+                                getActivity().finish();
+                            } else {
+
+                            }
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                            if (progress != null) {
+                                progress.dismiss();
+                            }
+                        }
+                    });
+        }
     }
 
 }

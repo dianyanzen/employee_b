@@ -30,6 +30,7 @@
                 android:layout_below="@+id/lblstret"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 android:singleLine="true" android:imeOptions="actionNext"/>
 
             <TextView
@@ -50,6 +51,7 @@
                 android:layout_below="@+id/lbladdress"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 android:singleLine="true" android:imeOptions="actionNext"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -69,6 +71,7 @@
                 android:layout_below="@+id/lblregion"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 android:singleLine="true" android:imeOptions="actionNext"/>
 
             <TextView
@@ -89,6 +92,7 @@
                 android:layout_below="@+id/lblsubdistrict"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 android:singleLine="true" android:imeOptions="actionNext"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -108,6 +112,7 @@
                 android:layout_below="@+id/lblprovince"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 android:singleLine="true" android:imeOptions="actionNext"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -127,6 +132,7 @@
                 android:layout_below="@+id/lblcountry"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 android:singleLine="true" android:imeOptions="actionNext"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -146,6 +152,7 @@
                 android:layout_below="@+id/lblpostalcode"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 android:singleLine="true" android:imeOptions="actionNext"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -165,6 +172,7 @@
                 android:layout_below="@+id/lblphone1"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 android:singleLine="true" android:imeOptions="actionNext"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -184,6 +192,7 @@
                 android:layout_below="@+id/lblphone2"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 android:singleLine="true" android:imeOptions="actionNext"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -203,6 +212,7 @@
                 android:layout_below="@+id/lblworkmail"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 android:singleLine="true" android:imeOptions="actionNext"/>
             <View
                 android:layout_width="match_parent"
@@ -230,6 +240,7 @@
                 android:layout_below="@+id/lblbankaccount"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 android:singleLine="true" android:imeOptions="actionNext"/>
             <View
                 android:layout_width="match_parent"
@@ -257,6 +268,7 @@
                 android:layout_below="@+id/lblcontactperson"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 android:singleLine="true" android:imeOptions="actionNext"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -276,6 +288,7 @@
                 android:layout_below="@+id/lblcontactpersonphone"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 android:singleLine="true" android:imeOptions="actionNext"/>
             <View
                 android:layout_width="match_parent"

@@ -31,6 +31,7 @@
                 android:layout_below="@+id/lbltitle"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 android:singleLine="true" android:imeOptions="actionNext"/>
 
             <TextView
@@ -51,22 +52,16 @@
                 android:layout_below="@+id/lblGender"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#B6B6B6"
-                android:id="@+id/linegender"
-                android:layout_below="@+id/spnGender"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="5dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Born Date"
                 android:id="@+id/lblBornDate"
-                android:layout_below="@+id/linegender"
+                android:layout_below="@+id/spnGender"
                 android:textStyle="bold|italic"
                 android:textSize="14dp"
                 android:layout_alignParentStart="true" />
@@ -81,6 +76,7 @@
                 android:layout_alignParentStart="true"
                 android:hint=" yyyy-mm-dd"
                 android:layout_toStartOf="@+id/btnBornDate"
+                android:layout_marginBottom="5dp"
                 android:focusable="false" />
 
             <TextView
@@ -100,6 +96,7 @@
                 android:id="@+id/txtBornPlace"
                 android:layout_below="@+id/lblBornPlace"
                 android:layout_alignParentStart="true"
+                android:layout_marginBottom="5dp"
                 android:layout_alignParentEnd="true"
                 android:singleLine="true" android:imeOptions="actionNext"/>
 
@@ -114,14 +111,15 @@
                 android:layout_below="@+id/txtBornPlace"
                 android:layout_alignParentStart="true" />
 
-            <EditText
+            <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtreligion"
+                android:id="@+id/spnReligion"
                 android:layout_below="@+id/lblreligion"
                 android:layout_alignParentStart="true"
+                android:layout_marginBottom="5dp"
                 android:layout_alignParentEnd="true"
-                android:singleLine="true" android:imeOptions="actionNext"/>
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -131,7 +129,7 @@
                 android:id="@+id/lblmeriedstatus"
                 android:textStyle="bold|italic"
                 android:textSize="14dp"
-                android:layout_below="@+id/txtreligion"
+                android:layout_below="@+id/spnReligion"
                 android:layout_alignParentStart="true" />
 
             <Spinner
@@ -141,15 +139,9 @@
                 android:layout_below="@+id/lblmeriedstatus"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="5dp"
                 />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#B6B6B6"
-                android:id="@+id/linemeriedstatus"
-                android:layout_below="@+id/spnmariedstatus"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="5dp" />
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -159,7 +151,7 @@
                 android:id="@+id/lblmeriedsince"
                 android:textStyle="bold|italic"
                 android:textSize="14dp"
-                android:layout_below="@+id/linemeriedstatus"
+                android:layout_below="@+id/spnmariedstatus"
                 android:layout_alignParentStart="true" />
             <EditText
                 android:layout_width="wrap_content"
@@ -171,6 +163,7 @@
                 android:layout_alignParentStart="true"
                 android:hint=" yyyy-mm-dd"
                 android:layout_toStartOf="@+id/btnmeriedsince"
+                android:layout_marginBottom="5dp"
                 android:focusable="false" />
             <TextView
                 android:layout_width="wrap_content"

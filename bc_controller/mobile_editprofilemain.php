@@ -45,11 +45,13 @@ public function get_main_religion()
         if ($result != "") {
             $data = explode(";", $result);
             for ($i = 0; $i < count($data); $i++) {
-                $row[] = $data[$i];
+                $row[] = array(
+                    'religions' => $data[$i]);
             }
         }
         echo json_encode($row);
 	}
+	
 
 public function get_main_marriedstat() 
 	{
@@ -60,7 +62,8 @@ public function get_main_marriedstat()
         if ($result != "") {
             $data = explode(";", $result);
             for ($i = 0; $i < count($data); $i++) {
-                $row[] = $data[$i];
+                $row[] = array(
+                    'married_status' => $data[$i]);
             }
         }
         echo json_encode($row);
@@ -164,7 +167,8 @@ public function get_education_level()
         if ($result != "") {
             $data = explode(";", $result);
             for ($i = 0; $i < count($data); $i++) {
-                $row[] =$data[$i];
+               $row[] = array(
+                    'edu_level' => $data[$i]);
             }
         }
         echo json_encode($row);
@@ -200,7 +204,8 @@ public function get_idcard_type()
         if ($result != "") {
             $data = explode(";", $result);
             for ($i = 0; $i < count($data); $i++) {
-                $row[] =$data[$i];
+                $row[] = array(
+                    'id_card_type' => $data[$i]);
             }
         }
         echo json_encode($row);
@@ -237,7 +242,8 @@ public function get_tax_marital()
         if ($result != "") {
             $data = explode(";", $result);
             for ($i = 0; $i < count($data); $i++) {
-                $row[] = $data[$i];
+                $row[] = array(
+                    'marital' => $data[$i]);
             }
         }
         echo json_encode($row);
@@ -323,7 +329,75 @@ public function get_userchangepswd()
 		}
 	}
 	}
-	
+
+public function get_updatemain()
+	{
+		$employee_id= $this->input->get('employee_id');
+		$user_title= $this->input->get('user_title');
+		$user_gender= $this->input->get('user_gender');
+		$user_born_dt= $this->input->get('user_born_dt');
+		$user_born_place= $this->input->get('user_born_place');
+		$user_religion= $this->input->get('user_religion');
+		$user_married_status= $this->input->get('user_married_status');
+		$user_married_since= $this->input->get('user_married_since');
+		if ($this->input->get('employee_id') != '')
+		{
+		if ($this->input->get('user_married_since') == '' && 
+			$this->input->get('user_married_status') != 'Single'){
+			
+			return $this->output
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode(array(
+                        'msgType' => "warning",
+                        'msgText' => "Married Since Tidak Boleh  Kosong"
+               )));
+		}else{
+		
+			$sql = "
+				update 
+					tb_m_employee
+				set
+					title = '$user_title',
+					gender = '$user_gender',
+					born_dt = '$user_born_dt',
+					born_place = '$user_born_place',
+					religion = '$user_religion',";
+			if ($this->input->get('user_married_since') != '')
+			{
+				$sql .=" married_since = '$user_married_since',";
+			}		
+				$sql .="
+					married_status = '$user_married_status'
+					
+				where
+					employee_id = '$employee_id'
+					";		
+			$this->db->query($sql);
+			 return $this->output
+						->set_content_type('application/json')
+						->set_output(json_encode(array(
+							'msgType' => "info",
+							'msgText' => "Data Telah Diupdate.."
+					)));
+		}
+		}
+		else
+		{
+				return $this->output
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode(array(
+                        'msgType' => "warning",
+                        'msgText' => "Terjadi Kesalahan "
+               )));
+		}
+
+	}
+
+public function get_updateaddress()
+{
+
+}
+
 public function get_userdata()
 	{
 	// $data = "";
