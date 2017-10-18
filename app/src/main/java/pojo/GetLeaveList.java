@@ -15,25 +15,25 @@ public class GetLeaveList {
     @SerializedName("leave_prod_month")
     @Expose
     private String leaveProdMonth;
-    @SerializedName("leave_id")
+    @SerializedName("time_off_id")
     @Expose
     private String leaveId;
-    @SerializedName("leave_type")
+    @SerializedName("time_off_type")
     @Expose
     private String leaveType;
     @SerializedName("leave_dt")
     @Expose
     private String leaveDt;
-    @SerializedName("leave_todt")
+    @SerializedName("leave_dt")
     @Expose
     private String leaveTodt;
     @SerializedName("leave_reason")
     @Expose
     private String leaveReason;
-    @SerializedName("leave_approved_dt")
+    @SerializedName("time_off_approve_dt")
     @Expose
     private String leaveApproveDt;
-    @SerializedName("leave_approved_by")
+    @SerializedName("time_off_approve_by")
     @Expose
     private String leaveApproveBy;
     @SerializedName("leave_status")

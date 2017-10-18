@@ -98,6 +98,148 @@ public function get_useraddress()
 		echo json_encode($data->row());	
 	}
 
+public function on_addfamily()
+	{
+		$employee_id = $this->input->get('employee_id');
+        $user_name = $this->input->get('user_name');
+        $family_id = $this->input->get('family_id');        
+        $family_relation = $this->input->get('family_relation');
+        $family_gender = $this->input->get('family_gender');        
+        $family_full_name = strtoupper($this->input->get('family_full_name'));
+        $family_born_place = $this->input->get('family_born_place');
+        $family_born_date = $this->input->get('family_born_date');
+        $family_nationality = $this->input->get('family_nationality');        
+if ($this->input->get('employee_id') != '' && 
+	$this->input->get('user_name') != '' && 
+	$this->input->get('family_relation') != '' && 
+	$this->input->get('family_gender') != '' && 
+	$this->input->get('family_full_name') != '' && 
+	$this->input->get('family_born_place') != '' && 
+	$this->input->get('family_born_date') != '' && 
+	$this->input->get('family_nationality') != ''){
+        if ($family_id == "") {
+            //insert 
+            $created_by = $user_name;
+            $created_dt = date('Y-m-d H:i:s');
+            	 try {
+            	 	$sql = "
+            	 	INSERT INTO
+            	 		tb_m_family (
+            	 		employee_id
+            	 		, relationship
+            	 		, gender
+            	 		, fullname
+            	 		, born_dt
+            	 		, born_place
+            	 		, nationality
+            	 		, created_by
+            	 		,created_dt
+            	 		)
+					VALUES (
+					'$employee_id'
+					, '$family_relation'
+					, '$family_gender'
+					, '$family_full_name'
+					, '$family_born_date'
+					, '$family_born_place'
+					, '$family_nationality'
+					, '$created_by'
+					, '$created_dt'
+					 )";
+            	 
+			$this->db->query($sql);
+            	       return $this->output
+						->set_content_type('application/json')
+						->set_output(json_encode(array(
+							'msgType' => "info",
+							'msgText' => "Data Keluarga Telah Disimpan.."
+					)));
+			} catch (Exception $e) {
+               return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Data Gagal Disimpan.."
+                                    )));
+             
+            }
+        } else {
+            //update
+
+            $changed_by = $user_name;
+            $changed_dt = date('Y-m-d H:i:s');
+
+             try {
+             	$sql = "
+				update 
+					tb_m_family
+				set
+					relationship = '$family_relation'
+					, gender = '$family_gender'
+					, fullname = '$family_full_name'
+					, born_place = '$family_born_place'
+					, born_dt = '$family_born_date'
+					, nationality = '$family_nationality'
+					, changed_by = '$changed_by'
+					, changed_dt = '$changed_dt'
+				where
+					employee_id = '$employee_id'
+					and family_id = '$family_id'
+					";		
+			$this->db->query($sql);
+            	            	return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "info",
+                                    'msgText' => "Data has been updated"
+                                    )));
+            } catch (Exception $e) {
+            	return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Update failed"
+                                    )));
+            }
+        } 
+    	}
+        else{
+        	return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Terjadi Kesalahan Input"
+                                    )));
+        }   
+	}
+
+public function on_deletefamily()
+	{
+		$family_id	= $this->input->get('family_id');
+		$employee_id	= $this->input->get('employee_id');
+		
+		try {
+			
+				$sql= "delete from tb_m_family
+					where family_id = '$family_id' and employee_id='$employee_id'";
+				$this->db->query($sql);
+
+			   	return $this->output
+	            	->set_content_type('application/json')
+	            	->set_output(json_encode(array(
+	                    'msgType' => "info",
+	                    'msgText' => "Data Keluarga Telah Dihapus.."
+	            )));
+		} catch (exception $e) {
+			return $this->output
+	            ->set_content_type('application/json')
+	            ->set_output(json_encode(array(
+	                    'msgType' => 'warning',
+	                    'msgText' => $e->getmessage()
+	            )));
+		}
+	}
+
 public function get_userfamily()
 	{
 		header("content-type: application/json");
@@ -115,10 +257,34 @@ public function get_userfamily()
 		from 
 			tb_m_family
 		 where
-		 	 employee_id = '$employee_id'";
+		 	 employee_id = '$employee_id'
+		 order by born_dt";
 		$data=$this->db->query($sql);
 		// return $data;
 		echo json_encode($data->result());	
+	}
+	public function get_userfamilybyid()
+	{
+		header("content-type: application/json");
+		$family_id= $this->input->get('family_id');
+		$sql = "
+		select 
+			family_id
+			, employee_id
+			, relationship
+			, gender
+			, fullname
+			, born_dt
+			, born_place
+			, nationality
+		from 
+			tb_m_family
+		 where
+		 	 family_id = '$family_id'
+		 order by born_dt";
+		$data=$this->db->query($sql);
+		// return $data;
+		echo json_encode($data->row());	
 	}
 	public function get_family_relation() 
 	{
@@ -219,7 +385,9 @@ public function get_usertax()
 		select 
 			employee_id
 			, ( case when user_name is null then '' else user_name end ) as user_name
-			, ( case when npwp_number is null then '' else npwp_number end ) as npwp_number
+			, ( case when npwp_number is null or 
+				replace(format(npwp_number,0),',','') = 0 
+				then '' else replace(format(npwp_number,0),',','') end ) as npwp_number
 			, ( case when npwp_dt is null then '' else npwp_dt end ) as npwp_dt
 			, ( case when marital is null then '' else marital end ) as marital
 			, ( case when bpjs_kesehatan is null then '' else bpjs_kesehatan end ) as bpjs_kesehatan
@@ -330,7 +498,7 @@ public function get_userchangepswd()
 	}
 	}
 
-public function get_updatemain()
+public function on_updatemain()
 	{
 		$employee_id= $this->input->get('employee_id');
 		$user_title= $this->input->get('user_title');
@@ -357,17 +525,17 @@ public function get_updatemain()
 				update 
 					tb_m_employee
 				set
-					title = '$user_title',
-					gender = '$user_gender',
-					born_dt = '$user_born_dt',
-					born_place = '$user_born_place',
-					religion = '$user_religion',";
+					title = '$user_title'
+					, gender = '$user_gender'
+					, born_dt = '$user_born_dt'
+					, born_place = '$user_born_place'
+					, religion = '$user_religion'";
 			if ($this->input->get('user_married_since') != '')
 			{
-				$sql .=" married_since = '$user_married_since',";
+				$sql .=" , married_since = '$user_married_since'";
 			}		
 				$sql .="
-					married_status = '$user_married_status'
+					, married_status = '$user_married_status'
 					
 				where
 					employee_id = '$employee_id'
@@ -393,10 +561,120 @@ public function get_updatemain()
 
 	}
 
-public function get_updateaddress()
-{
 
-}
+public function on_updateaddress()
+	{
+		$employee_id= $this->input->get('employee_id');
+		$user_street= $this->input->get('user_street');
+		$user_address= $this->input->get('user_address');
+		$user_region= $this->input->get('user_region');
+		$user_sub_district= $this->input->get('user_sub_district');
+		$user_province= $this->input->get('user_province');
+		$user_country= $this->input->get('user_country');
+		$user_postal_code= $this->input->get('user_postal_code');
+		$user_phone1= $this->input->get('user_phone1');
+		$user_phone2= $this->input->get('user_phone2');
+		$user_work_email= $this->input->get('user_work_email');
+		$user_bank_account= $this->input->get('user_bank_account');
+		$user_contact_person= $this->input->get('user_contact_person');
+		$user_contact_person_phone= $this->input->get('user_contact_person_phone');
+		if ($this->input->get('employee_id') != '')
+		{
+		
+			$sql = "
+				update 
+					tb_m_employee
+				set
+					street = '$user_street'
+					, address = '$user_address'
+					, region = '$user_region'
+					, sub_district = '$user_sub_district'
+					, province = '$user_province'
+					, country = '$user_country'
+					, postal_code = '$user_postal_code'
+					, handphone1 = '$user_phone1'
+					, handphone2 = '$user_phone2'
+					, work_email = '$user_work_email'
+					, bank_account_number = '$user_bank_account'
+					, closed_person_name = '$user_contact_person'
+					, closed_person_phone = '$user_contact_person_phone'
+					
+				where
+					employee_id = '$employee_id'
+					";		
+			$this->db->query($sql);
+			 return $this->output
+						->set_content_type('application/json')
+						->set_output(json_encode(array(
+							'msgType' => "info",
+							'msgText' => "Alamat Telah Diupdate.."
+					)));
+		
+		}
+		else
+		{
+				return $this->output
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode(array(
+                        'msgType' => "warning",
+                        'msgText' => "Terjadi Kesalahan "
+               )));
+		}
+
+	}
+
+	public function on_updatetax()
+	{   
+		
+		$employee_id= $this->input->get('employee_id');
+		$user_npwp= $this->input->get('user_npwp');
+/*		$user_npwp = substr($user_npwp,0,1).'.'.substr($user_npwp,2);
+		echo $user_npwp;
+		die;*/
+		$user_npwp_dt= $this->input->get('user_npwp_dt');
+		$user_marital= $this->input->get('user_marital');
+		$user_bpjs_ketenagakerjaan= $this->input->get('user_bpjs_ketenagakerjaan');
+		$user_bpjs_kesehatan= $this->input->get('user_bpjs_kesehatan');
+		
+		if ($this->input->get('employee_id') != '')
+		{
+		
+			$sql = "
+				update 
+					tb_m_employee
+				set
+					npwp_number = '$user_npwp'";
+					if ($this->input->get('user_npwp_dt') != '')
+					{
+					$sql .= " , npwp_dt = '$user_npwp_dt'";
+					}
+					$sql .= " , marital = '$user_marital'
+					, bpjs_ketenagakerjaan = '$user_bpjs_ketenagakerjaan'
+					, bpjs_kesehatan = '$user_bpjs_kesehatan'
+				where
+					employee_id = '$employee_id'
+					";		
+			$this->db->query($sql);
+			 return $this->output
+						->set_content_type('application/json')
+						->set_output(json_encode(array(
+							'msgType' => "info",
+							'msgText' => "Pajak Dan Bpjs Telah Diupdate.."
+					)));
+		
+		}
+		else
+		{
+				return $this->output
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode(array(
+                        'msgType' => "warning",
+                        'msgText' => "Terjadi Kesalahan "
+               )));
+		}
+
+	}
+
 
 public function get_userdata()
 	{

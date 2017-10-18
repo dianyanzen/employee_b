@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_marginTop="2dp"
             android:padding="10dp">
@@ -15,28 +13,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Add"
-                android:id="@+id/btnAddedu"
+                android:id="@+id/btnAddfamily"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
-                android:layout_toStartOf="@+id/btnResyncedu"
+                android:layout_toStartOf="@+id/btnResyncfamily"
                 android:background="#3f51b4"
                 android:textColor="#ffffff" />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Resync"
-                android:id="@+id/btnResyncedu"
+                android:id="@+id/btnResyncfamily"
                 android:textColor="#ffffff"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:background="#8ab23c" android:layout_marginLeft="3dp" />
             <ListView
-                android:id="@+id/listedu"
+                android:id="@+id/listfamily"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:dividerHeight="1dp"
-                android:layout_below="@+id/btnAddedu" android:layout_marginTop="3dp"
+                android:layout_below="@+id/btnAddfamily" android:layout_marginTop="3dp"
                 android:focusable="true" />
+
         </RelativeLayout>
-    </ScrollView>
 </RelativeLayout>

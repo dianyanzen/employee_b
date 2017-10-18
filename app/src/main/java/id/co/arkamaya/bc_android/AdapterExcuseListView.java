@@ -76,22 +76,12 @@ public class AdapterExcuseListView extends ArrayAdapter<GetExcuseList> {
         final int pos=position;
 
         btnDelete.setOnClickListener(
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        TextView txtExcuseId = (TextView) adapterView.findViewById(R.id.txtExcuseId);
-//                        //final String ReimburseId = txtReimburseId.getText().toString();
-//                        //Toast.makeText(v.getContext(), "Delete button clicked " +ReimburseId+"-"+EmployeeId, Toast.LENGTH_SHORT).show();
-//                        ((ListView) prnt).performItemClick(v, pos, 0); // Let the event be handled in onItemClick()
-//                    }
-//                }
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         View vp=(View)v.getParent();
                         TextView txtExcuseId = (TextView) vp.findViewById(R.id.txtExcuseId);
                         final String ExcuseId = txtExcuseId.getText().toString();
-                        //Toast.makeText(v.getContext(), "Delete button clicked " +ReimburseId+"-"+EmployeeId, Toast.LENGTH_SHORT).show();
                         ((ListView) prnt).performItemClick(vp, pos, v.getId()); // Let the event be handled in onItemClick()
                     }
                 }

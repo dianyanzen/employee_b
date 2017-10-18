@@ -3,11 +3,13 @@ package id.co.arkamaya.bc_android;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -27,7 +29,9 @@ import java.util.Calendar;
 import java.util.List;
 
 import id.co.arkamaya.cico.R;
+import pojo.CheckLogin;
 import pojo.GetProfileTax;
+import pojo.GetProfileTaxMarital;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -44,7 +48,7 @@ public class MyProfileTaxFragment extends Fragment {
     private String employee_id,user;
     public String ENDPOINT="http://bc-id.co.id/";
     EditText txtIdNpwp,txtNpwpDt,txtIdBpjsKerja,txtIdBpjsSehat;
-    Button btnNwpwDate, BtnSave, BtnCancel;
+    Button btnNwpwDate, BtnSavetax, BtnCancel;
     ArrayAdapter<String> adaAdapterMarital;
     String data_marital = "";
     Spinner spnMarital;
@@ -139,7 +143,27 @@ public class MyProfileTaxFragment extends Fragment {
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         BtnCancel =(Button)getActivity().findViewById(R.id.btnCancelTax );
-        BtnSave =(Button)getActivity().findViewById(R.id.btnSaveTax);
+        BtnSavetax =(Button)getActivity().findViewById(R.id.btnSaveTax);
+        BtnSavetax.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(v.getContext())
+                        .setMessage("Are you sure?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                if(conDetector.isConnectingToInternet()){
+                                    onSaveClick();
+                                }else{
+                                    Toast.makeText(getActivity().getApplicationContext(), "Internet Connection Error..", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
         BtnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,39 +176,52 @@ public class MyProfileTaxFragment extends Fragment {
         return (b == 0 ? a : GCD(b, a % b));
     }
     public void getMarital(){
-        List<String> list = new ArrayList<String>();
-        list.clear();
-        spnMarital.setAdapter(null);
-        list.add("TK");
-        list.add("K0");
-        list.add("K1");
-        list.add("K2");
-        list.add("K3");
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(ENDPOINT)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
 
-        adaAdapterMarital = new ArrayAdapter<String>
-                (getActivity().getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
+        APIEditProfile restInterface = restAdapter.create(APIEditProfile.class);
 
-        adaAdapterMarital.setDropDownViewResource
-                (R.layout.spinner_simple_item);
-
-        spnMarital.setAdapter(adaAdapterMarital);
-
-        String data = data_marital;
-
-        if (data != "") {
-            int idxLocation = adaAdapterMarital.getPosition(data_marital);
-            spnMarital.setSelection(idxLocation);
-        }
-        spnMarital.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        restInterface.getProfileTaxMarital(new  Callback<List<GetProfileTaxMarital>>() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+            public void success(List<GetProfileTaxMarital> m, Response response) {
+                List<String> list = new ArrayList<String>();
+
+                for (int i = 0; i < m.size(); i++) {
+                    list.add(m.get(i).getTaxMarital());
+                }
+                adaAdapterMarital = new ArrayAdapter<String>
+                        (getActivity().getApplicationContext(), R.layout.spinner_simple_item, R.id.listCombo, list);
+
+                adaAdapterMarital.setDropDownViewResource
+                        (R.layout.spinner_simple_item);
+
+                spnMarital.setAdapter(adaAdapterMarital);
+
+                String data = data_marital;
+
+                if (data != "") {
+                    int idxLocation = adaAdapterMarital.getPosition(data_marital);
+                    spnMarital.setSelection(idxLocation);
+                }
+                spnMarital.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 
 
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parentView) {
+
+                    }
+                });
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-
+            public void failure(RetrofitError error) {
+                // Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -271,5 +308,53 @@ public class MyProfileTaxFragment extends Fragment {
             }
         });
 
+    }
+    private void onSaveClick(){
+        String user_npwp  = txtIdNpwp.getText().toString();
+        String user_npwp_dt  = txtNpwpDt.getText().toString();
+        String user_marital  = ((String) spnMarital.getSelectedItem());
+        String user_bpjs_ketenagakerjaan  = txtIdBpjsKerja.getText().toString();
+        String user_bpjs_kesehatan = txtIdBpjsSehat.getText().toString();
+        if(employee_id.equals("")) {
+            Toast.makeText(getActivity().getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
+        }else{
+            progress = new ProgressDialog(getActivity());
+            progress.setMessage("Processing..");
+            progress.setIndeterminate(true);
+            progress.setCancelable(false);
+            progress.show();
+            RestAdapter restAdapter = new RestAdapter.Builder()
+                    .setEndpoint(ENDPOINT)
+                    .setLogLevel(RestAdapter.LogLevel.FULL)
+                    .build();
+
+            APIEditProfile restInterface = restAdapter.create(APIEditProfile.class);
+            restInterface.onUpdateTax(employee_id,user_npwp,user_npwp_dt,user_marital,user_bpjs_ketenagakerjaan,user_bpjs_kesehatan
+                    , new Callback<CheckLogin>() {
+                        @Override
+                        public void success(CheckLogin m, Response response) {
+
+                            if (progress != null) {
+                                progress.dismiss();
+                            }
+
+                            Toast.makeText(getActivity().getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
+
+                            if (m.getMsgType().toLowerCase().equals("info")) {
+                                getActivity().finish();
+                            } else {
+
+                            }
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                            if (progress != null) {
+                                progress.dismiss();
+                            }
+                        }
+                    });
+        }
     }
 }

@@ -18,6 +18,7 @@
                 android:text="ID NPWP"
                 android:id="@+id/lblidnpwp"
                 android:textStyle="bold|italic"
+                android:inputType="number"
                 android:textSize="14dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true" />
@@ -97,6 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtketenagakerjaan"
+                android:inputType="number"
                 android:layout_below="@+id/lblbpjsketenagakerjaan"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
@@ -118,6 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtbpjskesehatan"
+                android:inputType="number"
                 android:layout_below="@+id/lblbpjskesehatan"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"

@@ -2,11 +2,13 @@ package id.co.arkamaya.bc_android;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 import id.co.arkamaya.cico.R;
+import pojo.CheckLogin;
 import pojo.GetProfileAddress;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -123,6 +126,26 @@ public class MyProfileAddressFragment extends Fragment {
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         btnSave =(Button)getActivity().findViewById(R.id.btnSaveAddress);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(v.getContext())
+                        .setMessage("Are you sure?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                if(conDetector.isConnectingToInternet()){
+                                    onSaveClick();
+                                }else{
+                                    Toast.makeText(getActivity().getApplicationContext(), "Internet Connection Error..", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
         btnCancel =(Button)getActivity().findViewById(R.id.btnCancelAddress);
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,6 +208,75 @@ public class MyProfileAddressFragment extends Fragment {
             }
         });
 
+    }
+    private void onSaveClick(){
+        String user_street  = txtStreet.getText().toString();
+        String user_address  = txtAddress.getText().toString();
+        String user_region  = txtRegion.getText().toString();
+        String user_sub_district  = txtSubDistrict.getText().toString();
+        String user_province = txtProvince.getText().toString();
+        String user_country = txtCountry.getText().toString();
+        String user_postal_code = txtPostalCode.getText().toString();
+        String user_phone1 = txtPhone1.getText().toString();
+        String user_phone2 = txtPhone2.getText().toString();
+        String user_work_email = txtWorkMail.getText().toString();
+        String user_bank_account = txtBankAccout.getText().toString();
+        String user_contact_person = txtContactPerson.getText().toString();
+        String user_contact_person_phone = txtContactPersonPhone.getText().toString();
+        if(employee_id.equals("")) {
+            Toast.makeText(getActivity().getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
+        }else{
+            progress = new ProgressDialog(getActivity());
+            progress.setMessage("Processing..");
+            progress.setIndeterminate(true);
+            progress.setCancelable(false);
+            progress.show();
+            RestAdapter restAdapter = new RestAdapter.Builder()
+                    .setEndpoint(ENDPOINT)
+                    .setLogLevel(RestAdapter.LogLevel.FULL)
+                    .build();
+
+            APIEditProfile restInterface = restAdapter.create(APIEditProfile.class);
+            restInterface.onUpdateAddress(employee_id
+                    ,user_street
+                    ,user_address
+                    ,user_region
+                    ,user_sub_district
+                    ,user_province
+                    ,user_country
+                    ,user_postal_code
+                    ,user_phone1
+                    ,user_phone2
+                    ,user_work_email
+                    ,user_bank_account
+                    ,user_contact_person
+                    ,user_contact_person_phone
+                    , new Callback<CheckLogin>() {
+                        @Override
+                        public void success(CheckLogin m, Response response) {
+
+                            if (progress != null) {
+                                progress.dismiss();
+                            }
+
+                            Toast.makeText(getActivity().getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
+
+                            if (m.getMsgType().toLowerCase().equals("info")) {
+                                getActivity().finish();
+                            } else {
+
+                            }
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                            if (progress != null) {
+                                progress.dismiss();
+                            }
+                        }
+                    });
+        }
     }
 
 }
