@@ -71,6 +71,7 @@ public interface APIEditProfile {
     @POST("/mobile_editprofilemain/on_updatemain")
     void onUpdateMainData(
             @Query("employee_id") String employee_id,
+            @Query("user") String user,
             @Query("user_title") String user_title,
             @Query("user_gender") String user_gender,
             @Query("user_born_dt") String user_born_dt,

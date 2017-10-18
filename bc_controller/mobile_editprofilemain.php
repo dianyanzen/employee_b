@@ -501,6 +501,7 @@ public function get_userchangepswd()
 public function on_updatemain()
 	{
 		$employee_id= $this->input->get('employee_id');
+		$user_name= $this->input->get('user');
 		$user_title= $this->input->get('user_title');
 		$user_gender= $this->input->get('user_gender');
 		$user_born_dt= $this->input->get('user_born_dt');
@@ -527,8 +528,6 @@ public function on_updatemain()
 				set
 					title = '$user_title'
 					, gender = '$user_gender'
-					, born_dt = '$user_born_dt'
-					, born_place = '$user_born_place'
 					, religion = '$user_religion'";
 			if ($this->input->get('user_married_since') != '')
 			{
@@ -541,11 +540,77 @@ public function on_updatemain()
 					employee_id = '$employee_id'
 					";		
 			$this->db->query($sql);
+			if ($this->input->get('user_born_dt') != '' && $this->input->get('user_born_place') != '')
+			{
+		
+		$sql = "
+		select
+			employee_id 
+			,street 
+			,address
+			,region 
+			,sub_district
+			,province 
+			,country 
+			,postal_code
+			,handphone1 
+			,handphone2 
+			,work_email 
+			,bank_account_number
+			,closed_person_name 
+			,closed_person_phone
+		from 
+			tb_m_employee
+		 where
+		 	 employee_id = '$employee_id'";
+		$data=$this->db->query($sql);
+	
+		$row = $data->row();
+		$address = $row->address;
+		$handphone1 = $row->handphone1;
+		$handphone2 = $row->handphone2;
+		$work_email = $row->work_email;
+		$closed_person_name =$row->closed_person_name;
+		$closed_person_phone = $row->closed_person_phone;
+	
+			$changed_dt = date('Y-m-d H:i:s');
+			$sql = "
+				INSERT INTO
+            	 		tb_m_employee_det (
+            	 		employee_id
+            	 		, born_place
+            	 		, born_dt
+            	 		, address
+            	 		, handphone1
+            	 		, handphone2
+            	 		, work_email
+            	 		, closed_person_name
+            	 		, closed_person_phone
+            	 		, status
+            	 		, created_by
+            	 		,created_dt
+            	 		)
+					VALUES (
+					'$employee_id'
+					, '$user_born_place'
+					, '$user_born_dt'
+					, '$address'
+					, '$handphone1'
+					, '$handphone2'
+					, '$work_email'
+					, '$closed_person_name'
+					, '$closed_person_phone'
+					, '0'
+					, '$user_name'
+					, '$changed_dt')
+			";
+			$this->db->query($sql);
+		}
 			 return $this->output
 						->set_content_type('application/json')
 						->set_output(json_encode(array(
 							'msgType' => "info",
-							'msgText' => "Data Telah Diupdate.."
+							'msgText' => "Data Telah Di Ajukan Menunggu Persetujuan.."
 					)));
 		}
 		}
@@ -586,28 +651,79 @@ public function on_updateaddress()
 					tb_m_employee
 				set
 					street = '$user_street'
-					, address = '$user_address'
 					, region = '$user_region'
 					, sub_district = '$user_sub_district'
 					, province = '$user_province'
 					, country = '$user_country'
 					, postal_code = '$user_postal_code'
-					, handphone1 = '$user_phone1'
-					, handphone2 = '$user_phone2'
-					, work_email = '$user_work_email'
 					, bank_account_number = '$user_bank_account'
-					, closed_person_name = '$user_contact_person'
-					, closed_person_phone = '$user_contact_person_phone'
 					
 				where
 					employee_id = '$employee_id'
 					";		
 			$this->db->query($sql);
+			if ($this->input->get('user_address') != '' ||
+				$this->input->get('user_phone1') != ''||
+				$this->input->get('user_phone2') != ''||
+				$this->input->get('user_work_email') != ''||
+				$this->input->get('user_contact_person') != ''||
+				$this->input->get('user_contact_person_phone') != ''
+				 ){
+					$sql = "
+				select
+					employee_id 
+					,user_name 
+					,born_dt
+					,born_place
+				from 
+					tb_m_employee
+				 where
+				 	 employee_id = '$employee_id'";
+				$data=$this->db->query($sql);
+			
+				$row = $data->row();
+				$user_name = $row->user_name;
+				$born_dt = $row->born_dt;
+				$born_place = strtoupper($row->born_place);
+
+			$changed_dt = date('Y-m-d H:i:s');
+			$sql = "
+				INSERT INTO
+            	 		tb_m_employee_det (
+            	 		employee_id
+            	 		, born_place
+            	 		, born_dt
+            	 		, address
+            	 		, handphone1
+            	 		, handphone2
+            	 		, work_email
+            	 		, closed_person_name
+            	 		, closed_person_phone
+            	 		, status
+            	 		, created_by
+            	 		,created_dt
+            	 		)
+					VALUES (
+					'$employee_id'
+					, '$born_place'
+					, '$born_dt'
+					, '$user_address'
+					, '$user_phone1'
+					, '$user_phone2'
+					, '$user_work_email'
+					, '$user_contact_person'
+					, '$user_contact_person_phone'
+					, '0'
+					, '$user_name'
+					, '$changed_dt')
+			";
+			$this->db->query($sql);
+			}
 			 return $this->output
 						->set_content_type('application/json')
 						->set_output(json_encode(array(
 							'msgType' => "info",
-							'msgText' => "Alamat Telah Diupdate.."
+							'msgText' => "Alamat Telah Diupdate Mohon Tunggu Persetujuan.."
 					)));
 		
 		}

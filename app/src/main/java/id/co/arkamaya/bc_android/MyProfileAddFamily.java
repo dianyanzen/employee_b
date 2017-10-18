@@ -428,6 +428,7 @@ public class MyProfileAddFamily extends AppCompatActivity {
                     }
                     spnRelation.setSelection(idxRelation);
                     spnGender.setSelection(idxGender);
+                    btnSave.setText("UPDATE");
                 }catch (Exception e){
 //                    Toast.makeText(getApplicationContext(), "Connection Error Check Your Internet Connection", Toast.LENGTH_SHORT).show();
                 }

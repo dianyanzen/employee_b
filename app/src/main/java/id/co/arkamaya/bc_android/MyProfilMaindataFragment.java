@@ -497,7 +497,7 @@ public class MyProfilMaindataFragment extends Fragment {
                     .build();
 
             APIEditProfile restInterface = restAdapter.create(APIEditProfile.class);
-            restInterface.onUpdateMainData(employee_id,user_title,user_gender,user_born_dt,user_born_place,user_religion,user_married_status,user_married_since
+            restInterface.onUpdateMainData(employee_id,user,user_title,user_gender,user_born_dt,user_born_place,user_religion,user_married_status,user_married_since
                     , new Callback<CheckLogin>() {
                         @Override
                         public void success(CheckLogin m, Response response) {
