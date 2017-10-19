@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,8 +29,7 @@ import java.util.List;
 
 import id.co.arkamaya.cico.R;
 import pojo.CheckLogin;
-import pojo.GetFamilyList;
-import pojo.GetProfileFamilyRelation;
+import pojo.GetProfileFamilyList;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -398,9 +396,9 @@ public class MyProfileAddFamily extends AppCompatActivity {
 
         APIEditProfile restInterface = restAdapter.create(APIEditProfile.class);
 
-        restInterface.getFamilyListById(FamilyId, new Callback<GetFamilyList>() {
+        restInterface.getFamilyListById(FamilyId, new Callback<GetProfileFamilyList>() {
             @Override
-            public void success(GetFamilyList m, Response response) {
+            public void success(GetProfileFamilyList m, Response response) {
                 try {
                     txtfmlfullname.setText(m.getFullName().toString());
                     txtfmlborndt.setText(m.getBornDate().toString());

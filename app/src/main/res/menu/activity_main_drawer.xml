@@ -57,6 +57,10 @@
 
     <item android:title="Action">
         <menu>
+            <!--<item
+                android:id="@+id/nav_info"
+                android:icon="@drawable/ic_info_outline_black_24dp"
+                android:title="User Info" />-->
             <item
                 android:id="@+id/nav_logOut"
                 android:icon="@drawable/ic_lock_outline_black_24dp"

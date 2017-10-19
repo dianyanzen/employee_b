@@ -3,10 +3,12 @@ package id.co.arkamaya.bc_android;
 import java.util.List;
 
 import pojo.CheckLogin;
-import pojo.GetFamilyList;
 import pojo.GetProfileAddress;
 import pojo.GetProfileEducationLevel;
+import pojo.GetProfileEducationList;
+import pojo.GetProfileFamilyList;
 import pojo.GetProfileFamilyRelation;
+import pojo.GetProfileIdCardList;
 import pojo.GetProfileIdcardType;
 import pojo.GetProfileMain;
 import pojo.GetProfileMainMarried;
@@ -130,11 +132,41 @@ public interface APIEditProfile {
     );
     @GET("/mobile_editprofilemain/get_userfamily")
     void getFamilyList(
-            @Query("employee_id") String employee_id, Callback<List<GetFamilyList>> response
+            @Query("employee_id") String employee_id, Callback<List<GetProfileFamilyList>> response
     );
     @GET("/mobile_editprofilemain/get_userfamilybyid")
     void getFamilyListById(
-            @Query("family_id") String FamilyId, Callback<GetFamilyList> response
+            @Query("family_id") String FamilyId, Callback<GetProfileFamilyList> response
     );
-
+    @GET("/mobile_editprofilemain/get_usereducation")
+    void getEducationList(
+            @Query("employee_id") String employee_id, Callback<List<GetProfileEducationList>> response
+    );
+    @GET("/mobile_editprofilemain/get_useridcard")
+    void getIdCardList(
+            @Query("employee_id") String employee_id, Callback<List<GetProfileIdCardList>> response
+    );
+    @GET("/mobile_editprofilemain/on_deleteidcard")
+    void onDeleteIdCard(
+            @Query("card_id") String card_id,
+            @Query("employee_id") String employee_id,
+            Callback<CheckLogin> response
+    );
+    @GET("/mobile_editprofilemain/get_useridcardbyid")
+    void getCardListById(
+            @Query("card_id") String FamilyId, Callback<GetProfileIdCardList> response
+    );
+    @POST("/mobile_editprofilemain/on_addidcard")
+    void onAddCard(
+            @Query("card_id") String card_id,
+            @Query("employee_id") String employee_id,
+            @Query("user_name") String user_name,
+            @Query("card_type") String card_type,
+            @Query("card_description") String card_description,
+            @Query("card_number") String card_number,
+            @Query("card_issue_date") String card_issue_date,
+            @Query("card_place") String card_place,
+            @Query("card_expired_date") String card_expired_date,
+            Callback<CheckLogin> response
+    );
 }

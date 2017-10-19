@@ -1,11 +1,18 @@
 package id.co.arkamaya.bc_android;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -77,6 +84,7 @@ public class MainActivity extends AppCompatActivity
         txtEmployeeName.setText(pref.getString("User", null));
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
 
     }
 
@@ -198,7 +206,9 @@ public class MainActivity extends AppCompatActivity
                     getSupportFragmentManager().beginTransaction();
 
             fragmentTransaction.replace(R.id.fragment_container, fragment);
-            fragmentTransaction.commit();*/
+            fragmentTransaction.commit();
+        }else if (id==R.id.nav_info){
+            startActivity(new Intent(MainActivity.this, Activity_InfoUser.class));*/
         }
         else if (id==R.id.nav_logOut){
             SharedPreferences.Editor editor = pref.edit();

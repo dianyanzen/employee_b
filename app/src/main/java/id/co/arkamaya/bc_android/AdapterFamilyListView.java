@@ -15,15 +15,15 @@ import android.widget.TextView;
 import java.util.List;
 
 import id.co.arkamaya.cico.R;
-import pojo.GetFamilyList;
+import pojo.GetProfileFamilyList;
 
 /**
  * Created by root on 18/10/17.
  */
 
-public class AdapterFamilyListView extends ArrayAdapter<GetFamilyList> {
+public class AdapterFamilyListView extends ArrayAdapter<GetProfileFamilyList> {
     private Context context;
-    private List<GetFamilyList> familyList;
+    private List<GetProfileFamilyList> familyList;
     SharedPreferences pref;
     View adapterView;
     private ProgressDialog progress;
@@ -31,7 +31,7 @@ public class AdapterFamilyListView extends ArrayAdapter<GetFamilyList> {
     public String EmployeeId;
     private ListView list;
 
-    public AdapterFamilyListView(Context context, int resource, List<GetFamilyList> object) {
+    public AdapterFamilyListView(Context context, int resource, List<GetProfileFamilyList> object) {
         super(context, resource, object);
         this.context = context;
         this.familyList = object;
@@ -43,7 +43,7 @@ public class AdapterFamilyListView extends ArrayAdapter<GetFamilyList> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         adapterView = inflater.inflate(R.layout.list_adapter_family, parent, false);
-        GetFamilyList m = familyList.get(position);
+        GetProfileFamilyList m = familyList.get(position);
 
         pref = PreferenceManager.getDefaultSharedPreferences(adapterView.getContext().getApplicationContext());
         EmployeeId = pref.getString("EmployeeId", null);

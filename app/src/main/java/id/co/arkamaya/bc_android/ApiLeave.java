@@ -3,9 +3,9 @@ package id.co.arkamaya.bc_android;
 import java.util.List;
 
 import pojo.CheckLogin;
+import pojo.GetEmployees;
 import pojo.GetLeaveList;
 import pojo.GetLeaveType;
-import pojo.getEmployees;
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.POST;
@@ -29,7 +29,7 @@ public interface ApiLeave {
 
     @GET("/leaveservicemobile/getemployees")
     void getEmployees(
-            Callback<List<getEmployees>> response
+            Callback<List<GetEmployees>> response
     );
 
     @GET("/leaveservicemobile/getleavebyid")

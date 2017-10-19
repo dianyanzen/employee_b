@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/pading1"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textAlignment="center"
+        android:textColor="#000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pading2"
+        android:layout_below="@+id/pading1"
+        android:layout_toStartOf="@+id/txtCardName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="3273112909950002"
+        android:id="@+id/txtCardName"
+        android:paddingLeft="5dp"
+        android:textColor="#242424"
+        android:layout_alignBottom="@+id/pading2"
+        android:layout_alignStart="@+id/lblCardType"
+        android:textSize="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="KTP"
+        android:id="@+id/lblCardType"
+        android:paddingLeft="5dp"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:layout_alignTop="@+id/txtCardId"
+        android:layout_toEndOf="@+id/pading1" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnDeleteCard"
+        android:textColor="#ffffff"
+        android:drawableLeft="@android:drawable/ic_delete"
+        android:text=""
+        android:focusable="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text=""
+        android:id="@+id/txtCardId"
+        android:visibility="invisible"
+        android:layout_above="@+id/txtCardName"
+        android:layout_toStartOf="@+id/btnDelete" />
+
+</RelativeLayout>

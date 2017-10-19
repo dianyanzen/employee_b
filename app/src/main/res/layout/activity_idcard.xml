@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Card Type"
+        android:id="@+id/lblidctype"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spnidctype"
+        android:layout_below="@+id/lblidctype"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="5dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Description"
+        android:id="@+id/lblidcdescript"
+        android:layout_below="@+id/spnidctype"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spnidcdescript"
+        android:layout_below="@+id/lblidcdescript"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="5dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="ID Number"
+        android:id="@+id/lblidcnumber"
+        android:layout_below="@+id/spnidcdescript"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:id="@+id/txtidcnumber"
+        android:layout_below="@+id/lblidcnumber"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="5dp"
+        android:singleLine="true" android:imeOptions="actionNext"/>
+    
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Issued Date"
+        android:id="@+id/lblidcissuedate"
+        android:layout_below="@+id/txtidcnumber"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtidcissuedate"
+        android:layout_below="@+id/lblidcissuedate"
+        android:layout_alignParentStart="true"
+        android:hint=" yyyy-mm-dd"
+        android:layout_toStartOf="@+id/btnidcissuedate"
+        android:focusable="false"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/btnidcissuedate"
+        android:layout_alignBottom="@+id/txtidcissuedate"
+        android:layout_alignParentEnd="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Place"
+        android:id="@+id/lblidcplace"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtidcissuedate"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtidcplace"
+        android:layout_below="@+id/lblidcplace"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="5dp"
+        android:singleLine="true" android:imeOptions="actionNext"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Expired Date"
+        android:id="@+id/lblidcexpdate"
+        android:layout_below="@+id/txtidcplace"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtidcexpdate"
+        android:layout_below="@+id/lblidcexpdate"
+        android:layout_alignParentStart="true"
+        android:hint=" yyyy-mm-dd"
+        android:layout_toStartOf="@+id/btnidcexpdate"
+        android:focusable="false"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/btnidcexpdate"
+        android:layout_alignBottom="@+id/txtidcexpdate"
+        android:layout_alignParentEnd="true" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/btnidcSave"
+        android:background="#259dab"
+        android:textColor="#ffffff"
+        android:layout_above="@+id/btnidcCancel"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:id="@+id/btnidcCancel"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:background="#d9534f"
+        android:layout_marginTop="5dp"
+        android:textColor="#ffffff" />
+</RelativeLayout>

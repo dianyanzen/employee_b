@@ -22,7 +22,7 @@ import java.util.List;
 
 import id.co.arkamaya.cico.R;
 import pojo.CheckLogin;
-import pojo.GetFamilyList;
+import pojo.GetProfileFamilyList;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -179,9 +179,9 @@ public class MyProfileFamilyFragment extends Fragment {
 
         APIEditProfile restInterface = restAdapter.create(APIEditProfile.class);
         Log.d("Yudha", employee_id);
-        restInterface.getFamilyList(employee_id, new Callback<List<GetFamilyList>>() {
+        restInterface.getFamilyList(employee_id, new Callback<List<GetProfileFamilyList>>() {
             @Override
-            public void success(List<GetFamilyList> m, Response response) {
+            public void success(List<GetProfileFamilyList> m, Response response) {
                 listfamily.setAdapter(null);
                 if (m.size() > 0) {
                     AdapterFamilyListView adapt = new AdapterFamilyListView(getActivity().getApplicationContext(), R.layout.list_adapter_family, m);
