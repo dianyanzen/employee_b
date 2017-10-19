@@ -311,11 +311,11 @@ public function get_usereducation()
 		select
 			education_id
 			, employee_id
-			, level
-			, institution
-			, faculty
-			, graduated_dt
-			, gpa 
+			, ( case when level is null then '' else level end ) as level
+			, ( case when institution is null then '' else institution end ) as institution
+			, ( case when faculty is null then '' else faculty end ) as faculty
+			, ( case when graduated_dt is null then '' else graduated_dt end ) as graduated_dt
+			, ( case when gpa is null then '' else gpa end ) as gpa 
 		from 
 			tb_m_education 
 		where
@@ -339,6 +339,9 @@ public function get_education_level()
         }
         echo json_encode($row);
     }
+
+
+
 public function get_useridcard()
 	{
 		header("content-type: application/json");
@@ -347,11 +350,12 @@ public function get_useridcard()
 		select 
 			card_id
 			, employee_id
-			, type_card
-			, id_number
-			, issued_dt
+			, ( case when type_card is null or type_card = 'null' then '' else type_card end ) as type_card
+			, ( case when id_number is null or id_number = 'null' then '' else id_number end ) as id_number
+			, ( case when issued_dt is null or issued_dt = '0000-00-00' then '' else issued_dt end ) as issued_dt
 			, ( case when placed is null or placed = 'null' then '' else placed end ) as placed
-			, expired_dt 
+			, ( case when expired_dt is null or expired_dt = '0000-00-00' then '' else expired_dt end ) as expired_dt 
+			, ( case when description is null then '' else description end ) as description 
 		from 
 			tb_m_card
 		 where
@@ -360,6 +364,183 @@ public function get_useridcard()
 		$data=$this->db->query($sql);
 		// return $data;
 		echo json_encode($data->result());	
+	}
+
+public function on_deleteidcard()
+	{
+		$card_id	= $this->input->get('card_id');
+		$employee_id	= $this->input->get('employee_id');
+		
+		try {
+			
+				$sql= "delete from tb_m_card
+					where card_id = '$card_id' and employee_id='$employee_id'";
+				$this->db->query($sql);
+
+			   	return $this->output
+	            	->set_content_type('application/json')
+	            	->set_output(json_encode(array(
+	                    'msgType' => "info",
+	                    'msgText' => "Id Card Telah Dihapus.."
+	            )));
+		} catch (exception $e) {
+			return $this->output
+	            ->set_content_type('application/json')
+	            ->set_output(json_encode(array(
+	                    'msgType' => 'warning',
+	                    'msgText' => $e->getmessage()
+	            )));
+		}
+	}
+	public function on_addidcard()
+	{
+		$employee_id = $this->input->get('employee_id');
+        $user_name = $this->input->get('user_name');
+        $card_id = $this->input->get('card_id');        
+        $card_type = $this->input->get('card_type');
+        $card_description = $this->input->get('card_description');
+        $card_number = $this->input->get('card_number');        
+        $card_issue_date = $this->input->get('card_issue_date');
+        $card_place = strtoupper($this->input->get('card_place'));
+        $card_expired_date = $this->input->get('card_expired_date');
+
+if ($this->input->get('employee_id') != '' && 
+	$this->input->get('user_name') != '' && 
+	$this->input->get('card_type') != '' && 
+	$this->input->get('card_number') != '' && 
+	$this->input->get('card_place') != ''){
+        if ($card_id == "") {
+        		$sql = "
+		select 
+			 card_id	
+		from 
+			tb_m_card
+		 where
+		 	 employee_id = '$employee_id'
+		 	 and description = '$card_description'";
+		$data=$this->db->query($sql);
+		if ($data->num_rows() > 0)
+		{
+           	return $this->output
+	        	->set_content_type('application/json')
+	        	->set_output(json_encode(array(
+	        		'msgType' => "warning",
+	        		'msgText' => "Anda Tidak Bisa Memiliki 2 Id Card Yang Sama.."
+	        )));
+		}else{
+            //insert 
+            $created_by = $user_name;
+            $created_dt = date('Y-m-d H:i:s');
+            	 try {
+            	 	$sql = "
+            	 	INSERT INTO
+            	 		tb_m_card (
+            	 		employee_id
+            	 		, type_card
+            	 		, id_number
+            	 		, description";
+      	if ($this->input->get('card_issue_date') != '')
+      	{
+      			$sql .=", issued_dt";
+      	}
+        if ($this->input->get('card_expired_date') != '')
+      	{
+      			$sql .=", expired_dt";
+      	}
+          		$sql .=", placed   	
+         				, created_by
+            	 		, created_dt
+            	 		)
+					VALUES (
+					'$employee_id'
+					, '$card_type'
+					, '$card_number'
+					, '$card_description'";
+		if ($this->input->get('card_issue_date') != '')
+      	{
+      		$sql .=", '$card_issue_date'";
+      	}
+      	if ($this->input->get('card_expired_date') != '')
+      	{
+      		$sql .=", '$card_expired_date'";
+      	}
+			$sql .=", '$card_place'
+					, '$created_by'
+					, '$created_dt'
+					 )";
+            	 
+			$this->db->query($sql);
+            	       return $this->output
+						->set_content_type('application/json')
+						->set_output(json_encode(array(
+							'msgType' => "info",
+							'msgText' => "ID Card Telah Disimpan.."
+					)));
+			} catch (Exception $e) {
+               return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Data Gagal Disimpan.."
+                                    )));
+             
+            }
+            }
+        } else {
+            //update
+
+            $changed_by = $user_name;
+            $changed_dt = date('Y-m-d H:i:s');
+
+             try {
+             	$sql = "
+				update 
+					tb_m_card
+				set
+					type_card = '$card_type'
+					, id_number = '$card_number'
+					, description = '$card_description'";
+		if ($this->input->get('card_issue_date') != '')
+      	{
+			$sql .=", issued_dt = '$card_issue_date'";
+		}
+		if ($this->input->get('card_expired_date') != '')
+      	{
+			$sql .=", expired_dt = '$card_expired_date'";
+      	}
+		
+			$sql .=", placed = '$card_place'
+					, changed_by = '$changed_by'
+					, changed_dt = '$changed_dt'
+				where
+					employee_id = '$employee_id'
+					and card_id = '$card_id'
+					";		
+			$this->db->query($sql);
+            	            	return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "info",
+                                    'msgText' => "Data has been updated"
+                                    )));
+            } catch (Exception $e) {
+            	return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Update failed"
+                                    )));
+            }
+        } 
+    	}
+        else{
+        	return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Terjadi Kesalahan Input"
+                                    )));
+        }   
 	}
 
 public function get_idcard_type() 
@@ -375,6 +556,29 @@ public function get_idcard_type()
             }
         }
         echo json_encode($row);
+    }
+
+public function get_useridcardbyid()
+    {
+    	header("content-type: application/json");
+		$card_id= $this->input->get('card_id');
+		$sql = "
+		select 
+			card_id
+			, employee_id
+			, ( case when type_card is null or type_card = 'null' then '' else type_card end ) as type_card
+			, ( case when id_number is null or id_number = 'null' then '' else id_number end ) as id_number
+			, ( case when issued_dt is null or issued_dt = '0000-00-00' then '' else issued_dt end ) as issued_dt
+			, ( case when placed is null or placed = 'null' then '' else placed end ) as placed
+			, ( case when expired_dt is null or expired_dt = '0000-00-00' then '' else expired_dt end ) as expired_dt 
+			, ( case when description is null then '' else description end ) as description 
+		from 
+			tb_m_card
+		 where
+		 	 card_id = '$card_id'";
+		$data=$this->db->query($sql);
+		// return $data;
+		echo json_encode($data->row());	
     }
 
 public function get_usertax()
@@ -846,5 +1050,64 @@ public function get_userdata()
 		// return $data;
 		echo json_encode($data->result());	
 	}
-	
+public function insertidcard()
+	{
+		$this->load->view('welcome_message');
+		/*$input_array    =    range(1, 1000);
+		$chunks         =    array_chunk($input_array, 1000);
+		foreach ($chunks as $k => $chunk) {
+	    	if ($k == 0) {
+	        // your code here
+	    	}
+	    	$x = 1;
+	    	$no_kec = 0;
+	    	foreach ($chunk as $i) {
+	        $id = $x++;
+	        if ($no_kec < 9){
+	        $no_kec++;
+			$sql = "insert into
+	         		tb_m_card (
+	          			employee_id
+	          			, type_card
+	          			, id_number
+	          			, description
+	          		) value (
+	          			'$id'
+	          			, 'SIM'
+	          			,'32730".$no_kec."".rand(10,31)."0".rand(1,9)."".rand(10,99)."000".rand(1,9)."'
+	          			,'SIM-A')";
+	          $this->db->query($sql);
+			}else if ($no_kec < 30){
+			$no_kec++;
+			$sql = "insert into
+	         		tb_m_card (
+	          			employee_id
+	          			, type_card
+	          			, id_number
+	          			, description
+	          		) value (
+	          			'$id'
+	          			, 'SIM'
+	          			,'3273".$no_kec."".rand(10,31)."0".rand(1,9)."".rand(10,99)."000".rand(1,9)."'
+	          			,'SIM-C')";
+	          $this->db->query($sql);
+			}else{
+			$no_kec =0;
+			$no_kec++;
+			$sql = "insert into
+	         		tb_m_card (
+	          			employee_id
+	          			, type_card
+	          			, id_number
+	          			, description
+	          		) value (
+	          			'$id'
+	          			, 'SIM'
+	          			,'32730".$no_kec."".rand(10,31)."0".rand(1,9)."".rand(10,99)."000".rand(1,9)."'
+	          			,'SIM-A')";
+	          $this->db->query($sql);
+			}
+	    	}
+		}*/
+	}	
 }
