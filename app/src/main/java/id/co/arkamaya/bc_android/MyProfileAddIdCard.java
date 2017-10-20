@@ -323,8 +323,10 @@ public class MyProfileAddIdCard extends AppCompatActivity {
         String IdType = ((String) spnidctype.getSelectedItem());
         if (IdType.equals("KTP")) {
             getDescripKtp();
+            btnidcexpdate.setEnabled(false);
         }else if (IdType.equals("SIM")) {
             getDescriptSim();
+            btnidcexpdate.setEnabled(true);
         }
     }
     public void getDescripKtp(){

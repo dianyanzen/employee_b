@@ -294,7 +294,7 @@
                 android:textStyle="bold|italic"
                 android:textSize="14dp"
                 android:textColor="#ff0000"
-                android:layout_above="@+id/txtreligion"
+                android:layout_above="@+id/spnReligion"
                 android:layout_toEndOf="@+id/lblreligion" />
             <TextView
                 android:layout_width="wrap_content"
