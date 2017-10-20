@@ -21,6 +21,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import id.co.arkamaya.cico.R;
+import pojo.CheckLogin;
 import pojo.GetProfileEducationList;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -82,7 +83,7 @@ public class MyProfileEducationFragment extends Fragment {
                                 .setCancelable(false)
                                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
-                                        //onDeleteEdu(EduId, employee_id);
+                                        onDeleteEdu(EduId, employee_id);
                                     }
                                 })
                                 .setNegativeButton("No", null)
@@ -120,6 +121,47 @@ public class MyProfileEducationFragment extends Fragment {
         });
         super.onViewCreated(view, savedInstanceState);
     }
+    private void  onDeleteEdu(String EduId, String EmployeeId){
+        //Toast.makeText(getActivity(), "Internet Connection Error..", Toast.LENGTH_SHORT).show();
+        progress = new ProgressDialog(getActivity());
+        progress.setMessage("Processing..");
+        progress.setIndeterminate(true);
+        progress.setCancelable(false);
+        progress.show();
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(ENDPOINT)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+
+        APIEditProfile restInterface = restAdapter.create(APIEditProfile.class);
+
+        restInterface.onDeleteEducation(EduId, EmployeeId, new Callback<CheckLogin>() {
+            @Override
+            public void success(CheckLogin m, Response response) {
+
+                if (progress != null) {
+                    progress.dismiss();
+                }
+
+                Toast.makeText(vEdu.getContext().getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
+
+                if (m.getMsgType().toLowerCase().equals("info")) {
+                    getEduList();
+                } else {
+
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                if (progress != null) {
+                    progress.dismiss();
+                }
+            }
+        });
+    }
+
     private void getEduList(){
 
         /*-------------------------------*/

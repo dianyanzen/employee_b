@@ -25,6 +25,7 @@ import retrofit.http.Query;
  */
 
 public interface APIEditProfile {
+    // TODO User Data Fragment
     @GET("/mobile_editprofilemain/get_usermaindata")
     void getProfileMain(
             @Query("employee_id") String Employee_id, Callback<GetProfileMain> response
@@ -37,6 +38,7 @@ public interface APIEditProfile {
     void getProfileTax(
             @Query("employee_id") String Employee_id, Callback<GetProfileTax> response
     );
+    // TODO Get Combo Box Fragment
     @GET("/mobile_editprofilemain/get_main_religion")
     void getProfileMainReligion(
             Callback<List<GetProfileMainReligion>> response
@@ -61,7 +63,7 @@ public interface APIEditProfile {
     void getProfileTaxMarital(
             Callback<List<GetProfileTaxMarital>> response
     );
-
+    // TODO User Password Fragment
     @GET("/mobile_editprofilemain/get_userchangepswd")
     void onUpdatePassword(
             @Query("employee_id") String employee_id,
@@ -70,6 +72,7 @@ public interface APIEditProfile {
             @Query("password2") String password2,
             Callback<CheckLogin> response
     );
+    // TODO Main Data Fragment
     @POST("/mobile_editprofilemain/on_updatemain")
     void onUpdateMainData(
             @Query("employee_id") String employee_id,
@@ -83,6 +86,7 @@ public interface APIEditProfile {
             @Query("user_married_since") String user_married_since,
             Callback<CheckLogin> response
     );
+    // TODO Address Fragment
     @POST("/mobile_editprofilemain/on_updateaddress")
     void onUpdateAddress(
             @Query("employee_id") String employee_id,
@@ -101,6 +105,7 @@ public interface APIEditProfile {
             @Query("user_contact_person_phone") String user_contact_person_phone,
             Callback<CheckLogin> response
     );
+    // TODO Tax Fragment
     @POST("/mobile_editprofilemain/on_updatetax")
     void onUpdateTax(
             @Query("employee_id") String employee_id,
@@ -111,6 +116,7 @@ public interface APIEditProfile {
             @Query("user_bpjs_kesehatan") String user_bpjs_kesehatan,
             Callback<CheckLogin> response
     );
+    // TODO Family Activity
     @POST("/mobile_editprofilemain/on_addfamily")
     void onAddFamily(
             @Query("family_id") String family_id,
@@ -138,10 +144,34 @@ public interface APIEditProfile {
     void getFamilyListById(
             @Query("family_id") String FamilyId, Callback<GetProfileFamilyList> response
     );
+    // TODO Education Activity
     @GET("/mobile_editprofilemain/get_usereducation")
     void getEducationList(
             @Query("employee_id") String employee_id, Callback<List<GetProfileEducationList>> response
     );
+    @GET("/mobile_editprofilemain/on_deleteeducation")
+    void onDeleteEducation(
+            @Query("education_id") String EducationId,
+            @Query("employee_id") String employee_id,
+            Callback<CheckLogin> response
+    );
+    @GET("/mobile_editprofilemain/get_usereducationbyid")
+    void getEducationListById(
+            @Query("education_id") String EducationId, Callback<GetProfileEducationList> response
+    );
+    @POST("/mobile_editprofilemain/on_addeducation")
+    void onAddEducation(
+            @Query("education_id") String education_id,
+            @Query("employee_id") String employee_id,
+            @Query("user_name") String user_name,
+            @Query("education_level") String education_level,
+            @Query("education_institution") String education_institution,
+            @Query("education_faculty") String education_faculty,
+            @Query("education_graduate_date") String education_graduate_date,
+            @Query("education_gpa") String education_gpa,
+            Callback<CheckLogin> response
+    );
+    // TODO ID Card Activity
     @GET("/mobile_editprofilemain/get_useridcard")
     void getIdCardList(
             @Query("employee_id") String employee_id, Callback<List<GetProfileIdCardList>> response

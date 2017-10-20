@@ -17,7 +17,7 @@ public function get_usermaindata()
 		header("content-type: application/json");
 		$employee_id= $this->input->get('employee_id');
 		$sql = "
-		select
+		SELECT
 			employee_id
 			, ( case when user_name is null then '' else user_name end ) as user_name 
 			, ( case when title is null then '' else title end ) as user_title
@@ -74,7 +74,7 @@ public function get_useraddress()
 		header("content-type: application/json");
 		$employee_id= $this->input->get('employee_id');
 		$sql = "
-		select
+		SELECT
 			employee_id 
 			, ( case when street is null then '' else street end ) as street
 			, ( case when address is null then '' else address end ) as address
@@ -109,14 +109,14 @@ public function on_addfamily()
         $family_born_place = $this->input->get('family_born_place');
         $family_born_date = $this->input->get('family_born_date');
         $family_nationality = $this->input->get('family_nationality');        
-if ($this->input->get('employee_id') != '' && 
-	$this->input->get('user_name') != '' && 
-	$this->input->get('family_relation') != '' && 
-	$this->input->get('family_gender') != '' && 
-	$this->input->get('family_full_name') != '' && 
-	$this->input->get('family_born_place') != '' && 
-	$this->input->get('family_born_date') != '' && 
-	$this->input->get('family_nationality') != ''){
+		if ($this->input->get('employee_id') != '' && 
+			$this->input->get('user_name') != '' && 
+			$this->input->get('family_relation') != '' && 
+			$this->input->get('family_gender') != '' && 
+			$this->input->get('family_full_name') != '' && 
+			$this->input->get('family_born_place') != '' && 
+			$this->input->get('family_born_date') != '' && 
+			$this->input->get('family_nationality') != ''){
         if ($family_id == "") {
             //insert 
             $created_by = $user_name;
@@ -171,7 +171,7 @@ if ($this->input->get('employee_id') != '' &&
 
              try {
              	$sql = "
-				update 
+				UPDATE
 					tb_m_family
 				set
 					relationship = '$family_relation'
@@ -245,7 +245,7 @@ public function get_userfamily()
 		header("content-type: application/json");
 		$employee_id= $this->input->get('employee_id');
 		$sql = "
-		select 
+		SELECT 
 			family_id
 			, employee_id
 			, relationship
@@ -268,7 +268,7 @@ public function get_userfamily()
 		header("content-type: application/json");
 		$family_id= $this->input->get('family_id');
 		$sql = "
-		select 
+		SELECT 
 			family_id
 			, employee_id
 			, relationship
@@ -286,10 +286,11 @@ public function get_userfamily()
 		// return $data;
 		echo json_encode($data->row());	
 	}
+
 	public function get_family_relation() 
 	{
         header("Content-Type: application/json");
-        $sql = "select 
+        $sql = "SELECT 
         		distinct 
         			relationship 
         		from 
@@ -308,7 +309,7 @@ public function get_usereducation()
 		header("content-type: application/json");
 		$employee_id= $this->input->get('employee_id');
 		$sql = "
-		select
+		SELECT
 			education_id
 			, employee_id
 			, ( case when level is null then '' else level end ) as level
@@ -319,11 +320,33 @@ public function get_usereducation()
 		from 
 			tb_m_education 
 		where
-			employee_id = '$employee_id'";
+			employee_id = '$employee_id'
+			order by FIELD(level,'TK','SD/MI','SMP/MTs','SMA/MA','D1','D2','D3','S1','S2','S3'), education_id";
 		$data=$this->db->query($sql);
 		// return $data;
 		echo json_encode($data->result());	
 	}
+public function get_usereducationbyid()
+    {
+    	header("content-type: application/json");
+		$education_id= $this->input->get('education_id');
+			$sql = "
+		SELECT
+			education_id
+			, employee_id
+			, ( case when level is null then '' else level end ) as level
+			, ( case when institution is null then '' else institution end ) as institution
+			, ( case when faculty is null then '' else faculty end ) as faculty
+			, ( case when graduated_dt is null then '' else graduated_dt end ) as graduated_dt
+			, ( case when gpa is null then '' else gpa end ) as gpa 
+		from 
+			tb_m_education 
+		where
+			education_id = '$education_id'";
+		$data=$this->db->query($sql);
+		// return $data;
+		echo json_encode($data->row());	
+    }
 
 public function get_education_level() 
 	{
@@ -339,15 +362,160 @@ public function get_education_level()
         }
         echo json_encode($row);
     }
+    public function on_addeducation()
+	{
+		$employee_id = $this->input->get('employee_id');
+        $user_name = $this->input->get('user_name');
+        $education_id = $this->input->get('education_id');        
+        $education_level = $this->input->get('education_level');
+        $education_institution = strtoupper($this->input->get('education_institution'));        
+        $education_faculty = strtoupper($this->input->get('education_faculty'));        
+        $education_gpa = $this->input->get('education_gpa');
+        $education_graduate_date = $this->input->get('education_graduate_date');      
+        
+		if ($this->input->get('employee_id') != '' && 
+			$this->input->get('user_name') != '' && 
+			$this->input->get('education_level') != '' && 
+			$this->input->get('education_institution') != ''){
+			if ($this->input->get('education_gpa') == '' )
+        	{
+        		 $education_gpa = '0';
+        	}
+        if ($education_id == "") {
+            //insert 
+            $created_by = $user_name;
+            $created_dt = date('Y-m-d H:i:s');
+            	 try {
+            	 	$sql = "
+            	 	INSERT INTO
+            	 		tb_m_education (
+            	 		employee_id
+            	 		, level
+            	 		, institution
+            	 		, faculty";
+        if ($this->input->get('education_graduate_date') != '' ){
+        			$sql .=", graduated_dt";
+        }
+            	 	$sql .="
+            	 		, gpa
+            	 		, created_by
+            	 		,created_dt
+            	 		)
+					VALUES (
+					'$employee_id'
+					, '$education_level'
+					, '$education_institution'
+					, '$education_faculty'";
+		if ($this->input->get('education_graduate_date') != '' ){
+        			$sql .=", '$education_graduate_date'";
+        }
+					$sql .="
+					, '$education_gpa'
+					, '$created_by'
+					, '$created_dt'
+					 )";
+            	 
+			$this->db->query($sql);
+            	       return $this->output
+						->set_content_type('application/json')
+						->set_output(json_encode(array(
+							'msgType' => "info",
+							'msgText' => "Data Pendidikan Telah Disimpan.."
+					)));
+			} catch (Exception $e) {
+               return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Data Gagal Disimpan.."
+                                    )));
+             
+            }
+        } else {
+            //update
 
+            $changed_by = $user_name;
+            $changed_dt = date('Y-m-d H:i:s');
 
+             try {
+             	$sql = "
+				UPDATE
+					tb_m_education
+				set
+					level = '$education_level'
+					, institution = '$education_institution'
+					, faculty = '$education_faculty'";
+			if ($this->input->get('education_graduate_date') != '' ){
+	        	$sql .=", graduated_dt  = '$education_graduate_date";
+	        }
+				$sql .="
+					, gpa = '$education_gpa'
+					, changed_by = '$changed_by'
+					, changed_dt = '$changed_dt'
+				where
+					employee_id = '$employee_id'
+					and education_id = '$education_id'
+					";		
+			$this->db->query($sql);
+            	            	return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "info",
+                                    'msgText' => "Data has been updated"
+                                    )));
+            } catch (Exception $e) {
+            	return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Update failed"
+                                    )));
+            }
+        } 
+    	}
+        else{
+        	return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Terjadi Kesalahan Input"
+                                    )));
+        }   
+	}
+
+public function on_deleteeducation()
+	{
+		$education_id	= $this->input->get('education_id');
+		$employee_id	= $this->input->get('employee_id');
+		
+		try {
+			
+				$sql= "delete from tb_m_education
+					where education_id = '$education_id' and employee_id='$employee_id'";
+				$this->db->query($sql);
+
+			   	return $this->output
+	            	->set_content_type('application/json')
+	            	->set_output(json_encode(array(
+	                    'msgType' => "info",
+	                    'msgText' => "Data Pendidikan Telah Dihapus.."
+	            )));
+		} catch (exception $e) {
+			return $this->output
+	            ->set_content_type('application/json')
+	            ->set_output(json_encode(array(
+	                    'msgType' => 'warning',
+	                    'msgText' => $e->getmessage()
+	            )));
+		}
+	}
 
 public function get_useridcard()
 	{
 		header("content-type: application/json");
 		$employee_id= $this->input->get('employee_id');
 		$sql = "
-		select 
+		SELECT 
 			card_id
 			, employee_id
 			, ( case when type_card is null or type_card = 'null' then '' else type_card end ) as type_card
@@ -360,7 +528,7 @@ public function get_useridcard()
 			tb_m_card
 		 where
 		 	 employee_id = '$employee_id'
-		 order by card_id";
+		 order by FIELD(type_card,'KTP','SIM'),FIELD(description,'E-KTP','SIM-A','SIM-B','SIM-C'), card_id";
 		$data=$this->db->query($sql);
 		// return $data;
 		echo json_encode($data->result());	
@@ -404,18 +572,18 @@ public function on_deleteidcard()
         $card_place = strtoupper($this->input->get('card_place'));
         $card_expired_date = $this->input->get('card_expired_date');
 
-if ($this->input->get('employee_id') != '' && 
-	$this->input->get('user_name') != '' && 
-	$this->input->get('card_type') != '' && 
-	$this->input->get('card_number') != '' && 
-	$this->input->get('card_place') != ''){
+		if ($this->input->get('employee_id') != '' && 
+			$this->input->get('user_name') != '' && 
+			$this->input->get('card_type') != '' && 
+			$this->input->get('card_number') != '' && 
+			$this->input->get('card_place') != ''){
         if ($card_id == "") {
         		$sql = "
-		select 
+		SELECT 
 			 card_id	
 		from 
 			tb_m_card
-		 where
+		where
 		 	 employee_id = '$employee_id'
 		 	 and description = '$card_description'";
 		$data=$this->db->query($sql);
@@ -494,7 +662,7 @@ if ($this->input->get('employee_id') != '' &&
 
              try {
              	$sql = "
-				update 
+			UPDATE
 					tb_m_card
 				set
 					type_card = '$card_type'
@@ -563,7 +731,7 @@ public function get_useridcardbyid()
     	header("content-type: application/json");
 		$card_id= $this->input->get('card_id');
 		$sql = "
-		select 
+		SELECT 
 			card_id
 			, employee_id
 			, ( case when type_card is null or type_card = 'null' then '' else type_card end ) as type_card
@@ -586,7 +754,7 @@ public function get_usertax()
 		header("content-type: application/json");
 		$employee_id= $this->input->get('employee_id');
 		$sql = "
-		select 
+		SELECT 
 			employee_id
 			, ( case when user_name is null then '' else user_name end ) as user_name
 			, ( case when npwp_number is null or 
@@ -635,26 +803,21 @@ public function get_userchangepswd()
                         'msgType' => "warning",
                         'msgText' => "Pasword Salah Harus Di Isi Terlebih Dahulu"
                )));
-	}
-	else
-	{
-		$sql = "
-		select 
-			 employee_id	
-		from 
-			tb_m_employee
-		 where
-		 	 employee_id = '$employee_id'
-		 	 and user_password = '$user_password'";
-		$data=$this->db->query($sql);
-		if ($data->num_rows() > 0)
-		{
-			if ($this->input->get('password1') != '' && $this->input->get('password2') != '')
+			}
+			else
+			{
+				$sql = "SELECT employee_id	from tb_m_employee 
+					where employee_id = '$employee_id'
+				 	 and user_password = '$user_password'";
+				$data=$this->db->query($sql);
+				if ($data->num_rows() > 0)
 				{
+					if ($this->input->get('password1') != '' && $this->input->get('password2') != '')
+					{
 		   			if ($this->input->get('password1') == $this->input->get('password2'))
 		   				{
 						$sql = "
-							update 
+							UPDATE
 								tb_m_employee
 							set
 								user_password = '$password1'
@@ -727,7 +890,7 @@ public function on_updatemain()
 		}else{
 		
 			$sql = "
-				update 
+			UPDATE
 					tb_m_employee
 				set
 					title = '$user_title'
@@ -747,35 +910,35 @@ public function on_updatemain()
 			if ($this->input->get('user_born_dt') != '' && $this->input->get('user_born_place') != '')
 			{
 		
-		$sql = "
-		select
-			employee_id 
-			,street 
-			,address
-			,region 
-			,sub_district
-			,province 
-			,country 
-			,postal_code
-			,handphone1 
-			,handphone2 
-			,work_email 
-			,bank_account_number
-			,closed_person_name 
-			,closed_person_phone
-		from 
-			tb_m_employee
-		 where
-		 	 employee_id = '$employee_id'";
-		$data=$this->db->query($sql);
-	
-		$row = $data->row();
-		$address = $row->address;
-		$handphone1 = $row->handphone1;
-		$handphone2 = $row->handphone2;
-		$work_email = $row->work_email;
-		$closed_person_name =$row->closed_person_name;
-		$closed_person_phone = $row->closed_person_phone;
+				$sql = "
+				SELECT
+					employee_id 
+					,street 
+					,address
+					,region 
+					,sub_district
+					,province 
+					,country 
+					,postal_code
+					,handphone1 
+					,handphone2 
+					,work_email 
+					,bank_account_number
+					,closed_person_name 
+					,closed_person_phone
+				from 
+					tb_m_employee
+				 where
+				 	 employee_id = '$employee_id'";
+				$data=$this->db->query($sql);
+			
+				$row = $data->row();
+				$address = $row->address;
+				$handphone1 = $row->handphone1;
+				$handphone2 = $row->handphone2;
+				$work_email = $row->work_email;
+				$closed_person_name =$row->closed_person_name;
+				$closed_person_phone = $row->closed_person_phone;
 	
 			$changed_dt = date('Y-m-d H:i:s');
 			$sql = "
@@ -792,22 +955,22 @@ public function on_updatemain()
             	 		, closed_person_phone
             	 		, status
             	 		, created_by
-            	 		,created_dt
+            	 		, created_dt
             	 		)
-					VALUES (
-					'$employee_id'
-					, '$user_born_place'
-					, '$user_born_dt'
-					, '$address'
-					, '$handphone1'
-					, '$handphone2'
-					, '$work_email'
-					, '$closed_person_name'
-					, '$closed_person_phone'
-					, '0'
-					, '$user_name'
-					, '$changed_dt')
-			";
+						VALUES (
+						'$employee_id'
+						, '$user_born_place'
+						, '$user_born_dt'
+						, '$address'
+						, '$handphone1'
+						, '$handphone2'
+						, '$work_email'
+						, '$closed_person_name'
+						, '$closed_person_phone'
+						, '0'
+						, '$user_name'
+						, '$changed_dt')
+					";
 			$this->db->query($sql);
 		}
 			 return $this->output
@@ -851,7 +1014,7 @@ public function on_updateaddress()
 		{
 		
 			$sql = "
-				update 
+			UPDATE
 					tb_m_employee
 				set
 					street = '$user_street'
@@ -874,7 +1037,7 @@ public function on_updateaddress()
 				$this->input->get('user_contact_person_phone') != ''
 				 ){
 					$sql = "
-				select
+				SELECT
 					employee_id 
 					,user_name 
 					,born_dt
@@ -960,7 +1123,7 @@ public function on_updateaddress()
 		{
 		
 			$sql = "
-				update 
+			UPDATE
 					tb_m_employee
 				set
 					npwp_number = '$user_npwp'";
