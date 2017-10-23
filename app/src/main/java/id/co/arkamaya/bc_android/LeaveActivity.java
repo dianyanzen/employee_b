@@ -348,8 +348,48 @@ public class LeaveActivity extends AppCompatActivity {
                     txtlvfromdt.setText(m.getLeaveDt().toString());
                     txtlvtodt.setText(m.getLeaveDt().toString());
                     String Type = m.getTimeOffType().toString();
-                    if (Type.equalsIgnoreCase("training")) {
+                    if (Type.equalsIgnoreCase("cuti")) {
+                        idxType = 0;
+                    }else if (Type.equalsIgnoreCase("cuti mendadak")) {
                         idxType = 1;
+                    }else if (Type.equalsIgnoreCase("cuti 1/2 hari")) {
+                        idxType = 2;
+                    }else if (Type.equalsIgnoreCase("cuti dadakan")) {
+                        idxType = 3;
+                    }else if (Type.equalsIgnoreCase("cuti haid")) {
+                        idxType = 4;
+                    }else if (Type.equalsIgnoreCase("cuti hamil")) {
+                        idxType = 5;
+                    }else if (Type.equalsIgnoreCase("pernikahan")) {
+                        idxType = 6;
+                    }else if (Type.equalsIgnoreCase("kelahiran / gugur kandungan")) {
+                        idxType = 7;
+                    }else if (Type.equalsIgnoreCase("khitanan")) {
+                        idxType = 8;
+                    }else if (Type.equalsIgnoreCase("pemandian / baptis / gusaran anak")) {
+                        idxType = 9;
+                    }else if (Type.equalsIgnoreCase("pernikahan anak")) {
+                        idxType = 10;
+                    }else if (Type.equalsIgnoreCase("kematian keluarga")) {
+                        idxType = 11;
+                    }else if (Type.equalsIgnoreCase("musibah bencana alam")) {
+                        idxType = 12;
+                    }else if (Type.equalsIgnoreCase("kematian anggota keluarga")) {
+                        idxType = 13;
+                    }else if (Type.equalsIgnoreCase("balita sakit")) {
+                        idxType = 14;
+                    }else if (Type.equalsIgnoreCase("ibadah haji")) {
+                        idxType = 15;
+                    }else if (Type.equalsIgnoreCase("lain-lain")) {
+                        idxType = 16;
+                    }else if (Type.equalsIgnoreCase("cuti tidak dibayar")) {
+                        idxType = 17;
+                    }else if (Type.equalsIgnoreCase("cuti (1/2 hari) tidak dibayar")) {
+                        idxType = 18;
+                    }else if (Type.equalsIgnoreCase("sakit rawat jalan")) {
+                        idxType = 19;
+                    }else if (Type.equalsIgnoreCase("sakit rawat inap")) {
+                        idxType = 20;
                     }else {
                         idxType = 0;
                     }
