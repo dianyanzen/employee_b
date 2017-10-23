@@ -47,6 +47,9 @@ public class GetWorkingReport {
     @SerializedName("Count_Hour")
     @Expose
     private Integer CountHour;
+    @SerializedName("remark")
+    @Expose
+    private String remark;
 
     /**
      *
@@ -298,6 +301,24 @@ public class GetWorkingReport {
      */
     public void setCountHour(Integer CountHour) {
         this.CountHour = CountHour;
+    }
+
+    /**
+     *
+     * @return
+     *
+     */
+    public String getRemark() {
+        return remark;
+    }
+
+    /**
+     *
+     * @param remark
+     *
+     */
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
 }

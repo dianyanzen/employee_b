@@ -122,8 +122,12 @@ public class MyProfileTaxFragment extends Fragment {
 
             }
         });
+
         spnMarital = (Spinner) getActivity().findViewById(R.id.spnmaritalstatus);
         getMarital();
+        spnMarital.setEnabled(false);
+        txtIdBpjsKerja.setEnabled(false);
+        txtIdBpjsSehat.setEnabled(false);
         ScreenResolution sr = deviceDimensions();
         // use Euclid's theorem to calculate the proper aspect ratio i.e. screen
         // i.e. for resolution 480 * 800, aspect Ratio 3:5

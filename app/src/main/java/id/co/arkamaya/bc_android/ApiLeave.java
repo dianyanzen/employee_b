@@ -22,7 +22,7 @@ public interface ApiLeave {
             @Query("employee_id") String employee_id, Callback<List<GetLeaveList>> response
     );
 
-    @GET("/leaveservicemobile/getleavetype")
+    @GET("/leaveservicemobile/gettypevalue")
     void getLeaveType(
             Callback<List<GetLeaveType>> response
     );
@@ -46,15 +46,14 @@ public interface ApiLeave {
 
     //    @Multipart
     @POST("/leaveservicemobile/saveleave")
-    void onSaveExcuse(
+    void onSaveLeave(
+            @Query("leave_id") String leave_id,
             @Query("employee_id") String employee_id,
             @Query("username") String username,
-            @Query("time_off_id") String time_off_id,
-            @Query("time_off_dt") String time_off_dt,
-            @Query("time_off_type") String time_off_type,
-            @Query("time_off_description") String time_off_description,
-            @Query("date_from") String date_from,
-            @Query("date_to") String date_to,
+            @Query("leave_type") String leave_type,
+            @Query("leave_descript") String leave_descript,
+            @Query("leave_from_date") String leave_from_date,
+            @Query("leave_to_date") String leave_to_date,
             Callback<CheckLogin> response
     );
 

@@ -50,7 +50,7 @@ public class AdapterLeaveListView  extends ArrayAdapter<GetLeaveList> {
 
         TextView txtProdMonth=(TextView)adapterView.findViewById(R.id.txtProdMonth);
         TextView txtDate=(TextView)adapterView.findViewById(R.id.txtDate);
-        TextView txtLeaveType=(TextView)adapterView.findViewById(R.id.txtExcueseType);
+        TextView txtLeaveType=(TextView)adapterView.findViewById(R.id.lblLeaveType);
         TextView txtLeaveDescription=(TextView)adapterView.findViewById(R.id.txtLeaveDescription);
         TextView txtLeaveId=(TextView)adapterView.findViewById(R.id.txtLeaveId);
         TextView txtLeaveStatus=(TextView)adapterView.findViewById(R.id.txtLeaveStatus);
@@ -66,8 +66,8 @@ public class AdapterLeaveListView  extends ArrayAdapter<GetLeaveList> {
 
         txtProdMonth.setText(m.getLeaveProdMonth());
         txtDate.setText(m.getLeaveProdDate());
-        txtLeaveType.setText(m.getLeaveType());
-        txtLeaveDescription.setText(m.getLeaveDescription());
+        txtLeaveType.setText(m.getTimeOffType());
+        txtLeaveDescription.setText(m.getLeaveReason());
         txtLeaveId.setText(m.getLeaveId());
         txtLeaveStatus.setText(m.getLeaveStatus());
 

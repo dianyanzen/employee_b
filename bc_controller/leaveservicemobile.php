@@ -8,52 +8,156 @@ class leaveservicemobile extends CI_Controller {
 	}
 
 	public function getleavelist() {
-        //header("content-type: application/json");
+        header("content-type: application/json");
         date_default_timezone_set('asia/jakarta');
         $employee_id = $this->input->get('employee_id', true);
-        $sql = "SELECT
-        	 date_format(time_off_dt,'%d') as leave_prod_date
-        	 , date_format(time_off_dt,'%Y-%m') as leave_prod_month
-        	 , time_off_id, date_format(time_off_dt,'%Y-%m-%d') as leave_dt
-        	 , time_off_type
-        	 , CONCAT(SUBSTR(time_off_description,1,12),'..') as leave_reason
-        	 , time_off_approve_dt, time_off_approve_by 
-        	 , ( case when time_off_approve_by is null then '' else 'approved' end ) as leave_status 
-        	 from tb_r_time_off where
-        	  employee_id='$employee_id'
-				order by time_off_dt desc limit 30";
+        $sql = "SELECT a.time_off_id as leave_id
+             , a.employee_id
+             , date_format(a.time_off_dt,'%d') as leave_prod_date
+             , date_format(a.time_off_dt,'%Y-%m') as leave_prod_month
+             , date_format(a.time_off_dt,'%Y-%m-%d') as leave_dt
+             , b.leave_name as time_off_type
+             , ( case when a.time_off_description is null then '..' when a.time_off_description = '' then '..' else a.time_off_description end ) as leave_reason
+             , a.approval_due_dt
+             , a.time_off_approve_dt
+             , a.time_off_approve_by 
+             , ( case when a.time_off_approve_by is not null then 'approved' when a.rejected_dt is not null then 'rejected' else '' end ) as leave_status 
+             from tb_r_time_off a left join
+                tb_m_leave_type b on 
+                a.time_off_type = b.leave_type_cd
+             where
+              a.employee_id='$employee_id'
+                order by a.time_off_dt desc";
 		
 		$data = $this->db->query($sql);
         echo json_encode($data->result());
+    }
+    public function gettypevalue(){
+            header("content-type: application/json");
+            $sql ="select leave_type_cd,leave_name from tb_m_leave_type order by leave_type_cd;
+            ";
+            $data = $this->db->query($sql);
+            echo json_encode($data->result());
+          
+    }
+    public function getleavetypedescript(){
+        //header("content-type: application/json");
+            $sql ="
+                SELECT 
+                    system_value_txt as leave_type
+                from
+                    tb_m_system
+                where
+                    system_type ='time_off_request' and 
+                    system_code = 'type'
+            ";
+            $data = $this->db->query($sql);
+            $code = $data->row()->leave_type;
+            $splitcode = explode(';',$code);
+            $i =-1;
+            $data = array();
+            foreach ($splitcode as $rowsp) {
+                $i++;    
+                $data[$i] = $splitcode[$i];
+            }
+            $x=-1;
+            foreach ($data as $rowdt) {
+            $x++;
+            list($first[$x], $last[$x]) = explode('~',$data[$x]);
+            }
+            return $last;
+            //return $first;
+    }
+    public function getleavetype(){
+        //header("content-type: application/json");
+            $sql ="
+                SELECT 
+                    system_value_txt as leave_type
+                from
+                    tb_m_system
+                where
+                    system_type ='time_off_request' and 
+                    system_code = 'type'
+            ";
+            $data = $this->db->query($sql);
+            $code = $data->row()->leave_type;
+            $splitcode = explode(';',$code);
+            $i =-1;
+            $data = array();
+            foreach ($splitcode as $rowsp) {
+                $i++;    
+                $data[$i] = $splitcode[$i];
+            }
+            $x=-1;
+            foreach ($data as $rowdt) {
+            $x++;
+            list($first[$x], $last[$x]) = explode('~',$data[$x]);
+            }
+            //return $last;
+            return $first;
+    }
+    public function leavetype(){
+        header("content-type: application/json");
+        $last = $this->getleavetypedescript();
+        echo json_encode($last);   
+    }
+    public function leavecd(){
+        header("content-type: application/json");
+         $first = $this->getleavetype();
+        echo json_encode($first);   
+    }
+    public function convert_type($type){
+        $last = $this->getleavetypedescript();
+        $first = $this->getleavetype();
+        $x=-1;
+        foreach ($last as $lst) {
+        $x++;
+        if ($type == $last[$x]){
+            $type_leave = $first[$x];
+        }
+        }
+        return $type_leave;
+    }
+
+    public function reverse_convert_type($type){
+     $last = $this->getleavetypedescript();
+        $first = $this->getleavetype();
+        $x=-1;
+        foreach ($first as $frs) {
+        $x++;
+        if ($type == $first[$x]){
+            $type_leave_descript = $last[$x];
+        }
+        }
+        return $type_leave_descript;   
     }
 	
 	public function getleavebyid() {
         header("content-type: application/json");
         date_default_timezone_set('asia/jakarta');
         $time_off_id = $this->input->get('time_off_id', true);
-        $sql = "SELECT
-        	 date_format(time_off_dt,'%d') as leave_prod_date
-        	 , date_format(time_off_dt,'%Y-%m') as leave_prod_month
-        	 , time_off_id, date_format(time_off_dt,'%Y-%m-%d') as leave_dt
-        	 , time_off_type
-        	 , CONCAT(SUBSTR(time_off_description,1,12),'..') as leave_reason
-        	 , time_off_approve_dt, time_off_approve_by 
-        	 , ( case when time_off_approve_by is null then '' else 'approved' end ) as leave_status 
-        	 from tb_r_time_off where
-        	  time_off_id='$time_off_id'
-				order by time_off_dt desc limit 30";
+        $sql = "SELECT a.time_off_id as leave_id
+             , a.employee_id
+             , date_format(a.time_off_dt,'%d') as leave_prod_date
+             , date_format(a.time_off_dt,'%Y-%m') as leave_prod_month
+             , date_format(a.time_off_dt,'%Y-%m-%d') as leave_dt
+             , b.leave_name as time_off_type
+             , ( case when a.time_off_description is null then '..' when a.time_off_description = '' then '..' else a.time_off_description end ) as leave_reason
+             , a.approval_due_dt
+             , a.time_off_approve_dt
+             , a.time_off_approve_by 
+             , ( case when a.time_off_approve_by is not null then 'approved' when a.rejected_dt is not null then 'rejected' else '' end ) as leave_status 
+             from tb_r_time_off a left join
+                tb_m_leave_type b on 
+                a.time_off_type = b.leave_type_cd
+             where
+              a.time_off_id='$time_off_id'
+                order by a.time_off_dt desc";
 		
 		$data = $this->db->query($sql);
-        echo json_encode($data->result());
+        echo json_encode($data->row());
     }
-	
-	public function getleavetype() {
-        header("Content-Type: application/json");
-        $sql = "SELECT leave_type_cd as leave_id, leave_name as leave_type, quota FROM tb_m_leave_type order by leave_name asc ";
-     
-		$data = $this->db->query($sql);
-        echo json_encode($data->result());
-    }
+
 	
 	public function getemployees() {
         header("Content-Type: application/json");
@@ -116,14 +220,25 @@ class leaveservicemobile extends CI_Controller {
 	
 	function saveleave()
     {
-        $time_off_id = $this->input->post('time_off_id');        
-        $date_from = $this->input->post('date_from');        
-        $date_to = $this->input->post('date_to');        
-        $employee_id = $this->input->post('employee_id');
-        $employee_name = $this->input->post('username');
-        $app_due_dt = $this->input->post('approval_due_dt');
-        $time_off_type = $this->input->post('time_off_type');  
-        $time_off_description = $this->input->post('time_off_description');
+        $time_off_id = $this->input->get('leave_id');        
+        $date_from = $this->input->get('leave_from_date');        
+        $date_to = $this->input->get('leave_to_date');        
+        $employee_id = $this->input->get('employee_id');
+        $employee_name = $this->input->get('username');
+        $app_due_dt = $this->input->get('approval_due_dt');
+        $time_off_type = $this->input->get('leave_type');
+        if ($time_off_type != '' || $time_off_type == null){
+            $sql ="SELECT 
+                    leave_type_cd as type_cd 
+                from
+                    tb_m_leave_type
+                where leave_name = '$time_off_type'
+            ";
+
+        $data = $this->db->query($sql);
+        $time_off_type = $data->row()->type_cd;
+        }
+        $time_off_description = $this->input->get('leave_descript');
        
         $time_off = array
         (
@@ -134,7 +249,7 @@ class leaveservicemobile extends CI_Controller {
             , 'changed_dt'				=> date('Y-m-d H:i:s')
             
         );
-
+            
         if ($time_off_id == '' || $time_off_id == '0')
         {
             $cnt_workday = $this->count_workday($employee_id, date('Y-m-d'));
@@ -145,8 +260,8 @@ class leaveservicemobile extends CI_Controller {
             
             $time_off['approval_due_dt'] = $approval_due_dt;
             
-            $start_dt = $this>get_data('leave_request', 'start_month_date')->value_txt;
-            $longDate = $this->db->query("SELECT CONVERT(SUBSTRING_INDEX(DATEDIFF('$dateTo', DATE_ADD('$dateFrom', INTERVAL -1 DAY)),'-',-1),UNSIGNED INTEGER) as total")->row()->total;
+            $start_dt = $this->get_data('leave_request', 'start_month_date')->value_txt;
+            $longDate = $this->db->query("SELECT CONVERT(SUBSTRING_INDEX(DATEDIFF('$date_to', DATE_ADD('$date_from', INTERVAL -1 DAY)),'-',-1),UNSIGNED INTEGER) as total")->row()->total;
             $limit = $this->get_data("time_off_request", "limit" )->value_num;
             $cnt_time_off = $this->count_time_off($time_off["employee_id"], $start_dt );
             $ext_leave = $this->get_ext_leave($time_off["employee_id"]);
@@ -162,14 +277,14 @@ class leaveservicemobile extends CI_Controller {
                                     'msgText' => "Saving failed, total leave request more then ".$limit. " day(s)")));
                 
             }else{
-                $check_data = $this->check_data($time_off['employee_id'], $dateFrom, $dateTo);
+                $check_data = $this->check_data($time_off['employee_id'], $date_from, $date_to);
 
                 if ($check_data==0){
                     $data = array();
                     $i = 1;
                     while ($i <= $longDate){
                         
-                        $dt = $this->db->query("SELECT DATE_ADD(DATE_ADD('$dateFrom', INTERVAL -1 DAY), INTERVAL $i DAY) as addDate")->row()->addDate;
+                        $dt = $this->db->query("SELECT DATE_ADD(DATE_ADD('$date_from', INTERVAL -1 DAY), INTERVAL $i DAY) as addDate")->row()->addDate;
 						
                         $check_schedule = $this->check_schedule($employee_id, $dt);
               	 
@@ -182,6 +297,7 @@ class leaveservicemobile extends CI_Controller {
                     }
 			        
                     if ( count($data) > 0 ){
+
                         $result = $this->insert($data);
                     }else{
                         $result = 0;
@@ -251,9 +367,9 @@ class leaveservicemobile extends CI_Controller {
     }
 
 	
-	function check_data($employee_id, $dateFrom, $dateTo) {
+	function check_data($employee_id, $date_from, $date_to) {
         return $this->db->select('COUNT(*) as cnt')->from('tb_r_time_off')
-                        ->where("employee_id = '" . $employee_id . "' AND time_off_dt >= '" . $dateFrom . "' AND time_off_dt <= '" . $dateTo . "'")
+                        ->where("employee_id = '" . $employee_id . "' AND time_off_dt >= '" . $date_from . "' AND time_off_dt <= '" . $date_to . "'")
                         ->where('rejected_by IS NULL', null, false)
                         ->get()->row()->cnt;
     }
@@ -291,7 +407,7 @@ class leaveservicemobile extends CI_Controller {
         }
        
         $ext_leave = $this->get_ext_leave($employee_id);
-        
+       
         $limit = $limit + $ext_leave;
         
         if ($limit > 0){

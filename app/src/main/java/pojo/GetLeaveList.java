@@ -9,216 +9,249 @@ import com.google.gson.annotations.SerializedName;
 
 public class GetLeaveList {
 
+    @SerializedName("leave_id")
+    @Expose
+    private String leave_id;
+
+    @SerializedName("employee_id")
+    @Expose
+    private String employee_id;
+
     @SerializedName("leave_prod_date")
     @Expose
-    private String leaveProdDate;
+    private String leave_prod_date;
+
     @SerializedName("leave_prod_month")
     @Expose
-    private String leaveProdMonth;
-    @SerializedName("time_off_id")
+    private String leave_prod_month;
+
+    @SerializedName("leave_dt")
     @Expose
-    private String leaveId;
+    private String leave_dt;
+
     @SerializedName("time_off_type")
     @Expose
-    private String leaveType;
-    @SerializedName("leave_dt")
-    @Expose
-    private String leaveDt;
-    @SerializedName("leave_dt")
-    @Expose
-    private String leaveTodt;
+    private String time_off_type;
+
     @SerializedName("leave_reason")
     @Expose
-    private String leaveReason;
+    private String leave_reason;
+
+    @SerializedName("approval_due_dt")
+    @Expose
+    private String approval_due_dt;
+
     @SerializedName("time_off_approve_dt")
     @Expose
-    private String leaveApproveDt;
+    private String time_off_approve_dt;
+
     @SerializedName("time_off_approve_by")
     @Expose
-    private String leaveApproveBy;
+    private String time_off_approve_by;
+
     @SerializedName("leave_status")
     @Expose
-    private String leaveStatus;
+    private String leave_status;
 
 
-    /**
-     *
-     * @return
-     * The leaveProdDate
-     */
-    public String getLeaveProdDate() {
-        return leaveProdDate;
-    }
-
-    /**
-     *
-     * @param leaveProdDate
-     * The leave_prod_date
-     */
-    public void setLeaveProdDate(String leaveProdDate) {
-        this.leaveProdDate = leaveProdDate;
-    }
 
     /**
      *
      * @return
-     * The leaveProdMonth
-     */
-    public String getLeaveProdMonth() {
-        return leaveProdMonth;
-    }
-
-    /**
      *
-     * @param leaveProdMonth
-     * The leave_prod_month
-     */
-    public void setLeaveProdMonth(String leaveProdMonth) {
-        this.leaveProdMonth = leaveProdMonth;
-    }
-
-    /**
-     *
-     * @return
-     * The leaveId
      */
     public String getLeaveId() {
-        return leaveId;
+        return leave_id;
     }
 
     /**
      *
-     * @param leaveId
-     * The leave_id
+     * @param leave_id
+     *
      */
-    public void setLeaveId(String leaveId) {
-        this.leaveId = leaveId;
+    public void setLeaveId(String leave_id) {
+        this.leave_id = leave_id;
     }
 
     /**
      *
      * @return
-     * The leaveDt
+     *
+     */
+    public String getEmployeeId() {
+        return employee_id;
+    }
+
+    /**
+     *
+     * @param employee_id
+     *
+     */
+    public void setEmployeeId(String employee_id) {
+        this.employee_id = employee_id;
+    }
+
+    /**
+     *
+     * @return
+     *
+     */
+    public String getLeaveProdDate() {
+        return leave_prod_date;
+    }
+
+    /**
+     *
+     * @param leave_prod_date
+     *
+     */
+    public void setLeaveProdDate(String leave_prod_date) {
+        this.leave_prod_date = leave_prod_date;
+    }
+
+    /**
+     *
+     * @return
+     *
+     */
+    public String getLeaveProdMonth() {
+        return leave_prod_month;
+    }
+
+    /**
+     *
+     * @param leave_prod_month
+     *
+     */
+    public void setLeaveProdMonth(String leave_prod_month) {
+        this.leave_prod_month = leave_prod_month;
+    }
+
+    /**
+     *
+     * @return
+     *
      */
     public String getLeaveDt() {
-        return leaveDt;
+        return leave_dt;
     }
 
     /**
      *
-     * @param leaveDt
-     * The leave_dt
+     * @param leave_dt
+     *
      */
-    public void setLeaveDt(String leaveDt) {
-        this.leaveDt = leaveDt;
+    public void setLeaveDt(String leave_dt) {
+        this.leave_dt = leave_dt;
     }
 
     /**
      *
      * @return
-     * The leaveHour
+     *
      */
-    public String getLeaveTodt() {
-        return leaveTodt;
+    public String getTimeOffType() {
+        return time_off_type;
     }
 
     /**
      *
-     * @param leaveTodt
-     * The leave_dt
-     */
-    public void setLeaveTodt(String leaveTodt) {
-        this.leaveTodt = leaveTodt;
-    }
-
-    /**
+     * @param time_off_type
      *
-     * @return
-     * The leaveHour
      */
-    public String getLeaveType() {
-        return leaveType;
-    }
-
-    /**
-     *
-     * @param leaveType
-     * The leave_dt
-     */
-    public void setLeaveType(String leaveType) {
-        this.leaveType = leaveType;
+    public void setTimeOffType(String time_off_type) {
+        this.time_off_type = time_off_type;
     }
 
     /**
      *
      * @return
-     * The leaveHour
+     *
      */
-    public String getLeaveDescription() {
-        return leaveReason;
+    public String getLeaveReason() {
+        return leave_reason;
     }
 
     /**
      *
-     * @param leaveReason
-     * The leave_description
-     */
-    public void setLeaveDescription(String leaveReason) {
-        this.leaveReason = leaveReason;
-    }
-
-    /**
+     * @param leave_reason
      *
-     * @return
-     * The leaveApproveDt
      */
-    public String getLeaveApproveDt() {
-        return leaveApproveDt;
-    }
-
-    /**
-     *
-     * @param leaveApproveDt
-     * The leave_approve_dt
-     */
-    public void setLeaveApproveDt(String leaveApproveDt) {
-        this.leaveApproveDt = leaveApproveDt;
+    public void setLeaveReason(String leave_reason) {
+        this.leave_reason = leave_reason;
     }
 
     /**
      *
      * @return
-     * The leaveApproveBy
+     *
      */
-    public String getLeaveApproveBy() {
-        return leaveApproveBy;
+    public String getApprovalDueDt() {
+        return approval_due_dt;
     }
 
     /**
      *
-     * @param leaveApproveBy
-     * The leave_approve_by
+     * @param approval_due_dt
+     *
      */
-    public void setLeaveApproveBy(String leaveApproveBy) {
-        this.leaveApproveBy = leaveApproveBy;
+    public void setApprovalDueDt(String approval_due_dt) {
+        this.approval_due_dt = approval_due_dt;
     }
 
     /**
      *
      * @return
-     * The leaveStatus
+     *
+     */
+    public String getTimeOffApproveDt() {
+        return time_off_approve_dt;
+    }
+
+    /**
+     *
+     * @param time_off_approve_dt
+     *
+     */
+    public void setTimeOffApproveDt(String time_off_approve_dt) {
+        this.time_off_approve_dt = time_off_approve_dt;
+    }
+
+    /**
+     *
+     * @return
+     *
+     */
+    public String getTimeOffApproveBy() {
+        return time_off_approve_by;
+    }
+
+    /**
+     *
+     * @param time_off_approve_by
+     *
+     */
+    public void setTimeOffApproveBy(String time_off_approve_by) {
+        this.time_off_approve_by = time_off_approve_by;
+    }
+
+    /**
+     *
+     * @return
+     *
      */
     public String getLeaveStatus() {
-        return leaveStatus;
+        return leave_status;
     }
 
     /**
      *
-     * @param leaveStatus
-     * The leave_status
+     * @param leave_status
+     *
      */
-    public void setLeaveStatus(String leaveStatus) {
-        this.leaveStatus = leaveStatus;
+    public void setLeaveStatus(String leave_status) {
+        this.leave_status = leave_status;
     }
+
 
 }

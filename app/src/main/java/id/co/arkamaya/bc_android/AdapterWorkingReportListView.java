@@ -59,6 +59,7 @@ public class AdapterWorkingReportListView extends ArrayAdapter<GetWorkingReport>
         TextView txtWR_TimeIn = (TextView)adapterView.findViewById(R.id.txtWR_TimeIn);
         TextView txtWR_TimeOut = (TextView)adapterView.findViewById(R.id.txtWR_TimeOut);
         TextView txtWR_WH = (TextView)adapterView.findViewById(R.id.txtWR_WH);
+        TextView txtRemark = (TextView)adapterView.findViewById(R.id.txtRemark);
 
         //txtWR_Date.setBackgroundColor(Color.parseColor("red"));
 
@@ -67,11 +68,13 @@ public class AdapterWorkingReportListView extends ArrayAdapter<GetWorkingReport>
             txtWR_TimeIn.setBackgroundColor(Color.parseColor("yellow"));
             txtWR_TimeOut.setBackgroundColor(Color.parseColor("yellow"));
             txtWR_WH.setBackgroundColor(Color.parseColor("yellow"));
+            txtRemark.setBackgroundColor(Color.parseColor("yellow"));
         }else {
             txtWR_Date.setBackgroundColor(Color.parseColor("white"));
             txtWR_TimeIn.setBackgroundColor(Color.parseColor("white"));
             txtWR_TimeOut.setBackgroundColor(Color.parseColor("white"));
             txtWR_WH.setBackgroundColor(Color.parseColor("white"));
+            txtRemark.setBackgroundColor(Color.parseColor("white"));
         }
 
         if(m.getScheduleDt() != null){
@@ -96,6 +99,11 @@ public class AdapterWorkingReportListView extends ArrayAdapter<GetWorkingReport>
             txtWR_WH.setText(m.getDiffHour());
         }else{
             txtWR_WH.setText("-");
+        }
+        if(m.getRemark() != null){
+            txtRemark.setText(m.getRemark());
+        }else{
+            txtRemark.setText("-");
         }
 
         final ViewGroup prnt=parent;

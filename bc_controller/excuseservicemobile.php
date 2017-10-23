@@ -311,6 +311,7 @@ class excuseservicemobile extends CI_Controller {
         $this->db->where('excuse_id', $excuse_id);
         return $this->db->update('tb_m_excuse', $excuse);
     }
+    
     /* End excuse */
 }
 

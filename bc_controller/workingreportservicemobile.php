@@ -69,10 +69,11 @@ class workingreportservicemobile extends CI_Controller {
 				att.address,
 				att.place,
 				date_format(att.clock_out, '%Y-%m-%d') as schedule_dt,
-				COALESCE(SEC_TO_TIME(((TIMESTAMPDIFF(minute, clock_in, clock_out) - $time_off) * 60)),0) AS Diff_Hour,
-				COALESCE(CAST(SUBSTRING(SEC_TO_TIME(((TIMESTAMPDIFF(minute, clock_in, clock_out)) - $time_off) * 60), 1, 2) as UNSIGNED),0) AS Count_Hour
+				COALESCE(SEC_TO_TIME(((TIMESTAMPDIFF(minute, att.clock_in, att.clock_out) - $time_off) * 60)),0) AS Diff_Hour,
+				COALESCE(CAST(SUBSTRING(SEC_TO_TIME(((TIMESTAMPDIFF(minute, att.clock_in, att.clock_out)) - $time_off) * 60), 1, 2) as UNSIGNED),0) AS Count_Hour,
+				ats.remark
 			FROM 
-				tb_r_attendance as att
+				tb_r_attendance att left join tb_r_sum_attendance ats on att.attendance_dt = ats.attendance_dt and att.employee_id = ats.employee_id
 			WHERE 
 				att.employee_id='$employee_id' ";
 				
@@ -101,6 +102,8 @@ class workingreportservicemobile extends CI_Controller {
 			ORDER BY 
 				date_format(att.clock_in, '%Y-%M-%d') DESC LIMIT 30
 		";
+		// echo $sql;
+		// die;
         $data = $this->db->query($sql);
         echo json_encode($data->result());
     }

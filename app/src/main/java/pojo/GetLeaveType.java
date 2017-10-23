@@ -7,30 +7,30 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class GetLeaveType {
-    @SerializedName("leave_type")
+    @SerializedName("leave_name")
     @Expose
-    private String leave_type;
+    private String leave_name;
 
-    @SerializedName("leave_id")
+    @SerializedName("leave_type_cd")
     @Expose
-    private String leave_id;
+    private String leave_type_cd;
 
     /**
      *
      * @return
      *
      */
-    public String getLeaveID() {
-        return leave_id;
+    public String getLeaveNm() {
+        return leave_name;
     }
 
     /**
      *
-     * @param leave_id
+     * @param leave_name
      *
      */
-    public void setLeaveCd(String leave_id) {
-        this.leave_id = leave_id;
+    public void setLeaveNm(String leave_name) {
+        this.leave_name = leave_name;
     }
 
     /**
@@ -38,16 +38,16 @@ public class GetLeaveType {
      * @return
      *
      */
-    public String getLeaveName() {
-        return leave_type;
+    public String getLeaveCd() {
+        return leave_type_cd;
     }
 
     /**
      *
-     * @param leave_type
+     * @param leave_type_cd
      *
      */
-    public void setLeaveName(String leave_type) {
-        this.leave_id = leave_type;
+    public void setLeaveCd(String leave_type_cd) {
+        this.leave_type_cd = leave_type_cd;
     }
 }
