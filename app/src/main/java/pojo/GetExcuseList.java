@@ -10,6 +10,12 @@ import com.google.gson.annotations.SerializedName;
 
 public class GetExcuseList {
 
+    @SerializedName("employee_id")
+    @Expose
+    private String employee_id;
+    @SerializedName("employee_name")
+    @Expose
+    private String employee_name;
     @SerializedName("excuse_prod_date")
     @Expose
     private String excuseProdDate;
@@ -60,6 +66,40 @@ public class GetExcuseList {
     @Expose
     private String excuseStatus;
 
+    /**
+     *
+     * @return
+     * The excuseProdDate
+     */
+    public String getEmployeeId() {
+        return employee_id;
+    }
+
+    /**
+     *
+     * @param employee_id
+     * The excuse_prod_date
+     */
+    public void setEmployeeId(String employee_id) {
+        this.employee_id = employee_id;
+    }
+    /**
+     *
+     * @return
+     * The excuseProdDate
+     */
+    public String getEmployeeName() {
+        return employee_name;
+    }
+
+    /**
+     *
+     * @param employee_name
+     * The excuse_prod_date
+     */
+    public void setEmployeeName(String employee_name) {
+        this.employee_name = employee_name;
+    }
 
     /**
      *

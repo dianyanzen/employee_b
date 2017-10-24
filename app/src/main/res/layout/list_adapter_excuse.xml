@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="2dp" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="2dp">
     <!-- Thumbnail Image -->
 
     <TextView
@@ -28,14 +29,26 @@
         android:background="#FF4081"
         android:textColor="#ffffff"
         android:layout_toStartOf="@+id/txtExcueseType" />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Employee Name"
+        android:id="@+id/txtEmployeeName"
+        android:layout_alignTop="@+id/txtProdMonth"
+        android:paddingLeft="7dp"
+        android:textColor="#000000"
+        android:layout_toEndOf="@+id/txtDate"
+        android:paddingStart="7dp"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/txtExcuseDescription"
-        android:layout_alignBottom="@+id/txtDate"
+        android:layout_below="@+id/txtExcueseType"
         android:paddingLeft="7dp"
         android:textColor="#000000"
         android:layout_toEndOf="@+id/txtDate"
@@ -48,11 +61,12 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Lupa Clock Out"
+        android:layout_below="@+id/txtEmployeeName"
         android:id="@+id/txtExcueseType"
-        android:layout_marginTop="12dp"
         android:paddingLeft="2dp"
         android:textColor="#000000"
         android:layout_toEndOf="@+id/txtProdMonth"
+
         android:paddingStart="7dp"
         android:textSize="15dp"
         android:textStyle="bold"/>
@@ -67,7 +81,8 @@
         android:text="Delete"
         android:focusable="false"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,11 +96,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="id"
+        android:id="@+id/txtEmployeeId"
+        android:layout_alignTop="@+id/txtOvertimeHour"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="accepted"
+        android:layout_marginRight="10dp"
+        android:textSize="20dp"
         android:id="@+id/txtExcuseStatus"
         android:textColor="#06aa17"
         android:layout_below="@+id/txtProdMonth"
         android:layout_alignParentEnd="true" />
+    <ImageButton
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnReject"
+        android:textColor="#ffffff"
+        android:src="@drawable/ic_clear_black_24dp"
+        android:tint="#fff"
+        android:backgroundTint="#ff0000"
+        android:text=""
+        android:focusable="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+    <ImageButton
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAprove"
+        android:textColor="#ffffff"
+        android:src="@drawable/ic_check_black_24dp"
+        android:tint="#fff"
+        android:backgroundTint="#00ff00"
+        android:text=""
+        android:focusable="false"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/btnReject"
+        android:visibility="invisible"/>
 
 
 </RelativeLayout>

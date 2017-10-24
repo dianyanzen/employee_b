@@ -47,6 +47,20 @@ public interface ApiExcuse {
             Callback<CheckLogin> response
     );
 
+    @GET("/excuseservicemobile/setaprove")
+    void onAproveExcuse(
+            @Query("excuse_id") String excuse_id,
+            @Query("employee_id") String employee_id,
+            Callback<CheckLogin> response
+    );
+
+    @GET("/excuseservicemobile/setreject")
+    void onRejectExcuse(
+            @Query("excuse_id") String excuse_id,
+            @Query("employee_id") String employee_id,
+            Callback<CheckLogin> response
+    );
+
     //    @Multipart
     @POST("/excuseservicemobile/saveexcuse")
     void onSaveExcuse(

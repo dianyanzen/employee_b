@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,12 +74,13 @@ public class ExcuseFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 long viewId = id;//view.getId();
                 Button btnDeleteExcuse = (Button)view.findViewById(R.id.btnDelete);
+                ImageButton btnAproveExcuse = (ImageButton)view.findViewById(R.id.btnAprove);
+                ImageButton btnRejectExcuse = (ImageButton)view.findViewById(R.id.btnReject);
 
                 if(conDetector.isConnectingToInternet()){
-                    if(viewId==btnDeleteExcuse.getId())
-                    {
+                    if(viewId==btnDeleteExcuse.getId()) {
 
-                        View vp=(View)v.getParent();
+                        View vp = (View) v.getParent();
                         TextView txtExcuseId = (TextView) view.findViewById(R.id.txtExcuseId);
                         final String ExcuseId = String.valueOf(txtExcuseId.getText()); //txtReimburseId.getText().toString();
                         //Toast.makeText(v.getContext().getApplicationContext(),ReimburseId, Toast.LENGTH_SHORT).show();
@@ -88,6 +90,36 @@ public class ExcuseFragment extends Fragment {
                                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         onDeleteExcuse(ExcuseId, employee_id);
+                                    }
+                                })
+                                .setNegativeButton("No", null)
+                                .show();
+                    }else if(viewId==btnAproveExcuse.getId()){
+                        View vp = (View) v.getParent();
+                        TextView txtExcuseId = (TextView) view.findViewById(R.id.txtExcuseId);
+                        final String ExcuseId = String.valueOf(txtExcuseId.getText()); //txtReimburseId.getText().toString();
+                        //Toast.makeText(v.getContext().getApplicationContext(),ReimburseId, Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(v.getContext())
+                                .setMessage("Approve This Excuse?")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        onAproveExcuse(ExcuseId, employee_id);
+                                    }
+                                })
+                                .setNegativeButton("No", null)
+                                .show();
+                    }else if(viewId==btnRejectExcuse.getId()){
+                        View vp = (View) v.getParent();
+                        TextView txtExcuseId = (TextView) view.findViewById(R.id.txtExcuseId);
+                        final String ExcuseId = String.valueOf(txtExcuseId.getText()); //txtReimburseId.getText().toString();
+                        //Toast.makeText(v.getContext().getApplicationContext(),ReimburseId, Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(v.getContext())
+                                .setMessage("Reject This Excuse?")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        onRejectExcuse(ExcuseId, employee_id);
                                     }
                                 })
                                 .setNegativeButton("No", null)
@@ -127,6 +159,84 @@ public class ExcuseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    private void  onRejectExcuse(String ExcuseId, String EmployeeId){
+        progress = new ProgressDialog(v.getContext());
+        progress.setMessage("Processing..");
+        progress.setIndeterminate(true);
+        progress.setCancelable(false);
+        progress.show();
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(ENDPOINT)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+
+        ApiExcuse restInterface = restAdapter.create(ApiExcuse.class);
+
+        restInterface.onRejectExcuse(ExcuseId, EmployeeId, new Callback<CheckLogin>() {
+            @Override
+            public void success(CheckLogin m, Response response) {
+
+                if (progress != null) {
+                    progress.dismiss();
+                }
+
+                Toast.makeText(v.getContext().getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
+
+                if (m.getMsgType().toLowerCase().equals("info")) {
+                    getExcuseList();
+                } else {
+
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(v.getContext().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                if (progress != null) {
+                    progress.dismiss();
+                }
+            }
+        });
+    }
+    private void  onAproveExcuse(String ExcuseId, String EmployeeId){
+        progress = new ProgressDialog(v.getContext());
+        progress.setMessage("Processing..");
+        progress.setIndeterminate(true);
+        progress.setCancelable(false);
+        progress.show();
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(ENDPOINT)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+
+        ApiExcuse restInterface = restAdapter.create(ApiExcuse.class);
+
+        restInterface.onAproveExcuse(ExcuseId, EmployeeId, new Callback<CheckLogin>() {
+            @Override
+            public void success(CheckLogin m, Response response) {
+
+                if (progress != null) {
+                    progress.dismiss();
+                }
+
+                Toast.makeText(v.getContext().getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
+
+                if (m.getMsgType().toLowerCase().equals("info")) {
+                    getExcuseList();
+                } else {
+
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(v.getContext().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                if (progress != null) {
+                    progress.dismiss();
+                }
+            }
+        });
+    }
     private void  onDeleteExcuse(String ExcuseId, String EmployeeId){
         progress = new ProgressDialog(v.getContext());
         progress.setMessage("Processing..");
