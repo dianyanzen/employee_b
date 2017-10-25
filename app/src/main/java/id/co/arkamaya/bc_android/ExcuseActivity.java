@@ -210,7 +210,7 @@ public class ExcuseActivity extends AppCompatActivity {
             }
 
         }else{
-            Toast.makeText(this, "Invalid parameter", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Parameter Salah", Toast.LENGTH_SHORT).show();
             finish();
         }
 
@@ -227,19 +227,19 @@ public class ExcuseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(v.getContext())
-                        .setMessage("Are you sure?")
+                        .setMessage("Simpan data ini?")
                         .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
 
                                 if(conDetector.isConnectingToInternet()){
                                     onSaveExcuse();
                                 }else{
-                                    Toast.makeText(getApplicationContext(), "Internet Connection Error..", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Tidak Dapat Terhubung Dengan Internet..", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         })
-                        .setNegativeButton("No", null)
+                        .setNegativeButton("Tidak", null)
                         .show();
             }
         });
@@ -1068,7 +1068,7 @@ public class ExcuseActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
             }else{
                 progress = new ProgressDialog(this);
-                progress.setMessage("Processing..");
+                progress.setMessage("Sedang Memproses..");
                 progress.setIndeterminate(true);
                 progress.setCancelable(false);
                 progress.show();
@@ -1121,7 +1121,7 @@ public class ExcuseActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
             }else{
                 progress = new ProgressDialog(this);
-                progress.setMessage("Processing..");
+                progress.setMessage("Sedang Memproses..");
                 progress.setIndeterminate(true);
                 progress.setCancelable(false);
                 progress.show();
@@ -1173,7 +1173,7 @@ public class ExcuseActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
             }else{
                 progress = new ProgressDialog(this);
-                progress.setMessage("Processing..");
+                progress.setMessage("Sedang Memproses..");
                 progress.setIndeterminate(true);
                 progress.setCancelable(false);
                 progress.show();
@@ -1239,7 +1239,7 @@ public class ExcuseActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
             }else{
                 progress = new ProgressDialog(this);
-                progress.setMessage("Processing..");
+                progress.setMessage("Sedang Memproses..");
                 progress.setIndeterminate(true);
                 progress.setCancelable(false);
                 progress.show();
@@ -1291,7 +1291,7 @@ public class ExcuseActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
             }else{
                 progress = new ProgressDialog(this);
-                progress.setMessage("Processing..");
+                progress.setMessage("Sedang Memproses..");
                 progress.setIndeterminate(true);
                 progress.setCancelable(false);
                 progress.show();
@@ -1343,7 +1343,7 @@ public class ExcuseActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
         }else{
                 progress = new ProgressDialog(this);
-                progress.setMessage("Processing..");
+                progress.setMessage("Sedang Memproses..");
                 progress.setIndeterminate(true);
                 progress.setCancelable(false);
                 progress.show();
@@ -1404,7 +1404,7 @@ public class ExcuseActivity extends AppCompatActivity {
     private void getExcuseById(String ExcuseId){
         /*-------------------------------*/
         progress = new ProgressDialog(this);
-        progress.setMessage("Load Data..");
+        progress.setMessage("Menyiapkan Data..");
         progress.setIndeterminate(true);
         progress.setCancelable(false);
         progress.show();

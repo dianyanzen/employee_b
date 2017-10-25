@@ -97,7 +97,7 @@ public class MyProfileEducationFragment extends Fragment {
                         startActivity(intent);
                     }
                 }else{
-                    Toast.makeText(getActivity(), "Internet Connection Error..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Tidak Dapat Terhubung Dengan Internet..", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -122,7 +122,7 @@ public class MyProfileEducationFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
     private void  onDeleteEdu(String EduId, String EmployeeId){
-        //Toast.makeText(getActivity(), "Internet Connection Error..", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "Tidak Dapat Terhubung Dengan Internet..", Toast.LENGTH_SHORT).show();
         progress = new ProgressDialog(getActivity());
         progress.setMessage("Processing..");
         progress.setIndeterminate(true);

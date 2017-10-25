@@ -183,7 +183,7 @@ public class MyProfileAddFamily extends AppCompatActivity {
                                 if(conDetector.isConnectingToInternet()){
                                     onSaveClick();
                                 }else{
-                                    Toast.makeText(getApplicationContext(), "Internet Connection Error..", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Tidak Dapat Terhubung Dengan Internet..", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         })

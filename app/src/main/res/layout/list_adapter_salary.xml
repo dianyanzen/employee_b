@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/pading1"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textAlignment="center"
+        android:textColor="#000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pading2"
+        android:layout_below="@+id/pading1"
+        android:layout_toStartOf="@+id/txtPdfName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Dian Septian"
+        android:id="@+id/txtPdfName"
+        android:paddingLeft="5dp"
+        android:textColor="#242424"
+        android:layout_alignBottom="@+id/pading2"
+        android:layout_alignStart="@+id/lblPdfDate"
+        android:textSize="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="2017-10"
+        android:id="@+id/lblPdfDate"
+        android:paddingLeft="5dp"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:layout_alignTop="@+id/txtPdfId"
+        android:layout_toEndOf="@+id/pading1" />
+
+    <ImageButton
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnDownload"
+        android:textColor="#ffffff"
+        android:src="@drawable/ic_picture_as_pdf_black_24dp"
+        android:tint="#fff"
+        android:backgroundTint="#3f51b4"
+        android:focusable="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text=""
+        android:id="@+id/txtPdfId"
+        android:visibility="invisible"
+        android:layout_above="@+id/txtPdfName"
+        android:layout_toStartOf="@+id/btnDownload" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text=""
+        android:id="@+id/txtPdfFileName"
+        android:visibility="invisible"
+        android:layout_above="@+id/txtPdfName"
+        android:layout_toStartOf="@+id/btnDownload" />
+
+</RelativeLayout>

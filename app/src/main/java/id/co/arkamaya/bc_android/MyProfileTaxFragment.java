@@ -160,7 +160,7 @@ public class MyProfileTaxFragment extends Fragment {
                                 if(conDetector.isConnectingToInternet()){
                                     onSaveClick();
                                 }else{
-                                    Toast.makeText(getActivity().getApplicationContext(), "Internet Connection Error..", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity().getApplicationContext(), "Tidak Dapat Terhubung Dengan Internet..", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         })

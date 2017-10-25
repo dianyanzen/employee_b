@@ -208,7 +208,7 @@ public class MyProfileAddEducation extends AppCompatActivity {
             Toast.makeText(this, "Data tidak lengkap..", Toast.LENGTH_LONG).show();
         }else{
             progress = new ProgressDialog(this);
-            progress.setMessage("Processing..");
+            progress.setMessage("Sedang Memproses..");
             progress.setIndeterminate(true);
             progress.setCancelable(false);
             progress.show();

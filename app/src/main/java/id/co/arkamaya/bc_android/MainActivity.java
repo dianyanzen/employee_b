@@ -76,11 +76,11 @@ public class MainActivity extends AppCompatActivity
         pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         if (!pref.contains("URLEndPoint")) {
-            Toast.makeText(getApplicationContext(), "Web Service URL Not Set..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "URL Tidak Di Setting..", Toast.LENGTH_SHORT).show();
             moveToSettingActivity();
         }
 
-        Toast.makeText(getApplicationContext(), "Hallo " + pref.getString("User", null) + "...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Hai  " + pref.getString("User", null) + "...", Toast.LENGTH_SHORT).show();
         txtEmployeeName.setText(pref.getString("User", null));
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Click back once again to exit", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Klik tombol kembali sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(new Runnable() {
 
@@ -179,13 +179,13 @@ public class MainActivity extends AppCompatActivity
 
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.commit();
-       /* } else if (id == R.id.nav_reimburse) {
-            ReimburseFragment fragment= new ReimburseFragment();
+        } else if (id == R.id.nav_slipgaji) {
+            SlipGajiFragment fragment= new SlipGajiFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
 
             fragmentTransaction.replace(R.id.fragment_container, fragment);
-            fragmentTransaction.commit();*/
+            fragmentTransaction.commit();
         }else if(id==R.id.nav_otrequest){
             OvertimeFragment fragment= new OvertimeFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
@@ -246,8 +246,8 @@ public class MainActivity extends AppCompatActivity
     public void showAlertNoConnection() {
         if(alertNoConDlg == null){
             alertNoConDlg = new AlertDialog.Builder(getApplicationContext()).create();
-            alertNoConDlg.setTitle("Error Connection");
-            alertNoConDlg.setMessage("No Internet Connection");
+            alertNoConDlg.setTitle("Koneksi Error");
+            alertNoConDlg.setMessage("Tidak Dapat Terhubung Dengan Internet..");
             alertNoConDlg.setCancelable(false);
         }else{
             if(alertNoConDlg.isShowing()){
@@ -279,7 +279,7 @@ public class MainActivity extends AppCompatActivity
             public void run() {
                 if(!conDetector.isConnectingToInternet()){
                     //showAlertNoConnection();
-                    Toast.makeText(getApplicationContext(),  "No Internet Connection",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),  "Tidak Dapat Terhubung Dengan Internet",Toast.LENGTH_LONG).show();
                 }else{
                     if(alertNoConDlg!=null){
                         if(alertNoConDlg.isShowing()){

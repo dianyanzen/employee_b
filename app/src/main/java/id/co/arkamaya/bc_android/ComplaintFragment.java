@@ -80,14 +80,14 @@ public class ComplaintFragment extends Fragment {
                         final String ComplaintId = String.valueOf(txtComplaintId.getText()); //txtReimburseId.getText().toString();
                         //Toast.makeText(v.getContext().getApplicationContext(),ReimburseId, Toast.LENGTH_SHORT).show();
                         new AlertDialog.Builder(v.getContext())
-                                .setMessage("Are you sure?")
+                                .setMessage("Hapus data ini?")
                                 .setCancelable(false)
-                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         onDeleteComplaint(ComplaintId, employee_id);
                                     }
                                 })
-                                .setNegativeButton("No", null)
+                                .setNegativeButton("Tidak", null)
                                 .show();
                     }else{
                         TextView txtComplaintId = (TextView) view.findViewById(R.id.txtComplaintId);
@@ -98,7 +98,7 @@ public class ComplaintFragment extends Fragment {
                         startActivity(intent);
                     }
                 }else{
-                    Toast.makeText(v.getContext().getApplicationContext(), "Internet Connection Error..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext().getApplicationContext(), "Tidak Dapat Terhubung Dengan Internet..", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -126,7 +126,7 @@ public class ComplaintFragment extends Fragment {
 
     private void  onDeleteComplaint(String ComplaintId, String EmployeeId){
         progress = new ProgressDialog(v.getContext());
-        progress.setMessage("Processing..");
+        progress.setMessage("Sedang Memproses..");
         progress.setIndeterminate(true);
         progress.setCancelable(false);
         progress.show();
@@ -168,7 +168,7 @@ public class ComplaintFragment extends Fragment {
 
         /*-------------------------------*/
         progress = new ProgressDialog(v.getContext());
-        progress.setMessage("Syncrhonizing...");
+        progress.setMessage("Sedang Menyinkronkan...");
         progress.setIndeterminate(true);
         progress.setCancelable(false);
         progress.show();

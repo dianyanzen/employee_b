@@ -263,7 +263,7 @@ public class MainFragment extends Fragment implements GoogleApiClient.Connection
         if(pref.contains("URLEndPoint")){
             ENDPOINT= pref.getString("URLEndPoint", "");
         }else{
-            Toast.makeText(v.getContext().getApplicationContext(), "Web Service URL Not Set..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(v.getContext().getApplicationContext(), "URL Tidak Di Setting..", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(v.getContext().getApplicationContext(), SettingActivity.class);
             startActivity(intent);
             //getActivity().finish();
@@ -528,7 +528,7 @@ public class MainFragment extends Fragment implements GoogleApiClient.Connection
         final String employee_id=EmployeeId;
 
         progress = new ProgressDialog(v.getContext());
-        progress.setMessage("Synchronizing..");
+        progress.setMessage("Sedang Menyinkronkan..");
         progress.setIndeterminate(true);
         progress.setCancelable(false);
         progress.show();
@@ -638,13 +638,13 @@ public class MainFragment extends Fragment implements GoogleApiClient.Connection
 
     @Override
     public void onConnectionSuspended(int i) {
-        Toast.makeText(getActivity(),"GPS Connection is suspended",
+        Toast.makeText(getActivity(),"GPS Telah Di Suspend",
                 Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        Toast.makeText(getActivity(),"GPS Connection is failed"+connectionResult.getErrorMessage(),
+        Toast.makeText(getActivity(),"Gagal Mengkoneksi  GPS "+connectionResult.getErrorMessage(),
                 Toast.LENGTH_LONG).show();
     }
 
@@ -690,8 +690,8 @@ public class MainFragment extends Fragment implements GoogleApiClient.Connection
     public void showAlertNoConnection() {
         if(alertNoConDlg == null){
             alertNoConDlg = new AlertDialog.Builder(getActivity()).create();
-            alertNoConDlg.setTitle("Error Connection");
-            alertNoConDlg.setMessage("No Internet Connection");
+            alertNoConDlg.setTitle("Koneksi Error");
+            alertNoConDlg.setMessage("Tidak Dapat Terhubung Dengan Internet..");
             alertNoConDlg.setCancelable(false);
         }else{
             if(alertNoConDlg.isShowing()){

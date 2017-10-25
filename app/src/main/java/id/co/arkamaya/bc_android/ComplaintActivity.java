@@ -180,7 +180,7 @@ public class ComplaintActivity extends AppCompatActivity {
             }
 
         }else{
-            Toast.makeText(this, "Invalid parameter", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Parameter Salah...", Toast.LENGTH_SHORT).show();
             finish();
         }
 
@@ -197,15 +197,15 @@ public class ComplaintActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(v.getContext())
-                        .setMessage("Are you sure?")
+                        .setMessage("Simpan Data?")
                         .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
 
                                 onSaveComplaint();
                             }
                         })
-                        .setNegativeButton("No", null)
+                        .setNegativeButton("Tidak", null)
                         .show();
             }
         });
@@ -333,7 +333,7 @@ public class ComplaintActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
         }else{
             progress = new ProgressDialog(this);
-            progress.setMessage("Processing..");
+            progress.setMessage("Sedang Memproses..");
             progress.setIndeterminate(true);
             progress.setCancelable(false);
             progress.show();
@@ -384,7 +384,7 @@ public class ComplaintActivity extends AppCompatActivity {
     private void getComplaintById(String ComplaintId){
         /*-------------------------------*/
         progress = new ProgressDialog(this);
-        progress.setMessage("Load Data..");
+        progress.setMessage("Menyiapkan Data..");
         progress.setIndeterminate(true);
         progress.setCancelable(false);
         progress.show();
