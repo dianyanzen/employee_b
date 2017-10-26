@@ -34,7 +34,7 @@ class excuseservicemobile extends CI_Controller {
         header("content-type: application/json");
         date_default_timezone_set('asia/jakarta');
         $nowdate = date('Y-m-d');
-        $pastdate = date("Y-m-d", strtotime("- 90 days")); 
+        $pastdate = date("Y-m-d", strtotime("- 14 days")); 
         $employee_id = $this->input->get('employee_id', true);
         $sql ="select 
             a.employee_id
@@ -372,7 +372,18 @@ class excuseservicemobile extends CI_Controller {
         $data['group']          = $group ? $group : NULL;
         if ($excuse_type == 'Berita Acara Clock IN/OUT'){
 			$data['date_from']      = $date_event;
-			$data['date_to']        = $date_event;    
+			$data['date_to']        = $date_event;
+            if ($date_event > date('Y-m-d')){
+                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Anda Tidak Dapat Mengajukan BAC Lebih Dari Hari Ini"
+                                    )));
+                //die;
+            }
+            // echo 2;
+
 		}else{
 			$data['date_from']      = $date_from;
 			$data['date_to']        = $date_to;    
@@ -388,7 +399,7 @@ class excuseservicemobile extends CI_Controller {
         }else{
             $data['shift_type'] = $shift_type ? $shift_type : NULL;
         }
-        
+        //die;
         if ($excuse_id == "") {
             //insert 
             $data['created_by'] = $employee_name;

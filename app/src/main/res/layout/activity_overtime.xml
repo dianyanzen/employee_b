@@ -31,28 +31,86 @@
         android:hint=" yyyy-mm-dd"
         android:layout_toStartOf="@+id/btnDatePicker"
         android:focusable="false" />
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/btnDatePicker"
+        android:layout_alignBottom="@+id/txtOvertimeDate"
+        android:layout_alignParentEnd="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Over Time"
-        android:id="@+id/lblOvertime"
+        android:text="Start Time"
+        android:id="@+id/lblOvertimeTime1"
         android:textStyle="bold|italic"
         android:textSize="14dp"
         android:layout_below="@+id/txtOvertimeDate"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"  />
 
     <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtOvertimeTime1"
+        android:layout_below="@+id/lblOvertimeTime1"
+        android:layout_alignParentStart="true"
+        android:hint=" hh.mm"
+        android:layout_toStartOf="@+id/btnDatePicker"
+        android:focusable="false" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/btnDatePicker2"
+        android:layout_alignBottom="@+id/txtOvertimeTime1"
+        android:layout_alignParentEnd="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="End Time"
+        android:id="@+id/lblOvertimeTime2"
+        android:textStyle="bold|italic"
+        android:textSize="14dp"
+        android:layout_below="@+id/txtOvertimeTime1"
+        android:layout_alignParentStart="true"  />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtOvertimeTime2"
+        android:layout_below="@+id/lblOvertimeTime2"
+        android:layout_alignParentStart="true"
+        android:hint=" hh.mm"
+        android:layout_toStartOf="@+id/btnDatePicker"
+        android:focusable="false" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:id="@+id/btnDatePicker3"
+        android:layout_alignBottom="@+id/txtOvertimeTime2"
+        android:layout_alignParentEnd="true" />
+
+
+    <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
         android:id="@+id/txtOvertime"
-        android:layout_below="@+id/lblOvertime"
+        android:layout_below="@+id/txtOvertimeTime2"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:singleLine="true" android:imeOptions="actionNext"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
+        android:text="Include Breaktime"
+        android:checked="true"
         android:focusable="true" />
 
     <TextView
@@ -106,13 +164,7 @@
         android:layout_toEndOf="@+id/lblDate"
         android:visibility="invisible" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="..."
-        android:id="@+id/btnDatePicker"
-        android:layout_alignBottom="@+id/txtOvertimeDate"
-        android:layout_alignParentEnd="true" />
+
 
 
 </RelativeLayout>

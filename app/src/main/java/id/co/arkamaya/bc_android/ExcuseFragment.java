@@ -73,7 +73,7 @@ public class ExcuseFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 long viewId = id;//view.getId();
-                Button btnDeleteExcuse = (Button)view.findViewById(R.id.btnDelete);
+                ImageButton btnDeleteExcuse = (ImageButton)view.findViewById(R.id.btnDelete);
                 ImageButton btnAproveExcuse = (ImageButton)view.findViewById(R.id.btnAprove);
                 ImageButton btnRejectExcuse = (ImageButton)view.findViewById(R.id.btnReject);
 

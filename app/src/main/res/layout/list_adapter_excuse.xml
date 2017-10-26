@@ -36,18 +36,18 @@
         android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/txtProdMonth" />
     <TextView
+        android:fontFamily="sans-serif-condensed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Employee Name"
         android:id="@+id/txtEmployeeName"
-        android:layout_marginTop="5dp"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
         android:layout_toRightOf="@+id/txtDate"
         android:layout_toEndOf="@+id/txtDate"
         android:textColor="#000000"
-        android:textSize="15dp"
+        android:textSize="12dp"
         android:layout_weight="1"
         android:gravity="left"
         android:textStyle="bold"/>
@@ -59,11 +59,12 @@
         android:layout_alignStart="@+id/txtExcueseType"
         android:layout_toStartOf="@+id/btnDelete"
         android:layout_marginRight="5dp"
+        android:textColor="@color/colorGray"
         android:layout_below="@+id/txtExcueseType"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="left"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="3dp"
         android:text="TextView"/>
 
     <TextView
@@ -75,19 +76,25 @@
         android:layout_toStartOf="@+id/btnDelete"
         android:layout_marginRight="5dp"
         android:layout_below="@+id/txtEmployeeName"
+        android:textColor="@color/colorGray"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="left"
         android:text="TextView"/>
 
-    <Button
+    <ImageButton
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:id="@+id/btnDelete"
         android:textColor="#ffffff"
-        android:drawableLeft="@android:drawable/ic_delete"
-        android:text="Delete"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_delete_black_24dp"
+        android:tint="#fff"
+        android:backgroundTint="#ff0000"
+        android:textSize="10dp"
+        android:text=""
         android:focusable="false"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -122,8 +129,9 @@
         android:layout_alignParentEnd="true"/>
     <ImageButton
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:id="@+id/btnReject"
         android:textColor="#ffffff"
         android:src="@drawable/ic_clear_black_24dp"
@@ -137,9 +145,10 @@
         />
     <ImageButton
         style="?android:attr/buttonStyleSmall"
+        android:layout_marginTop="8dp"
         android:padding="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:id="@+id/btnAprove"
         android:textColor="#ffffff"
         android:src="@drawable/ic_check_black_24dp"
@@ -149,7 +158,8 @@
         android:focusable="false"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/btnReject"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        />
 
 
 </RelativeLayout>

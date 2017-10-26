@@ -38,7 +38,6 @@ public class OvertimeActivity extends AppCompatActivity {
 
     private EditText txtOvertimeDate;
     private EditText txtOvertimeDescription;
-    private EditText txtOvertime;
     private Button bntDatePicker;
 
     public String ENDPOINT="http://bc-id.co.id/";
@@ -117,7 +116,7 @@ public class OvertimeActivity extends AppCompatActivity {
 
         txtOvertimeDate = (EditText)findViewById(R.id.txtOvertimeDate);
         txtOvertimeDescription = (EditText)findViewById(R.id.txtOvertimeDescription);
-        txtOvertime = (EditText)findViewById(R.id.txtOvertime);
+//        txtOvertime = (EditText)findViewById(R.id.txtOvertime);
 
         if (extras != null) {
             modeEdit=extras.getString("Mode");
@@ -129,7 +128,7 @@ public class OvertimeActivity extends AppCompatActivity {
                 modeEdit="new";
                 txtOvertimeDate.setText("");
                 txtOvertimeDescription.setText("");
-                txtOvertime.setText("");
+//                txtOvertime.setText("");
                 setDate();
             }
 
@@ -182,7 +181,7 @@ public class OvertimeActivity extends AppCompatActivity {
     protected void onSaveOvertime(){
         String overtime_date = txtOvertimeDate.getText().toString();
         String overtime_description = txtOvertimeDescription.getText().toString();
-        String overtime_hour = txtOvertime.getText().toString();
+        String overtime_hour = "0";
         String overtime_id = OvertimeId;
 
         /*
@@ -320,7 +319,7 @@ public class OvertimeActivity extends AppCompatActivity {
 
                 txtOvertimeDate.setText(m.getOtDt().toString());
                 txtOvertimeDescription.setText(m.getOtDescription().toString());
-                txtOvertime.setText(m.getOtHour().toString());
+                //txtOvertime.setText(m.getOtHour().toString());
                 if (progress != null) {
                     progress.dismiss();
                 }

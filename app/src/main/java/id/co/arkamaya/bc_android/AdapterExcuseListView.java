@@ -60,7 +60,7 @@ public class AdapterExcuseListView extends ArrayAdapter<GetExcuseList> {
         TextView txtExcuseDescription=(TextView)adapterView.findViewById(R.id.txtExcuseDescription);
         TextView txtExcuseId=(TextView)adapterView.findViewById(R.id.txtExcuseId);
         TextView txtExcuseStatus=(TextView)adapterView.findViewById(R.id.txtExcuseStatus);
-        Button btnDelete=(Button)adapterView.findViewById((R.id.btnDelete));
+        ImageButton btnDelete=(ImageButton)adapterView.findViewById((R.id.btnDelete));
         ImageButton btnAprove=(ImageButton)adapterView.findViewById((R.id.btnAprove));
         ImageButton btnReject=(ImageButton)adapterView.findViewById((R.id.btnReject));
         Log.e("Data",m.getEmployeeId().toString()+" - "+EmployeeId);
