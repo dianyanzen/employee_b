@@ -93,7 +93,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         txtOvertimeDate = (EditText)findViewById(R.id.txtOvertimeDate);
         txtOvertimeDescription = (EditText)findViewById(R.id.txtOvertimeDescription);
-        txtOvertime = (EditText)findViewById(R.id.txtOvertime);
+        //txtOvertime = (EditText)findViewById(R.id.txtOvertime);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
