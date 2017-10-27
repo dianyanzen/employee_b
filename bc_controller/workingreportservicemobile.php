@@ -68,7 +68,7 @@ class workingreportservicemobile extends CI_Controller {
 				att.reason,
 				att.address,
 				att.place,
-				date_format(att.clock_out, '%Y-%m-%d') as schedule_dt,
+				( case when date_format(att.clock_in, '%Y-%m-%d') is null then date_format(att.clock_out, '%Y-%m-%d') else date_format(att.clock_in, '%Y-%m-%d') end ) as schedule_dt,
 				COALESCE(SEC_TO_TIME(((TIMESTAMPDIFF(minute, att.clock_in, att.clock_out) - $time_off) * 60)),0) AS Diff_Hour,
 				COALESCE(CAST(SUBSTRING(SEC_TO_TIME(((TIMESTAMPDIFF(minute, att.clock_in, att.clock_out)) - $time_off) * 60), 1, 2) as UNSIGNED),0) AS Count_Hour,
 				ats.remark
@@ -76,7 +76,6 @@ class workingreportservicemobile extends CI_Controller {
 				tb_r_attendance att left join tb_r_sum_attendance ats on att.attendance_dt = ats.attendance_dt and att.employee_id = ats.employee_id
 			WHERE 
 				att.employee_id='$employee_id' ";
-				
 		if($data_month != null){
 			$dataMonth_split = explode("-",$data_month); //$data_month.split("-");
 			$dataYear = $dataMonth_split[0];
