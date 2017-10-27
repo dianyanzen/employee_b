@@ -4,14 +4,18 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,29 +57,61 @@ public class AdapterOvertimeListView extends ArrayAdapter<GetOvertimeList> {
         pref = PreferenceManager.getDefaultSharedPreferences(adapterView.getContext().getApplicationContext());
         EmployeeId=pref.getString("EmployeeId", null);
         ENDPOINT=pref.getString("URLEndPoint", "");
-
+        RelativeLayout Overtime_list = (RelativeLayout)adapterView.findViewById(R.id.overtime_list);
+        TextView txtEmployeeNm=(TextView)adapterView.findViewById(R.id.txtEmployeeName);
+        TextView txtEmployeeId=(TextView)adapterView.findViewById(R.id.txtEmployeeId);
         TextView txtProdMonth = (TextView)adapterView.findViewById(R.id.txtProdMonth);
         TextView txtDate = (TextView)adapterView.findViewById(R.id.txtDate);
         TextView txtHour = (TextView)adapterView.findViewById(R.id.txtOvertimeHour);
         TextView txtOvertimeDescription = (TextView)adapterView.findViewById(R.id.txtOvertimeDescription);
         TextView txtOvertimeId = (TextView)adapterView.findViewById(R.id.txtOvertimeId);
         TextView txtOvertimeStatus =(TextView)adapterView.findViewById(R.id.txtOvertimeStatus);
-        Button btnDelete = (Button)adapterView.findViewById((R.id.btnDelete));
+        ImageButton btnDelete=(ImageButton)adapterView.findViewById((R.id.btnDelete));
+        ImageButton btnEdit=(ImageButton)adapterView.findViewById((R.id.btnEdit));
+        ImageButton btnAprove=(ImageButton)adapterView.findViewById((R.id.btnAprove));
+        ImageButton btnReject=(ImageButton)adapterView.findViewById((R.id.btnReject));
+        Log.e("Data",m.getEmployeeId().toString()+" - "+EmployeeId);
+        String GetemployeID =m.getEmployeeId();
 
-        if(m.getOvertimeStatus() != "" && m.getOvertimeStatus() != null){
-            txtOvertimeStatus.setVisibility(adapterView.VISIBLE);
+        if ( !GetemployeID.equals(EmployeeId) ) {
             btnDelete.setVisibility(adapterView.INVISIBLE);
-        }else{
-            txtOvertimeStatus.setVisibility(adapterView.INVISIBLE);
-            btnDelete.setVisibility(adapterView.VISIBLE);
-        }
+            btnEdit.setVisibility(adapterView.INVISIBLE);
+            Overtime_list.setBackgroundColor(adapterView.getResources().getColor(R.color.colorGrayLight));
+            if (m.getOvertimeStatus() != "" && m.getOvertimeStatus() != null) {
+                txtOvertimeStatus.setVisibility(adapterView.VISIBLE);
+                btnAprove.setVisibility(adapterView.INVISIBLE);
+                btnReject.setVisibility(adapterView.INVISIBLE);
+            } else {
+                txtOvertimeStatus.setVisibility(adapterView.INVISIBLE);
+                btnAprove.setVisibility(adapterView.VISIBLE);
+                btnReject.setVisibility(adapterView.VISIBLE);
+            }
 
+        }
+        else {
+            if (m.getOvertimeStatus() != "" && m.getOvertimeStatus() != null) {
+                txtOvertimeStatus.setVisibility(adapterView.VISIBLE);
+                btnDelete.setVisibility(adapterView.INVISIBLE);
+                btnEdit.setVisibility(adapterView.INVISIBLE);
+            } else {
+                txtOvertimeStatus.setVisibility(adapterView.INVISIBLE);
+                btnDelete.setVisibility(adapterView.VISIBLE);
+                btnEdit.setVisibility(adapterView.VISIBLE);
+            }
+            btnAprove.setVisibility(adapterView.INVISIBLE);
+            btnReject.setVisibility(adapterView.INVISIBLE);
+        }
+        txtEmployeeNm.setText(m.getEmployeeName());
+        txtEmployeeId.setText(m.getEmployeeId());
         txtProdMonth.setText(m.getOvertimeProdMonth());
         txtDate.setText(m.getOvertimeProdDate());
         txtOvertimeDescription.setText(m.getOtDescription());
         txtHour.setText(m.getOtHour());
         txtOvertimeId.setText(m.getOtId());
         txtOvertimeStatus.setText(m.getOvertimeStatus());
+        if (m.getOvertimeStatus().equalsIgnoreCase("rejected") ){
+            txtOvertimeStatus.setTextColor(Color.RED);
+        }
 
         final ViewGroup prnt=parent;
         final int pos=position;
@@ -88,6 +124,39 @@ public class AdapterOvertimeListView extends ArrayAdapter<GetOvertimeList> {
                         TextView txtOvertimeId = (TextView) vp.findViewById(R.id.txtOvertimeId);
                         final String OvertimeId = txtOvertimeId.getText().toString();
                         //Toast.makeText(v.getContext(), "Delete button clicked " +ReimburseId+"-"+EmployeeId, Toast.LENGTH_SHORT).show();
+                        ((ListView) prnt).performItemClick(vp, pos, v.getId()); // Let the event be handled in onItemClick()
+                    }
+                }
+        );
+        btnEdit.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        View vp=(View)v.getParent();
+                        TextView txtOvertimeId = (TextView) vp.findViewById(R.id.txtOvertimeId);
+                        final String OvertimeId = txtOvertimeId.getText().toString();
+                        ((ListView) prnt).performItemClick(vp, pos, v.getId()); // Let the event be handled in onItemClick()
+                    }
+                }
+        );
+        btnAprove.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        View vp=(View)v.getParent();
+                        TextView txtOvertimeId = (TextView) vp.findViewById(R.id.txtOvertimeId);
+                        final String OvertimeId = txtOvertimeId.getText().toString();
+                        ((ListView) prnt).performItemClick(vp, pos, v.getId()); // Let the event be handled in onItemClick()
+                    }
+                }
+        );
+        btnReject.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        View vp=(View)v.getParent();
+                        TextView txtOvertimeId = (TextView) vp.findViewById(R.id.txtOvertimeId);
+                        final String OvertimeId = txtOvertimeId.getText().toString();
                         ((ListView) prnt).performItemClick(vp, pos, v.getId()); // Let the event be handled in onItemClick()
                     }
                 }

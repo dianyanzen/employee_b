@@ -34,7 +34,8 @@ class excuseservicemobile extends CI_Controller {
         header("content-type: application/json");
         date_default_timezone_set('asia/jakarta');
         $nowdate = date('Y-m-d');
-        $pastdate = date("Y-m-d", strtotime("- 14 days")); 
+        /* UBAH HARI PADA  */
+        $pastdate = date("Y-m-d", strtotime("- 30 days")); 
         $employee_id = $this->input->get('employee_id', true);
         $sql ="select 
             a.employee_id
@@ -140,7 +141,37 @@ class excuseservicemobile extends CI_Controller {
             $aprove_mgr_dt = $data->row()->mgr_approved_dt;    
         }
         
-        if ($approved_by == $supervisorone){
+        if ($approved_by == $supervisortwo){
+            try {
+                $sql = "
+                UPDATE
+                    tb_m_excuse
+                set
+                    spv_approved_dt = '$aprove_spv_dt'
+                    , spv_approved_by = '$supervisorone'
+                    , mgr_approved_dt = '$aprove_mgr_dt'
+                    , mgr_approved_by = '$supervisortwo'
+                    , excuse_approved_dt = '$approved_dt'
+                    , excuse_approved_by = '$approved_by'
+                where
+                    excuse_id = '$excuse_id'
+                    ";      
+            $this->db->query($sql);
+                                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "info",
+                                    'msgText' => "Excuse has been Aproved"
+                                    )));
+            } catch (Exception $e) {
+                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Failed to aprove excuse"
+                                    )));
+            }
+        }else  if ($approved_by == $supervisorone){
             try {
                 $sql = "
                 UPDATE
@@ -166,34 +197,6 @@ class excuseservicemobile extends CI_Controller {
                                     'msgText' => "Failed to aprove excuse"
                                     )));
             }  
-        }else if ($approved_by == $supervisortwo){
-            try {
-                $sql = "
-                UPDATE
-                    tb_m_excuse
-                set
-                     mgr_approved_dt = '$aprove_mgr_dt'
-                    , mgr_approved_by = '$supervisortwo'
-                    , excuse_approved_dt = '$approved_dt'
-                    , excuse_approved_by = '$approved_by'
-                where
-                    excuse_id = '$excuse_id'
-                    ";      
-            $this->db->query($sql);
-                                return $this->output
-                                ->set_content_type('application/json')
-                                ->set_output(json_encode(array(
-                                    'msgType' => "info",
-                                    'msgText' => "Excuse has been Aproved"
-                                    )));
-            } catch (Exception $e) {
-                return $this->output
-                                ->set_content_type('application/json')
-                                ->set_output(json_encode(array(
-                                    'msgType' => "warning",
-                                    'msgText' => "Failed to aprove excuse"
-                                    )));
-            }
         }else{
             try {
                 $sql = "

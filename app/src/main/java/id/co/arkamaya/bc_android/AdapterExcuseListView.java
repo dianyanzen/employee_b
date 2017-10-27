@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -51,7 +52,7 @@ public class AdapterExcuseListView extends ArrayAdapter<GetExcuseList> {
         pref = PreferenceManager.getDefaultSharedPreferences(adapterView.getContext().getApplicationContext());
         EmployeeId=pref.getString("EmployeeId", null);
         ENDPOINT=pref.getString("URLEndPoint", "");
-
+        RelativeLayout Excuse_list = (RelativeLayout)adapterView.findViewById(R.id.excuse_list);
         TextView txtProdMonth=(TextView)adapterView.findViewById(R.id.txtProdMonth);
         TextView txtEmployeeNm=(TextView)adapterView.findViewById(R.id.txtEmployeeName);
         TextView txtEmployeeId=(TextView)adapterView.findViewById(R.id.txtEmployeeId);
@@ -61,6 +62,7 @@ public class AdapterExcuseListView extends ArrayAdapter<GetExcuseList> {
         TextView txtExcuseId=(TextView)adapterView.findViewById(R.id.txtExcuseId);
         TextView txtExcuseStatus=(TextView)adapterView.findViewById(R.id.txtExcuseStatus);
         ImageButton btnDelete=(ImageButton)adapterView.findViewById((R.id.btnDelete));
+        ImageButton btnEdit=(ImageButton)adapterView.findViewById((R.id.btnEdit));
         ImageButton btnAprove=(ImageButton)adapterView.findViewById((R.id.btnAprove));
         ImageButton btnReject=(ImageButton)adapterView.findViewById((R.id.btnReject));
         Log.e("Data",m.getEmployeeId().toString()+" - "+EmployeeId);
@@ -68,6 +70,8 @@ public class AdapterExcuseListView extends ArrayAdapter<GetExcuseList> {
 
         if ( !GetemployeID.equals(EmployeeId) ) {
             btnDelete.setVisibility(adapterView.INVISIBLE);
+            btnEdit.setVisibility(adapterView.INVISIBLE);
+            Excuse_list.setBackgroundColor(adapterView.getResources().getColor(R.color.colorGrayLight));
             if (m.getExcuseStatus() != "" && m.getExcuseStatus() != null) {
                 txtExcuseStatus.setVisibility(adapterView.VISIBLE);
                 btnAprove.setVisibility(adapterView.INVISIBLE);
@@ -83,9 +87,11 @@ public class AdapterExcuseListView extends ArrayAdapter<GetExcuseList> {
             if (m.getExcuseStatus() != "" && m.getExcuseStatus() != null) {
                 txtExcuseStatus.setVisibility(adapterView.VISIBLE);
                 btnDelete.setVisibility(adapterView.INVISIBLE);
+                btnEdit.setVisibility(adapterView.INVISIBLE);
             } else {
                 txtExcuseStatus.setVisibility(adapterView.INVISIBLE);
                 btnDelete.setVisibility(adapterView.VISIBLE);
+                btnEdit.setVisibility(adapterView.VISIBLE);
             }
             btnAprove.setVisibility(adapterView.INVISIBLE);
             btnReject.setVisibility(adapterView.INVISIBLE);
@@ -108,6 +114,17 @@ public class AdapterExcuseListView extends ArrayAdapter<GetExcuseList> {
         final int pos=position;
 
         btnDelete.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        View vp=(View)v.getParent();
+                        TextView txtExcuseId = (TextView) vp.findViewById(R.id.txtExcuseId);
+                        final String ExcuseId = txtExcuseId.getText().toString();
+                        ((ListView) prnt).performItemClick(vp, pos, v.getId()); // Let the event be handled in onItemClick()
+                    }
+                }
+        );
+        btnEdit.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

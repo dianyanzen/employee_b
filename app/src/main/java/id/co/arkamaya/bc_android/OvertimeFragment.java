@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,7 +64,10 @@ public class OvertimeFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 long viewId = id;//view.getId();
-                Button btnDeleteOvertime = (Button)view.findViewById(R.id.btnDelete);
+                ImageButton btnDeleteOvertime = (ImageButton)view.findViewById(R.id.btnDelete);
+                ImageButton btnAproveOvertime = (ImageButton)view.findViewById(R.id.btnAprove);
+                ImageButton btnRejectOvertime = (ImageButton)view.findViewById(R.id.btnReject);
+                ImageButton btnEditOvertime = (ImageButton)view.findViewById(R.id.btnEdit);
 
                 if(conDetector.isConnectingToInternet()){
                     if(viewId==btnDeleteOvertime.getId())
@@ -83,13 +87,46 @@ public class OvertimeFragment extends Fragment{
                                 })
                                 .setNegativeButton("No", null)
                                 .show();
-                    }else{
+                    }else if(viewId==btnAproveOvertime.getId()){
+                        View vp = (View) v.getParent();
                         TextView txtOvertimeId = (TextView) view.findViewById(R.id.txtOvertimeId);
-                        final String OvertimeId = txtOvertimeId.getText().toString();
-                        Intent intent = new Intent(v.getContext(), OvertimeActivity.class);
-                        intent.putExtra("OvertimeId", OvertimeId);
-                        intent.putExtra("Mode","edit");
-                        startActivity(intent);
+                        final String OvertimeId = String.valueOf(txtOvertimeId.getText()); //txtReimburseId.getText().toString();
+                        //Toast.makeText(v.getContext().getApplicationContext(),ReimburseId, Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(v.getContext())
+                                .setMessage("Approve This Overtime?")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        onAproveOvertime(OvertimeId, employe_id);
+                                    }
+                                })
+                                .setNegativeButton("No", null)
+                                .show();
+                    }else if(viewId==btnRejectOvertime.getId()){
+                        View vp = (View) v.getParent();
+                        TextView txtOvertimeId = (TextView) view.findViewById(R.id.txtOvertimeId);
+                        final String OvertimeId = String.valueOf(txtOvertimeId.getText()); //txtReimburseId.getText().toString();
+                        //Toast.makeText(v.getContext().getApplicationContext(),ReimburseId, Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(v.getContext())
+                                .setMessage("Reject This Overtime?")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        onRejectOvertime(OvertimeId, employe_id);
+                                    }
+                                })
+                                .setNegativeButton("No", null)
+                                .show();
+                    }else if(viewId==btnEditOvertime.getId()){
+                        TextView OvertimeStatus = (TextView) view.findViewById(R.id.txtOvertimeStatus);
+                        if (OvertimeStatus.getVisibility() == View.INVISIBLE){
+                            TextView txtOvertimeId = (TextView) view.findViewById(R.id.txtOvertimeId);
+                            final String OvertimeId = txtOvertimeId.getText().toString();
+                            Intent intent = new Intent(v.getContext(), OvertimeActivity.class);
+                            intent.putExtra("OvertimeId", OvertimeId);
+                            intent.putExtra("Mode","edit");
+                            startActivity(intent);
+                        }
                     }
                 }else{
                     Toast.makeText(v.getContext().getApplicationContext(), "Internet Connection Error..", Toast.LENGTH_SHORT).show();
@@ -117,7 +154,84 @@ public class OvertimeFragment extends Fragment{
 
         super.onViewCreated(view, savedInstanceState);
     }
+    private void  onRejectOvertime(String OvertimeId, String EmployeeId){
+        progress = new ProgressDialog(v.getContext());
+        progress.setMessage("Processing..");
+        progress.setIndeterminate(true);
+        progress.setCancelable(false);
+        progress.show();
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(ENDPOINT)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
 
+        APIOvertime restInterface = restAdapter.create(APIOvertime.class);
+
+        restInterface.onRejectOvertime(OvertimeId, EmployeeId, new Callback<CheckLogin>() {
+            @Override
+            public void success(CheckLogin m, Response response) {
+
+                if (progress != null) {
+                    progress.dismiss();
+                }
+
+                Toast.makeText(v.getContext().getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
+
+                if (m.getMsgType().toLowerCase().equals("info")) {
+                    getOvertimeList();
+                } else {
+
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(v.getContext().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                if (progress != null) {
+                    progress.dismiss();
+                }
+            }
+        });
+    }
+    private void  onAproveOvertime(String OvertimeId, String EmployeeId){
+        progress = new ProgressDialog(v.getContext());
+        progress.setMessage("Processing..");
+        progress.setIndeterminate(true);
+        progress.setCancelable(false);
+        progress.show();
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(ENDPOINT)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+
+        APIOvertime restInterface = restAdapter.create(APIOvertime.class);
+
+        restInterface.onAproveOvertime(OvertimeId, EmployeeId, new Callback<CheckLogin>() {
+            @Override
+            public void success(CheckLogin m, Response response) {
+
+                if (progress != null) {
+                    progress.dismiss();
+                }
+
+                Toast.makeText(v.getContext().getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
+
+                if (m.getMsgType().toLowerCase().equals("info")) {
+                    getOvertimeList();
+                } else {
+
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(v.getContext().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                if (progress != null) {
+                    progress.dismiss();
+                }
+            }
+        });
+    }
     private void  onDeleteOvertime(String OvertimeId, String EmployeeId){
         progress = new ProgressDialog(v.getContext());
         progress.setMessage("Processing..");

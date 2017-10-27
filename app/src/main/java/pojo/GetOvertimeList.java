@@ -5,6 +5,12 @@ import com.google.gson.annotations.SerializedName;
 
 public class GetOvertimeList {
 
+    @SerializedName("employee_id")
+    @Expose
+    private String employee_id;
+    @SerializedName("employee_name")
+    @Expose
+    private String employee_name;
     @SerializedName("overtime_prod_date")
     @Expose
     private String overtimeProdDate;
@@ -20,6 +26,12 @@ public class GetOvertimeList {
     @SerializedName("ot_hour")
     @Expose
     private String otHour;
+    @SerializedName("ot_from")
+    @Expose
+    private String otFrom;
+    @SerializedName("ot_to")
+    @Expose
+    private String otTo;
     @SerializedName("ot_calculate")
     @Expose
     private String otCalculate;
@@ -39,7 +51,42 @@ public class GetOvertimeList {
     /**
      *
      * @return
-     * The overtimeProdDate
+     *
+     */
+    public String getEmployeeId() {
+        return employee_id;
+    }
+
+    /**
+     *
+     * @param employee_id
+     *
+     */
+    public void setEmployeeId(String employee_id) {
+        this.employee_id = employee_id;
+    }
+    /**
+     *
+     * @return
+     *
+     */
+    public String getEmployeeName() {
+        return employee_name;
+    }
+
+    /**
+     *
+     * @param employee_name
+     *
+     */
+    public void setEmployeeName(String employee_name) {
+        this.employee_name = employee_name;
+    }
+
+    /**
+     *
+     * @return
+     *
      */
     public String getOvertimeProdDate() {
         return overtimeProdDate;
@@ -124,6 +171,42 @@ public class GetOvertimeList {
      */
     public void setOtHour(String otHour) {
         this.otHour = otHour;
+    }
+
+    /**
+     *
+     * @return
+     * The otHour
+     */
+    public String getOtFrom() {
+        return otFrom;
+    }
+
+    /**
+     *
+     * @param otFrom
+     * The ot_hour
+     */
+    public void setOtFrom(String otFrom) {
+        this.otFrom = otFrom;
+    }
+
+    /**
+     *
+     * @return
+     * The otHour
+     */
+    public String getOtTo() {
+        return otTo;
+    }
+
+    /**
+     *
+     * @param otTo
+     * The ot_hour
+     */
+    public void setOtTo(String otTo) {
+        this.otTo = otTo;
     }
 
     /**

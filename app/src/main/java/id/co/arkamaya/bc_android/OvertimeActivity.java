@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,8 +17,10 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -36,8 +39,8 @@ public class OvertimeActivity extends AppCompatActivity {
     SharedPreferences pref;
     private ProgressDialog progress;
 
-    private EditText txtOvertimeDate;
-    private EditText txtOvertimeDescription;
+    private EditText txtOvertimeDate,txtOvertimeDescription,txtovertimeFrom,txtovertimeTo;
+    private CheckBox cbInc;
     private Button bntDatePicker;
 
     public String ENDPOINT="http://bc-id.co.id/";
@@ -46,7 +49,7 @@ public class OvertimeActivity extends AppCompatActivity {
     /**UserInfo**/
     String User="";
     String EmployeeId="";
-
+    String CbInclude;
     int aspectX;
     int aspectY;
     int outputX;
@@ -56,6 +59,7 @@ public class OvertimeActivity extends AppCompatActivity {
 
     /**DatePicker**/
     private int year, month, day;
+    private int hour, minute;
 
     private class ScreenResolution {
         int width, height;
@@ -116,6 +120,14 @@ public class OvertimeActivity extends AppCompatActivity {
 
         txtOvertimeDate = (EditText)findViewById(R.id.txtOvertimeDate);
         txtOvertimeDescription = (EditText)findViewById(R.id.txtOvertimeDescription);
+        txtovertimeFrom = (EditText)findViewById(R.id.txtOvertimeTime1);
+        txtovertimeTo = (EditText)findViewById(R.id.txtOvertimeTime2);
+        cbInc = (CheckBox)findViewById(R.id.cbInclude);
+        if(cbInc.isChecked()){
+            CbInclude = "1";
+        }else{
+            CbInclude = "0";
+        }
 //        txtOvertime = (EditText)findViewById(R.id.txtOvertime);
 
         if (extras != null) {
@@ -128,6 +140,8 @@ public class OvertimeActivity extends AppCompatActivity {
                 modeEdit="new";
                 txtOvertimeDate.setText("");
                 txtOvertimeDescription.setText("");
+                txtovertimeFrom.setText("");
+                txtovertimeTo.setText("");
 //                txtOvertime.setText("");
                 setDate();
             }
@@ -168,11 +182,27 @@ public class OvertimeActivity extends AppCompatActivity {
         });
 
         Button btnDatePicker=(Button)findViewById(R.id.btnDatePicker);
+        Button btnTimePicker1=(Button)findViewById(R.id.btnDatePicker2);
+        Button btnTimePicker2=(Button)findViewById(R.id.btnDatePicker3);
         btnDatePicker.performClick();
         btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setDate();
+            }
+        });
+        btnTimePicker1.performClick();
+        btnTimePicker1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTime1();
+            }
+        });
+        btnTimePicker2.performClick();
+        btnTimePicker2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTime2();
             }
         });
 
@@ -181,7 +211,9 @@ public class OvertimeActivity extends AppCompatActivity {
     protected void onSaveOvertime(){
         String overtime_date = txtOvertimeDate.getText().toString();
         String overtime_description = txtOvertimeDescription.getText().toString();
-        String overtime_hour = "0";
+        String overtime_from = txtovertimeFrom.getText().toString();;
+        String overtime_to = txtovertimeTo.getText().toString();;
+        String overtime_inc = CbInclude;
         String overtime_id = OvertimeId;
 
         /*
@@ -234,10 +266,9 @@ public class OvertimeActivity extends AppCompatActivity {
         }
         */
 
-        if(overtime_date.equals("")|| overtime_description.equals("") || overtime_hour.equals("")) {
+        if(overtime_date.equals("")|| overtime_description.equals("") || overtime_from.equals("")) {
             Toast.makeText(getApplicationContext(), "Data tidak lengkap..", Toast.LENGTH_LONG).show();
         }else{
-            if(Integer.parseInt(overtime_hour) > 0 & Integer.parseInt(overtime_hour) <= 24){
                 progress = new ProgressDialog(this);
                 progress.setMessage("Processing..");
                 progress.setIndeterminate(true);
@@ -250,8 +281,8 @@ public class OvertimeActivity extends AppCompatActivity {
 
                 APIOvertime restInterface = restAdapter.create(APIOvertime.class);
 
-                restInterface.onSaveOvertime(overtime_id, overtime_date, overtime_description, overtime_hour,
-                        User, EmployeeId, new Callback<CheckLogin>() {
+                restInterface.onSaveOvertime(overtime_id,EmployeeId,User, overtime_date,overtime_from,overtime_to,overtime_inc, overtime_description,
+                          new Callback<CheckLogin>() {
                             @Override
                             public void success(CheckLogin m, Response response) {
 
@@ -276,9 +307,7 @@ public class OvertimeActivity extends AppCompatActivity {
                                 }
                             }
                         });
-            }else{
-                Toast.makeText(getApplicationContext(), "Tidak boleh mengisi lebih dari 24 jam ", Toast.LENGTH_LONG).show();
-            }
+
         }
     }
 
@@ -319,6 +348,8 @@ public class OvertimeActivity extends AppCompatActivity {
 
                 txtOvertimeDate.setText(m.getOtDt().toString());
                 txtOvertimeDescription.setText(m.getOtDescription().toString());
+                txtovertimeFrom.setText(m.getOtFrom().toString());
+                txtovertimeTo.setText(m.getOtTo().toString());
                 //txtOvertime.setText(m.getOtHour().toString());
                 if (progress != null) {
                     progress.dismiss();
@@ -337,16 +368,24 @@ public class OvertimeActivity extends AppCompatActivity {
 
     @SuppressWarnings("deprecation")
     public void setDate() {
-        showDialog(999);
-        //Toast.makeText(getApplicationContext(), "ca", Toast.LENGTH_SHORT)
-        //        .show();
+        showDialog(100);
+    }
+    public void setTime1() {
+        showDialog(200);
+    }
+    public void setTime2() {
+        showDialog(300);
     }
 
     @Override
     protected Dialog onCreateDialog(int id) {
         // TODO Auto-generated method stub
-        if (id == 999) {
+        if (id == 100) {
             return new DatePickerDialog(this, myDateListener, year, month, day);
+        }else if (id == 200){
+            return new TimePickerDialog(this, myTime1 , hour, minute, false);
+        }else if (id == 300){
+            return new TimePickerDialog(this, myTime2 , hour, minute, false);
         }
         return null;
     }
@@ -365,5 +404,27 @@ public class OvertimeActivity extends AppCompatActivity {
     private void showDate(int year, int month, int day) {
         txtOvertimeDate.setText(new StringBuilder().append(year).append("-")
                 .append(month).append("-").append(day));
+    }
+
+    private TimePickerDialog.OnTimeSetListener myTime1 = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker arg0, int arg1, int arg2) {
+            showTime1(arg1, arg2);
+        }
+    };
+    private void showTime1(int hour, int minute) {
+        txtovertimeFrom.setText(new StringBuilder().append(hour).append(":")
+                .append(minute));
+    }
+
+    private TimePickerDialog.OnTimeSetListener myTime2 = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker arg0, int arg1, int arg2) {
+            showTime2(arg1, arg2);
+        }
+    };
+    private void showTime2(int hour, int minute) {
+        txtovertimeTo.setText(new StringBuilder().append(hour).append(":")
+                .append(minute));
     }
 }

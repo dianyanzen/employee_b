@@ -125,12 +125,15 @@ public class ExcuseFragment extends Fragment {
                                 .setNegativeButton("No", null)
                                 .show();
                     }else{
-                        TextView txtExcuseId = (TextView) view.findViewById(R.id.txtExcuseId);
-                        final String ExcuseId = txtExcuseId.getText().toString();
-                        Intent intent = new Intent(v.getContext(), ExcuseActivity.class);
-                        intent.putExtra("ExcuseId", ExcuseId);
-                        intent.putExtra("Mode","edit");
-                        startActivity(intent);
+                        TextView ExcuseStatus = (TextView) view.findViewById(R.id.txtExcuseStatus);
+                        if (ExcuseStatus.getVisibility() == View.INVISIBLE){
+                            TextView txtExcuseId = (TextView) view.findViewById(R.id.txtExcuseId);
+                            final String ExcuseId = txtExcuseId.getText().toString();
+                            Intent intent = new Intent(v.getContext(), ExcuseActivity.class);
+                            intent.putExtra("ExcuseId", ExcuseId);
+                            intent.putExtra("Mode","edit");
+                            startActivity(intent);
+                        }
                     }
                 }else{
                     Toast.makeText(v.getContext().getApplicationContext(), "Internet Connection Error..", Toast.LENGTH_SHORT).show();

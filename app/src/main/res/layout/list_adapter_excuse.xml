@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/excuse_list"
+    android:background="#fff"
     android:layout_margin="2dp">
     <!-- Thumbnail Image -->
 
@@ -81,7 +83,22 @@
         android:layout_weight="1"
         android:gravity="left"
         android:text="TextView"/>
-
+    <ImageButton
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/btnEdit"
+        android:textColor="#ffffff"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_edit_black_24dp"
+        android:tint="#fff"
+        android:backgroundTint="#3f51b4"
+        android:textSize="10dp"
+        android:text=""
+        android:focusable="false"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/btnReject"
+        />
     <ImageButton
         style="?android:attr/buttonStyleSmall"
         android:layout_width="35dp"
@@ -89,7 +106,7 @@
         android:id="@+id/btnDelete"
         android:textColor="#ffffff"
         android:layout_marginTop="8dp"
-        android:layout_marginRight="10dp"
+
         android:src="@drawable/ic_delete_black_24dp"
         android:tint="#fff"
         android:backgroundTint="#ff0000"

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="id.co.arkamaya.bc_android.MainFragment"
-    android:padding="10dp"
+    android:padding="15dp"
     android:id="@+id/lblDate">
 
     <!-- TODO: Update blank fragment layout -->

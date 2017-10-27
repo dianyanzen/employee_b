@@ -35,14 +35,29 @@ public interface APIOvertime {
             Callback<CheckLogin> response
     );
 
+    @GET("/overtimeservicemobile/setaprove")
+    void onAproveOvertime(
+            @Query("ot_id") String ot_id,
+            @Query("employee_id") String employee_id,
+            Callback<CheckLogin> response
+    );
+
+    @GET("/overtimeservicemobile/setreject")
+    void onRejectOvertime(
+            @Query("ot_id") String ot_id,
+            @Query("employee_id") String employee_id,
+            Callback<CheckLogin> response
+    );
     @POST("/overtimeservicemobile/saveovertime")
     void onSaveOvertime(
             @Query("ot_id") String ot_id,
-            @Query("ot_dt") String ot_dt,
-            @Query("ot_description") String ot_description,
-            @Query("ot_hour") String ot_hour,
-            @Query("username") String username,
             @Query("employee_id") String employee_id,
+            @Query("username") String username,
+            @Query("ot_dt") String ot_dt,
+            @Query("ot_time_from") String ot_time_from,
+            @Query("ot_time_to") String ot_time_to,
+            @Query("inc_rest") String inc_rest,
+            @Query("ot_description") String ot_description,
             Callback<CheckLogin> response
     );
 }

@@ -58,6 +58,7 @@
         android:layout_toStartOf="@+id/btnDelete"
         android:layout_marginRight="5dp"
         android:layout_below="@+id/txtScheduleActivityType"
+        android:textColor="@color/colorGray"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="left"
