@@ -89,17 +89,17 @@ class workingreportservicemobile extends CI_Controller {
 			$Month_Year = $dataYear . "-" . $dataMonth;
 			
 			$sql = $sql . " 
-				AND date_format(att.clock_in, '%Y-%m-%d') between concat('$Month_Year', '-', '02') and date_add((concat('$Month_Year', '-', '01')), INTERVAL 1 month)
+				AND date_format(att.clock_in, '%Y-%m-%d') between concat('$Month_Year', '-', '01') and date_add((concat('$Month_Year', '-', '01')), INTERVAL 1 month)
 			";
 		}else{
 			$sql = $sql . "
-				AND date_format(att.clock_in, '%Y-%m-%d') between concat((date_format(now(), '%Y-%m')), '-', '01') and concat((date_format((date_add(now(), INTERVAL 1 month)), '%Y-%m')), '-', '02')
+				AND date_format(att.clock_in, '%Y-%m-%d') between concat((date_format(now(), '%Y-%m')), '-', '01') and concat((date_format((date_add(now(), INTERVAL 1 month)), '%Y-%m')), '-', '01')
 			";
 		}
 		
 		$sql = $sql . "
 			ORDER BY 
-				date_format(att.clock_in, '%Y-%M-%d') DESC LIMIT 30
+				date_format(att.clock_in, '%Y-%M-%d') DESC LIMIT 31
 		";
 		// echo $sql;
 		// die;

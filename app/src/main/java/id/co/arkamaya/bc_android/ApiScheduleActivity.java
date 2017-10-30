@@ -31,6 +31,19 @@ public interface ApiScheduleActivity {
             Callback<CheckLogin> response
     );
 
+    @GET("/scheduleservicemobile/setaprove")
+    void onAproveScheduleActivity(
+            @Query("schedule_id") String schedule_id,
+            @Query("employee_id") String employee_id,
+            Callback<CheckLogin> response
+    );
+
+    @GET("/scheduleservicemobile/setreject")
+    void onRejectScheduleActivity(
+            @Query("schedule_id") String schedule_id,
+            @Query("employee_id") String employee_id,
+            Callback<CheckLogin> response
+    );
     //    @Multipart
     @POST("/scheduleservicemobile/saveschedule")
     void onSaveScheduleActivity(

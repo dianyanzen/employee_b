@@ -152,6 +152,7 @@ public class LeaveActivity extends AppCompatActivity {
                 LeaveId = extras.getString("LeaveId");
                 try {
                     getLeaveById(LeaveId);
+                    Log.e("Dugi Dieu",LeaveId);
 
                 } catch (Exception e) {
                     Log.e("yz",e.toString());

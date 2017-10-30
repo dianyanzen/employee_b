@@ -33,24 +33,250 @@ class scheduleservicemobile extends CI_Controller {
     public function getschedulelist() {
         header("content-type: application/json");
         date_default_timezone_set('asia/jakarta');
+         $nowdate = date('Y-m-d');
+        /* UBAH HARI PADA  */
+        $pastdate = date("Y-m-d", strtotime("- 30 days")); 
         $employee_id = $this->input->get('employee_id', true);
-        $sql = "select 
-                schedule_id
-                , employee_id
-                , date_format(schedule_dt,'%d') as schedule_prod_date
-                , date_format(schedule_dt,'%Y-%m') as schedule_prod_month
-                , date_format(schedule_dt,'%Y-%m-%d') as schedule_dt
-                , ( case when schedule_type = 'ONSITE' then 'DINAS LUAR' when schedule_type = 'VISIT' then 'DINAS LUAR' else schedule_type end ) as schedule_type
-                , schedule_description
-                , ( case when schedule_approved_dt is not null  then 'approved' when rejected_dt is not null then 'rejected' else '' end ) as schedule_status
-                , date_format(approval_due_dt,'%Y-%m-%d') as approval_due_dt
-                from tb_r_schedule where
-        	  employee_id='$employee_id'
-				order by schedule_dt desc";
+        $sql ="select 
+            a.employee_id
+            , a.user_name
+            , a.user_group
+            , ( case when b.position_name is null then 'ADMIN' else b.position_name end ) as position_name
+                from tb_m_employee a left join tb_m_position b on a.position_id = b.position_id where a.employee_id
+                = '$employee_id'";
+        $data = $this->db->query($sql);
+        $user_name = $data->row()->user_name;
+        $user_group = $data->row()->user_group;
+        $position_name = strtolower($data->row()->position_name);
+        if ($user_group == 'employee' ||  $user_group == 'employee_app'){
+            $position_name = 'employee';
+        }
+        
+        if (strpos($position_name, 'admin') != false || $position_name == 'admin' ){
+        $sql = "SELECT 
+                a.schedule_id
+                , a.employee_id
+                , b.employee_name
+                , date_format(a.schedule_dt,'%d') as schedule_prod_date
+                , date_format(a.schedule_dt,'%Y-%m') as schedule_prod_month
+                , date_format(a.schedule_dt,'%Y-%m-%d') as schedule_dt
+                , ( case when a.schedule_type = 'ONSITE' then 'DINAS LUAR' when a.schedule_type = 'VISIT' then 'DINAS LUAR' else a.schedule_type end ) as schedule_type
+                , a.schedule_description
+                , ( case when a.schedule_approved_dt is not null  then 'approved' when a.rejected_dt is not null then 'rejected' else '' end ) as schedule_status
+                , date_format(a.approval_due_dt,'%Y-%m-%d') as approval_due_dt
+                from tb_r_schedule a left join tb_m_employee b on a.employee_id = b.employee_id where
+        	    a.created_dt >= '$pastdate' and 
+                a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
+				order by a.schedule_dt desc";
+        $data = $this->db->query($sql);
+        echo json_encode($data->result());
+    }else{
+        if ($user_name != '' ||  $user_name != null){
+        $sql = "SELECT 
+                a.schedule_id
+                , a.employee_id
+                , b.employee_name
+                , date_format(a.schedule_dt,'%d') as schedule_prod_date
+                , date_format(a.schedule_dt,'%Y-%m') as schedule_prod_month
+                , date_format(a.schedule_dt,'%Y-%m-%d') as schedule_dt
+                , ( case when a.schedule_type = 'ONSITE' then 'DINAS LUAR' when a.schedule_type = 'VISIT' then 'DINAS LUAR' else a.schedule_type end ) as schedule_type
+                , a.schedule_description
+                , ( case when a.schedule_approved_dt is not null  then 'approved' when a.rejected_dt is not null then 'rejected' else '' end ) as schedule_status
+                , date_format(a.approval_due_dt,'%Y-%m-%d') as approval_due_dt
+                from tb_r_schedule a left join tb_m_employee b on a.employee_id = b.employee_id where
+                b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name' and
+                a.created_dt >= '$pastdate' and 
+                a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
+                order by a.schedule_dt desc";
         $data = $this->db->query($sql);
         echo json_encode($data->result());
     }
- 
+}
+}
+  public function setaprove(){
+        header("content-type: application/json");
+        date_default_timezone_set('asia/jakarta');
+        $schedule_id  = $this->input->get('schedule_id');
+        $employee_id = $this->input->get('employee_id');
+        
+        $sql ="select user_name
+                , user_group 
+            from tb_m_employee 
+            where employee_id = '$employee_id'";
+        
+        $data = $this->db->query($sql);
+        $approved_by = $data->row()->user_name;
+        
+        $sql ="select 
+                a.supervisor1
+                , a.supervisor2
+                , b.spv_approved_dt
+                , b.spv_approved_by 
+                , b.mgr_approved_dt
+                , b.mgr_approved_by
+            from tb_m_employee a 
+            inner join tb_r_schedule b 
+            on a.employee_id = b.employee_id 
+            where b.schedule_id = '$schedule_id'";
+        $data = $this->db->query($sql);
+        $aprove_mgr = $data->row()->mgr_approved_by;
+        $aprove_spv = $data->row()->spv_approved_by;
+        $approved_dt = date('Y-m-d H:i:s');
+        if($aprove_spv == null || $aprove_spv == ''){
+            $supervisorone = $data->row()->supervisor1;    
+            $aprove_spv_dt = date('Y-m-d H:i:s');
+            
+        }else{
+            $supervisorone = $aprove_spv;
+            $aprove_spv_dt = $data->row()->spv_approved_dt;    
+        }
+        if($aprove_mgr == null || $aprove_mgr == ''){
+            $supervisortwo = $data->row()->supervisor2;
+            $aprove_mgr_dt = date('Y-m-d H:i:s');
+        }else{
+            $supervisortwo = $aprove_mgr;
+            $aprove_mgr_dt = $data->row()->mgr_approved_dt;    
+        }
+        
+        if ($approved_by == $supervisortwo){
+            try {
+                $sql = "
+                UPDATE
+                    tb_r_schedule
+                set
+                    spv_approved_dt = '$aprove_spv_dt'
+                    , spv_approved_by = '$supervisorone'
+                    , mgr_approved_dt = '$aprove_mgr_dt'
+                    , mgr_approved_by = '$supervisortwo'
+                    , schedule_approved_dt = '$approved_dt'
+                    , schedule_approved_by = '$approved_by'
+                where
+                    schedule_id = '$schedule_id'
+                    ";      
+            $this->db->query($sql);
+                                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "info",
+                                    'msgText' => "schedule has been Aproved"
+                                    )));
+            } catch (Exception $e) {
+                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Failed to aprove schedule"
+                                    )));
+            }
+        }else  if ($approved_by == $supervisorone){
+            try {
+                $sql = "
+                UPDATE
+                    tb_r_schedule
+                set
+                     spv_approved_dt = '$aprove_spv_dt'
+                    , spv_approved_by = '$supervisorone'
+                where
+                    schedule_id = '$schedule_id'
+                    ";      
+            $this->db->query($sql);
+                                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "info",
+                                    'msgText' => "schedule has been Aproved"
+                                    )));
+            } catch (Exception $e) {
+                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Failed to aprove schedule"
+                                    )));
+            }  
+        }else{
+            try {
+                $sql = "
+                UPDATE
+                    tb_r_schedule
+                set
+                     spv_approved_dt = '$aprove_spv_dt'
+                    , spv_approved_by = '$supervisorone'
+                    , mgr_approved_dt = '$aprove_mgr_dt'
+                    , mgr_approved_by = '$supervisortwo'
+                    , schedule_approved_dt = '$approved_dt'
+                    , schedule_approved_by = '$approved_by'
+                where
+                    schedule_id = '$schedule_id'
+                    ";      
+            $this->db->query($sql);
+                                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "info",
+                                    'msgText' => "schedule has been Aproved"
+                                    )));
+            } catch (Exception $e) {
+                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Failed to aprove schedule"
+                                    )));
+            }
+        }
+     }
+     public function setreject(){
+        header("content-type: application/json");
+        date_default_timezone_set('asia/jakarta');
+        $schedule_id = $this->input->get('schedule_id');
+        $employee_id = $this->input->get('employee_id');
+        $sql ="select user_name, user_group from tb_m_employee where employee_id = '$employee_id'";
+        $data = $this->db->query($sql);
+        $approved_by = $data->row()->user_name;
+        $approved_dt = date('Y-m-d H:i:s');
+        $sql ="select 
+            a.employee_id
+            , a.user_name
+            , a.user_group
+            , ( case when b.position_name is null then 'HRD' else b.position_name end ) as position_name
+                from tb_m_employee a left join tb_m_position b on a.position_id = b.position_id where a.employee_id
+                = '$employee_id'";
+        $data = $this->db->query($sql);
+        $user_name = $data->row()->user_name;
+        $user_group = $data->row()->user_group;
+        $position_name = strtolower($data->row()->position_name);
+        if (($user_group == 'employee' ||  $user_group == 'employee_app') && $position_name == 'hrd') {
+            $position_name = 'employee';
+        }
+        $position_name = strtoupper($position_name);
+             try {
+                $sql = "
+                UPDATE
+                    tb_r_schedule
+                set
+                    rejected_dt = '$approved_dt'
+                    , rejected_by = '$approved_by'
+                    , rejected_position = '$position_name'
+                where
+                    schedule_id = '$schedule_id'
+                    ";      
+            $this->db->query($sql);
+                                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "info",
+                                    'msgText' => "schedule has been Rejected"
+                                    )));
+            } catch (Exception $e) {
+                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Failed to Rejected schedule"
+                                    )));
+            }   
+     }
  public function get_complaint_list() {
         header("Content-Type: application/json");
         date_default_timezone_set('Asia/Jakarta');

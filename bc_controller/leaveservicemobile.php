@@ -10,9 +10,29 @@ class leaveservicemobile extends CI_Controller {
 	public function getleavelist() {
         header("content-type: application/json");
         date_default_timezone_set('asia/jakarta');
+        $nowdate = date('Y-m-d');
+        /* UBAH HARI PADA  */
+        $pastdate = date("Y-m-d", strtotime("- 30 days")); 
         $employee_id = $this->input->get('employee_id', true);
+        $sql ="select 
+            a.employee_id
+            , a.user_name
+            , a.user_group
+            , ( case when b.position_name is null then 'ADMIN' else b.position_name end ) as position_name
+                from tb_m_employee a left join tb_m_position b on a.position_id = b.position_id where a.employee_id
+                = '$employee_id'";
+        $data = $this->db->query($sql);
+        $user_name = $data->row()->user_name;
+        $user_group = $data->row()->user_group;
+        $position_name = strtolower($data->row()->position_name);
+        if ($user_group == 'employee' ||  $user_group == 'employee_app'){
+            $position_name = 'employee';
+        }
+        
+        if (strpos($position_name, 'admin') != false || $position_name == 'admin' ){
         $sql = "SELECT a.time_off_id as leave_id
              , a.employee_id
+             , c.employee_name
              , date_format(a.time_off_dt,'%d') as leave_prod_date
              , date_format(a.time_off_dt,'%Y-%m') as leave_prod_month
              , date_format(a.time_off_dt,'%Y-%m-%d') as leave_dt
@@ -22,16 +42,241 @@ class leaveservicemobile extends CI_Controller {
              , a.time_off_approve_dt
              , a.time_off_approve_by 
              , ( case when a.time_off_approve_by is not null then 'approved' when a.rejected_dt is not null then 'rejected' else '' end ) as leave_status 
-             from tb_r_time_off a left join
-                tb_m_leave_type b on 
-                a.time_off_type = b.leave_type_cd
-             where
-              a.employee_id='$employee_id'
-                order by a.time_off_dt desc";
-		
+            from tb_r_time_off a 
+            left join
+                tb_m_leave_type b 
+                on a.time_off_type = b.leave_type_cd
+            left join 
+            tb_m_employee c
+                on a.employee_id = c.employee_id
+            where
+              a.created_dt >= '$pastdate' and 
+             a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY)
+            order by a.time_off_dt desc";
+		/*echo $sql;
+        die;*/
 		$data = $this->db->query($sql);
         echo json_encode($data->result());
+        }else{
+             if ($user_name != '' ||  $user_name != null){
+        $sql = "SELECT a.time_off_id as leave_id
+             , a.employee_id
+             , c.employee_name
+             , date_format(a.time_off_dt,'%d') as leave_prod_date
+             , date_format(a.time_off_dt,'%Y-%m') as leave_prod_month
+             , date_format(a.time_off_dt,'%Y-%m-%d') as leave_dt
+             , b.leave_name as time_off_type
+             , ( case when a.time_off_description is null then '..' when a.time_off_description = '' then '..' else a.time_off_description end ) as leave_reason
+             , a.approval_due_dt
+             , a.time_off_approve_dt
+             , a.time_off_approve_by 
+             , ( case when a.time_off_approve_by is not null then 'approved' when a.rejected_dt is not null then 'rejected' else '' end ) as leave_status 
+            from tb_r_time_off a 
+            left join
+                tb_m_leave_type b 
+                on a.time_off_type = b.leave_type_cd
+            left join 
+            tb_m_employee c
+                on a.employee_id = c.employee_id
+            where
+            c.user_name = '$user_name' or c.supervisor1 = '$user_name' or c.supervisor2 = '$user_name' 
+            and
+            a.created_dt >= '$pastdate' and 
+            a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
+            order by a.time_off_dt desc";
+            // echo $sql;
+            // die;
+        $data = $this->db->query($sql);
+       
+        echo json_encode($data->result());
+        }
+        }
     }
+    public function setaprove(){
+        header("content-type: application/json");
+        date_default_timezone_set('asia/jakarta');
+        $time_off_id = $this->input->get('time_off_id');
+        $employee_id = $this->input->get('employee_id');
+        
+        $sql ="select user_name
+                , user_group 
+            from tb_m_employee 
+            where employee_id = '$employee_id'";
+        
+        $data = $this->db->query($sql);
+        $approved_by = $data->row()->user_name;
+        
+        $sql ="select 
+                a.supervisor1
+                , a.supervisor2
+                , b.spv_approved_dt
+                , b.spv_approved_by 
+                , b.mgr_approved_dt
+                , b.mgr_approved_by
+            from tb_m_employee a 
+            inner join tb_r_time_off b 
+            on a.employee_id = b.employee_id 
+            where b.time_off_id = '$time_off_id'";
+        
+        $data = $this->db->query($sql);
+        $aprove_mgr = $data->row()->mgr_approved_by;
+        $aprove_spv = $data->row()->spv_approved_by;
+        $approved_dt = date('Y-m-d H:i:s');
+        if($aprove_spv == null || $aprove_spv == ''){
+            $supervisorone = $data->row()->supervisor1;    
+            $aprove_spv_dt = date('Y-m-d H:i:s');
+            
+        }else{
+            $supervisorone = $aprove_spv;
+            $aprove_spv_dt = $data->row()->spv_approved_dt;    
+        }
+        if($aprove_mgr == null || $aprove_mgr == ''){
+            $supervisortwo = $data->row()->supervisor2;
+            $aprove_mgr_dt = date('Y-m-d H:i:s');
+        }else{
+            $supervisortwo = $aprove_mgr;
+            $aprove_mgr_dt = $data->row()->mgr_approved_dt;    
+        }
+        
+        if ($approved_by == $supervisortwo){
+            try {
+                $sql = "
+                UPDATE
+                    tb_r_time_off
+                set
+                    spv_approved_dt = '$aprove_spv_dt'
+                    , spv_approved_by = '$supervisorone'
+                    , mgr_approved_dt = '$aprove_mgr_dt'
+                    , mgr_approved_by = '$supervisortwo'
+                    , time_off_approve_dt = '$approved_dt'
+                    , time_off_approve_by = '$approved_by'
+                where
+                    time_off_id = '$time_off_id'
+                    ";      
+            $this->db->query($sql);
+                                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "info",
+                                    'msgText' => "leave has been Aproved"
+                                    )));
+            } catch (Exception $e) {
+                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Failed to aprove leave"
+                                    )));
+            }
+        }else  if ($approved_by == $supervisorone){
+            try {
+                $sql = "
+                UPDATE
+                    tb_r_time_off
+                set
+                     spv_approved_dt = '$aprove_spv_dt'
+                    , spv_approved_by = '$supervisorone'
+                where
+                    time_off_id = '$time_off_id'
+                    ";      
+            $this->db->query($sql);
+                                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "info",
+                                    'msgText' => "leave has been Aproved"
+                                    )));
+            } catch (Exception $e) {
+                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Failed to aprove leave"
+                                    )));
+            }  
+        }else{
+            try {
+                $sql = "
+                UPDATE
+                    tb_r_time_off
+                set
+                     spv_approved_dt = '$aprove_spv_dt'
+                    , spv_approved_by = '$supervisorone'
+                    , mgr_approved_dt = '$aprove_mgr_dt'
+                    , mgr_approved_by = '$supervisortwo'
+                    , time_off_approve_dt = '$approved_dt'
+                    , time_off_approve_by = '$approved_by'
+                where
+                    time_off_id = '$time_off_id'
+                    ";      
+            $this->db->query($sql);
+                                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "info",
+                                    'msgText' => "leave has been Aproved"
+                                    )));
+            } catch (Exception $e) {
+                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Failed to aprove leave"
+                                    )));
+            }
+        }
+     }
+     public function setreject(){
+        header("content-type: application/json");
+        date_default_timezone_set('asia/jakarta');
+        $time_off_id = $this->input->get('time_off_id');
+        $employee_id = $this->input->get('employee_id');
+        $sql ="select user_name, user_group from tb_m_employee where employee_id = '$employee_id'";
+        $data = $this->db->query($sql);
+        $approved_by = $data->row()->user_name;
+        $approved_dt = date('Y-m-d H:i:s');
+        $sql ="select 
+            a.employee_id
+            , a.user_name
+            , a.user_group
+            , ( case when b.position_name is null then 'HRD' else b.position_name end ) as position_name
+                from tb_m_employee a left join tb_m_position b on a.position_id = b.position_id where a.employee_id
+                = '$employee_id'";
+        $data = $this->db->query($sql);
+        $user_name = $data->row()->user_name;
+        $user_group = $data->row()->user_group;
+        $position_name = strtolower($data->row()->position_name);
+        if (($user_group == 'employee' ||  $user_group == 'employee_app') && $position_name == 'hrd') {
+            $position_name = 'employee';
+        }
+        $position_name = strtoupper($position_name);
+             try {
+                $sql = "
+                UPDATE
+                    tb_r_time_off
+                set
+                    rejected_dt = '$approved_dt'
+                    , rejected_by = '$approved_by'
+                    , rejected_position = '$position_name'
+                where
+                    time_off_id = '$time_off_id'
+                    ";      
+            $this->db->query($sql);
+                                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "info",
+                                    'msgText' => "leave has been Rejected"
+                                    )));
+            } catch (Exception $e) {
+                return $this->output
+                                ->set_content_type('application/json')
+                                ->set_output(json_encode(array(
+                                    'msgType' => "warning",
+                                    'msgText' => "Failed to Rejected leave"
+                                    )));
+            }   
+     }
     public function gettypevalue(){
             header("content-type: application/json");
             $sql ="select leave_type_cd,leave_name from tb_m_leave_type order by leave_type_cd;
@@ -138,6 +383,7 @@ class leaveservicemobile extends CI_Controller {
         $time_off_id = $this->input->get('time_off_id', true);
         $sql = "SELECT a.time_off_id as leave_id
              , a.employee_id
+             , c.employee_name
              , date_format(a.time_off_dt,'%d') as leave_prod_date
              , date_format(a.time_off_dt,'%Y-%m') as leave_prod_month
              , date_format(a.time_off_dt,'%Y-%m-%d') as leave_dt
@@ -147,12 +393,16 @@ class leaveservicemobile extends CI_Controller {
              , a.time_off_approve_dt
              , a.time_off_approve_by 
              , ( case when a.time_off_approve_by is not null then 'approved' when a.rejected_dt is not null then 'rejected' else '' end ) as leave_status 
-             from tb_r_time_off a left join
-                tb_m_leave_type b on 
-                a.time_off_type = b.leave_type_cd
-             where
+            from tb_r_time_off a 
+            left join
+                tb_m_leave_type b 
+                on a.time_off_type = b.leave_type_cd
+            left join 
+            tb_m_employee c
+                on a.employee_id = c.employee_id
+            where
               a.time_off_id='$time_off_id'
-                order by a.time_off_dt desc";
+            order by a.time_off_dt desc";
 		
 		$data = $this->db->query($sql);
         echo json_encode($data->row());

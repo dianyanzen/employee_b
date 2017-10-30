@@ -43,6 +43,19 @@ public interface ApiLeave {
             @Query("employee_id") String employee_id,
             Callback<CheckLogin> response
     );
+    @GET("/leaveservicemobile/setaprove")
+    void onAproveLeave(
+            @Query("time_off_id") String time_off_id,
+            @Query("employee_id") String employee_id,
+            Callback<CheckLogin> response
+    );
+
+    @GET("/leaveservicemobile/setreject")
+    void onRejectLeave(
+            @Query("time_off_id") String time_off_id,
+            @Query("employee_id") String employee_id,
+            Callback<CheckLogin> response
+    );
 
     //    @Multipart
     @POST("/leaveservicemobile/saveleave")

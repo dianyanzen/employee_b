@@ -12,10 +12,13 @@ public class GetLeaveList {
     @SerializedName("leave_id")
     @Expose
     private String leave_id;
-
     @SerializedName("employee_id")
     @Expose
     private String employee_id;
+
+    @SerializedName("employee_name")
+    @Expose
+    private String employee_name;
 
     @SerializedName("leave_prod_date")
     @Expose
@@ -89,6 +92,24 @@ public class GetLeaveList {
      */
     public void setEmployeeId(String employee_id) {
         this.employee_id = employee_id;
+    }
+
+    /**
+     *
+     * @return
+     *
+     */
+    public String getEmployeeName() {
+        return employee_name;
+    }
+
+    /**
+     *
+     * @param employee_name
+     *
+     */
+    public void setEmployeeName(String employee_name) {
+        this.employee_name = employee_name;
     }
 
     /**

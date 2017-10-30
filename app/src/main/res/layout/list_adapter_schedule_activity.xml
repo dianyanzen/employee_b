@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/schedule_activity_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent" android:descendantFocusability="blocksDescendants">
     <!-- Thumbnail Image -->
@@ -34,28 +35,41 @@
         android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/txtProdMonth" />
     <TextView
-        android:id="@+id/txtScheduleActivityType"
-        android:layout_width="100dp"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:text="Employee Name"
+        android:id="@+id/txtEmployeeName"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
-        android:layout_toRightOf="@+id/txtDate"
-        android:layout_toEndOf="@+id/txtDate"
+        android:layout_toRightOf="@+id/txtProdMonth"
+        android:layout_toEndOf="@+id/txtProdMonth"
+        android:textColor="#000000"
+        android:textSize="12dp"
         android:layout_weight="1"
         android:gravity="left"
-        android:text="TextView"
-        android:textColor="#000000"
-        android:textSize="15dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/txtScheduleActivityType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtEmployeeName"
+        android:layout_alignStart="@+id/txtEmployeeName"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/txtEmployeeName"
+        android:textColor="@color/colorGray"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:text="DINAS LUAR"/>
     <TextView
         android:id="@+id/txtScheduleActivityDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/txtScheduleActivityType"
         android:layout_alignStart="@+id/txtScheduleActivityType"
-        android:layout_toStartOf="@+id/btnDelete"
+        android:layout_toStartOf="@+id/btnEdit"
         android:layout_marginRight="5dp"
         android:layout_below="@+id/txtScheduleActivityType"
         android:textColor="@color/colorGray"
@@ -63,21 +77,82 @@
         android:layout_weight="1"
         android:gravity="left"
         android:layout_marginBottom="10dp"
-        android:text="TextView"/>
+        android:text="Diner Bersama Jokowi"/>
 
-    <Button
+    <ImageButton
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnDelete"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/btnEdit"
         android:textColor="#ffffff"
-        android:layout_marginRight="5dp"
-        android:drawableLeft="@android:drawable/ic_delete"
-        android:text="Delete"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_edit_black_24dp"
+        android:tint="#fff"
+        android:backgroundTint="#3f51b4"
+        android:textSize="10dp"
+        android:text=""
         android:focusable="false"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
-
+        android:layout_toLeftOf="@+id/btnDelete"
+        />
+    <ImageButton
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/btnDelete"
+        android:textColor="#ffffff"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_delete_black_24dp"
+        android:tint="#fff"
+        android:backgroundTint="#ff0000"
+        android:textSize="10dp"
+        android:text=""
+        android:focusable="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        />
+    <ImageButton
+        style="?android:attr/buttonStyleSmall"
+        android:layout_marginTop="8dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/btnReject"
+        android:textColor="#ffffff"
+        android:src="@drawable/ic_clear_black_24dp"
+        android:tint="#fff"
+        android:backgroundTint="#ff0000"
+        android:text=""
+        android:focusable="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+    <ImageButton
+        style="?android:attr/buttonStyleSmall"
+        android:layout_marginTop="8dp"
+        android:padding="10dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/btnAprove"
+        android:textColor="#ffffff"
+        android:src="@drawable/ic_check_black_24dp"
+        android:tint="#fff"
+        android:backgroundTint="#06aa17"
+        android:text=""
+        android:focusable="false"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/btnReject"
+        android:visibility="invisible"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="id"
+        android:id="@+id/txtEmployeeId"
+        android:layout_alignTop="@+id/txtEmployeeName"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

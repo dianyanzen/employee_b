@@ -88,7 +88,10 @@ class excuseservicemobile extends CI_Controller {
                 when a.rejected_by is not null then 'rejected'
                 when a.excuse_approved_by is not null then 'approved'
                   else '' end ) as excuse_status 
-             from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name' order by a.date_from desc";
+             from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name'
+             and
+            a.created_dt >= '$pastdate' and 
+            a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) order by a.date_from desc";
         $data = $this->db->query($sql);
        
         echo json_encode($data->result());
@@ -260,7 +263,7 @@ class excuseservicemobile extends CI_Controller {
                 set
                     rejected_dt = '$approved_dt'
                     , rejected_by = '$approved_by'
-                    , rejected_position = '$$position_name'
+                    , rejected_position = '$position_name'
                 where
                     excuse_id = '$excuse_id'
                     ";      

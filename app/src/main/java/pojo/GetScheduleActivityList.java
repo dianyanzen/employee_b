@@ -8,14 +8,17 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class GetScheduleActivityList {
-    @SerializedName("schedule_id")
-    @Expose
-    private String schedule_id;
+
 
     @SerializedName("employee_id")
     @Expose
     private String employee_id;
-
+    @SerializedName("employee_name")
+    @Expose
+    private String employee_name;
+    @SerializedName("schedule_id")
+    @Expose
+    private String schedule_id;
     @SerializedName("schedule_prod_date")
     @Expose
     private String schedule_prod_date;
@@ -70,6 +73,20 @@ public class GetScheduleActivityList {
      */
     public void setEmployeeId(String employee_id) {
         this.employee_id = employee_id;
+    }
+
+    /**
+     * @return
+     */
+    public String getEmployeeName() {
+        return employee_name;
+    }
+
+    /**
+     * @param employee_name
+     */
+    public void setEmployeeName(String employee_name) {
+        this.employee_name = employee_name;
     }
 
     /**

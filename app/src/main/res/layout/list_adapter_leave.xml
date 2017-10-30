@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/leave_list"
     android:layout_margin="2dp">
     <TextView
         android:id="@+id/txtProdMonth"
@@ -34,7 +35,22 @@
         android:textColor="#ffffff"
         android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/txtProdMonth"/>
-
+    <TextView
+        android:fontFamily="sans-serif-condensed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Employee Name"
+        android:id="@+id/txtEmployeeName"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_toRightOf="@+id/txtProdMonth"
+        android:layout_toEndOf="@+id/txtProdMonth"
+        android:textColor="#000000"
+        android:textSize="12dp"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:textStyle="bold"/>
     <TextView
         android:id="@+id/txtLeaveDescription"
         android:layout_width="wrap_content"
@@ -46,38 +62,99 @@
         android:layout_below="@+id/lblLeaveType"
         android:textColor="@color/colorGray"
         android:layout_gravity="center"
-        android:layout_marginLeft="5dp"
         android:layout_weight="1"
         android:gravity="left"
         android:layout_marginBottom="10dp"
-        android:text="TextView"/>
+        android:text="Sakit"/>
 
+    <TextView
+        android:id="@+id/lblLeaveType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtEmployeeName"
+        android:layout_alignStart="@+id/txtEmployeeName"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/txtEmployeeName"
+        android:textColor="@color/colorGray"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:text="Cuti Mendadak" />
+
+    <ImageButton
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/btnEdit"
+        android:textColor="#ffffff"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_edit_black_24dp"
+        android:tint="#fff"
+        android:backgroundTint="#3f51b4"
+        android:textSize="10dp"
+        android:text=""
+        android:focusable="false"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/btnDelete"
+        />
+    <ImageButton
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/btnDelete"
+        android:textColor="#ffffff"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_delete_black_24dp"
+        android:tint="#fff"
+        android:backgroundTint="#ff0000"
+        android:textSize="10dp"
+        android:text=""
+        android:focusable="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        />
+    <ImageButton
+        style="?android:attr/buttonStyleSmall"
+        android:layout_marginTop="8dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/btnReject"
+        android:textColor="#ffffff"
+        android:src="@drawable/ic_clear_black_24dp"
+        android:tint="#fff"
+        android:backgroundTint="#ff0000"
+        android:text=""
+        android:focusable="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        />
+    <ImageButton
+        style="?android:attr/buttonStyleSmall"
+        android:layout_marginTop="8dp"
+        android:padding="10dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/btnAprove"
+        android:textColor="#ffffff"
+        android:src="@drawable/ic_check_black_24dp"
+        android:tint="#fff"
+        android:backgroundTint="#06aa17"
+        android:text=""
+        android:focusable="false"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/btnReject"
+        android:visibility="invisible"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="TRANSPORT"
-        android:id="@+id/lblLeaveType"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:paddingLeft="5dp"
-        android:textColor="#000000"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        android:layout_toEndOf="@+id/txtProdMonth" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnDelete"
-        android:textColor="#ffffff"
-        android:drawableLeft="@android:drawable/ic_delete"
-        android:text="Delete"
-        android:focusable="false"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
-
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="id"
+        android:id="@+id/txtEmployeeId"
+        android:layout_alignTop="@+id/txtEmployeeName"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -95,6 +172,7 @@
         android:text="accepted"
         android:id="@+id/txtLeaveStatus"
         android:textColor="#06aa17"
+        android:layout_marginRight="10dp"
         android:layout_below="@+id/txtProdMonth"
         android:layout_alignParentEnd="true" />
 </RelativeLayout>

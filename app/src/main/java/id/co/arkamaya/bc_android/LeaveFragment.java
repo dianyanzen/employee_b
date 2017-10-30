@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,7 +73,10 @@ public class LeaveFragment  extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 long viewId = id;//view.getId();
-                Button btnDeleteLeave = (Button)view.findViewById(R.id.btnDelete);
+                ImageButton btnDeleteLeave = (ImageButton)view.findViewById(R.id.btnDelete);
+                ImageButton btnEditLeave = (ImageButton)view.findViewById(R.id.btnEdit);
+                ImageButton btnRejectLeave = (ImageButton)view.findViewById(R.id.btnReject);
+                ImageButton btnApproveLeave = (ImageButton)view.findViewById(R.id.btnAprove);
 
                 if(conDetector.isConnectingToInternet()){
                     if(viewId==btnDeleteLeave.getId())
@@ -92,7 +96,37 @@ public class LeaveFragment  extends Fragment {
                                 })
                                 .setNegativeButton("No", null)
                                 .show();
-                    }else{
+                    }else if(viewId==btnApproveLeave.getId()){
+                        View vp=(View)v.getParent();
+                        TextView txtLeaveId = (TextView) view.findViewById(R.id.txtLeaveId);
+                        final String LeaveId = String.valueOf(txtLeaveId.getText()); //txtReimburseId.getText().toString();
+                        //Toast.makeText(v.getContext().getApplicationContext(),ReimburseId, Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(v.getContext())
+                                .setMessage("Are you sure?")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        onAproveLeave(LeaveId, employee_id);
+                                    }
+                                })
+                                .setNegativeButton("No", null)
+                                .show();
+                    }else if(viewId==btnRejectLeave.getId()){
+                        View vp=(View)v.getParent();
+                        TextView txtLeaveId = (TextView) view.findViewById(R.id.txtLeaveId);
+                        final String LeaveId = String.valueOf(txtLeaveId.getText()); //txtReimburseId.getText().toString();
+                        //Toast.makeText(v.getContext().getApplicationContext(),ReimburseId, Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(v.getContext())
+                                .setMessage("Are you sure?")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        onRejectLeave(LeaveId, employee_id);
+                                    }
+                                })
+                                .setNegativeButton("No", null)
+                                .show();
+                    }else if(viewId==btnEditLeave.getId()){
                         TextView txtLeaveId = (TextView) view.findViewById(R.id.txtLeaveId);
                         final String LeaveId = txtLeaveId.getText().toString();
                         Intent intent = new Intent(v.getContext(), LeaveActivity.class);
@@ -126,7 +160,84 @@ public class LeaveFragment  extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
     }
+    private void  onAproveLeave(String LeaveId, String EmployeeId) {
+        progress = new ProgressDialog(v.getContext());
+        progress.setMessage("Processing..");
+        progress.setIndeterminate(true);
+        progress.setCancelable(false);
+        progress.show();
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(ENDPOINT)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
 
+        ApiLeave restInterface = restAdapter.create(ApiLeave.class);
+
+        restInterface.onAproveLeave(LeaveId, EmployeeId, new Callback<CheckLogin>() {
+            @Override
+            public void success(CheckLogin m, Response response) {
+
+                if (progress != null) {
+                    progress.dismiss();
+                }
+
+                Toast.makeText(v.getContext().getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
+
+                if (m.getMsgType().toLowerCase().equals("info")) {
+                    getLeaveList();
+                } else {
+
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(v.getContext().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                if (progress != null) {
+                    progress.dismiss();
+                }
+            }
+        });
+    }
+    private void  onRejectLeave(String LeaveId, String EmployeeId) {
+        progress = new ProgressDialog(v.getContext());
+        progress.setMessage("Processing..");
+        progress.setIndeterminate(true);
+        progress.setCancelable(false);
+        progress.show();
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(ENDPOINT)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+
+        ApiLeave restInterface = restAdapter.create(ApiLeave.class);
+
+        restInterface.onRejectLeave(LeaveId, EmployeeId, new Callback<CheckLogin>() {
+            @Override
+            public void success(CheckLogin m, Response response) {
+
+                if (progress != null) {
+                    progress.dismiss();
+                }
+
+                Toast.makeText(v.getContext().getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
+
+                if (m.getMsgType().toLowerCase().equals("info")) {
+                    getLeaveList();
+                } else {
+
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(v.getContext().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                if (progress != null) {
+                    progress.dismiss();
+                }
+            }
+        });
+    }
     private void  onDeleteLeave(String LeaveId, String EmployeeId){
         progress = new ProgressDialog(v.getContext());
         progress.setMessage("Processing..");

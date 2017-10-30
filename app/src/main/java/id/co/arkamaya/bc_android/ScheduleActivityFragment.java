@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,12 +74,14 @@ public class ScheduleActivityFragment extends android.support.v4.app.Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 long viewId = id;//view.getId();
-                Button btnDeleteScheduleActivity = (Button)view.findViewById(R.id.btnDelete);
+                ImageButton btnDeleteScheduleActivity = (ImageButton)view.findViewById(R.id.btnDelete);
+                ImageButton btnEditScheduleActivity = (ImageButton)view.findViewById(R.id.btnEdit);
+                ImageButton btnAproveScheduleActivity = (ImageButton)view.findViewById(R.id.btnAprove);
+                ImageButton btnRejectScheduleActivity = (ImageButton)view.findViewById(R.id.btnReject);
 
                 if(conDetector.isConnectingToInternet()){
                     if(viewId==btnDeleteScheduleActivity.getId())
                     {
-
                         View vp=(View)v.getParent();
                         TextView txtScheduleActivityId = (TextView) view.findViewById(R.id.txtScheduleActivityId);
                         final String ScheduleActivityId = String.valueOf(txtScheduleActivityId.getText()); //txtReimburseId.getText().toString();
@@ -93,7 +96,37 @@ public class ScheduleActivityFragment extends android.support.v4.app.Fragment {
                                 })
                                 .setNegativeButton("No", null)
                                 .show();
-                    }else{
+                    }else if(viewId==btnAproveScheduleActivity.getId()){
+                        View vp=(View)v.getParent();
+                        TextView txtScheduleActivityId = (TextView) view.findViewById(R.id.txtScheduleActivityId);
+                        final String ScheduleActivityId = String.valueOf(txtScheduleActivityId.getText()); //txtReimburseId.getText().toString();
+                        //Toast.makeText(v.getContext().getApplicationContext(),ReimburseId, Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(v.getContext())
+                                .setMessage("Are you sure?")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        onAprove(ScheduleActivityId, employee_id);
+                                    }
+                                })
+                                .setNegativeButton("No", null)
+                                .show();
+                    }else if(viewId==btnRejectScheduleActivity.getId()){
+                        View vp=(View)v.getParent();
+                        TextView txtScheduleActivityId = (TextView) view.findViewById(R.id.txtScheduleActivityId);
+                        final String ScheduleActivityId = String.valueOf(txtScheduleActivityId.getText()); //txtReimburseId.getText().toString();
+                        //Toast.makeText(v.getContext().getApplicationContext(),ReimburseId, Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(v.getContext())
+                                .setMessage("Are you sure?")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        onReject(ScheduleActivityId, employee_id);
+                                    }
+                                })
+                                .setNegativeButton("No", null)
+                                .show();
+                    }else if(viewId==btnEditScheduleActivity.getId()){
                         TextView txtScheduleActivityId = (TextView) view.findViewById(R.id.txtScheduleActivityId);
                         final String ScheduleActivityId = txtScheduleActivityId.getText().toString();
                         Intent intent = new Intent(v.getContext(), ScheduleActivityActivity.class);
@@ -127,7 +160,84 @@ public class ScheduleActivityFragment extends android.support.v4.app.Fragment {
 
         super.onViewCreated(view, savedInstanceState);
     }
+    private void  onAprove(String ScheduleActivityId, String EmployeeId) {
+        progress = new ProgressDialog(v.getContext());
+        progress.setMessage("Processing..");
+        progress.setIndeterminate(true);
+        progress.setCancelable(false);
+        progress.show();
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(ENDPOINT)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
 
+        ApiScheduleActivity restInterface = restAdapter.create(ApiScheduleActivity.class);
+
+        restInterface.onAproveScheduleActivity(ScheduleActivityId, EmployeeId, new Callback<CheckLogin>() {
+            @Override
+            public void success(CheckLogin m, Response response) {
+
+                if (progress != null) {
+                    progress.dismiss();
+                }
+
+                Toast.makeText(v.getContext().getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
+
+                if (m.getMsgType().toLowerCase().equals("info")) {
+                    getScheduleActivityList();
+                } else {
+
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(v.getContext().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                if (progress != null) {
+                    progress.dismiss();
+                }
+            }
+        });
+    }
+    private void  onReject(String ScheduleActivityId, String EmployeeId) {
+        progress = new ProgressDialog(v.getContext());
+        progress.setMessage("Processing..");
+        progress.setIndeterminate(true);
+        progress.setCancelable(false);
+        progress.show();
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(ENDPOINT)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+
+        ApiScheduleActivity restInterface = restAdapter.create(ApiScheduleActivity.class);
+
+        restInterface.onRejectScheduleActivity(ScheduleActivityId, EmployeeId, new Callback<CheckLogin>() {
+            @Override
+            public void success(CheckLogin m, Response response) {
+
+                if (progress != null) {
+                    progress.dismiss();
+                }
+
+                Toast.makeText(v.getContext().getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
+
+                if (m.getMsgType().toLowerCase().equals("info")) {
+                    getScheduleActivityList();
+                } else {
+
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(v.getContext().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                if (progress != null) {
+                    progress.dismiss();
+                }
+            }
+        });
+    }
     private void  onDeleteScheduleActivity(String ScheduleActivityId, String EmployeeId){
         progress = new ProgressDialog(v.getContext());
         progress.setMessage("Processing..");
