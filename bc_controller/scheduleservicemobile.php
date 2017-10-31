@@ -69,9 +69,7 @@ class scheduleservicemobile extends CI_Controller {
                 a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
 				order by a.schedule_dt desc";
         $data = $this->db->query($sql);
-        $data2 = $this->db->query($sql);
         echo json_encode($data->result());
-        echo json_encode($data2->result());
 
     }else{
         if ($user_name != '' ||  $user_name != null){
