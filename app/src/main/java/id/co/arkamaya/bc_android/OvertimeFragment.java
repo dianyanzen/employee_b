@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,10 +65,10 @@ public class OvertimeFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 long viewId = id;//view.getId();
-                ImageButton btnDeleteOvertime = (ImageButton)view.findViewById(R.id.btnDelete);
-                ImageButton btnAproveOvertime = (ImageButton)view.findViewById(R.id.btnAprove);
-                ImageButton btnRejectOvertime = (ImageButton)view.findViewById(R.id.btnReject);
-                ImageButton btnEditOvertime = (ImageButton)view.findViewById(R.id.btnEdit);
+                AppCompatImageView btnDeleteOvertime = (AppCompatImageView)view.findViewById(R.id.btnDelete);
+                AppCompatImageView btnAproveOvertime = (AppCompatImageView)view.findViewById(R.id.btnAprove);
+                AppCompatImageView btnRejectOvertime = (AppCompatImageView)view.findViewById(R.id.btnReject);
+                AppCompatImageView btnEditOvertime = (AppCompatImageView)view.findViewById(R.id.btnEdit);
 
                 if(conDetector.isConnectingToInternet()){
                     if(viewId==btnDeleteOvertime.getId())

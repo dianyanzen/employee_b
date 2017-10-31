@@ -87,6 +87,8 @@ class excuseservicemobile extends CI_Controller {
              , ( case
                 when a.rejected_by is not null then 'rejected'
                 when a.excuse_approved_by is not null then 'approved'
+                when a.spv_approved_by = '$user_name' then 'approved' 
+                 when a.mgr_approved_by = '$user_name' then 'approved' 
                   else '' end ) as excuse_status 
              from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name'
              and
@@ -154,8 +156,6 @@ class excuseservicemobile extends CI_Controller {
                     , spv_approved_by = '$supervisorone'
                     , mgr_approved_dt = '$aprove_mgr_dt'
                     , mgr_approved_by = '$supervisortwo'
-                    , excuse_approved_dt = '$approved_dt'
-                    , excuse_approved_by = '$approved_by'
                 where
                     excuse_id = '$excuse_id'
                     ";      

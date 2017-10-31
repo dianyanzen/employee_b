@@ -4,11 +4,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -52,7 +52,7 @@ public class AdapterSlipGajiListView extends ArrayAdapter<GetSalaryPdf> {
         TextView txtName=(TextView)adapterView.findViewById(R.id.txtPdfName);
         TextView txtPdfId=(TextView)adapterView.findViewById(R.id.txtPdfId);
         TextView txtPdfFileName=(TextView)adapterView.findViewById(R.id.txtPdfFileName);
-        ImageButton btnDownload=(ImageButton)adapterView.findViewById((R.id.btnDownload));
+        AppCompatImageView btnDownload=(AppCompatImageView)adapterView.findViewById((R.id.btnDownload));
 
 
 

@@ -233,7 +233,7 @@
                     android:textColor="@color/common_google_signin_btn_text_dark_default"
                     android:paddingLeft="5dp"
                     android:layout_marginBottom="3dp"
-                    android:text="Total Kurang Jam Kerja"/>
+                    android:text="Total Sisa Cuti"/>
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -256,7 +256,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="30dp"
                         android:textAlignment="center"
-                        android:text="Jam"/>
+                        android:text="Hari"/>
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>

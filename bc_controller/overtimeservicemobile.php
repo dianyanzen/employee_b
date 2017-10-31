@@ -104,6 +104,8 @@ class overtimeservicemobile extends CI_Controller {
                     , ( case
                 			when a.rejected_by is not null then 'rejected'
                 			when a.ot_approve_by is not null then 'approved'
+                            when a.spv_approved_by = '$user_name' then 'approved' 
+                            when a.mgr_approved_by = '$user_name' then 'approved' 
                   			else '' end ) as overtime_status 
 					from tb_r_overtime a inner join tb_m_employee b 
 					on a.employee_id = b.employee_id where 
@@ -173,8 +175,6 @@ class overtimeservicemobile extends CI_Controller {
                     , spv_approved_by = '$supervisorone'
                     , mgr_approved_dt = '$aprove_mgr_dt'
                     , mgr_approved_by = '$supervisortwo'
-                    , ot_approve_dt = '$approved_dt'
-                    , ot_approve_by = '$approved_by'
                 where
                     ot_id = '$ot_id'
                     ";      

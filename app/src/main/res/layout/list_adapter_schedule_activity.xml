@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/schedule_activity_list"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" android:descendantFocusability="blocksDescendants">
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants">
     <!-- Thumbnail Image -->
 
     <TextView
@@ -79,65 +81,65 @@
         android:layout_marginBottom="10dp"
         android:text="Diner Bersama Jokowi"/>
 
-    <ImageButton
+    <android.support.v7.widget.AppCompatImageView
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/btnEdit"
         android:textColor="#ffffff"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_edit_black_24dp"
         android:tint="#fff"
-        android:backgroundTint="#3f51b4"
+        app:backgroundTint="#3f51b4"
         android:textSize="10dp"
         android:text=""
         android:focusable="false"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/btnDelete"
         />
-    <ImageButton
+    <android.support.v7.widget.AppCompatImageView
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/btnDelete"
         android:textColor="#ffffff"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_delete_black_24dp"
         android:tint="#fff"
-        android:backgroundTint="#ff0000"
+        app:backgroundTint="#ff0000"
         android:textSize="10dp"
         android:text=""
         android:focusable="false"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         />
-    <ImageButton
+    <android.support.v7.widget.AppCompatImageView
         style="?android:attr/buttonStyleSmall"
         android:layout_marginTop="8dp"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/btnReject"
         android:textColor="#ffffff"
         android:src="@drawable/ic_clear_black_24dp"
         android:tint="#fff"
-        android:backgroundTint="#ff0000"
+        app:backgroundTint="#ff0000"
         android:text=""
         android:focusable="false"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:visibility="invisible"
         />
-    <ImageButton
+    <android.support.v7.widget.AppCompatImageView
         style="?android:attr/buttonStyleSmall"
         android:layout_marginTop="8dp"
         android:padding="10dp"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/btnAprove"
         android:textColor="#ffffff"
         android:src="@drawable/ic_check_black_24dp"
         android:tint="#fff"
-        android:backgroundTint="#06aa17"
+        app:backgroundTint="#06aa17"
         android:text=""
         android:focusable="false"
         android:layout_alignParentTop="true"

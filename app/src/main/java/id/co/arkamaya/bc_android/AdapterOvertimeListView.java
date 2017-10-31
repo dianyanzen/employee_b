@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,10 +67,10 @@ public class AdapterOvertimeListView extends ArrayAdapter<GetOvertimeList> {
         TextView txtOvertimeDescription = (TextView)adapterView.findViewById(R.id.txtOvertimeDescription);
         TextView txtOvertimeId = (TextView)adapterView.findViewById(R.id.txtOvertimeId);
         TextView txtOvertimeStatus =(TextView)adapterView.findViewById(R.id.txtOvertimeStatus);
-        ImageButton btnDelete=(ImageButton)adapterView.findViewById((R.id.btnDelete));
-        ImageButton btnEdit=(ImageButton)adapterView.findViewById((R.id.btnEdit));
-        ImageButton btnAprove=(ImageButton)adapterView.findViewById((R.id.btnAprove));
-        ImageButton btnReject=(ImageButton)adapterView.findViewById((R.id.btnReject));
+        AppCompatImageView btnDelete=(AppCompatImageView)adapterView.findViewById((R.id.btnDelete));
+        AppCompatImageView btnEdit=(AppCompatImageView)adapterView.findViewById((R.id.btnEdit));
+        AppCompatImageView btnAprove=(AppCompatImageView)adapterView.findViewById((R.id.btnAprove));
+        AppCompatImageView btnReject=(AppCompatImageView)adapterView.findViewById((R.id.btnReject));
         Log.e("Data",m.getEmployeeId().toString()+" - "+EmployeeId);
         String GetemployeID =m.getEmployeeId();
 

@@ -2,6 +2,14 @@
 
 class dashboardservicemobile extends CI_Controller {
 
+ function __construct()
+    {
+        parent:: __construct();
+        $this->load->model('hr_time_off_request_model', 'mdl');
+        $this->load->model('shared_model', 'sm');
+
+ 
+    }
 	public function index()
 	{
 		$this->load->view('welcome_message');
@@ -33,7 +41,7 @@ class dashboardservicemobile extends CI_Controller {
 		
 		//$cnt_remaining_days_off = $this->cnt_remaining_days_off($employee_id, $work_day_start, $work_day_end);
 		
-		$cnt_less_work_hour = 1;//$this->cnt_less_work_hour($employee_id, $work_day_start, $work_day_end);
+		$cnt_less_work_hour = $this->remain($employee_id, $work_day_start, $work_day_end);
 		
 		$ot_hour_period = isset($cnt_ot_hour_period) ? $cnt_ot_hour_period : 0;
 		//$reimburse_amount_period = isset($cnt_reimburse_amount_period) ? $cnt_reimburse_amount_period : 0;
@@ -58,6 +66,37 @@ class dashboardservicemobile extends CI_Controller {
         echo json_encode($data->result());
 		
 	}
+	function remain($employee_id){
+        //$employee_id = $this->input->post('employee_id');
+        $end_dt = $this->sm->get_data('leave_request', 'end_month_date')->value_txt;
+        $start_dt = $this->sm->get_data('leave_request', 'start_month_date')->value_txt;
+        $num_of_month  = $this->mdl->total_month($employee_id, $end_dt);
+
+        if ($num_of_month < 0){
+            $limit = 0;
+        }else if ( $num_of_month >= 12 ){
+            $limit = $this->sm->get_data("time_off_request", "limit" )->value_num;
+        }else{
+            $limit = $num_of_month;
+        }
+       
+        if ($employee_id != ""){
+            $leave_count = $this->mdl->count_time_off( $employee_id, $start_dt );
+        }else{
+            $leave_count = $limit;
+        }
+       
+        $ext_leave = $this->mdl->get_ext_leave($employee_id);
+        
+        $limit = $limit + $ext_leave;
+        
+        if ($limit > 0){
+            $remain = $limit - $leave_count;
+        }else{
+            $remain = $limit;
+        }
+        return $remain;
+    }
 	
 	public function work_day_start(){
 		$sql = "select system_value_txt as system_value_txt from tb_m_system where system_code = 'work_day_start' and system_type = 'config_others'";

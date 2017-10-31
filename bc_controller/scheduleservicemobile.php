@@ -69,7 +69,10 @@ class scheduleservicemobile extends CI_Controller {
                 a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
 				order by a.schedule_dt desc";
         $data = $this->db->query($sql);
+        $data2 = $this->db->query($sql);
         echo json_encode($data->result());
+        echo json_encode($data2->result());
+
     }else{
         if ($user_name != '' ||  $user_name != null){
         $sql = "SELECT 
@@ -81,13 +84,19 @@ class scheduleservicemobile extends CI_Controller {
                 , date_format(a.schedule_dt,'%Y-%m-%d') as schedule_dt
                 , ( case when a.schedule_type = 'ONSITE' then 'DINAS LUAR' when a.schedule_type = 'VISIT' then 'DINAS LUAR' else a.schedule_type end ) as schedule_type
                 , a.schedule_description
-                , ( case when a.schedule_approved_dt is not null  then 'approved' when a.rejected_dt is not null then 'rejected' else '' end ) as schedule_status
+                , ( case when a.schedule_approved_dt is not null  then 'approved'
+                 when a.rejected_dt is not null then 'rejected' 
+                 when a.spv_approved_by = '$user_name' then 'approved' 
+                 when a.mgr_approved_by = '$user_name' then 'approved' 
+                 else '' end ) as schedule_status
                 , date_format(a.approval_due_dt,'%Y-%m-%d') as approval_due_dt
                 from tb_r_schedule a left join tb_m_employee b on a.employee_id = b.employee_id where
                 b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name' and
                 a.created_dt >= '$pastdate' and 
                 a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
                 order by a.schedule_dt desc";
+                echo $sql;
+                die;
         $data = $this->db->query($sql);
         echo json_encode($data->result());
     }
@@ -148,8 +157,6 @@ class scheduleservicemobile extends CI_Controller {
                     , spv_approved_by = '$supervisorone'
                     , mgr_approved_dt = '$aprove_mgr_dt'
                     , mgr_approved_by = '$supervisortwo'
-                    , schedule_approved_dt = '$approved_dt'
-                    , schedule_approved_by = '$approved_by'
                 where
                     schedule_id = '$schedule_id'
                     ";      

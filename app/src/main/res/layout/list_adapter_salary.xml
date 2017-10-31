@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
         android:layout_width="wrap_content"
@@ -45,7 +47,7 @@
         android:layout_alignTop="@+id/txtPdfId"
         android:layout_toEndOf="@+id/pading1" />
 
-    <ImageButton
+    <android.support.v7.widget.AppCompatImageView
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,7 +55,7 @@
         android:textColor="#ffffff"
         android:src="@drawable/ic_picture_as_pdf_black_24dp"
         android:tint="#fff"
-        android:backgroundTint="#3f51b4"
+        app:backgroundTint="#3f51b4"
         android:focusable="false"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />

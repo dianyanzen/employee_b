@@ -70,7 +70,10 @@ class leaveservicemobile extends CI_Controller {
              , a.approval_due_dt
              , a.time_off_approve_dt
              , a.time_off_approve_by 
-             , ( case when a.time_off_approve_by is not null then 'approved' when a.rejected_dt is not null then 'rejected' else '' end ) as leave_status 
+             , ( case when a.time_off_approve_by is not null then 'approved' when a.rejected_dt is not null then 'rejected' 
+                when a.spv_approved_by = '$user_name' then 'approved' 
+                when a.mgr_approved_by = '$user_name' then 'approved' 
+             else '' end ) as leave_status 
             from tb_r_time_off a 
             left join
                 tb_m_leave_type b 
@@ -148,8 +151,6 @@ class leaveservicemobile extends CI_Controller {
                     , spv_approved_by = '$supervisorone'
                     , mgr_approved_dt = '$aprove_mgr_dt'
                     , mgr_approved_by = '$supervisortwo'
-                    , time_off_approve_dt = '$approved_dt'
-                    , time_off_approve_by = '$approved_by'
                 where
                     time_off_id = '$time_off_id'
                     ";      

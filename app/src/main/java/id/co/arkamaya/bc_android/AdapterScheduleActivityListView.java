@@ -5,12 +5,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
+
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -60,10 +60,10 @@ public class AdapterScheduleActivityListView extends ArrayAdapter<GetScheduleAct
         TextView txtScheduleActivityDescription=(TextView)adapterView.findViewById(R.id.txtScheduleActivityDescription);
         TextView txtScheduleActivityId=(TextView)adapterView.findViewById(R.id.txtScheduleActivityId);
         TextView txtScheduleActivityStatus=(TextView)adapterView.findViewById(R.id.txtScheduleActivityStatus);
-        ImageButton btnDelete=(ImageButton)adapterView.findViewById((R.id.btnDelete));
-        ImageButton btnEdit=(ImageButton)adapterView.findViewById((R.id.btnEdit));
-        ImageButton btnAprove=(ImageButton)adapterView.findViewById((R.id.btnAprove));
-        ImageButton btnReject=(ImageButton)adapterView.findViewById((R.id.btnReject));
+        AppCompatImageView btnDelete=(AppCompatImageView)adapterView.findViewById((R.id.btnDelete));
+        AppCompatImageView btnEdit=(AppCompatImageView)adapterView.findViewById((R.id.btnEdit));
+        AppCompatImageView btnAprove=(AppCompatImageView)adapterView.findViewById((R.id.btnAprove));
+        AppCompatImageView btnReject=(AppCompatImageView)adapterView.findViewById((R.id.btnReject));
 
         if ( !m.getEmployeeId().equals(EmployeeId) ) {
             btnDelete.setVisibility(adapterView.INVISIBLE);

@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,7 +75,7 @@ public class SlipGajiFragment extends android.support.v4.app.Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 long viewId = id;//view.getId();
-                ImageButton btnDownloadSlipGaji = (ImageButton)view.findViewById(R.id.btnDownload);
+                AppCompatImageView btnDownloadSlipGaji = (AppCompatImageView)view.findViewById(R.id.btnDownload);
 
                 if(conDetector.isConnectingToInternet()){
                     if(viewId==btnDownloadSlipGaji.getId())

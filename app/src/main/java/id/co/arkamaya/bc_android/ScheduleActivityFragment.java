@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,10 +75,10 @@ public class ScheduleActivityFragment extends android.support.v4.app.Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 long viewId = id;//view.getId();
-                ImageButton btnDeleteScheduleActivity = (ImageButton)view.findViewById(R.id.btnDelete);
-                ImageButton btnEditScheduleActivity = (ImageButton)view.findViewById(R.id.btnEdit);
-                ImageButton btnAproveScheduleActivity = (ImageButton)view.findViewById(R.id.btnAprove);
-                ImageButton btnRejectScheduleActivity = (ImageButton)view.findViewById(R.id.btnReject);
+                AppCompatImageView btnDeleteScheduleActivity = (AppCompatImageView)view.findViewById(R.id.btnDelete);
+                AppCompatImageView btnEditScheduleActivity = (AppCompatImageView)view.findViewById(R.id.btnEdit);
+                AppCompatImageView btnAproveScheduleActivity = (AppCompatImageView)view.findViewById(R.id.btnAprove);
+                AppCompatImageView btnRejectScheduleActivity = (AppCompatImageView)view.findViewById(R.id.btnReject);
 
                 if(conDetector.isConnectingToInternet()){
                     if(viewId==btnDeleteScheduleActivity.getId())

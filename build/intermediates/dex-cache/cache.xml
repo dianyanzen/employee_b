@@ -3,66 +3,21 @@
 
     <item
         is-multidex="false"
-        jar="/root/.android/build-cache/f43b108d2efaa42f72adf61ed8af5ad427053f93/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
-        <dex dex="/home/dianyanzen/AndroidStudioProjects/bc_mobile/bc_android/app/build/intermediates/pre-dexed/release/classes_0d5cc3b6440f86da3e77b0935fa99185380a0bed.jar" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/dianyanzen/AndroidStudioProjects/bc_mobile/bc_android/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="a6a9ec350ae6ca0c609cd63650c65ab7b0aa7cc3">
-        <dex dex="/home/dianyanzen/AndroidStudioProjects/bc_mobile/bc_android/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_59621b70d30f326b725d4e15751d4cc0b09ce62d/classes.dex" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/root/.android/build-cache/232c590a6aee279c3dd98688c34d5a018ba26208/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="fcd01fd11233459f546c437ec927e9b61bf7caf1">
-        <dex dex="/home/dianyanzen/AndroidStudioProjects/bc_mobile/bc_android/app/build/intermediates/pre-dexed/release/classes_f643cf440417c7a1518e45e465117dbdf714425d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/root/.android/build-cache/594777faf396e1eef0adba2de3c3f15cc1f021d4/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="952944218ecedea1554a513dec0c14d570642843">
-        <dex dex="/home/dianyanzen/AndroidStudioProjects/bc_mobile/bc_android/app/build/intermediates/pre-dexed/release/classes_f621ece628c329033a40e4a85e3728f801fb531d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/dianyanzen/AndroidStudioProjects/bc_mobile/bc_android/scanlibrary/build/intermediates/bundles/default/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="719f7bcfaf2d4a0d774fc8523aa70e0cbb2b051b">
-        <dex dex="/home/dianyanzen/AndroidStudioProjects/bc_mobile/bc_android/app/build/intermediates/pre-dexed/release/classes_98407ecc878898f05d64dafba3e3bb4a53fc17b6.jar" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/root/.android/build-cache/0fd114df9ee9c0f6123fbea16782e0d5eb371fa7/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="e176fd06c2ad5b50a2f5cb4de6000a83a7cb48f5">
-        <dex dex="/home/dianyanzen/AndroidStudioProjects/bc_mobile/bc_android/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_90fcec9935cc9f58e13bafe6a1d585206f27f724/classes.dex" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/root/.android/build-cache/ae9728fb472ad05dd510efdca86d708b6f0bf829/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="18d31838aa4fcc768a8a0516e22cc13b94655d89">
         <dex dex="/home/dianyanzen/AndroidStudioProjects/bc_mobile/bc_android/app/build/intermediates/pre-dexed/release/classes_50fa474163246782c82efd18f8610c09ca6d6248.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/root/.android/build-cache/f43b108d2efaa42f72adf61ed8af5ad427053f93/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
+        <dex dex="/home/dianyanzen/AndroidStudioProjects/bc_mobile/bc_android/app/build/intermediates/pre-dexed/release/classes_0d5cc3b6440f86da3e77b0935fa99185380a0bed.jar" />
     </item>
     <item
         is-multidex="false"
@@ -83,6 +38,15 @@
         <dex dex="/home/dianyanzen/AndroidStudioProjects/bc_mobile/bc_android/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_c4163be6c21201a476604a0db2ab1e776c7c8cad/classes.dex" />
     </item>
     <item
+        is-multidex="true"
+        jar="/home/dianyanzen/AndroidStudioProjects/bc_mobile/bc_android/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a6a9ec350ae6ca0c609cd63650c65ab7b0aa7cc3">
+        <dex dex="/home/dianyanzen/AndroidStudioProjects/bc_mobile/bc_android/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_59621b70d30f326b725d4e15751d4cc0b09ce62d/classes.dex" />
+    </item>
+    <item
         is-multidex="false"
         jar="/home/dianyanzen/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/26.0.0-alpha1/support-annotations-26.0.0-alpha1.jar"
         jumboMode="false"
@@ -93,12 +57,39 @@
     </item>
     <item
         is-multidex="false"
+        jar="/root/.android/build-cache/232c590a6aee279c3dd98688c34d5a018ba26208/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fcd01fd11233459f546c437ec927e9b61bf7caf1">
+        <dex dex="/home/dianyanzen/AndroidStudioProjects/bc_mobile/bc_android/app/build/intermediates/pre-dexed/release/classes_f643cf440417c7a1518e45e465117dbdf714425d.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/root/.android/build-cache/0fd114df9ee9c0f6123fbea16782e0d5eb371fa7/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="e176fd06c2ad5b50a2f5cb4de6000a83a7cb48f5">
         <dex dex="/home/dianyanzen/AndroidStudioProjects/bc_mobile/bc_android/app/build/intermediates/pre-dexed/release/classes_90fcec9935cc9f58e13bafe6a1d585206f27f724.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/root/.android/build-cache/594777faf396e1eef0adba2de3c3f15cc1f021d4/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="952944218ecedea1554a513dec0c14d570642843">
+        <dex dex="/home/dianyanzen/AndroidStudioProjects/bc_mobile/bc_android/app/build/intermediates/pre-dexed/release/classes_f621ece628c329033a40e4a85e3728f801fb531d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/dianyanzen/AndroidStudioProjects/bc_mobile/bc_android/scanlibrary/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="719f7bcfaf2d4a0d774fc8523aa70e0cbb2b051b">
+        <dex dex="/home/dianyanzen/AndroidStudioProjects/bc_mobile/bc_android/app/build/intermediates/pre-dexed/release/classes_98407ecc878898f05d64dafba3e3bb4a53fc17b6.jar" />
     </item>
     <item
         is-multidex="false"

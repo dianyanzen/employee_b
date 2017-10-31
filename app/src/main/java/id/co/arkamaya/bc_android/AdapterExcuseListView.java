@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,10 +62,10 @@ public class AdapterExcuseListView extends ArrayAdapter<GetExcuseList> {
         TextView txtExcuseDescription=(TextView)adapterView.findViewById(R.id.txtExcuseDescription);
         TextView txtExcuseId=(TextView)adapterView.findViewById(R.id.txtExcuseId);
         TextView txtExcuseStatus=(TextView)adapterView.findViewById(R.id.txtExcuseStatus);
-        ImageButton btnDelete=(ImageButton)adapterView.findViewById((R.id.btnDelete));
-        ImageButton btnEdit=(ImageButton)adapterView.findViewById((R.id.btnEdit));
-        ImageButton btnAprove=(ImageButton)adapterView.findViewById((R.id.btnAprove));
-        ImageButton btnReject=(ImageButton)adapterView.findViewById((R.id.btnReject));
+        AppCompatImageView btnDelete=(AppCompatImageView)adapterView.findViewById((R.id.btnDelete));
+        AppCompatImageView btnEdit=(AppCompatImageView)adapterView.findViewById((R.id.btnEdit));
+        AppCompatImageView btnAprove=(AppCompatImageView)adapterView.findViewById((R.id.btnAprove));
+        AppCompatImageView btnReject=(AppCompatImageView)adapterView.findViewById((R.id.btnReject));
         Log.e("Data",m.getEmployeeId().toString()+" - "+EmployeeId);
         String GetemployeID =m.getEmployeeId();
 

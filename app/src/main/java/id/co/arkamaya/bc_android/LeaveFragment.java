@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,10 +74,10 @@ public class LeaveFragment  extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 long viewId = id;//view.getId();
-                ImageButton btnDeleteLeave = (ImageButton)view.findViewById(R.id.btnDelete);
-                ImageButton btnEditLeave = (ImageButton)view.findViewById(R.id.btnEdit);
-                ImageButton btnRejectLeave = (ImageButton)view.findViewById(R.id.btnReject);
-                ImageButton btnApproveLeave = (ImageButton)view.findViewById(R.id.btnAprove);
+                AppCompatImageView btnDeleteLeave = (AppCompatImageView)view.findViewById(R.id.btnDelete);
+                AppCompatImageView btnEditLeave = (AppCompatImageView)view.findViewById(R.id.btnEdit);
+                AppCompatImageView btnRejectLeave = (AppCompatImageView)view.findViewById(R.id.btnReject);
+                AppCompatImageView btnApproveLeave = (AppCompatImageView)view.findViewById(R.id.btnAprove);
 
                 if(conDetector.isConnectingToInternet()){
                     if(viewId==btnDeleteLeave.getId())
