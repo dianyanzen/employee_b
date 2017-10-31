@@ -220,7 +220,7 @@ public class ScheduleActivityActivity extends AppCompatActivity {
         String schedule_due_date = txtscdscdduedt.getText().toString();
         String schedule_to_date = txtscdscdtodt.getText().toString();
         String employee_id = EmployeeId;
-        if(employee_id.equals("") || schedule_descript.equals("") || schedule_type.equals("") || schedule_due_date.equals((""))) {
+        if(employee_id.equals("") || schedule_descript.equals("") || schedule_type.equals("") || schedule_to_date.equals("") || schedule_from_date.equals((""))) {
             Toast.makeText(this, "Data tidak lengkap..", Toast.LENGTH_LONG).show();
         }else{
             progress = new ProgressDialog(this);
