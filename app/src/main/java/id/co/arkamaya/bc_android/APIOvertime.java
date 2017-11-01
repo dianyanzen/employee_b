@@ -22,6 +22,26 @@ public interface APIOvertime {
     void getOvertimeList(
             @Query("employee_id") String employee_id, Callback<List<GetOvertimeList>> response
     );
+    @GET("/overtimeservicemobile/getovertimespvlist")
+    void getOvertimeSpvList(
+            @Query("employee_id") String employee_id, Callback<List<GetOvertimeList>> response
+    );
+    @GET("/overtimeservicemobile/getovertimemgrlist")
+    void getOvertimeMgrList(
+            @Query("employee_id") String employee_id, Callback<List<GetOvertimeList>> response
+    );
+    @GET("/overtimeservicemobile/getovertimehrdlist")
+    void getOvertimeHrdList(
+            @Query("employee_id") String employee_id, Callback<List<GetOvertimeList>> response
+    );
+    @GET("/overtimeservicemobile/getovertimerejectedlist")
+    void getOvertimeRejectedList(
+            @Query("employee_id") String employee_id, Callback<List<GetOvertimeList>> response
+    );
+    @GET("/overtimeservicemobile/getovertimenotyetlist")
+    void getOvertimeNotYetList(
+            @Query("employee_id") String employee_id, Callback<List<GetOvertimeList>> response
+    );
 
     @GET("/overtimeservicemobile/getovertimebyid")
     void getOvertimeById(

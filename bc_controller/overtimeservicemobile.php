@@ -109,7 +109,7 @@ class overtimeservicemobile extends CI_Controller {
                   			else '' end ) as overtime_status 
 					from tb_r_overtime a inner join tb_m_employee b 
 					on a.employee_id = b.employee_id where 
-				 	b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name' 
+				 	(b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name') 
 				 	and a.created_dt >= '$pastdate' 
 				 	and a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
 					order by a.ot_dt desc";
@@ -119,7 +119,445 @@ class overtimeservicemobile extends CI_Controller {
         echo json_encode($data->result());
     	}
     }
-
+    public function getovertimespvlist() {
+        header("content-type: application/json");
+        date_default_timezone_set('asia/jakarta');
+         $nowdate = date('Y-m-d');
+        /* UBAH HARI PADA  */
+        $pastdate = date("Y-m-d", strtotime("- 30 days")); 
+        $employee_id = $this->input->get('employee_id', true);
+        $sql ="select 
+            a.employee_id
+            , a.user_name
+            , a.user_group
+            , ( case when b.position_name is null then 'ADMIN' else b.position_name end ) as position_name
+                from tb_m_employee a left join tb_m_position b on a.position_id = b.position_id where a.employee_id
+                = '$employee_id'";
+        $data = $this->db->query($sql);
+        $user_name = $data->row()->user_name;
+        $user_group = $data->row()->user_group;
+        $position_name = strtolower($data->row()->position_name);
+        if ($user_group == 'employee' ||  $user_group == 'employee_app'){
+            $position_name = 'employee';
+        }
+        
+        if (strpos($position_name, 'admin') != false || $position_name == 'admin' ){
+        $sql = "SELECT
+                    b.employee_name
+                    , a.employee_id
+                    , date_format(a.ot_dt,'%d') as overtime_prod_date
+                    , date_format(a.ot_dt,'%Y-%m') as overtime_prod_month
+                    , a.ot_id
+                    , date_format(a.ot_dt,'%Y-%m-%d') as ot_dt
+                    , date_format(a.ot_time_from,'%H:%i') as ot_from
+                    , date_format(a.ot_time_to,'%H:%i') as ot_to
+                    , a.ot_hour
+                    , a.ot_calculate
+                    , a.ot_description
+                    , a.ot_approve_dt
+                    , a.ot_approve_by 
+                    ,( case
+                    when a.rejected_by is not null then 'rejected'
+                    when a.ot_approve_by is not null then 'approved'
+                    else '' end ) as overtime_status 
+                    from tb_r_overtime a inner join tb_m_employee b
+                    on a.employee_id = b.employee_id where 
+                    a.rejected_by is null and
+                    a.spv_approved_by is not null and
+                    a.mgr_approved_by is null and
+                    a.ot_approve_by is null and
+                    a.created_dt >= '$pastdate' and 
+                    a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
+                    order by a.ot_dt desc";
+        $data = $this->db->query($sql);
+        echo json_encode($data->result());
+        }else{
+            $sql = "SELECT
+                    b.employee_name
+                    , a.employee_id
+                    , date_format(a.ot_dt,'%d') as overtime_prod_date
+                    , date_format(a.ot_dt,'%Y-%m') as overtime_prod_month
+                    , a.ot_id
+                    , date_format(a.ot_dt,'%Y-%m-%d') as ot_dt
+                    , date_format(a.ot_time_from,'%H:%i') as ot_from
+                    , date_format(a.ot_time_to,'%H:%i') as ot_to
+                    , a.ot_hour
+                    , a.ot_calculate
+                    , a.ot_description
+                    , a.ot_approve_dt
+                    , a.ot_approve_by 
+                    , ( case
+                            when a.rejected_by is not null then 'rejected'
+                            when a.ot_approve_by is not null then 'approved'
+                            when a.spv_approved_by = '$user_name' then 'approved' 
+                            when a.mgr_approved_by = '$user_name' then 'approved' 
+                            else '' end ) as overtime_status 
+                    from tb_r_overtime a inner join tb_m_employee b 
+                    on a.employee_id = b.employee_id where 
+                    (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name') and
+                    a.rejected_by is null and
+                    a.spv_approved_by is not null and
+                    a.mgr_approved_by is null and
+                    a.ot_approve_by is null and
+                    a.created_dt >= '$pastdate' and
+                    a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
+                    order by a.ot_dt desc";
+                /*echo $sql;
+                die;*/
+        $data = $this->db->query($sql);
+        echo json_encode($data->result());
+        }
+    }
+    public function getovertimemgrlist() {
+        header("content-type: application/json");
+        date_default_timezone_set('asia/jakarta');
+         $nowdate = date('Y-m-d');
+        /* UBAH HARI PADA  */
+        $pastdate = date("Y-m-d", strtotime("- 30 days")); 
+        $employee_id = $this->input->get('employee_id', true);
+        $sql ="select 
+            a.employee_id
+            , a.user_name
+            , a.user_group
+            , ( case when b.position_name is null then 'ADMIN' else b.position_name end ) as position_name
+                from tb_m_employee a left join tb_m_position b on a.position_id = b.position_id where a.employee_id
+                = '$employee_id'";
+        $data = $this->db->query($sql);
+        $user_name = $data->row()->user_name;
+        $user_group = $data->row()->user_group;
+        $position_name = strtolower($data->row()->position_name);
+        if ($user_group == 'employee' ||  $user_group == 'employee_app'){
+            $position_name = 'employee';
+        }
+        
+        if (strpos($position_name, 'admin') != false || $position_name == 'admin' ){
+        $sql = "SELECT
+                    b.employee_name
+                    , a.employee_id
+                    , date_format(a.ot_dt,'%d') as overtime_prod_date
+                    , date_format(a.ot_dt,'%Y-%m') as overtime_prod_month
+                    , a.ot_id
+                    , date_format(a.ot_dt,'%Y-%m-%d') as ot_dt
+                    , date_format(a.ot_time_from,'%H:%i') as ot_from
+                    , date_format(a.ot_time_to,'%H:%i') as ot_to
+                    , a.ot_hour
+                    , a.ot_calculate
+                    , a.ot_description
+                    , a.ot_approve_dt
+                    , a.ot_approve_by 
+                    ,( case
+                    when a.rejected_by is not null then 'rejected'
+                    when a.ot_approve_by is not null then 'approved'
+                    else '' end ) as overtime_status 
+                    from tb_r_overtime a inner join tb_m_employee b
+                    on a.employee_id = b.employee_id where
+                    a.rejected_by is null and
+                    a.spv_approved_by is not null and
+                    a.mgr_approved_by is not null and
+                    a.ot_approve_by is null and
+                    a.created_dt >= '$pastdate' and 
+                    a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
+                    order by a.ot_dt desc";
+        $data = $this->db->query($sql);
+        echo json_encode($data->result());
+        }else{
+            $sql = "SELECT
+                    b.employee_name
+                    , a.employee_id
+                    , date_format(a.ot_dt,'%d') as overtime_prod_date
+                    , date_format(a.ot_dt,'%Y-%m') as overtime_prod_month
+                    , a.ot_id
+                    , date_format(a.ot_dt,'%Y-%m-%d') as ot_dt
+                    , date_format(a.ot_time_from,'%H:%i') as ot_from
+                    , date_format(a.ot_time_to,'%H:%i') as ot_to
+                    , a.ot_hour
+                    , a.ot_calculate
+                    , a.ot_description
+                    , a.ot_approve_dt
+                    , a.ot_approve_by 
+                    , ( case
+                            when a.rejected_by is not null then 'rejected'
+                            when a.ot_approve_by is not null then 'approved'
+                            when a.spv_approved_by = '$user_name' then 'approved' 
+                            when a.mgr_approved_by = '$user_name' then 'approved' 
+                            else '' end ) as overtime_status 
+                    from tb_r_overtime a inner join tb_m_employee b 
+                    on a.employee_id = b.employee_id where 
+                    (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name') and
+                    a.rejected_by is null and
+                    a.spv_approved_by is not null and
+                    a.mgr_approved_by is not null and
+                    a.ot_approve_by is null and
+                    a.created_dt >= '$pastdate' and 
+                    a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
+                    order by a.ot_dt desc";
+                /*echo $sql;
+                die;*/
+        $data = $this->db->query($sql);
+        echo json_encode($data->result());
+        }
+    }
+    public function getovertimehrdlist() {
+        header("content-type: application/json");
+        date_default_timezone_set('asia/jakarta');
+         $nowdate = date('Y-m-d');
+        /* UBAH HARI PADA  */
+        $pastdate = date("Y-m-d", strtotime("- 30 days")); 
+        $employee_id = $this->input->get('employee_id', true);
+        $sql ="select 
+            a.employee_id
+            , a.user_name
+            , a.user_group
+            , ( case when b.position_name is null then 'ADMIN' else b.position_name end ) as position_name
+                from tb_m_employee a left join tb_m_position b on a.position_id = b.position_id where a.employee_id
+                = '$employee_id'";
+        $data = $this->db->query($sql);
+        $user_name = $data->row()->user_name;
+        $user_group = $data->row()->user_group;
+        $position_name = strtolower($data->row()->position_name);
+        if ($user_group == 'employee' ||  $user_group == 'employee_app'){
+            $position_name = 'employee';
+        }
+        
+        if (strpos($position_name, 'admin') != false || $position_name == 'admin' ){
+        $sql = "SELECT
+                    b.employee_name
+                    , a.employee_id
+                    , date_format(a.ot_dt,'%d') as overtime_prod_date
+                    , date_format(a.ot_dt,'%Y-%m') as overtime_prod_month
+                    , a.ot_id
+                    , date_format(a.ot_dt,'%Y-%m-%d') as ot_dt
+                    , date_format(a.ot_time_from,'%H:%i') as ot_from
+                    , date_format(a.ot_time_to,'%H:%i') as ot_to
+                    , a.ot_hour
+                    , a.ot_calculate
+                    , a.ot_description
+                    , a.ot_approve_dt
+                    , a.ot_approve_by 
+                    ,( case
+                    when a.rejected_by is not null then 'rejected'
+                    when a.ot_approve_by is not null then 'approved'
+                    else '' end ) as overtime_status 
+                    from tb_r_overtime a inner join tb_m_employee b
+                    on a.employee_id = b.employee_id where 
+                    a.rejected_by is null and
+                    a.spv_approved_by is not null and
+                    a.mgr_approved_by is not null and
+                    a.ot_approve_by is not null and
+                    a.created_dt >= '$pastdate' and 
+                    a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
+                    order by a.ot_dt desc";
+        $data = $this->db->query($sql);
+        echo json_encode($data->result());
+        }else{
+            $sql = "SELECT
+                    b.employee_name
+                    , a.employee_id
+                    , date_format(a.ot_dt,'%d') as overtime_prod_date
+                    , date_format(a.ot_dt,'%Y-%m') as overtime_prod_month
+                    , a.ot_id
+                    , date_format(a.ot_dt,'%Y-%m-%d') as ot_dt
+                    , date_format(a.ot_time_from,'%H:%i') as ot_from
+                    , date_format(a.ot_time_to,'%H:%i') as ot_to
+                    , a.ot_hour
+                    , a.ot_calculate
+                    , a.ot_description
+                    , a.ot_approve_dt
+                    , a.ot_approve_by 
+                    , ( case
+                            when a.rejected_by is not null then 'rejected'
+                            when a.ot_approve_by is not null then 'approved'
+                            when a.spv_approved_by = '$user_name' then 'approved' 
+                            when a.mgr_approved_by = '$user_name' then 'approved' 
+                            else '' end ) as overtime_status 
+                    from tb_r_overtime a inner join tb_m_employee b 
+                    on a.employee_id = b.employee_id where 
+                    (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name') and 
+                    a.rejected_by is null and
+                    a.spv_approved_by is not null and
+                    a.mgr_approved_by is not null and
+                    a.ot_approve_by is not null and
+                    a.created_dt >= '$pastdate' and
+                    a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
+                    order by a.ot_dt desc";
+                /*echo $sql;
+                die;*/
+        $data = $this->db->query($sql);
+        echo json_encode($data->result());
+        }
+    }
+    public function getovertimerejectedlist() {
+        header("content-type: application/json");
+        date_default_timezone_set('asia/jakarta');
+         $nowdate = date('Y-m-d');
+        /* UBAH HARI PADA  */
+        $pastdate = date("Y-m-d", strtotime("- 30 days")); 
+        $employee_id = $this->input->get('employee_id', true);
+        $sql ="select 
+            a.employee_id
+            , a.user_name
+            , a.user_group
+            , ( case when b.position_name is null then 'ADMIN' else b.position_name end ) as position_name
+                from tb_m_employee a left join tb_m_position b on a.position_id = b.position_id where a.employee_id
+                = '$employee_id'";
+        $data = $this->db->query($sql);
+        $user_name = $data->row()->user_name;
+        $user_group = $data->row()->user_group;
+        $position_name = strtolower($data->row()->position_name);
+        if ($user_group == 'employee' ||  $user_group == 'employee_app'){
+            $position_name = 'employee';
+        }
+        
+        if (strpos($position_name, 'admin') != false || $position_name == 'admin' ){
+        $sql = "SELECT
+                    b.employee_name
+                    , a.employee_id
+                    , date_format(a.ot_dt,'%d') as overtime_prod_date
+                    , date_format(a.ot_dt,'%Y-%m') as overtime_prod_month
+                    , a.ot_id
+                    , date_format(a.ot_dt,'%Y-%m-%d') as ot_dt
+                    , date_format(a.ot_time_from,'%H:%i') as ot_from
+                    , date_format(a.ot_time_to,'%H:%i') as ot_to
+                    , a.ot_hour
+                    , a.ot_calculate
+                    , a.ot_description
+                    , a.ot_approve_dt
+                    , a.ot_approve_by 
+                    ,( case
+                    when a.rejected_by is not null then 'rejected'
+                    when a.ot_approve_by is not null then 'approved'
+                    else '' end ) as overtime_status 
+                    from tb_r_overtime a inner join tb_m_employee b
+                    on a.employee_id = b.employee_id where 
+                    a.rejected_by is not null and
+                    a.created_dt >= '$pastdate' and 
+                    a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
+                    order by a.ot_dt desc";
+        $data = $this->db->query($sql);
+        echo json_encode($data->result());
+        }else{
+            $sql = "SELECT
+                    b.employee_name
+                    , a.employee_id
+                    , date_format(a.ot_dt,'%d') as overtime_prod_date
+                    , date_format(a.ot_dt,'%Y-%m') as overtime_prod_month
+                    , a.ot_id
+                    , date_format(a.ot_dt,'%Y-%m-%d') as ot_dt
+                    , date_format(a.ot_time_from,'%H:%i') as ot_from
+                    , date_format(a.ot_time_to,'%H:%i') as ot_to
+                    , a.ot_hour
+                    , a.ot_calculate
+                    , a.ot_description
+                    , a.ot_approve_dt
+                    , a.ot_approve_by 
+                    , ( case
+                            when a.rejected_by is not null then 'rejected'
+                            when a.ot_approve_by is not null then 'approved'
+                            when a.spv_approved_by = '$user_name' then 'approved' 
+                            when a.mgr_approved_by = '$user_name' then 'approved' 
+                            else '' end ) as overtime_status 
+                    from tb_r_overtime a inner join tb_m_employee b 
+                    on a.employee_id = b.employee_id where 
+                    (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name') 
+                    and a.created_dt >= '$pastdate'
+                    and a.rejected_by is not null 
+                    and a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
+                    order by a.ot_dt desc";
+                /*echo $sql;
+                die;*/
+        $data = $this->db->query($sql);
+        echo json_encode($data->result());
+        }
+    }
+    public function getovertimenotyetlist() {
+        header("content-type: application/json");
+        date_default_timezone_set('asia/jakarta');
+         $nowdate = date('Y-m-d');
+        /* UBAH HARI PADA  */
+        $pastdate = date("Y-m-d", strtotime("- 30 days")); 
+        $employee_id = $this->input->get('employee_id', true);
+        $sql ="select 
+            a.employee_id
+            , a.user_name
+            , a.user_group
+            , ( case when b.position_name is null then 'ADMIN' else b.position_name end ) as position_name
+                from tb_m_employee a left join tb_m_position b on a.position_id = b.position_id where a.employee_id
+                = '$employee_id'";
+        $data = $this->db->query($sql);
+        $user_name = $data->row()->user_name;
+        $user_group = $data->row()->user_group;
+        $position_name = strtolower($data->row()->position_name);
+        if ($user_group == 'employee' ||  $user_group == 'employee_app'){
+            $position_name = 'employee';
+        }
+        
+        if (strpos($position_name, 'admin') != false || $position_name == 'admin' ){
+        $sql = "SELECT
+                    b.employee_name
+                    , a.employee_id
+                    , date_format(a.ot_dt,'%d') as overtime_prod_date
+                    , date_format(a.ot_dt,'%Y-%m') as overtime_prod_month
+                    , a.ot_id
+                    , date_format(a.ot_dt,'%Y-%m-%d') as ot_dt
+                    , date_format(a.ot_time_from,'%H:%i') as ot_from
+                    , date_format(a.ot_time_to,'%H:%i') as ot_to
+                    , a.ot_hour
+                    , a.ot_calculate
+                    , a.ot_description
+                    , a.ot_approve_dt
+                    , a.ot_approve_by 
+                    ,( case
+                    when a.rejected_by is not null then 'rejected'
+                    when a.ot_approve_by is not null then 'approved'
+                    else '' end ) as overtime_status 
+                    from tb_r_overtime a inner join tb_m_employee b
+                    on a.employee_id = b.employee_id where 
+                    a.rejected_by is null and
+                    a.spv_approved_by is null and
+                    a.mgr_approved_by is null and
+                    a.ot_approve_by is null and
+                    a.created_dt >= '$pastdate' and
+                    a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
+                    order by a.ot_dt desc";
+        $data = $this->db->query($sql);
+        echo json_encode($data->result());
+        }else{
+            $sql = "SELECT
+                    b.employee_name
+                    , a.employee_id
+                    , date_format(a.ot_dt,'%d') as overtime_prod_date
+                    , date_format(a.ot_dt,'%Y-%m') as overtime_prod_month
+                    , a.ot_id
+                    , date_format(a.ot_dt,'%Y-%m-%d') as ot_dt
+                    , date_format(a.ot_time_from,'%H:%i') as ot_from
+                    , date_format(a.ot_time_to,'%H:%i') as ot_to
+                    , a.ot_hour
+                    , a.ot_calculate
+                    , a.ot_description
+                    , a.ot_approve_dt
+                    , a.ot_approve_by 
+                    , ( case
+                            when a.rejected_by is not null then 'rejected'
+                            when a.ot_approve_by is not null then 'approved'
+                            when a.spv_approved_by = '$user_name' then 'approved' 
+                            when a.mgr_approved_by = '$user_name' then 'approved' 
+                            else '' end ) as overtime_status 
+                    from tb_r_overtime a inner join tb_m_employee b 
+                    on a.employee_id = b.employee_id where 
+                    (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name') 
+                    and 
+                    a.rejected_by is null and
+                    a.spv_approved_by is null and
+                    a.mgr_approved_by is null and
+                    a.ot_approve_by is null and
+                    a.created_dt >= '$pastdate' and
+                    a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
+                    order by a.ot_dt desc";
+                
+        $data = $this->db->query($sql);
+        echo json_encode($data->result());
+        }
+    }
     public function setaprove(){
         header("content-type: application/json");
         date_default_timezone_set('asia/jakarta');

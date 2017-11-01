@@ -90,7 +90,7 @@ class excuseservicemobile extends CI_Controller {
                 when a.spv_approved_by = '$user_name' then 'approved' 
                  when a.mgr_approved_by = '$user_name' then 'approved' 
                   else '' end ) as excuse_status 
-             from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name'
+             from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name')
              and
             a.created_dt >= '$pastdate' and 
             a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) order by a.date_from desc";
@@ -138,6 +138,7 @@ class excuseservicemobile extends CI_Controller {
                 when a.excuse_approved_by is not null then 'approved'
                   else '' end ) as excuse_status 
              from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where 
+             a.rejected_by is null and
              a.spv_approved_by is not null and
              a.mgr_approved_by is null and
              a.excuse_approved_by is null and
@@ -164,8 +165,9 @@ class excuseservicemobile extends CI_Controller {
                 when a.spv_approved_by = '$user_name' then 'approved' 
                  when a.mgr_approved_by = '$user_name' then 'approved' 
                   else '' end ) as excuse_status 
-             from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name'
+             from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name')
              and
+             a.rejected_by is null and
             a.spv_approved_by is not null and
             a.mgr_approved_by is null and
             a.excuse_approved_by is null and
@@ -214,6 +216,7 @@ class excuseservicemobile extends CI_Controller {
                 when a.excuse_approved_by is not null then 'approved'
                   else '' end ) as excuse_status 
              from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where 
+             a.rejected_by is null and
              a.mgr_approved_by is not null and
              a.excuse_approved_by is null and
              a.created_dt >= '$pastdate' and 
@@ -239,8 +242,9 @@ class excuseservicemobile extends CI_Controller {
                 when a.spv_approved_by = '$user_name' then 'approved' 
                  when a.mgr_approved_by = '$user_name' then 'approved' 
                   else '' end ) as excuse_status 
-             from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name'
+             from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name')
              and
+             a.rejected_by is null and
             a.mgr_approved_by is not null and
             a.excuse_approved_by is null and
             a.created_dt >= '$pastdate' and 
@@ -288,6 +292,7 @@ class excuseservicemobile extends CI_Controller {
                 when a.excuse_approved_by is not null then 'approved'
                   else '' end ) as excuse_status 
              from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where 
+            a.rejected_by is null and
              a.excuse_approved_by is not null and
              a.created_dt >= '$pastdate' and 
              a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) order by a.date_from desc";
@@ -312,8 +317,9 @@ class excuseservicemobile extends CI_Controller {
                 when a.spv_approved_by = '$user_name' then 'approved' 
                  when a.mgr_approved_by = '$user_name' then 'approved' 
                   else '' end ) as excuse_status 
-             from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name'
+             from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name')
              and
+             a.rejected_by is null and
             a.excuse_approved_by is not null and
             a.created_dt >= '$pastdate' and 
             a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) order by a.date_from desc";
@@ -384,7 +390,7 @@ class excuseservicemobile extends CI_Controller {
                 when a.spv_approved_by = '$user_name' then 'approved' 
                  when a.mgr_approved_by = '$user_name' then 'approved' 
                   else '' end ) as excuse_status 
-             from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name'
+             from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name')
              and
             a.rejected_by is not null and
             a.created_dt >= '$pastdate' and 
@@ -431,7 +437,8 @@ class excuseservicemobile extends CI_Controller {
                 when a.rejected_by is not null then 'rejected'
                 when a.excuse_approved_by is not null then 'approved'
                   else '' end ) as excuse_status 
-             from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where 
+             from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where
+             a.rejected_by is null and 
              a.spv_approved_by is null and
              a.mgr_approved_by is null and
              a.excuse_approved_by is null and
@@ -458,8 +465,9 @@ class excuseservicemobile extends CI_Controller {
                 when a.spv_approved_by = '$user_name' then 'approved' 
                  when a.mgr_approved_by = '$user_name' then 'approved' 
                   else '' end ) as excuse_status 
-             from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name'
+             from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name')
              and
+             a.rejected_by is null and
              a.spv_approved_by is null and
              a.mgr_approved_by is null and
              a.excuse_approved_by is null and

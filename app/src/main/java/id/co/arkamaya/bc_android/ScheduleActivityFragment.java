@@ -7,11 +7,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -19,6 +28,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import id.co.arkamaya.cico.R;
@@ -33,300 +43,79 @@ import retrofit.client.Response;
  * Created by root on 17/10/17.
  */
 
-public class ScheduleActivityFragment extends android.support.v4.app.Fragment {
-    private View v;
-    SharedPreferences pref;
-    private ProgressDialog progress;
-    private ListView list;
-    private String employee_id;
+public class ScheduleActivityFragment extends AppCompatActivity {
 
-    ConnectionDetector conDetector;
-    public String ENDPOINT="http://bc-id.co.id/";
-
-    public ScheduleActivityFragment() {
-        // Required empty public constructor
-    }
-
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_scedule_main);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
+
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_schedule_activity, container, false);
-    }
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        v=view;
-        list=(ListView)v.findViewById(R.id.list);
-        pref = PreferenceManager.getDefaultSharedPreferences(v.getContext().getApplicationContext());
-        employee_id=pref.getString("EmployeeId", null);
-        Log.d("Yudha", employee_id);
-//        employee_cd=pref.getString("EmployeeId", null);
-        ENDPOINT= pref.getString("URLEndPoint", "");
-        conDetector =  new ConnectionDetector(v.getContext().getApplicationContext());
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                long viewId = id;//view.getId();
-                AppCompatImageView btnDeleteScheduleActivity = (AppCompatImageView)view.findViewById(R.id.btnDelete);
-                AppCompatImageView btnEditScheduleActivity = (AppCompatImageView)view.findViewById(R.id.btnEdit);
-                AppCompatImageView btnAproveScheduleActivity = (AppCompatImageView)view.findViewById(R.id.btnAprove);
-                AppCompatImageView btnRejectScheduleActivity = (AppCompatImageView)view.findViewById(R.id.btnReject);
-
-                if(conDetector.isConnectingToInternet()){
-                    if(viewId==btnDeleteScheduleActivity.getId())
-                    {
-                        View vp=(View)v.getParent();
-                        TextView txtScheduleActivityId = (TextView) view.findViewById(R.id.txtScheduleActivityId);
-                        final String ScheduleActivityId = String.valueOf(txtScheduleActivityId.getText()); //txtReimburseId.getText().toString();
-                        //Toast.makeText(v.getContext().getApplicationContext(),ReimburseId, Toast.LENGTH_SHORT).show();
-                        new AlertDialog.Builder(v.getContext())
-                                .setMessage("Are you sure?")
-                                .setCancelable(false)
-                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        onDeleteScheduleActivity(ScheduleActivityId, employee_id);
-                                    }
-                                })
-                                .setNegativeButton("No", null)
-                                .show();
-                    }else if(viewId==btnAproveScheduleActivity.getId()){
-                        View vp=(View)v.getParent();
-                        TextView txtScheduleActivityId = (TextView) view.findViewById(R.id.txtScheduleActivityId);
-                        final String ScheduleActivityId = String.valueOf(txtScheduleActivityId.getText()); //txtReimburseId.getText().toString();
-                        //Toast.makeText(v.getContext().getApplicationContext(),ReimburseId, Toast.LENGTH_SHORT).show();
-                        new AlertDialog.Builder(v.getContext())
-                                .setMessage("Are you sure?")
-                                .setCancelable(false)
-                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        onAprove(ScheduleActivityId, employee_id);
-                                    }
-                                })
-                                .setNegativeButton("No", null)
-                                .show();
-                    }else if(viewId==btnRejectScheduleActivity.getId()){
-                        View vp=(View)v.getParent();
-                        TextView txtScheduleActivityId = (TextView) view.findViewById(R.id.txtScheduleActivityId);
-                        final String ScheduleActivityId = String.valueOf(txtScheduleActivityId.getText()); //txtReimburseId.getText().toString();
-                        //Toast.makeText(v.getContext().getApplicationContext(),ReimburseId, Toast.LENGTH_SHORT).show();
-                        new AlertDialog.Builder(v.getContext())
-                                .setMessage("Are you sure?")
-                                .setCancelable(false)
-                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        onReject(ScheduleActivityId, employee_id);
-                                    }
-                                })
-                                .setNegativeButton("No", null)
-                                .show();
-                    }else if(viewId==btnEditScheduleActivity.getId()){
-                        TextView txtScheduleActivityId = (TextView) view.findViewById(R.id.txtScheduleActivityId);
-                        final String ScheduleActivityId = txtScheduleActivityId.getText().toString();
-                        Intent intent = new Intent(v.getContext(), ScheduleActivityActivity.class);
-                        intent.putExtra("ScheduleId", ScheduleActivityId);
-                        intent.putExtra("Mode","edit");
-                        startActivity(intent);
-                    }
-                }else{
-                    Toast.makeText(v.getContext().getApplicationContext(), "Internet Connection Error..", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        Button btnAdd = (Button) view.findViewById(R.id.btnAdd);
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ScheduleActivityActivity.class);
-                intent.putExtra("Mode", "new");
-                startActivity(intent);
-            }
-        });
-
-        Button btnResync = (Button) view.findViewById(R.id.btnResync);
-        btnResync.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getScheduleActivityList();
-            }
-        });
-
-        super.onViewCreated(view, savedInstanceState);
-    }
-    private void  onAprove(String ScheduleActivityId, String EmployeeId) {
-        progress = new ProgressDialog(v.getContext());
-        progress.setMessage("Processing..");
-        progress.setIndeterminate(true);
-        progress.setCancelable(false);
-        progress.show();
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(ENDPOINT)
-                .setLogLevel(RestAdapter.LogLevel.FULL)
-                .build();
-
-        ApiScheduleActivity restInterface = restAdapter.create(ApiScheduleActivity.class);
-
-        restInterface.onAproveScheduleActivity(ScheduleActivityId, EmployeeId, new Callback<CheckLogin>() {
-            @Override
-            public void success(CheckLogin m, Response response) {
-
-                if (progress != null) {
-                    progress.dismiss();
-                }
-
-                Toast.makeText(v.getContext().getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
-
-                if (m.getMsgType().toLowerCase().equals("info")) {
-                    getScheduleActivityList();
-                } else {
-
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                Toast.makeText(v.getContext().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                if (progress != null) {
-                    progress.dismiss();
-                }
-            }
-        });
-    }
-    private void  onReject(String ScheduleActivityId, String EmployeeId) {
-        progress = new ProgressDialog(v.getContext());
-        progress.setMessage("Processing..");
-        progress.setIndeterminate(true);
-        progress.setCancelable(false);
-        progress.show();
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(ENDPOINT)
-                .setLogLevel(RestAdapter.LogLevel.FULL)
-                .build();
-
-        ApiScheduleActivity restInterface = restAdapter.create(ApiScheduleActivity.class);
-
-        restInterface.onRejectScheduleActivity(ScheduleActivityId, EmployeeId, new Callback<CheckLogin>() {
-            @Override
-            public void success(CheckLogin m, Response response) {
-
-                if (progress != null) {
-                    progress.dismiss();
-                }
-
-                Toast.makeText(v.getContext().getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
-
-                if (m.getMsgType().toLowerCase().equals("info")) {
-                    getScheduleActivityList();
-                } else {
-
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                Toast.makeText(v.getContext().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                if (progress != null) {
-                    progress.dismiss();
-                }
-            }
-        });
-    }
-    private void  onDeleteScheduleActivity(String ScheduleActivityId, String EmployeeId){
-        progress = new ProgressDialog(v.getContext());
-        progress.setMessage("Processing..");
-        progress.setIndeterminate(true);
-        progress.setCancelable(false);
-        progress.show();
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(ENDPOINT)
-                .setLogLevel(RestAdapter.LogLevel.FULL)
-                .build();
-
-        ApiScheduleActivity restInterface = restAdapter.create(ApiScheduleActivity.class);
-
-        restInterface.onDeleteScheduleActivity(ScheduleActivityId, EmployeeId, new Callback<CheckLogin>() {
-            @Override
-            public void success(CheckLogin m, Response response) {
-
-                if (progress != null) {
-                    progress.dismiss();
-                }
-
-                Toast.makeText(v.getContext().getApplicationContext(), m.getMsgText(), Toast.LENGTH_SHORT).show();
-
-                if (m.getMsgType().toLowerCase().equals("info")) {
-                    getScheduleActivityList();
-                } else {
-
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                Toast.makeText(v.getContext().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                if (progress != null) {
-                    progress.dismiss();
-                }
-            }
-        });
+        return super.onOptionsItemSelected(item);
     }
 
-    private void getScheduleActivityList(){
-
-        /*-------------------------------*/
-        progress = new ProgressDialog(v.getContext());
-        progress.setMessage("Syncrhonizing...");
-        progress.setIndeterminate(true);
-        progress.setCancelable(false);
-        progress.show();
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(ENDPOINT)
-                .setLogLevel(RestAdapter.LogLevel.FULL)
-                .build();
-
-        ApiScheduleActivity restInterface = restAdapter.create(ApiScheduleActivity.class);
-        Log.d("Yudha", employee_id);
-        restInterface.getScheduleActivityList(employee_id, new Callback<List<GetScheduleActivityList>>() {
-            @Override
-            public void success(List<GetScheduleActivityList> m, Response response) {
-                list.setAdapter(null);
-                if (m.size() > 0) {
-                    AdapterScheduleActivityListView adapt = new AdapterScheduleActivityListView(getActivity().getApplicationContext(), R.layout.list_adapter_schedule_activity, m);
-                    list.setAdapter(adapt);
-                }
-
-                if (progress != null) {
-                    progress.dismiss();
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                if (progress != null) {
-                    progress.dismiss();
-                }
-            }
-        });
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new ScheduleActivityAllFragment(), "All Schedule");
+        adapter.addFrag(new ScheduleActivitySpvFragment(), "Approved By Spv");
+        adapter.addFrag(new ScheduleActivityMgrFragment(), "Approved By Mgr");
+        adapter.addFrag(new ScheduleActivityHrdFragment(), "Approved By Hrd");
+        adapter.addFrag(new ScheduleActivityRejectedFragment(), "Rejected");
+        adapter.addFrag(new ScheduleActivityNotYetFragment(), "Not Yet Approved");
+//        adapter.addFrag(new MyProfileOtherFragment(), "Other+");
+        viewPager.setAdapter(adapter);
     }
 
-    @Override
-    public void onStart() {
-        getScheduleActivityList();
-        super.onStart();
-    }
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
 
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
 
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFrag(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
+    }
 }

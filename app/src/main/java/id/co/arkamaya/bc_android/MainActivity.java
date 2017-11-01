@@ -159,19 +159,21 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_profile) {
             startActivity(new Intent(MainActivity.this, MyProfileFragment.class));
         } else if (id == R.id.nav_schedule) {
-            ScheduleActivityFragment fragment= new ScheduleActivityFragment();
+            /*ScheduleActivityFragment fragment= new ScheduleActivityFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
 
             fragmentTransaction.replace(R.id.fragment_container, fragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.commit();*/
+            startActivity(new Intent(MainActivity.this, ScheduleActivityFragment.class));
         } else if (id == R.id.nav_leave) {
-            LeaveFragment fragment= new LeaveFragment();
+            /*LeaveFragment fragment= new LeaveFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
 
             fragmentTransaction.replace(R.id.fragment_container, fragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.commit();*/
+            startActivity(new Intent(MainActivity.this, LeaveFragment.class));
         } else if (id == R.id.nav_excuse) {
            /* ExcuseFragment fragment= new ExcuseFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
@@ -188,12 +190,13 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.commit();
         }else if(id==R.id.nav_otrequest){
-            OvertimeFragment fragment= new OvertimeFragment();
+            /*OvertimeFragment fragment= new OvertimeFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
 
             fragmentTransaction.replace(R.id.fragment_container, fragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.commit();*/
+            startActivity(new Intent(MainActivity.this, OvertimeFragment.class));
         }else if(id==R.id.nav_viewattendance){
             WorkingReportFragment fragment= new WorkingReportFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction =

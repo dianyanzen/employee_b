@@ -18,6 +18,26 @@ public interface ApiScheduleActivity {
     void getScheduleActivityList(
             @Query("employee_id") String employee_id, Callback<List<GetScheduleActivityList>> response
     );
+    @GET("/scheduleservicemobile/getschedulespvlist")
+    void getScheduleActivitySpvList(
+            @Query("employee_id") String employee_id, Callback<List<GetScheduleActivityList>> response
+    );
+    @GET("/scheduleservicemobile/getschedulemgrlist")
+    void getScheduleActivityMgrList(
+            @Query("employee_id") String employee_id, Callback<List<GetScheduleActivityList>> response
+    );
+    @GET("/scheduleservicemobile/getschedulehrdlist")
+    void getScheduleActivityHrdList(
+            @Query("employee_id") String employee_id, Callback<List<GetScheduleActivityList>> response
+    );
+    @GET("/scheduleservicemobile/getschedulerejectedlist")
+    void getScheduleActivityRejectedList(
+            @Query("employee_id") String employee_id, Callback<List<GetScheduleActivityList>> response
+    );
+    @GET("/scheduleservicemobile/getschedulenotyetlist")
+    void getScheduleActivityNotYetList(
+            @Query("employee_id") String employee_id, Callback<List<GetScheduleActivityList>> response
+    );
 
     @GET("/scheduleservicemobile/getschedulebyid")
     void getScheduleActivityById(

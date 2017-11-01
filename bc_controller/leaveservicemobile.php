@@ -82,8 +82,483 @@ class leaveservicemobile extends CI_Controller {
             tb_m_employee c
                 on a.employee_id = c.employee_id
             where
-            c.user_name = '$user_name' or c.supervisor1 = '$user_name' or c.supervisor2 = '$user_name' 
+            (c.user_name = '$user_name' or c.supervisor1 = '$user_name' or c.supervisor2 = '$user_name' )
             and
+
+            a.created_dt >= '$pastdate' and 
+            a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
+            order by a.time_off_dt desc";
+            // echo $sql;
+            // die;
+        $data = $this->db->query($sql);
+       
+        echo json_encode($data->result());
+        }
+        }
+    }
+    public function getleavespvlist() {
+        header("content-type: application/json");
+        date_default_timezone_set('asia/jakarta');
+        $nowdate = date('Y-m-d');
+        /* UBAH HARI PADA  */
+        $pastdate = date("Y-m-d", strtotime("- 30 days")); 
+        $employee_id = $this->input->get('employee_id', true);
+        $sql ="select 
+            a.employee_id
+            , a.user_name
+            , a.user_group
+            , ( case when b.position_name is null then 'ADMIN' else b.position_name end ) as position_name
+                from tb_m_employee a left join tb_m_position b on a.position_id = b.position_id where a.employee_id
+                = '$employee_id'";
+        $data = $this->db->query($sql);
+        $user_name = $data->row()->user_name;
+        $user_group = $data->row()->user_group;
+        $position_name = strtolower($data->row()->position_name);
+        if ($user_group == 'employee' ||  $user_group == 'employee_app'){
+            $position_name = 'employee';
+        }
+        
+        if (strpos($position_name, 'admin') != false || $position_name == 'admin' ){
+        $sql = "SELECT a.time_off_id as leave_id
+             , a.employee_id
+             , c.employee_name
+             , date_format(a.time_off_dt,'%d') as leave_prod_date
+             , date_format(a.time_off_dt,'%Y-%m') as leave_prod_month
+             , date_format(a.time_off_dt,'%Y-%m-%d') as leave_dt
+             , b.leave_name as time_off_type
+             , ( case when a.time_off_description is null then '..' when a.time_off_description = '' then '..' else a.time_off_description end ) as leave_reason
+             , a.approval_due_dt
+             , a.time_off_approve_dt
+             , a.time_off_approve_by 
+             , ( case when a.time_off_approve_by is not null then 'approved' when a.rejected_dt is not null then 'rejected' else '' end ) as leave_status 
+            from tb_r_time_off a 
+            left join
+                tb_m_leave_type b 
+                on a.time_off_type = b.leave_type_cd
+            left join 
+            tb_m_employee c
+                on a.employee_id = c.employee_id
+            where
+            a.rejected_by is null and
+             a.spv_approved_by is not null and
+             a.mgr_approved_by is null and
+             a.time_off_approve_by is null and
+              a.created_dt >= '$pastdate' and 
+             a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY)
+            order by a.time_off_dt desc";
+        /*echo $sql;
+        die;*/
+        $data = $this->db->query($sql);
+        echo json_encode($data->result());
+        }else{
+             if ($user_name != '' ||  $user_name != null){
+        $sql = "SELECT a.time_off_id as leave_id
+             , a.employee_id
+             , c.employee_name
+             , date_format(a.time_off_dt,'%d') as leave_prod_date
+             , date_format(a.time_off_dt,'%Y-%m') as leave_prod_month
+             , date_format(a.time_off_dt,'%Y-%m-%d') as leave_dt
+             , b.leave_name as time_off_type
+             , ( case when a.time_off_description is null then '..' when a.time_off_description = '' then '..' else a.time_off_description end ) as leave_reason
+             , a.approval_due_dt
+             , a.time_off_approve_dt
+             , a.time_off_approve_by 
+             , ( case when a.time_off_approve_by is not null then 'approved' when a.rejected_dt is not null then 'rejected' 
+                when a.spv_approved_by = '$user_name' then 'approved' 
+                when a.mgr_approved_by = '$user_name' then 'approved' 
+             else '' end ) as leave_status 
+            from tb_r_time_off a 
+            left join
+                tb_m_leave_type b 
+                on a.time_off_type = b.leave_type_cd
+            left join 
+            tb_m_employee c
+                on a.employee_id = c.employee_id
+            where
+            (c.user_name = '$user_name' or c.supervisor1 = '$user_name' or c.supervisor2 = '$user_name' )
+            and
+            a.rejected_by is null and
+             a.spv_approved_by is not null and
+             a.mgr_approved_by is null and
+             a.time_off_approve_by is null and
+            a.created_dt >= '$pastdate' and 
+            a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
+            order by a.time_off_dt desc";
+            // echo $sql;
+            // die;
+        $data = $this->db->query($sql);
+       
+        echo json_encode($data->result());
+        }
+        }
+    }
+    public function getleavemgrlist() {
+        header("content-type: application/json");
+        date_default_timezone_set('asia/jakarta');
+        $nowdate = date('Y-m-d');
+        /* UBAH HARI PADA  */
+        $pastdate = date("Y-m-d", strtotime("- 30 days")); 
+        $employee_id = $this->input->get('employee_id', true);
+        $sql ="select 
+            a.employee_id
+            , a.user_name
+            , a.user_group
+            , ( case when b.position_name is null then 'ADMIN' else b.position_name end ) as position_name
+                from tb_m_employee a left join tb_m_position b on a.position_id = b.position_id where a.employee_id
+                = '$employee_id'";
+        $data = $this->db->query($sql);
+        $user_name = $data->row()->user_name;
+        $user_group = $data->row()->user_group;
+        $position_name = strtolower($data->row()->position_name);
+        if ($user_group == 'employee' ||  $user_group == 'employee_app'){
+            $position_name = 'employee';
+        }
+        
+        if (strpos($position_name, 'admin') != false || $position_name == 'admin' ){
+        $sql = "SELECT a.time_off_id as leave_id
+             , a.employee_id
+             , c.employee_name
+             , date_format(a.time_off_dt,'%d') as leave_prod_date
+             , date_format(a.time_off_dt,'%Y-%m') as leave_prod_month
+             , date_format(a.time_off_dt,'%Y-%m-%d') as leave_dt
+             , b.leave_name as time_off_type
+             , ( case when a.time_off_description is null then '..' when a.time_off_description = '' then '..' else a.time_off_description end ) as leave_reason
+             , a.approval_due_dt
+             , a.time_off_approve_dt
+             , a.time_off_approve_by 
+             , ( case when a.time_off_approve_by is not null then 'approved' when a.rejected_dt is not null then 'rejected' else '' end ) as leave_status 
+            from tb_r_time_off a 
+            left join
+                tb_m_leave_type b 
+                on a.time_off_type = b.leave_type_cd
+            left join 
+            tb_m_employee c
+                on a.employee_id = c.employee_id
+            where
+            a.rejected_by is null and
+             a.spv_approved_by is not null and
+             a.mgr_approved_by is not null and
+             a.time_off_approve_by is null and
+              a.created_dt >= '$pastdate' and 
+             a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY)
+            order by a.time_off_dt desc";
+        /*echo $sql;
+        die;*/
+        $data = $this->db->query($sql);
+        echo json_encode($data->result());
+        }else{
+             if ($user_name != '' ||  $user_name != null){
+        $sql = "SELECT a.time_off_id as leave_id
+             , a.employee_id
+             , c.employee_name
+             , date_format(a.time_off_dt,'%d') as leave_prod_date
+             , date_format(a.time_off_dt,'%Y-%m') as leave_prod_month
+             , date_format(a.time_off_dt,'%Y-%m-%d') as leave_dt
+             , b.leave_name as time_off_type
+             , ( case when a.time_off_description is null then '..' when a.time_off_description = '' then '..' else a.time_off_description end ) as leave_reason
+             , a.approval_due_dt
+             , a.time_off_approve_dt
+             , a.time_off_approve_by 
+             , ( case when a.time_off_approve_by is not null then 'approved' when a.rejected_dt is not null then 'rejected' 
+                when a.spv_approved_by = '$user_name' then 'approved' 
+                when a.mgr_approved_by = '$user_name' then 'approved' 
+             else '' end ) as leave_status 
+            from tb_r_time_off a 
+            left join
+                tb_m_leave_type b 
+                on a.time_off_type = b.leave_type_cd
+            left join 
+            tb_m_employee c
+                on a.employee_id = c.employee_id
+            where
+            (c.user_name = '$user_name' or c.supervisor1 = '$user_name' or c.supervisor2 = '$user_name' )
+            and
+            a.rejected_by is null and
+             a.spv_approved_by is not null and
+             a.mgr_approved_by is not null and
+             a.time_off_approve_by is null and
+            a.created_dt >= '$pastdate' and 
+            a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
+            order by a.time_off_dt desc";
+            // echo $sql;
+            // die;
+        $data = $this->db->query($sql);
+       
+        echo json_encode($data->result());
+        }
+        }
+    }
+    public function getleavehrdlist() {
+        header("content-type: application/json");
+        date_default_timezone_set('asia/jakarta');
+        $nowdate = date('Y-m-d');
+        /* UBAH HARI PADA  */
+        $pastdate = date("Y-m-d", strtotime("- 30 days")); 
+        $employee_id = $this->input->get('employee_id', true);
+        $sql ="select 
+            a.employee_id
+            , a.user_name
+            , a.user_group
+            , ( case when b.position_name is null then 'ADMIN' else b.position_name end ) as position_name
+                from tb_m_employee a left join tb_m_position b on a.position_id = b.position_id where a.employee_id
+                = '$employee_id'";
+        $data = $this->db->query($sql);
+        $user_name = $data->row()->user_name;
+        $user_group = $data->row()->user_group;
+        $position_name = strtolower($data->row()->position_name);
+        if ($user_group == 'employee' ||  $user_group == 'employee_app'){
+            $position_name = 'employee';
+        }
+        
+        if (strpos($position_name, 'admin') != false || $position_name == 'admin' ){
+        $sql = "SELECT a.time_off_id as leave_id
+             , a.employee_id
+             , c.employee_name
+             , date_format(a.time_off_dt,'%d') as leave_prod_date
+             , date_format(a.time_off_dt,'%Y-%m') as leave_prod_month
+             , date_format(a.time_off_dt,'%Y-%m-%d') as leave_dt
+             , b.leave_name as time_off_type
+             , ( case when a.time_off_description is null then '..' when a.time_off_description = '' then '..' else a.time_off_description end ) as leave_reason
+             , a.approval_due_dt
+             , a.time_off_approve_dt
+             , a.time_off_approve_by 
+             , ( case when a.time_off_approve_by is not null then 'approved' when a.rejected_dt is not null then 'rejected' else '' end ) as leave_status 
+            from tb_r_time_off a 
+            left join
+                tb_m_leave_type b 
+                on a.time_off_type = b.leave_type_cd
+            left join 
+            tb_m_employee c
+                on a.employee_id = c.employee_id
+            where
+            a.rejected_by is null and
+             a.spv_approved_by is not null and
+             a.mgr_approved_by is not null and
+             a.time_off_approve_by is not null and
+              a.created_dt >= '$pastdate' and 
+             a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY)
+            order by a.time_off_dt desc";
+        /*echo $sql;
+        die;*/
+        $data = $this->db->query($sql);
+        echo json_encode($data->result());
+        }else{
+             if ($user_name != '' ||  $user_name != null){
+        $sql = "SELECT a.time_off_id as leave_id
+             , a.employee_id
+             , c.employee_name
+             , date_format(a.time_off_dt,'%d') as leave_prod_date
+             , date_format(a.time_off_dt,'%Y-%m') as leave_prod_month
+             , date_format(a.time_off_dt,'%Y-%m-%d') as leave_dt
+             , b.leave_name as time_off_type
+             , ( case when a.time_off_description is null then '..' when a.time_off_description = '' then '..' else a.time_off_description end ) as leave_reason
+             , a.approval_due_dt
+             , a.time_off_approve_dt
+             , a.time_off_approve_by 
+             , ( case when a.time_off_approve_by is not null then 'approved' when a.rejected_dt is not null then 'rejected' 
+                when a.spv_approved_by = '$user_name' then 'approved' 
+                when a.mgr_approved_by = '$user_name' then 'approved' 
+             else '' end ) as leave_status 
+            from tb_r_time_off a 
+            left join
+                tb_m_leave_type b 
+                on a.time_off_type = b.leave_type_cd
+            left join 
+            tb_m_employee c
+                on a.employee_id = c.employee_id
+            where
+            (c.user_name = '$user_name' or c.supervisor1 = '$user_name' or c.supervisor2 = '$user_name' )
+            and
+            a.rejected_by is null and
+             a.spv_approved_by is not null and
+             a.mgr_approved_by is not null and
+             a.time_off_approve_by is not null and
+            a.created_dt >= '$pastdate' and 
+            a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
+            order by a.time_off_dt desc";
+            // echo $sql;
+            // die;
+        $data = $this->db->query($sql);
+       
+        echo json_encode($data->result());
+        }
+        }
+    }
+    public function getleaverejectedlist() {
+        header("content-type: application/json");
+        date_default_timezone_set('asia/jakarta');
+        $nowdate = date('Y-m-d');
+        /* UBAH HARI PADA  */
+        $pastdate = date("Y-m-d", strtotime("- 30 days")); 
+        $employee_id = $this->input->get('employee_id', true);
+        $sql ="select 
+            a.employee_id
+            , a.user_name
+            , a.user_group
+            , ( case when b.position_name is null then 'ADMIN' else b.position_name end ) as position_name
+                from tb_m_employee a left join tb_m_position b on a.position_id = b.position_id where a.employee_id
+                = '$employee_id'";
+        $data = $this->db->query($sql);
+        $user_name = $data->row()->user_name;
+        $user_group = $data->row()->user_group;
+        $position_name = strtolower($data->row()->position_name);
+        if ($user_group == 'employee' ||  $user_group == 'employee_app'){
+            $position_name = 'employee';
+        }
+        
+        if (strpos($position_name, 'admin') != false || $position_name == 'admin' ){
+        $sql = "SELECT a.time_off_id as leave_id
+             , a.employee_id
+             , c.employee_name
+             , date_format(a.time_off_dt,'%d') as leave_prod_date
+             , date_format(a.time_off_dt,'%Y-%m') as leave_prod_month
+             , date_format(a.time_off_dt,'%Y-%m-%d') as leave_dt
+             , b.leave_name as time_off_type
+             , ( case when a.time_off_description is null then '..' when a.time_off_description = '' then '..' else a.time_off_description end ) as leave_reason
+             , a.approval_due_dt
+             , a.time_off_approve_dt
+             , a.time_off_approve_by 
+             , ( case when a.time_off_approve_by is not null then 'approved' when a.rejected_dt is not null then 'rejected' else '' end ) as leave_status 
+            from tb_r_time_off a 
+            left join
+                tb_m_leave_type b 
+                on a.time_off_type = b.leave_type_cd
+            left join 
+            tb_m_employee c
+                on a.employee_id = c.employee_id
+            where
+            a.rejected_by is not null and
+              a.created_dt >= '$pastdate' and 
+             a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY)
+            order by a.time_off_dt desc";
+        /*echo $sql;
+        die;*/
+        $data = $this->db->query($sql);
+        echo json_encode($data->result());
+        }else{
+             if ($user_name != '' ||  $user_name != null){
+        $sql = "SELECT a.time_off_id as leave_id
+             , a.employee_id
+             , c.employee_name
+             , date_format(a.time_off_dt,'%d') as leave_prod_date
+             , date_format(a.time_off_dt,'%Y-%m') as leave_prod_month
+             , date_format(a.time_off_dt,'%Y-%m-%d') as leave_dt
+             , b.leave_name as time_off_type
+             , ( case when a.time_off_description is null then '..' when a.time_off_description = '' then '..' else a.time_off_description end ) as leave_reason
+             , a.approval_due_dt
+             , a.time_off_approve_dt
+             , a.time_off_approve_by 
+             , ( case when a.time_off_approve_by is not null then 'approved' when a.rejected_dt is not null then 'rejected' 
+                when a.spv_approved_by = '$user_name' then 'approved' 
+                when a.mgr_approved_by = '$user_name' then 'approved' 
+             else '' end ) as leave_status 
+            from tb_r_time_off a 
+            left join
+                tb_m_leave_type b 
+                on a.time_off_type = b.leave_type_cd
+            left join 
+            tb_m_employee c
+                on a.employee_id = c.employee_id
+            where
+            (c.user_name = '$user_name' or c.supervisor1 = '$user_name' or c.supervisor2 = '$user_name' )
+            and
+            a.rejected_by is not null and
+            a.created_dt >= '$pastdate' and 
+            a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
+            order by a.time_off_dt desc";
+            // echo $sql;
+            // die;
+        $data = $this->db->query($sql);
+       
+        echo json_encode($data->result());
+        }
+        }
+    }
+    public function getleavenotyetlist() {
+        header("content-type: application/json");
+        date_default_timezone_set('asia/jakarta');
+        $nowdate = date('Y-m-d');
+        /* UBAH HARI PADA  */
+        $pastdate = date("Y-m-d", strtotime("- 30 days")); 
+        $employee_id = $this->input->get('employee_id', true);
+        $sql ="select 
+            a.employee_id
+            , a.user_name
+            , a.user_group
+            , ( case when b.position_name is null then 'ADMIN' else b.position_name end ) as position_name
+                from tb_m_employee a left join tb_m_position b on a.position_id = b.position_id where a.employee_id
+                = '$employee_id'";
+        $data = $this->db->query($sql);
+        $user_name = $data->row()->user_name;
+        $user_group = $data->row()->user_group;
+        $position_name = strtolower($data->row()->position_name);
+        if ($user_group == 'employee' ||  $user_group == 'employee_app'){
+            $position_name = 'employee';
+        }
+        
+        if (strpos($position_name, 'admin') != false || $position_name == 'admin' ){
+        $sql = "SELECT a.time_off_id as leave_id
+             , a.employee_id
+             , c.employee_name
+             , date_format(a.time_off_dt,'%d') as leave_prod_date
+             , date_format(a.time_off_dt,'%Y-%m') as leave_prod_month
+             , date_format(a.time_off_dt,'%Y-%m-%d') as leave_dt
+             , b.leave_name as time_off_type
+             , ( case when a.time_off_description is null then '..' when a.time_off_description = '' then '..' else a.time_off_description end ) as leave_reason
+             , a.approval_due_dt
+             , a.time_off_approve_dt
+             , a.time_off_approve_by 
+             , ( case when a.time_off_approve_by is not null then 'approved' when a.rejected_dt is not null then 'rejected' else '' end ) as leave_status 
+            from tb_r_time_off a 
+            left join
+                tb_m_leave_type b 
+                on a.time_off_type = b.leave_type_cd
+            left join 
+            tb_m_employee c
+                on a.employee_id = c.employee_id
+            where
+            a.rejected_by is null and
+             a.spv_approved_by is null and
+             a.mgr_approved_by is null and
+             a.time_off_approve_by is null and
+              a.created_dt >= '$pastdate' and 
+             a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY)
+            order by a.time_off_dt desc";
+        /*echo $sql;
+        die;*/
+        $data = $this->db->query($sql);
+        echo json_encode($data->result());
+        }else{
+             if ($user_name != '' ||  $user_name != null){
+        $sql = "SELECT a.time_off_id as leave_id
+             , a.employee_id
+             , c.employee_name
+             , date_format(a.time_off_dt,'%d') as leave_prod_date
+             , date_format(a.time_off_dt,'%Y-%m') as leave_prod_month
+             , date_format(a.time_off_dt,'%Y-%m-%d') as leave_dt
+             , b.leave_name as time_off_type
+             , ( case when a.time_off_description is null then '..' when a.time_off_description = '' then '..' else a.time_off_description end ) as leave_reason
+             , a.approval_due_dt
+             , a.time_off_approve_dt
+             , a.time_off_approve_by 
+             , ( case when a.time_off_approve_by is not null then 'approved' when a.rejected_dt is not null then 'rejected' 
+                when a.spv_approved_by = '$user_name' then 'approved' 
+                when a.mgr_approved_by = '$user_name' then 'approved' 
+             else '' end ) as leave_status 
+            from tb_r_time_off a 
+            left join
+                tb_m_leave_type b 
+                on a.time_off_type = b.leave_type_cd
+            left join 
+            tb_m_employee c
+                on a.employee_id = c.employee_id
+            where
+            (c.user_name = '$user_name' or c.supervisor1 = '$user_name' or c.supervisor2 = '$user_name' )
+            and
+            a.rejected_by is null and
+             a.spv_approved_by is null and
+             a.mgr_approved_by is null and
+             a.time_off_approve_by is null and
             a.created_dt >= '$pastdate' and 
             a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
             order by a.time_off_dt desc";

@@ -37,6 +37,21 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.Full"
             android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity
+            android:name="id.co.arkamaya.bc_android.ScheduleActivityFragment"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.Full"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity
+            android:name="id.co.arkamaya.bc_android.LeaveFragment"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.Full"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity
+            android:name="id.co.arkamaya.bc_android.OvertimeFragment"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.Full"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
 
         <activity
             android:name="id.co.arkamaya.bc_android.LoginActivity"

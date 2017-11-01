@@ -89,7 +89,7 @@ class scheduleservicemobile extends CI_Controller {
                  else '' end ) as schedule_status
                 , date_format(a.approval_due_dt,'%Y-%m-%d') as approval_due_dt
                 from tb_r_schedule a left join tb_m_employee b on a.employee_id = b.employee_id where
-                b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name' and
+                (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name') and
                 a.created_dt >= '$pastdate' and 
                 a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
                 order by a.schedule_dt desc";
@@ -133,6 +133,7 @@ class scheduleservicemobile extends CI_Controller {
                 , ( case when a.schedule_approved_by is not null  then 'approved' when a.rejected_by is not null then 'rejected' else '' end ) as schedule_status
                 , date_format(a.approval_due_dt,'%Y-%m-%d') as approval_due_dt
                 from tb_r_schedule a left join tb_m_employee b on a.employee_id = b.employee_id where
+                a.rejected_by is null and
                 a.spv_approved_by is not null and
                 a.mgr_approved_by is null and
                 a.schedule_approved_by is null and
@@ -160,7 +161,8 @@ class scheduleservicemobile extends CI_Controller {
                  else '' end ) as schedule_status
                 , date_format(a.approval_due_dt,'%Y-%m-%d') as approval_due_dt
                 from tb_r_schedule a left join tb_m_employee b on a.employee_id = b.employee_id where
-                b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name' and
+                (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name') and
+                a.rejected_by is null and
                 a.spv_approved_by is not null and
                 a.mgr_approved_by is null and
                 a.schedule_approved_by is null and
@@ -207,6 +209,7 @@ public function getschedulemgrlist() {
                 , ( case when a.schedule_approved_dt is not null  then 'approved' when a.rejected_dt is not null then 'rejected' else '' end ) as schedule_status
                 , date_format(a.approval_due_dt,'%Y-%m-%d') as approval_due_dt
                 from tb_r_schedule a left join tb_m_employee b on a.employee_id = b.employee_id where
+                a.rejected_by is null and
                 a.spv_approved_by is not null and
                 a.mgr_approved_by is not null and
                 a.schedule_approved_by is null and
@@ -234,7 +237,8 @@ public function getschedulemgrlist() {
                  else '' end ) as schedule_status
                 , date_format(a.approval_due_dt,'%Y-%m-%d') as approval_due_dt
                 from tb_r_schedule a left join tb_m_employee b on a.employee_id = b.employee_id where
-                b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name' and
+                (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name') and
+                a.rejected_by is null and
                 a.spv_approved_by is not null and
                 a.mgr_approved_by is not null and
                 a.schedule_approved_by is null and
@@ -281,6 +285,7 @@ public function getschedulehrdlist() {
                 , ( case when a.schedule_approved_dt is not null  then 'approved' when a.rejected_dt is not null then 'rejected' else '' end ) as schedule_status
                 , date_format(a.approval_due_dt,'%Y-%m-%d') as approval_due_dt
                 from tb_r_schedule a left join tb_m_employee b on a.employee_id = b.employee_id where
+                a.rejected_by is null and
                 a.schedule_approved_by is not null and
                 a.created_dt >= '$pastdate' and 
                 a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
@@ -306,7 +311,8 @@ public function getschedulehrdlist() {
                  else '' end ) as schedule_status
                 , date_format(a.approval_due_dt,'%Y-%m-%d') as approval_due_dt
                 from tb_r_schedule a left join tb_m_employee b on a.employee_id = b.employee_id where
-                b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name' and
+                (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name') and
+                a.rejected_by is null and
                 a.schedule_approved_by is not null and
                 a.created_dt >= '$pastdate' and 
                 a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
@@ -376,7 +382,7 @@ public function getschedulerejectedlist() {
                  else '' end ) as schedule_status
                 , date_format(a.approval_due_dt,'%Y-%m-%d') as approval_due_dt
                 from tb_r_schedule a left join tb_m_employee b on a.employee_id = b.employee_id where
-                b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name' and
+                (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name') and
                 a.rejected_by is not null and
                 a.created_dt >= '$pastdate' and 
                 a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
@@ -421,6 +427,7 @@ public function getschedulenotyetlist() {
                 , ( case when a.schedule_approved_dt is not null  then 'approved' when a.rejected_dt is not null then 'rejected' else '' end ) as schedule_status
                 , date_format(a.approval_due_dt,'%Y-%m-%d') as approval_due_dt
                 from tb_r_schedule a left join tb_m_employee b on a.employee_id = b.employee_id where
+                a.rejected_by is null and
                 a.spv_approved_by is null and
                 a.mgr_approved_by is null and
                 a.schedule_approved_by is null and
@@ -448,7 +455,8 @@ public function getschedulenotyetlist() {
                  else '' end ) as schedule_status
                 , date_format(a.approval_due_dt,'%Y-%m-%d') as approval_due_dt
                 from tb_r_schedule a left join tb_m_employee b on a.employee_id = b.employee_id where
-                b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name' and
+                (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name') and
+                a.rejected_by is null and
                 a.spv_approved_by is null and
                 a.mgr_approved_by is null and
                 a.schedule_approved_by is null and

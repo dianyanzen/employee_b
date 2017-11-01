@@ -21,6 +21,26 @@ public interface ApiLeave {
     void getLeaveList(
             @Query("employee_id") String employee_id, Callback<List<GetLeaveList>> response
     );
+    @GET("/leaveservicemobile/getleavespvlist")
+    void getLeaveSpvList(
+            @Query("employee_id") String employee_id, Callback<List<GetLeaveList>> response
+    );
+    @GET("/leaveservicemobile/getleavemgrlist")
+    void getLeaveMgrList(
+            @Query("employee_id") String employee_id, Callback<List<GetLeaveList>> response
+    );
+    @GET("/leaveservicemobile/getleavehrdlist")
+    void getLeaveHrdList(
+            @Query("employee_id") String employee_id, Callback<List<GetLeaveList>> response
+    );
+    @GET("/leaveservicemobile/getleaverejectedlist")
+    void getLeaveRejectedList(
+            @Query("employee_id") String employee_id, Callback<List<GetLeaveList>> response
+    );
+    @GET("/leaveservicemobile/getleavenotyetlist")
+    void getLeaveNotYetList(
+            @Query("employee_id") String employee_id, Callback<List<GetLeaveList>> response
+    );
 
     @GET("/leaveservicemobile/gettypevalue")
     void getLeaveType(
