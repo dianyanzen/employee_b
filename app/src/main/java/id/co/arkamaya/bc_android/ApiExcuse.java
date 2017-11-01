@@ -34,6 +34,26 @@ public interface ApiExcuse {
     void getExcuseList(
             @Query("employee_id") String employee_id, Callback<List<GetExcuseList>> response
     );
+    @GET("/excuseservicemobile/getexcusespvlist")
+    void getExcuseSpvList(
+            @Query("employee_id") String employee_id, Callback<List<GetExcuseList>> response
+    );
+    @GET("/excuseservicemobile/getexcusemgrlist")
+    void getExcuseMgrList(
+            @Query("employee_id") String employee_id, Callback<List<GetExcuseList>> response
+    );
+    @GET("/excuseservicemobile/getexcusehrdlist")
+    void getExcuseHrdList(
+            @Query("employee_id") String employee_id, Callback<List<GetExcuseList>> response
+    );
+    @GET("/excuseservicemobile/getexcuserejectedlist")
+    void getExcuseRejectedList(
+            @Query("employee_id") String employee_id, Callback<List<GetExcuseList>> response
+    );
+    @GET("/excuseservicemobile/getexcusenotyetlist")
+    void getExcuseNotYetList(
+            @Query("employee_id") String employee_id, Callback<List<GetExcuseList>> response
+    );
 
     @GET("/excuseservicemobile/getexcusebyid")
     void getExcuseById(

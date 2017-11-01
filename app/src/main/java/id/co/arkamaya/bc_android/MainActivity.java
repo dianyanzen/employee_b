@@ -173,12 +173,13 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_excuse) {
-            ExcuseFragment fragment= new ExcuseFragment();
+           /* ExcuseFragment fragment= new ExcuseFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
 
             fragmentTransaction.replace(R.id.fragment_container, fragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.commit();*/
+            startActivity(new Intent(MainActivity.this, ExcuseFragment.class));
         } else if (id == R.id.nav_slipgaji) {
             SlipGajiFragment fragment= new SlipGajiFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
