@@ -358,6 +358,9 @@ public function getschedulerejectedlist() {
                 , date_format(a.approval_due_dt,'%Y-%m-%d') as approval_due_dt
                 from tb_r_schedule a left join tb_m_employee b on a.employee_id = b.employee_id where
                 a.rejected_by is not null and
+                a.spv_approved_by is null and
+                a.mgr_approved_by is null and
+                a.schedule_approved_by is null and
                 a.created_dt >= '$pastdate' and 
                 a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
                 order by a.schedule_dt desc";
@@ -384,6 +387,9 @@ public function getschedulerejectedlist() {
                 from tb_r_schedule a left join tb_m_employee b on a.employee_id = b.employee_id where
                 (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name') and
                 a.rejected_by is not null and
+                a.spv_approved_by is null and
+                a.mgr_approved_by is null and
+                a.schedule_approved_by is null and
                 a.created_dt >= '$pastdate' and 
                 a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
                 order by a.schedule_dt desc";

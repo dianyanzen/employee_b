@@ -428,6 +428,9 @@ class leaveservicemobile extends CI_Controller {
                 on a.employee_id = c.employee_id
             where
             a.rejected_by is not null and
+             a.spv_approved_by is null and
+             a.mgr_approved_by is null and
+             a.time_off_approve_by is null and
               a.created_dt >= '$pastdate' and 
              a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY)
             order by a.time_off_dt desc";
@@ -463,6 +466,9 @@ class leaveservicemobile extends CI_Controller {
             (c.user_name = '$user_name' or c.supervisor1 = '$user_name' or c.supervisor2 = '$user_name' )
             and
             a.rejected_by is not null and
+             a.spv_approved_by is null and
+             a.mgr_approved_by is null and
+             a.time_off_approve_by is null and
             a.created_dt >= '$pastdate' and 
             a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) 
             order by a.time_off_dt desc";

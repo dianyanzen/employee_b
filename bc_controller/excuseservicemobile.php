@@ -367,6 +367,9 @@ class excuseservicemobile extends CI_Controller {
                   else '' end ) as excuse_status 
              from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where 
              a.rejected_by is not null and
+             a.spv_approved_by is null and
+             a.mgr_approved_by is null and
+             a.excuse_approved_by is null and
              a.created_dt >= '$pastdate' and 
              a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) order by a.date_from desc";
         
@@ -393,6 +396,9 @@ class excuseservicemobile extends CI_Controller {
              from tb_m_excuse a inner join tb_m_employee b on a.employee_id = b.employee_id where (b.user_name = '$user_name' or b.supervisor1 = '$user_name' or b.supervisor2 = '$user_name')
              and
             a.rejected_by is not null and
+            a.spv_approved_by is null and
+             a.mgr_approved_by is null and
+             a.excuse_approved_by is null and
             a.created_dt >= '$pastdate' and 
             a.created_dt < DATE_ADD('$nowdate',INTERVAL 1 DAY) order by a.date_from desc";
         $data = $this->db->query($sql);

@@ -10,16 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5f363dc-1f94-4e03-aa29-b07a91e563d9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Apk/Barry Callebaut.apk" afterPath="$PROJECT_DIR$/Apk/Barry Callebaut.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app-release.apk" afterPath="$PROJECT_DIR$/app/app-release.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bc_controller/excuseservicemobile.php" afterPath="$PROJECT_DIR$/bc_controller/excuseservicemobile.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bc_controller/leaveservicemobile.php" afterPath="$PROJECT_DIR$/bc_controller/leaveservicemobile.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bc_controller/overtimeservicemobile.php" afterPath="$PROJECT_DIR$/bc_controller/overtimeservicemobile.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bc_controller/scheduleservicemobile.php" afterPath="$PROJECT_DIR$/bc_controller/scheduleservicemobile.php" />
     </list>
     <ignored path="bc_android.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -3878,7 +3873,14 @@
       <option name="project" value="LOCAL" />
       <updated>1509524042779</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Realise Fix Final Apk">
+      <created>1509524150438</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1509524150438</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3959,7 +3961,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add Menu Leave And Scedule Activity" />
     <MESSAGE value="Config For Android APi 25" />
     <MESSAGE value="Update Controller" />
     <MESSAGE value="Succes Update MainData Edit Profile" />
@@ -3984,7 +3985,8 @@
     <MESSAGE value="Schedule Last Push" />
     <MESSAGE value="Approved Using Filter Excuse Menu" />
     <MESSAGE value="Approved Using Filter Excuse, Schedule Activity, Leave, And Overtime" />
-    <option name="LAST_COMMIT_MESSAGE" value="Approved Using Filter Excuse, Schedule Activity, Leave, And Overtime" />
+    <MESSAGE value="Realise Fix Final Apk" />
+    <option name="LAST_COMMIT_MESSAGE" value="Realise Fix Final Apk" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
