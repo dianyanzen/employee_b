@@ -27,34 +27,7 @@ class workingreportservicemobile extends CI_Controller {
         $employee_id = $this->input->get('employee_id', TRUE);
 		$data_month = $this->input->get('data_month', TRUE);
 		$time_off = $this->time_off();
-		/*$curr_dt = date('Y-m-d H:i:s');*/
-		/*
-        $sql = "SELECT 
-					att.attendance_id,
-					att.employee_id,
-					date_format(att.clock_out, '%H:%i:%S') as clock_out,
-					date_format(att.clock_in, '%H:%i:%S') as clock_in,
-					att.work_hour,
-					att.source,
-					att.long_in,
-					att.lat_in,
-					att.reason,
-					att.address,
-					att.place,
-					sch.schedule_dt,
-					sch.schedule_type,
-					sch.schedule_description,
-					sch.schedule_project,
-					sch.schedule_approve_by,
-					sch.schedule_approve_dt
-				FROM 
-					tb_r_attendance as att left join tb_r_schedule as sch
-					on att.employee_id = sch.employee_id
-				WHERE 
-					att.employee_id='8'
-				ORDER BY 
-					sch.schedule_dt DESC LIMIT 30";
-		*/
+		$now_date = date("d");
 		$sql = "
 			SELECT 
 				att.attendance_id,
@@ -89,17 +62,23 @@ class workingreportservicemobile extends CI_Controller {
 			$Month_Year = $dataYear . "-" . $dataMonth;
 			
 			$sql = $sql . " 
-				AND date_format(att.clock_in, '%Y-%m-%d') between concat('$Month_Year', '-', '01') and date_add((concat('$Month_Year', '-', '01')), INTERVAL 1 month)
+				AND date_format(att.clock_in, '%Y-%m-%d') between concat('$Month_Year', '-', '16') and date_add((concat('$Month_Year', '-', '15')), INTERVAL 1 month)
 			";
 		}else{
+			if ($now_date < "16"){
 			$sql = $sql . "
-				AND date_format(att.clock_in, '%Y-%m-%d') between concat((date_format(now(), '%Y-%m')), '-', '01') and concat((date_format((date_add(now(), INTERVAL 1 month)), '%Y-%m')), '-', '01')
+				AND date_format(att.clock_in, '%Y-%m-%d') between concat((date_format((date_sub(now(), INTERVAL 1 month)), '%Y-%m')), '-', '16') and concat((date_format(now(), '%Y-%m')), '-', '15')
 			";
+			}else{
+			$sql = $sql . "
+				AND date_format(att.clock_in, '%Y-%m-%d') between concat((date_format(now(), '%Y-%m')), '-', '16') and concat((date_format((date_add(now(), INTERVAL 1 month)), '%Y-%m')), '-', '15')
+			";
+			}
 		}
 		
 		$sql = $sql . "
 			ORDER BY 
-				date_format(att.clock_in, '%Y-%M-%d') DESC LIMIT 31
+				( case when date_format(att.clock_in, '%Y-%m-%d') is null then date_format(att.clock_out, '%Y-%m-%d') else date_format(att.clock_in, '%Y-%m-%d') end ) DESC LIMIT 31
 		";
 		// echo $sql;
 		// die;
